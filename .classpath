@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/ressources"/>
+	<classpathentry kind="src" path="src/tests/java"/>
+	<classpathentry kind="src" path="src/tests/ressources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="lib" path="C:/Users/jrl/Desktop/archives/BUT info/ordi IUT/deuxième semestre/Q dev/CC-A/lib/mockito-core-4.5.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/jrl/Desktop/archives/BUT info/ordi IUT/deuxième semestre/Q dev/CC-A/lib/mockito-junit-jupiter-4.5.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -21,14 +21,14 @@ public abstract class GenereTrace {
 	 * @param sousDossier le sous dossier voulu pour mettre plus d'ordre
 	 * @param nomFic le nom du ficher à enregistrer
 	 */
-	public void creeEnregistrementJson(int numSimulation, String sousDossier, String nomFic) {
+	public void creeEnregistrementJson(String nomSimulation, String sousDossier, String nomFic) {
         try {
         	//si le dossier n'existe pas on le créé
-        	File f=new File("enregistrements\\simulation" + numSimulation
+        	File f=new File("enregistrements\\simulation" + nomSimulation
         			+ "\\" + sousDossier + "\\");
         	f.mkdirs();
             PrintWriter writer = new PrintWriter(
-            		"enregistrements\\simulation" + numSimulation
+            		"enregistrements\\simulation" + nomSimulation
             		+ "\\" + sousDossier
             		+ "\\" + nomFic + ".json");
             writer.write(this.toStringJson());

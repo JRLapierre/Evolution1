@@ -48,12 +48,6 @@ public class Cerveau extends GenereTrace{
 	 * une linkedList de connexions
 	 */
 	private ListeChaine<Connexion> listeConnexions=new ListeChaine<>();
-	
-	/**
-	 * une la liste des differents types de nerones.
-	 * les valeurs sont : "input", "output", "interne".
-	 */
-	private final String[] listeTypes= {"input", "output", "interne"};
 
 	//------------------------------------------------------------------------------
 	//constructeur
@@ -83,10 +77,8 @@ public class Cerveau extends GenereTrace{
 	 * @param type
 	 */
 	private void exeptionType(String type) {
-		for (String t:listeTypes) {
-			if (type.equals(t)) {
-				return;
-			}
+		if (type=="input" || type=="output" || type=="interne") {
+			return;
 		}//je sais que l'exeption n'est pas la bonne mais flemme de creer
 		throw new ArithmeticException("le type de la neurone est inconnu");
 	}

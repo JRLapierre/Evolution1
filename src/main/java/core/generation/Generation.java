@@ -5,7 +5,7 @@ import core.individus.CloneParfait;
 import core.individus.EnfantSexe;
 import core.individus.Individu;
 import core.mutations.Mutation;
-import outils.listeChaine.Compare;
+import outils.listeChaine.Carracteristique;
 import outils.listeChaine.ListeChaine;
 
 /**
@@ -138,9 +138,8 @@ public abstract class Generation {
 			liste.ajout(population[i]);
 		}
 		//tri de la population selon le score
-		Compare<Individu> egal = (a, b) -> a.getScore()==b.getScore();
-		Compare<Individu> different = (a , b) -> a.getScore() > b.getScore();
-		liste.triRapide(egal, different); //ceux avec le plus grand score sont au debut
+		Carracteristique<Individu> car = (elt) -> elt.getScore();
+		liste.triRapide(car); //ceux avec le plus grand score sont au debut
 		//application du tri a la liste originale
 		Individu ind=liste.getSuivant();
 		int i=0;

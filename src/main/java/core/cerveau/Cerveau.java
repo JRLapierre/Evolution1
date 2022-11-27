@@ -286,12 +286,11 @@ public class Cerveau extends GenereTrace{
 	 * d'origine.
 	 */
 	public String toStringJson() {
-		String str="{";
+		String str="{\"inputs\":{";
 		//les connexions venant des input
-		str +="\"inputs\":{";
 		for (int i=0; i<nbInput; i++) {
-			str += "\"Neurone" + i + "\":";
-			str += listeInput[i].toStringJson();
+			str += "\"Neurone" + i + "\":" 
+					+ listeInput[i].toStringJson();
 			if(i!=nbInput-1) {
 				str += ",";
 			}
@@ -300,8 +299,8 @@ public class Cerveau extends GenereTrace{
 		//les connexions venant de l'interieur
 		str +="\"interne\":{";
 		for (int i=0; i<nbNeurones; i++) {
-			str += "\"Neurone" + i + "\":";
-			str += listeNeurones[i].toStringJson();
+			str += "\"Neurone" + i + "\":" 
+					+ listeNeurones[i].toStringJson();
 			if(i!=nbNeurones-1) {
 				str += ",";
 			}
@@ -310,14 +309,13 @@ public class Cerveau extends GenereTrace{
 		//les connexions venant des outputs
 		str +="\"outputs\":{";
 		for (int i=0; i<nbOutput; i++) {
-			str += "\"Neurone" + i + "\":";
-			str += listeOutput[i].toStringJson();
+			str += "\"Neurone" + i + "\":" 
+					+ listeOutput[i].toStringJson();
 			if(i!=nbOutput-1) {
 				str += ",";
 			}
 		}
-		str +="}";
-		str+="}";
+		str +="}}";
 		return str;
 	}
 

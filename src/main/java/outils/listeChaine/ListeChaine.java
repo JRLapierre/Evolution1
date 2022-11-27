@@ -350,17 +350,11 @@ public class ListeChaine<T> {
 	}
 	
 	/**
-	 * fonction de tri intégré.
-	 * L'algorytme utilisé est le tri rapide.
-	 * cette fonction utilise deux expressions lambda pour savoir comment
-	 * comparer les elements : comment savoir si deux elements sont égaux
-	 * et comment savoir si un element est plus grand qu'un autre.
-	 * Par exemple, on peut trier sur l'id d'un objet.
-	 * @param egal expression lambda pour savoir si un objet est égal a un autre
-	 * @param ordone expression labmda pour 
-	 * savoir si un objet est plus petit qu'un autre
+	 * cette fonction fait un tri rapide d'une listeChaine.
+	 * @param car une expression labda qui indique sur quel carracteristique de l'objet
+	 * on doit trier
 	 */
-	public void triRapide(Compare<T> egal, Compare<T> ordone){
+	public void triRapide(Carracteristique<T> car){
 		if (this.getLongueur()<=1) {
 			return;
 		}
@@ -371,10 +365,10 @@ public class ListeChaine<T> {
 		//on met les differents elements dans les trois listes
 		T elt=this.getSuivant();
 		while (elt!=null) {
-			if (compareObj(egal, pivot, elt)) {
+			if (car.carracteristique(elt)==car.carracteristique(pivot)) {
 				pareil.ajout(elt);
 			}
-			else if (compareObj(ordone, pivot, elt)) {
+			else if (car.carracteristique(elt)>car.carracteristique(pivot)) {
 				grand.ajout(elt);
 			}
 			else {
@@ -384,27 +378,16 @@ public class ListeChaine<T> {
 		}
 		//partie recursive
 		if (petit.getLongueur()>1) {
-			petit.triRapide(egal, ordone);
+			petit.triRapide(car);
 		}
 		if (grand.getLongueur()>1) {
-			grand.triRapide(egal, ordone);
+			grand.triRapide(car);
 		}
 		this.vide();
 		//concatenation et return
 		this.concatene(petit);
 		this.concatene(pareil);
 		this.concatene(grand);
-	}
-
-	/**
-	 * permet d'evaluer l'expression lambda et de traduire cela en booleen
-	 * @param methode la methode a apprliquer (egal ou ordonne)
-	 * @param obj1 premier objet a comparer
-	 * @param obj2 deuxieme objet a comparer
-	 * @return le resultat de l'operation
-	 */
-	private boolean compareObj(Compare<T> methode, T obj1, T obj2) {
-		return methode.compare(obj1, obj2);
 	}
 	
 	//------------------------------------------------------------------------------

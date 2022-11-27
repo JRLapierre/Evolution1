@@ -222,11 +222,10 @@ class TestListeChaine {
 	@DisplayName("test du tri rapide")
 	void testTriRapide() {
 		
-		Compare<Integer> egal = (a, b) -> a==b;
-		Compare<Integer> different = (a , b) -> (int) a< (int) b;
+		Carracteristique<Integer> car = (elt) -> elt;
 		
 		ListeChaine<Integer> liste=liste6();
-		liste.triRapide(egal, different);
+		liste.triRapide(car);
 		assertEquals(liste6trie(), liste);
 
 	}

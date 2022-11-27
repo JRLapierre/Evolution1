@@ -1,1 +1,8 @@
+core.cerveau
 core.generation
+core.individus
+core.mutations
+core.trace
+main.evolution
+outils.aleatoire
+outils.listeChaine

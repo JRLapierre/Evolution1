@@ -1,5 +1,8 @@
 package core.generation;
 
+import java.io.File;
+import java.io.PrintWriter;
+
 import core.individus.CloneMute;
 import core.individus.CloneParfait;
 import core.individus.EnfantSexe;
@@ -42,6 +45,11 @@ public abstract class Generation {
 	//autres variables
 	
 	/**
+	 * le numero de la generation
+	 */
+	private int id;
+	
+	/**
 	 * le nombre de tics d'une evaluation
 	 */
 	protected int nbTics;
@@ -80,6 +88,7 @@ public abstract class Generation {
 		this.nbClonesMutes=nbClonesMutes;
 		this.nbEnfantsSexe=nbEnfantsSexe;
 		this.nbIndividus=nbClonesParfaits+nbClonesMutes+nbEnfantsSexe;
+		this.id=1;
 		this.mutation=mutation;
 		this.nbTics=nbTics;
 		this.nomSimulation=nomSimulation;
@@ -100,6 +109,7 @@ public abstract class Generation {
 		this.nbClonesMutes=precedent.nbClonesMutes;
 		this.nbEnfantsSexe=precedent.nbEnfantsSexe;
 		this.nbIndividus=precedent.nbIndividus;
+		this.id=precedent.id+1;
 		this.mutation=precedent.mutation;
 		this.nbTics=precedent.nbTics;
 		this.nomSimulation=precedent.nomSimulation;
@@ -181,6 +191,26 @@ public abstract class Generation {
 		}
 	}
 	
+	//------------------------------------------------------------------------------------------
+	//fonction d'affichage
+	
+	/**
+	 * fonction toStringJson qui genere un descriptif a la syntaxe Json
+	 * @return un string compatible au json
+	 */
+	public String toStringJson() {
+		return "{"
+		+ "\"nomSimulation\":" + nomSimulation + ","
+		+ "\"nbTics\":" + nbTics + ","
+		+ "\"generation\":" + id + ","
+		+ "\"nbClonesParfaits\":" + nbClonesParfaits + ","
+		+ "\"nbClonesMutes\":" + nbClonesMutes + ","
+		+ "\"nbEnfantsSexe\":" + nbEnfantsSexe + ","
+		+ "\"nbIndividus\":" + nbIndividus + ","
+		+ "\"mutations\":" + mutation.toStringJson()
+		+"}";
+	}
+	
 	//-------------------------------------------------------------------------------------------
 	//fonctions d'enregistrements
 	
@@ -189,6 +219,24 @@ public abstract class Generation {
 	 */
 	public void enregistre() {
 		for (int i=0; i<nbIndividus; i++) {
+			//creer un fichier generation info
+	        try {
+	        	//si le dossier n'existe pas on le créé
+	        	File f=new File("enregistrements\\simulation" + nomSimulation
+	        			+ "\\generation" + id + "\\");
+	        	f.mkdirs();
+	            PrintWriter writer = new PrintWriter(
+	            		"enregistrements\\simulation" + nomSimulation
+	            		+ "\\generation" + id
+	            		+ "\\infos_gen" + id + ".json");
+	            writer.write(this.toStringJson());
+	            
+	            writer.flush();
+	            writer.close();
+	            System.out.println("Nouvelle generation");
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
 			population[i].creeEnregistrementJson(nomSimulation);
 		}
 	}

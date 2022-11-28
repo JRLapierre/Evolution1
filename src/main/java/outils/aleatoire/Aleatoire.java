@@ -107,6 +107,10 @@ public class Aleatoire {
 	//----------------------------------------------------------------------
 	//fonctions et autres
 	
+	/**
+	 * la graine de generation
+	 */
+	private int graine;
 	
 	//---------------------------------------------------------------------
 	//constructeur
@@ -117,11 +121,20 @@ public class Aleatoire {
 	 * @param graine la graine qui va déterminer les éléments de la liste
 	 */
 	public Aleatoire(int graine) {
+		this.graine=graine;
 		mtSeed(graine);
 	}
 	
 	//---------------------------------------------------------------------
 	//methodes
+	
+	/**
+	 * getteur pour la graine
+	 * @return la graine
+	 */
+	public int getGraine() {
+		return graine;
+	}
 	
 	//---------------------------------------------------------------------
 	//erreur en cas d'entrees incorrectes

@@ -15,7 +15,7 @@ public class Connexion {
 	/**
 	 * variable statique mise pour generer les identifiants
 	 */
-	private static int nbNeurones=0;
+	private static int nbConnexions=0;
 	
 	/**
 	 * l'identifient d'une connexion pour mieux traquer
@@ -58,8 +58,8 @@ public class Connexion {
 		this.facteur = corrigeFacteur(facteur);
 		this.origine = origine;
 		this.cible = cible;
-		this.id=nbNeurones;
-		nbNeurones++;
+		this.id=nbConnexions;
+		nbConnexions++;
 	}
 	
 	/**
@@ -77,6 +77,29 @@ public class Connexion {
 		this.id=id;
 	}
 	
+	//constructeur pour creer depuis un enregistrement json
+	public Connexion(String sub, Cerveau cerveau) {
+		//faire de la sous decoupe
+		//{"connexion14":{"id":14,"facteur":-1.084696,"origine":{"type":"input","numero":0},"cible":{"type":"output","numero":0}}
+		this.id=Integer.parseInt(sub.substring(
+				sub.indexOf("\"id\":")+5, 
+				sub.indexOf(",\"facteur\":")));
+		this.facteur=Float.valueOf(sub.substring(
+				sub.indexOf(",\"facteur\":")+11, 
+				sub.indexOf(",\"origine\":{")));
+		//neurones
+		this.origine=trouveNeurone(sub.substring(
+				sub.indexOf("\"origine\":")+10, 
+				sub.indexOf(",\"cible\":")), cerveau);
+		this.cible=trouveNeurone(sub.substring(
+				sub.indexOf("\"cible\":")+8, 
+				sub.indexOf("}}")+1), cerveau);
+		//pour remettre le compte des neurones assez haut
+		if (this.id>nbConnexions) {
+			nbConnexions=this.id;
+		}
+	}
+	
 	//---------------------------------------------------------------------
 	//fonction de controle
 	
@@ -89,6 +112,30 @@ public class Connexion {
 		if(facteur<-2) return -2;
 		if(facteur>2) return 2;
 		return facteur;
+	}
+	
+	/**
+	 * fonction privée pour determiner une neurone a partir d'un string
+	 * @param sub la sous chaine de carractere correspondant a la neurone
+	 * @param cerveau le cerveau contenant la neurone
+	 * @return la neurone correspondant a cette chaine de carracteres
+	 */
+	private Neurone trouveNeurone(String sub, Cerveau cerveau) {
+		String type=sub.substring(9, 14);
+		if (type.equals("input")) {
+			return cerveau.getListeInput()[Integer.parseInt(sub.substring(25, 26))];
+		}
+		else if (type.equals("outpu")) {
+			return cerveau.getListeOutput()[Integer.parseInt(sub.substring(26, 27))];
+		}
+		else if (type.equals("inter")) {
+			return cerveau.getListeNeurones()[Integer.parseInt(sub.substring(27, 28))];
+		}
+		else {//flemme de faire une vraie erreur
+			System.err.println("erreur : type de neurone inconnu");
+			return null;
+		}
+		
 	}
 	
 	//-------------------------------------------------------------------------------

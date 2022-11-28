@@ -200,5 +200,20 @@ public class Mutation {
 	}
 	
 	//-------------------------------------------------------------------------------
-	//un toString comprenant toutes les mutations ?
+	//fonction d'affichage
+	
+	/**
+	 * fonction toStringJson qui genere un string compatible au JSon
+	 * @return un string au JSon
+	 */
+	public String toStringJson() {
+		return "{"
+		+ "\"graine\":" + aleatoire.getGraine() + ","
+		+ "\"tauxCreation\":" + tauxCreation + ","
+		+ "\"tauxSuppression\":" + tauxSuppression + ","
+		+ "\"tauxMutationFacteur\":" + tauxMutationFacteur + ","
+		+ "\"maxChangementFacteur\":" + maxChangementFacteur + ","
+		+ "\"tauxMutationNeurone\":" + tauxMutationNeurone
+		+ "}";
+	}
 }

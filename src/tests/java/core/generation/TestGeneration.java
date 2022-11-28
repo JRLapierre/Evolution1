@@ -55,6 +55,8 @@ class TestGeneration {
 		Generation g3=new Type0(g2);
 		g3.evaluation();
 		g3.enregistre();
+		System.out.println( g2.toStringJson());
+		System.out.println( g3.toStringJson());
 	}
 
 }

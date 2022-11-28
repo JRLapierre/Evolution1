@@ -154,7 +154,7 @@ public abstract class Individu {
             
             writer.flush();
             writer.close();
-            System.out.println("fichier cree");
+            System.out.println("individu enregistre");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -148,6 +148,7 @@ class TestIndividu {
 		System.out.println(i1.toStringJson());
 		System.out.println(i2.toStringJson());
 		System.out.println(i3.toStringJson());
+		System.out.println(m.toStringJson());
 		
 	}
 	

@@ -11,7 +11,6 @@ J'ai donc decide de creer un projet avec un tracage facile, en enregistrant tout
 
 #### idees : 
 
-creer un moyen de traquer les mutations  
 changer l'evaluation et compter les pertes dans le cerveau comme du malus  
 creer un graphe qui permet de traquer visuellement les generations   
 creer une simulation pour jouer au puissance 4  
@@ -23,6 +22,9 @@ implementer un butoir pour les x meilleurs individus pouvant se reproduire
 #### TODO
 mettre des stringBuffer / stringBuilder  
 faire un decodeur JSon afin de pouvoir continuer la simulation apres l'avoir arrete  
+
+faire un decodeur :   
+ classes qui doivent avoir le decodeur : Connexion(fait), Cerveau, Individu et ses derivés, Generation  
 
 
 #### trucs a finir si j'en ai le courage

@@ -76,7 +76,17 @@ class TestConnexion {
 		assertEquals(c1.getCible().getPuissance(), 1.5);
 	}
 	
-	//ya juste le equals que j'ai la flemme de tester
+	@Test
+	@DisplayName("test du constructeur depuis un string")
+	void testfromString() {
+		Cerveau cerveau=new Cerveau(1, 1, 1);
+		Connexion c1=new Connexion("{\"connexion14\":{\"id\":14,\"facteur\":-1.084696,\"origine\":{\"type\":\"input\",\"numero\":0},\"cible\":{\"type\":\"output\",\"numero\":0}}",cerveau);
+		Connexion c2=new Connexion("{\"connexion17\":{\"id\":17,\"facteur\":-1.5,\"origine\":{\"type\":\"interne\",\"numero\":0},\"cible\":{\"type\":\"output\",\"numero\":0}}",cerveau);
+		Connexion c3=new Connexion("{\"connexion16\":{\"id\":16,\"facteur\":2,\"origine\":{\"type\":\"input\",\"numero\":0},\"cible\":{\"type\":\"interne\",\"numero\":0}}",cerveau);
+		System.out.println(c1.toStringJson());
+		System.out.println(c2.toStringJson());
+		System.out.println(c3.toStringJson());
+	}
 	
 
 }

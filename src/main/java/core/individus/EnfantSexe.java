@@ -187,12 +187,11 @@ public class EnfantSexe extends Individu{
 	 */
 	@Override
 	public String toStringJson() {
-		String str="{\"individu" + this.getId() + "\":{";
-		str += "\"type\":\"EnfantSexe\"" + ",";
-		str += "\"parent1\":" + parent1.getId() + ",";
-		str += "\"parent2\":" + parent2.getId() + ",";
-		str += super.toStringJson();
-		return str;
+		return "{\"individu" + this.getId() + "\":{"
+		+ "\"type\":\"EnfantSexe\"" + ","
+		+ "\"parent1\":" + parent1.getId() + ","
+		+ "\"parent2\":" + parent2.getId() + ","
+		+ super.toStringJson();
 	}
 	
 }

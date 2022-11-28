@@ -161,10 +161,10 @@ class TestIndividu {
 		Individu i2=new CloneParfait(i0);
 		Individu i3=new EnfantSexe(i1, i2, m);
 		
-		i0.creeEnregistrementJson("0", "test", "i0");
-		i0.creeEnregistrementJson("0", "test", "i1");
-		i0.creeEnregistrementJson("0", "test", "i2");
-		i0.creeEnregistrementJson("0", "test", "i3");
+		i0.creeEnregistrementJson("0");
+		i1.creeEnregistrementJson("0");
+		i2.creeEnregistrementJson("0");
+		i3.creeEnregistrementJson("0");
 	}
 
 }

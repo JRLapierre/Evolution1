@@ -1,7 +1,5 @@
 package core.cerveau;
 
-import core.trace.GenereTrace;
-
 /**
  * cette classe simule une connexion entre deux neurones.
  * Elle amplifie ou affaiblit le signal d'une neurone pour l'envoyer vers une autre.
@@ -9,7 +7,7 @@ import core.trace.GenereTrace;
  * @author jrl
  *
  */
-public class Connexion extends GenereTrace{
+public class Connexion {
 	
 	//-------------------------------------------------------------------------------
 	//variables

@@ -40,11 +40,10 @@ public class CloneMute extends Individu{
 	 */
 	@Override
 	public String toStringJson() {
-		String str="{\"individu" + this.getId() + "\":{";
-		str += "\"type\":\"CloneMute\",";
-		str += "\"parent\":" + parent.getId() + ",";
-		str += super.toStringJson();
-		return str;
+		return "{\"individu" + this.getId() + "\":{"
+		+ "\"type\":\"CloneMute\","
+		+ "\"parent\":" + parent.getId() + ","
+		+ super.toStringJson();
 	}
 	
 	

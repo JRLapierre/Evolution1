@@ -37,11 +37,10 @@ public class CloneParfait extends Individu{
 	 */
 	@Override
 	public String toStringJson() {
-		String str="{\"individu" + this.getId() + "\":{";
-		str += "\"type\":\"CloneParfait\",";
-		str += "\"parent\":" + parent.getId() + ",";
-		str += super.toStringJson();
-		return str;
+		return "{\"individu" + this.getId() + "\":{"
+		+ "\"type\":\"CloneParfait\","
+		+ "\"parent\":" + parent.getId() + ","
+		+ super.toStringJson();
 	}
 	
 

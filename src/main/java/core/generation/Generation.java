@@ -189,9 +189,7 @@ public abstract class Generation {
 	 */
 	public void enregistre() {
 		for (int i=0; i<nbIndividus; i++) {
-			population[i].creeEnregistrementJson(nomSimulation, 
-					"generation"+population[i].getGeneration(), 
-					"individu"+population[i].getId());
+			population[i].creeEnregistrementJson(nomSimulation);
 		}
 	}
 }

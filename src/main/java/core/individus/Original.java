@@ -29,10 +29,9 @@ public class Original extends Individu{
 	 */
 	@Override
 	public String toStringJson() {
-		String str = "{\"individu" + this.getId() + "\":{";
-		str += "\"type\":\"original\",";
-		str += super.toStringJson();
-		return str;
+		return "{\"individu" + this.getId() + "\":{"
+		+ "\"type\":\"original\","
+		+ super.toStringJson();
 	}
 
 }

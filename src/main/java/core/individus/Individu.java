@@ -1,7 +1,9 @@
 package core.individus;
 
+import java.io.File;
+import java.io.PrintWriter;
+
 import core.cerveau.Cerveau;
-import core.trace.GenereTrace;
 import outils.aleatoire.Aleatoire;
 
 /**
@@ -17,7 +19,7 @@ import outils.aleatoire.Aleatoire;
  * @author jrl
  *
  */
-public abstract class Individu extends GenereTrace{	
+public abstract class Individu {	
 	
 	//-------------------------------------------------------------------------------
 	//variables
@@ -119,15 +121,43 @@ public abstract class Individu extends GenereTrace{
 	 */
 	public String toStringJson() {
 		//je laisse le début aux sous classes
-		String str="";
-		str += "\"id\":" + id +",";
-		str += "\"generation\":" + generation + ",";
-		str += "\"score\":" + score + ",";
-		str += "\"cerveau\":";
-		str += cerveau.toStringJson();
+		return ""
+		+ "\"id\":" + id +","
+		+ "\"generation\":" + generation + ","
+		+ "\"score\":" + score + ","
+		+ "\"cerveau\":"
+		+ cerveau.toStringJson()
 		//je ferme cette partie la pour l'instant
-		str += "}}";
-		return str;
+		+ "}}";
+	}
+	
+	//------------------------------------------------------------------------------------------
+	//fonction d'enregistrement
+	
+	/**
+	 * une methode qui enregistre les resultats de chaque individu
+	 * @param numSimulation le numero de la simulation servant d'identifiant au dossier
+	 * @param sousDossier le sous dossier voulu pour mettre plus d'ordre
+	 * @param nomFic le nom du ficher à enregistrer
+	 */
+	public void creeEnregistrementJson(String nomSimulation) {
+        try {
+        	//si le dossier n'existe pas on le créé
+        	File f=new File("enregistrements\\simulation" + nomSimulation
+        			+ "\\generation" + generation + "\\");
+        	f.mkdirs();
+            PrintWriter writer = new PrintWriter(
+            		"enregistrements\\simulation" + nomSimulation
+            		+ "\\generation" + generation
+            		+ "\\individu" + id + ".json");
+            writer.write(this.toStringJson());
+            
+            writer.flush();
+            writer.close();
+            System.out.println("fichier cree");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 	}
 
 	

@@ -22,6 +22,7 @@ implementer un butoir pour les x meilleurs individus pouvant se reproduire
 
 #### TODO
 mettre des stringBuffer / stringBuilder  
+faire un decodeur JSon afin de pouvoir continuer la simulation apres l'avoir arrete  
 
 
 #### trucs a finir si j'en ai le courage

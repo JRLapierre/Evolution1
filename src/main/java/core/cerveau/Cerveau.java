@@ -1,6 +1,5 @@
 package core.cerveau;
 
-import core.trace.GenereTrace;
 import outils.listeChaine.ListeChaine;
 
 /**
@@ -9,7 +8,7 @@ import outils.listeChaine.ListeChaine;
  * @author jrl
  *
  */
-public class Cerveau extends GenereTrace{
+public class Cerveau {
 	
 	//-------------------------------------------------------------------------------
 	//variables

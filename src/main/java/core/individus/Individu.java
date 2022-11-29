@@ -66,6 +66,27 @@ public abstract class Individu {
 		nbIndividus++;
 	}
 	
+	/**
+	 * constructeur pour recreer des individus depuis une sauvegarde.
+	 * @param sub le string qui decrit un individu
+	 */
+	protected Individu(String sub, int seed) {
+		this.id=Integer.parseInt(sub.substring(
+				sub.indexOf("\"id\":")+5, 
+				sub.indexOf(",\"generation\"")));
+		this.generation=Integer.parseInt(sub.substring(
+				sub.indexOf("\"generation\":")+13, 
+				sub.indexOf(",\"score\"")));
+		this.score=Float.parseFloat(sub.substring(
+				sub.indexOf("\"score\":")+8, 
+				sub.indexOf(",\"cerveau\"")));
+		this.cerveau=new Cerveau(sub.substring(sub.indexOf("\"cerveau\":")+10));
+		if(this.id>nbIndividus) {
+			nbIndividus=id;
+		}
+		alea=new Aleatoire(seed+10%2147483647);
+	}
+	
 	//----------------------------------------------------------------------
 	//getteurs
 	

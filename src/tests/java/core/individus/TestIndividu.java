@@ -167,5 +167,18 @@ class TestIndividu {
 		i2.creeEnregistrementJson("0");
 		i3.creeEnregistrementJson("0");
 	}
+	
+	
+	@Test
+	@DisplayName("test de creation d'individu a partir d'un string")
+	void testCreationFromString() {
+		//{"individu102":{"type":"CloneParfait","parent":1,"id":102,"generation":2,"score":50.0,"cerveau":{"inputs":{"Neurone0":{}},"interne":{"Neurone0":{},"Neurone1":{},"Neurone2":{},"Neurone3":{"connexion0":{"id":0,"facteur":-1.3322587,"origine":{"type":"interne","numero":3},"cible":{"type":"input","numero":0}}},"Neurone4":{}},"outputs":{"Neurone0":{}}}}}
+		Individu individu=new Sauvegarde("{\"individu102\":{\"type\":\"CloneParfait\",\"parent\":1,\"id\":102,\"generation\":2,\"score\":50.0,\"cerveau\":{\"inputs\":{\"Neurone0\":{}},\"interne\":{\"Neurone0\":{},\"Neurone1\":{},\"Neurone2\":{},\"Neurone3\":{\"connexion0\":{\"id\":0,\"facteur\":-1.3322587,\"origine\":{\"type\":\"interne\",\"numero\":3},\"cible\":{\"type\":\"input\",\"numero\":0}}},\"Neurone4\":{}},\"outputs\":{\"Neurone0\":{}}}}}", 0);
+		
+		assertEquals(102, individu.getId());
+		assertEquals(2, individu.getGeneration());
+		assertEquals(50, individu.getScore());
+		System.out.println(individu.toStringJson());
+	}
 
 }

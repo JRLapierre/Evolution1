@@ -78,6 +78,30 @@ public class Mutation {
 		this.tauxMutationNeurone=corrigeTaux(tauxMutationNeurone);
 	}
 	
+	/**
+	 * constructeur a partir d'un string format json
+	 * @param sub le substring correspondant aux carracteristiques
+	 */
+	public Mutation(String sub) {
+		this.aleatoire=new Aleatoire(Integer.parseInt(sub.substring(10, 
+				sub.indexOf(",\"tauxCreation\"")))+1%2147483647);
+		this.tauxCreation=Integer.parseInt(sub.substring(
+				sub.indexOf("\"tauxCreation\"")+15, 
+				sub.indexOf(",\"tauxSuppression\"")));
+		this.tauxSuppression=Integer.parseInt(sub.substring(
+				sub.indexOf("\"tauxSuppression\"")+18, 
+				sub.indexOf(",\"tauxMutationFacteur\"")));
+		this.tauxMutationFacteur=Integer.parseInt(sub.substring(
+				sub.indexOf("\"tauxMutationFacteur\":")+22, 
+				sub.indexOf(",\"maxChangementFacteur\"")));
+		this.maxChangementFacteur=Float.parseFloat(sub.substring(
+				sub.indexOf("\"maxChangementFacteur\":")+23, 
+				sub.indexOf(",\"tauxMutationNeurone\"")));
+		this.tauxMutationNeurone=Integer.parseInt(sub.substring(
+				sub.indexOf("\"tauxMutationNeurone\":")+22, 
+				sub.indexOf("}}")));
+	}
+	
 	//-------------------------------------------------------------------------------
 	//fonctions d'initialisation
 	

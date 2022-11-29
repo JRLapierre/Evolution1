@@ -24,7 +24,7 @@ mettre des stringBuffer / stringBuilder
 faire un decodeur JSon afin de pouvoir continuer la simulation apres l'avoir arrete  
 
 faire un decodeur :   
- classes qui doivent avoir le decodeur : Connexion(fait), Cerveau(fait), Individu et ses derivés(fait), Generation  
+ classes qui doivent avoir le decodeur : Connexion(fait), Cerveau(fait), Individu et ses derivés(fait), Mutation(fait), Generation  
 
 
 #### trucs a finir si j'en ai le courage

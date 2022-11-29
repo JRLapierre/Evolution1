@@ -93,6 +93,37 @@ public class Cerveau {
 		
 	}
 	
+	//-----------------------------------------------------------------------------
+	//fonction d'erreur
+	
+	/**
+	 * fonction d'erreur en cas de type incorrect
+	 * @param type
+	 */
+	private void exeptionType(String type) {
+		if (type=="input" || type=="output" || type=="interne") {
+			return;
+		}//je sais que l'exeption n'est pas la bonne mais flemme de creer
+		throw new ArithmeticException("le type de la neurone est inconnu");
+	}
+	
+	//------------------------------------------------------------------------------
+	//fonction d'initialisation
+
+	/**
+	 * fonction privée qui remplis une liste de neronnes
+	 * @param nb le nombre de neurones
+	 * @param type le type de la neurone
+	 * @return
+	 */
+	private Neurone[] initListN(int nb, String type) {
+		Neurone[] n=new Neurone[nb];
+		for (int i=0; i<nb; i++) {
+			n[i]=new Neurone(type, i);
+		}
+		return n;
+	}
+	
 	/**
 	 * fonction privee pour determiner le nombre de neurones d'un type
 	 * @param type le type de neurones dont on veut connaitre le nombre
@@ -125,37 +156,6 @@ public class Cerveau {
 		}
 		
 		return i;
-	}
-	
-	//-----------------------------------------------------------------------------
-	//fonction d'erreur
-	
-	/**
-	 * fonction d'erreur en cas de type incorrect
-	 * @param type
-	 */
-	private void exeptionType(String type) {
-		if (type=="input" || type=="output" || type=="interne") {
-			return;
-		}//je sais que l'exeption n'est pas la bonne mais flemme de creer
-		throw new ArithmeticException("le type de la neurone est inconnu");
-	}
-	
-	//------------------------------------------------------------------------------
-	//fonction d'initialisation
-
-	/**
-	 * fonction privée qui remplis une liste de neronnes
-	 * @param nb le nombre de neurones
-	 * @param type le type de la neurone
-	 * @return
-	 */
-	private Neurone[] initListN(int nb, String type) {
-		Neurone[] n=new Neurone[nb];
-		for (int i=0; i<nb; i++) {
-			n[i]=new Neurone(type, i);
-		}
-		return n;
 	}
 	
 	

@@ -68,6 +68,65 @@ public class Cerveau {
 		listeNeurones=initListN(nbNeurones, "interne");		
 	}
 	
+	/**
+	 * constructeur pour generer un cerveau depuis un string Json
+	 * @param sub les infos venant de l'individu
+	 */
+	public Cerveau(String sub) {
+		this.nbInput=decodeNbNeurones("inputs", sub);
+		this.nbOutput=decodeNbNeurones("outputs", sub);
+		this.nbNeurones=decodeNbNeurones("interne", sub);
+		//initialisation des listes
+		listeInput=initListN(nbInput, "input");
+		listeOutput=initListN(nbOutput, "output");
+		listeNeurones=initListN(nbNeurones, "interne");		
+		//chercher les connexions et les ajouter
+		int i=0;
+		int begin=sub.indexOf("{\"connexion", i);
+		int end=sub.indexOf("}}", begin)+2;
+		while(begin!=-1) {
+			addConnexion(new Connexion(sub.substring(begin, end),this));
+			i=end;
+			begin=sub.indexOf("{\"connexion", i);
+			end=sub.indexOf("}}", begin)+2;
+		}
+		
+	}
+	
+	/**
+	 * fonction privee pour determiner le nombre de neurones d'un type
+	 * @param type le type de neurones dont on veut connaitre le nombre
+	 * @param sub la chaine de carractere sur laquelle se trouvent les infos
+	 * @return le nombre de neurones de ce type
+	 */
+	private int decodeNbNeurones(String type, String sub) {
+		String subsub; //la sous sous chaine de carractere a etudier
+		int i=0;
+		if(type.equals("inputs")) {
+			subsub=sub.substring(
+					sub.indexOf(type + "\":{"), 
+					sub.indexOf(",\"interne\":{"));
+		}
+		else if(type.equals("outputs")) {
+			subsub=sub.substring(sub.indexOf(type + "\":{"));
+		}
+		else if(type.equals("interne")) {
+			subsub=sub.substring(
+					sub.indexOf(",\"interne\":{"), 
+					sub.indexOf(",\"outputs\":{"));
+		}
+		else {
+			System.err.println("le type " + type + " n'est pas bon");
+			return 0;
+		}
+		//conmpter le nombre de neurones
+		while(subsub.indexOf("Neurone"+i)!=-1) {
+			i++;
+		}
+		
+		return i;
+	}
+	
 	//-----------------------------------------------------------------------------
 	//fonction d'erreur
 	

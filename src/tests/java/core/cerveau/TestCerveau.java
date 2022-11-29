@@ -110,5 +110,16 @@ class TestCerveau {
 		
 		assertEquals(sc2(), c2().toStringJson());
 	}
+	
+	@Test
+	@DisplayName("test du constructeur a partir d'un string")
+	void testFromToString() {
+		//{"individu391":{"type":"EnfantSexe","parent1":230,"parent2":231,"id":391,"generation":4,"score":50.0,"cerveau":{"inputs":{"Neurone0":{}},"interne":{"Neurone0":{},"Neurone1":{"connexion141":{"id":141,"facteur":-1.3898041,"origine":{"type":"interne","numero":1},"cible":{"type":"interne","numero":3}}},"Neurone2":{},"Neurone3":{},"Neurone4":{"connexion140":{"id":140,"facteur":-1.7281322,"origine":{"type":"interne","numero":4},"cible":{"type":"input","numero":0}}}},"outputs":{"Neurone0":{"connexion2":{"id":2,"facteur":-0.5347695,"origine":{"type":"output","numero":0},"cible":{"type":"interne","numero":4}}}}}}}
+		Cerveau c=new Cerveau("{\"individu391\":{\"type\":\"EnfantSexe\",\"parent1\":230,\"parent2\":231,\"id\":391,\"generation\":4,\"score\":50.0,\"cerveau\":{\"inputs\":{\"Neurone0\":{}},\"interne\":{\"Neurone0\":{},\"Neurone1\":{\"connexion141\":{\"id\":141,\"facteur\":-1.3898041,\"origine\":{\"type\":\"interne\",\"numero\":1},\"cible\":{\"type\":\"interne\",\"numero\":3}}},\"Neurone2\":{},\"Neurone3\":{},\"Neurone4\":{\"connexion140\":{\"id\":140,\"facteur\":-1.7281322,\"origine\":{\"type\":\"interne\",\"numero\":4},\"cible\":{\"type\":\"input\",\"numero\":0}}}},\"outputs\":{\"Neurone0\":{\"connexion2\":{\"id\":2,\"facteur\":-0.5347695,\"origine\":{\"type\":\"output\",\"numero\":0},\"cible\":{\"type\":\"interne\",\"numero\":4}}}}}}}");
+		assertEquals(1, c.getNbInput());
+		assertEquals(5, c.getNbNeurones());
+		assertEquals(1, c.getNbOutput());
+		assertEquals("{\"inputs\":{\"Neurone0\":{}},\"interne\":{\"Neurone0\":{},\"Neurone1\":{\"connexion141\":{\"id\":141,\"facteur\":-1.3898041,\"origine\":{\"type\":\"interne\",\"numero\":1},\"cible\":{\"type\":\"interne\",\"numero\":3}}},\"Neurone2\":{},\"Neurone3\":{},\"Neurone4\":{\"connexion140\":{\"id\":140,\"facteur\":-1.7281322,\"origine\":{\"type\":\"interne\",\"numero\":4},\"cible\":{\"type\":\"input\",\"numero\":0}}}},\"outputs\":{\"Neurone0\":{\"connexion2\":{\"id\":2,\"facteur\":-0.5347695,\"origine\":{\"type\":\"output\",\"numero\":0},\"cible\":{\"type\":\"interne\",\"numero\":4}}}}}", c.toStringJson());
+	}
 
 }

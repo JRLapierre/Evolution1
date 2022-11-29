@@ -233,13 +233,12 @@ public class Connexion {
 	 * renvoie des infos sur la neurone pour un format json
 	 */
 	public String toStringJson() {
-		String str="\"connexion" + id + "\":{";
-		str += "\"id\":" + id + ",";
-		str += "\"facteur\":" + facteur + ",";
-		str += "\"origine\":" + origine.toStringJson2() + ",";
-		str += "\"cible\":" + cible.toStringJson2();
-		str += "}";
-		return str;
+		return "\"connexion" + id + "\":{"
+		+ "\"id\":" + id + ","
+		+ "\"facteur\":" + facteur + ","
+		+ "\"origine\":" + origine.toStringJson2() + ","
+		+ "\"cible\":" + cible.toStringJson2()
+		+ "}";
 	}
 	
 	//---------------------------------------------------------------------

@@ -1,12 +1,16 @@
 package core.generation;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import core.individus.CloneMute;
 import core.individus.CloneParfait;
 import core.individus.EnfantSexe;
 import core.individus.Individu;
+import core.individus.Sauvegarde;
 import core.mutations.Mutation;
 import outils.listeChaine.Carracteristique;
 import outils.listeChaine.ListeChaine;
@@ -134,6 +138,52 @@ public abstract class Generation {
 		
 	}
 	
+	/**
+	 * constructeur pour recreer une generation a partir de fichiers
+	 * @param nomSimulation le nom de la simulation a restaurer
+	 * @param generation la generation d'ou reprendre la simulation
+	 * @throws IOException 
+	 */
+	protected Generation(String nomSimulation, int idGeneration) throws IOException {
+		//recherche de la simulation et de la generation en accedant aux fichiers
+		String path="enregistrements/simulation"+nomSimulation+"/generation"+idGeneration+"/";
+		//fichiers de la generation
+		String sim = Files.readString(Paths.get(path+"infos_gen"+idGeneration+".json"));
+		
+		this.nomSimulation=sim.substring(17, sim.indexOf(",\"nbTics\""));
+		this.nbTics=Integer.parseInt(sim.substring(
+				sim.indexOf("\"nbTics\":")+9, 
+				sim.indexOf(",\"generation\"")));
+		this.id=Integer.parseInt(sim.substring(
+				sim.indexOf("\"generation\":")+13, 
+				sim.indexOf(",\"nbClonesParfaits\"")));
+		this.nbClonesParfaits=Integer.parseInt(sim.substring(
+				sim.indexOf("\"nbClonesParfaits\":")+19, 
+				sim.indexOf(",\"nbClonesMutes\"")));
+		this.nbClonesMutes=Integer.parseInt(sim.substring(
+				sim.indexOf("\"nbClonesMutes\":")+16, 
+				sim.indexOf(",\"nbEnfantsSexe\"")));
+		this.nbEnfantsSexe=Integer.parseInt(sim.substring(
+				sim.indexOf("\"nbEnfantsSexe\":")+16, 
+				sim.indexOf(",\"nbIndividus\"")));
+		this.nbIndividus=nbClonesParfaits+nbClonesMutes+nbEnfantsSexe;
+		//les mutations
+		this.mutation=new Mutation(sim.substring(sim.indexOf("\"mutations\":")+12));
+		this.population=new Individu[nbIndividus];
+		int graine=Integer.parseInt(sim.substring(
+				sim.indexOf("\"graine\":")+9, 
+				sim.indexOf(",\"tauxCreation\"")));
+		String content;
+		int premierId=nbIndividus*(id-1);
+		//la population
+		for(int i=1; i<=nbIndividus; i++) {
+			//chercher le fichier en question
+			content=Files.readString(Paths.get(path+"individu"+(premierId+i)+".json"));
+			this.population[i-1]=new Sauvegarde(content, graine);
+		}
+		triScore(population);
+	}
+	
 	//------------------------------------------------------------------------------------------
 	//fonctions prives pratiques
 	
@@ -148,7 +198,8 @@ public abstract class Generation {
 			liste.ajout(population[i]);
 		}
 		//tri de la population selon le score
-		Carracteristique<Individu> car = (elt) -> elt.getScore();
+		Carracteristique<Individu> car = (elt) -> elt.getScore()*(-1);
+		//pour avoir les meilleurs au debut
 		liste.triRapide(car); //ceux avec le plus grand score sont au debut
 		//application du tri a la liste originale
 		Individu ind=liste.getSuivant();

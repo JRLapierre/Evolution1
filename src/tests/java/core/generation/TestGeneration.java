@@ -2,6 +2,8 @@ package core.generation;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -57,6 +59,24 @@ class TestGeneration {
 		g3.enregistre();
 		System.out.println( g2.toStringJson());
 		System.out.println( g3.toStringJson());
+	}
+	
+	@Test
+	@DisplayName("test du decodeur")
+	void testDecodeur() {
+		try {
+			Generation g=new FromSave("1", 100);
+			g=new Type1(g);
+			for(int i=0; i<10; i++) {
+				g.evaluation();
+				g.enregistre();
+				g=new Type1(g);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail();
+		}
+
 	}
 
 }

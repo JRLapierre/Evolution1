@@ -80,7 +80,7 @@ public abstract class Individu {
 		this.score=Float.parseFloat(sub.substring(
 				sub.indexOf("\"score\":")+8, 
 				sub.indexOf(",\"cerveau\"")));
-		this.cerveau=new Cerveau(sub.substring(sub.indexOf("\"cerveau\":")+10));
+		this.cerveau=new Cerveau(sub);
 		if(this.id>nbIndividus) {
 			nbIndividus=id;
 		}

@@ -1,5 +1,10 @@
 package main.evolution;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.io.IOException;
+
+import core.generation.FromSave;
 import core.generation.Generation;
 import core.generation.Type1;
 
@@ -32,6 +37,17 @@ public class Simulation {
 			g.evaluation();
 			g.enregistre();
 			g=new Type1(g);
+		}
+		try {
+			Generation g2=new FromSave("1", 100);
+			g2=new Type1(g);
+			for(int i=0; i<10; i++) {
+				g.evaluation();
+				g.enregistre();
+				g=new Type1(g);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		
 	}

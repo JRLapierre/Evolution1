@@ -198,7 +198,7 @@ public abstract class Generation {
 			liste.ajout(population[i]);
 		}
 		//tri de la population selon le score
-		Carracteristique<Individu> car = (elt) -> elt.getScore()*(-1);
+		Carracteristique<Individu> car = elt -> elt.getScore()*(-1);
 		//pour avoir les meilleurs au debut
 		liste.triRapide(car); //ceux avec le plus grand score sont au debut
 		//application du tri a la liste originale
@@ -284,7 +284,6 @@ public abstract class Generation {
 	            
 	            writer.flush();
 	            writer.close();
-	            System.out.println("Nouvelle generation");
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }

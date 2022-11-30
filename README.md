@@ -17,10 +17,9 @@ creer une simulation pour jouer au puissance 4
 implementer un butoir pour les x meilleurs individus pouvant se reproduire
 
 #### urgent :
+fix la recuperation de sauvegarde (encore)
 
 #### TODO
-mettre des stringBuffer / stringBuilder  
-
 
 
 #### trucs a finir si j'en ai le courage

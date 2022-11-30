@@ -1,5 +1,7 @@
 package outils.listeChaine;
 
+import java.util.Objects;
+
 /**
  * cette classe correspond à une liste doublement chainée de taille variable.
  * Je l'ai crée parce que je le pouvais et je ne voulais pas utiliser le
@@ -149,6 +151,7 @@ public class ListeChaine<T> {
 	 * dans la liste.
 	 * @param elts
 	 */
+	@SafeVarargs
 	public ListeChaine(T... elts) {
 		for (T elt:elts) {
 			ajout(elt);
@@ -295,6 +298,7 @@ public class ListeChaine<T> {
 	 * @param index l'index auquel on commence à insérer les elements
 	 * @param elts les éléments à ajouter
 	 */
+	@SuppressWarnings("unchecked")
 	public void ajout(int index, T... elts) {
 		//risque d'erreurs conséquent
 		if (index>longueur||index<0) {
@@ -313,11 +317,7 @@ public class ListeChaine<T> {
 	 */
 	public void concatene(ListeChaine<T> liste) {
 		//cas de liste vide
-		if (liste.longueur==0) {
-			return;
-		}
-		//cas de this vide
-		else {
+		if (liste.longueur!=0) {
 			ListeChaine<T>.Noeud n=liste.premier;
 			while (n!=null) {
 				this.ajout(n.getElt());
@@ -589,13 +589,17 @@ public class ListeChaine<T> {
 		}
 	}
 	
+	
 	//-------------------------------------------------------------------------------
 	//fonctions generales
+
 	
-	
-	/**
-	 * fonction equals
-	 */
+	@Override
+	public int hashCode() {
+		return Objects.hash(dernier, local, longueur, premier);
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -604,21 +608,22 @@ public class ListeChaine<T> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ListeChaine<T> other = (ListeChaine<T>) obj;
+		ListeChaine other = (ListeChaine) obj;
 		Noeud n1=this.premier;
 		Noeud n2=other.premier;
 		while (n1!=null ||n2!=null) {
-			if (n1==null || n2==null) {
-				return false;
-			}
-			else if (!n1.getElt().equals(n2.getElt())) {
-				return false;
-			}
-			else {
-				n1=n1.suivant;
-				n2=n2.suivant;
-			}
+		    if (n1==null || n2==null) {
+		        return false;
+		    }
+		    else if (!n1.getElt().equals(n2.getElt())) {
+		        return false;
+		    }
+		    else {
+		        n1=n1.suivant;
+		        n2=n2.suivant;
+		    }
 		}
 		return true;
 	}
+	
 }

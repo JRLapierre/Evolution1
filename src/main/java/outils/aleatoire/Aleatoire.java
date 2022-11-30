@@ -54,8 +54,8 @@ public class Aleatoire {
 	//cree un tableau de longeur n pour stocker l'état du générateur
 	private int[] mt=new int[n];
 	private int index=n+1;
-	private final int LOWERMASK=(1<<r)-1;//le nombre binaire de 1 dans r
-	private final int UPPERMASK=0x80000000;
+	private final int lowerMask=(1<<r)-1;//le nombre binaire de 1 dans r
+	private final int upperMask=0x80000000;
 
 	/**
 	 * initialise le générateur à partir d'une graine
@@ -95,7 +95,7 @@ public class Aleatoire {
 	 */
 	private void twist() {
 		for (int i=0; i<n; i++) {
-			int x=(mt[i] & UPPERMASK) + (mt[(i+1) % n] & LOWERMASK);
+			int x=(mt[i] & upperMask) + (mt[(i+1) % n] & lowerMask);
 			int xa = x >> 1;
 			if ((x%2)!=0) {
 				xa = xa ^ a;

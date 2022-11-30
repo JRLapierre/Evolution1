@@ -121,7 +121,7 @@ public class Neurone {
 	 * @param puissance un signal recu d'une connexion
 	 */
 	public void updatePuissance(float puissance) {
-		this.puissance=limitePuissance(this.puissance += puissance);
+		this.puissance=limitePuissance(this.puissance + puissance);
 	}
 	
 	/**
@@ -159,19 +159,20 @@ public class Neurone {
 	 * @return une description de la neurone au format json
 	 */
 	public String toStringJson() {
-		String str="";
-		str += "{";
+		StringBuilder build=new StringBuilder(connexions.getLongueur()*100);
+		build.append("");
+		build.append("{");
 		Connexion c=connexions.getSuivant();
 		while (c!=null) {
-			str += c.toStringJson();
+			build.append(c.toStringJson());
 			c=connexions.getSuivant();
 			if(c!=null) {
-				str += ",";
+				build.append(",");
 			}
 			
 		}
-		str +="}";
-		return str;
+		build.append("}");
+		return build.toString();
 	}
 	
 	/**
@@ -195,14 +196,9 @@ public class Neurone {
 	 * @param obj l'objet à comparer
 	 * @return true si les deux neurones ont le même type et le même numero
 	 */
-	public boolean equalsRoles(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
+	public boolean equalsRoles(Neurone other) {
+		if (other == null)
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Neurone other = (Neurone) obj;
 		return numero == other.numero 
 				&& type.equals(other.type);
 	}

@@ -101,7 +101,7 @@ public class Cerveau {
 	 * @param type
 	 */
 	private void exeptionType(String type) {
-		if (type=="input" || type=="output" || type=="interne") {
+		if (type.equals("input") || type.equals("output") || type.equals("interne")) {
 			return;
 		}//je sais que l'exeption n'est pas la bonne mais flemme de creer
 		throw new ArithmeticException("le type de la neurone est inconnu");
@@ -226,13 +226,13 @@ public class Cerveau {
 	 */
 	private Neurone getNeurone(String type, int position) {
 		exeptionType(type);
-		if (type=="input") {
+		if (type.equals("input")) {
 			return listeInput[position];
 		}
-		else if (type=="output") {
+		else if (type.equals("output")) {
 			return listeOutput[position];
 		}
-		else if (type=="interne") {
+		else if (type.equals("interne")) {
 			return listeNeurones[position];
 		}
 		else {
@@ -344,37 +344,38 @@ public class Cerveau {
 	 * d'origine.
 	 */
 	public String toStringJson() {
-		String str="{\"inputs\":{";
+		StringBuilder build=new StringBuilder(nbInput*100+nbNeurones*100+nbOutput*100);
+		build.append("{\"inputs\":{");
 		//les connexions venant des input
 		for (int i=0; i<nbInput; i++) {
-			str += "\"Neurone" + i + "\":" 
-					+ listeInput[i].toStringJson();
+			build.append("\"Neurone" + i + "\":" 
+					+ listeInput[i].toStringJson());
 			if(i!=nbInput-1) {
-				str += ",";
+				build.append(",");
 			}
 		}
-		str +="},";
+		build.append("},");
 		//les connexions venant de l'interieur
-		str +="\"interne\":{";
+		build.append("\"interne\":{");
 		for (int i=0; i<nbNeurones; i++) {
-			str += "\"Neurone" + i + "\":" 
-					+ listeNeurones[i].toStringJson();
+			build.append("\"Neurone" + i + "\":" 
+					+ listeNeurones[i].toStringJson());
 			if(i!=nbNeurones-1) {
-				str += ",";
+				build.append(",");
 			}
 		}
-		str +="},";
+		build.append("},");
 		//les connexions venant des outputs
-		str +="\"outputs\":{";
+		build.append("\"outputs\":{");
 		for (int i=0; i<nbOutput; i++) {
-			str += "\"Neurone" + i + "\":" 
-					+ listeOutput[i].toStringJson();
+			build.append("\"Neurone" + i + "\":" 
+					+ listeOutput[i].toStringJson());
 			if(i!=nbOutput-1) {
-				str += ",";
+				build.append(",");
 			}
 		}
-		str +="}}";
-		return str;
+		build.append("}}");
+		return build.toString();
 	}
 
 
@@ -399,6 +400,11 @@ public class Cerveau {
 			return false;
 		}
 		return listeConnexions.equals(other.listeConnexions);
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
 	}
 	
 

@@ -80,7 +80,6 @@ public class Connexion {
 	//constructeur pour creer depuis un enregistrement json
 	public Connexion(String sub, Cerveau cerveau) {
 		//faire de la sous decoupe
-		//{"connexion14":{"id":14,"facteur":-1.084696,"origine":{"type":"input","numero":0},"cible":{"type":"output","numero":0}}
 		this.id=Integer.parseInt(sub.substring(
 				sub.indexOf("\"id\":")+5, 
 				sub.indexOf(",\"facteur\":")));
@@ -203,7 +202,7 @@ public class Connexion {
 	 * @param update l'amplification ou l'affaiblissement du facteur
 	 */
 	public void updateFacteur(float update) {
-		this.facteur=corrigeFacteur(facteur+=update);
+		this.facteur=corrigeFacteur(facteur+update);
 	}
 	
 	/**
@@ -261,6 +260,11 @@ public class Connexion {
 				&& Float.floatToIntBits(facteur) == Float.floatToIntBits(other.facteur)
 				&& cible.equalsRoles(other.cible)
 				&& id==other.id;
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
 	}
 	
 		

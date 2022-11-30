@@ -70,7 +70,7 @@ public abstract class Individu {
 	 * constructeur pour recreer des individus depuis une sauvegarde.
 	 * @param sub le string qui decrit un individu
 	 */
-	protected Individu(String sub, int seed) {
+	protected Individu(String sub) {
 		this.id=Integer.parseInt(sub.substring(
 				sub.indexOf("\"id\":")+5, 
 				sub.indexOf(",\"generation\"")));
@@ -84,7 +84,6 @@ public abstract class Individu {
 		if(this.id>nbIndividus) {
 			nbIndividus=id;
 		}
-		alea=new Aleatoire(seed+10%2147483647);
 	}
 	
 	//----------------------------------------------------------------------
@@ -175,7 +174,6 @@ public abstract class Individu {
             
             writer.flush();
             writer.close();
-            System.out.println("individu enregistre");
         } catch (Exception e) {
             e.printStackTrace();
         }

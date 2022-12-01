@@ -2,7 +2,7 @@ package core.generation;
 
 import java.io.IOException;
 
-import core.individus.Individu;
+import core.generation.individus.Individu;
 
 /**
  * cette classe permet de recuperer une generation depuis une sauvegarde.

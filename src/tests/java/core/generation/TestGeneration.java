@@ -7,11 +7,11 @@ import java.io.IOException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import core.cerveau.Cerveau;
-import core.cerveau.Connexion;
-import core.individus.Individu;
-import core.individus.Original;
-import core.mutations.Mutation;
+import core.generation.individus.Individu;
+import core.generation.individus.Original;
+import core.generation.individus.cerveau.Cerveau;
+import core.generation.individus.cerveau.Connexion;
+import core.generation.individus.mutations.Mutation;
 
 class TestGeneration {
 	

@@ -1,9 +1,9 @@
-package core.individus;
+package core.generation.individus;
 
-import core.cerveau.Cerveau;
-import core.cerveau.Connexion;
-import core.cerveau.Neurone;
-import core.mutations.Mutation;
+import core.generation.individus.cerveau.Cerveau;
+import core.generation.individus.cerveau.Connexion;
+import core.generation.individus.cerveau.Neurone;
+import core.generation.individus.mutations.Mutation;
 import outils.listeChaine.ListeChaine;
 
 /**

@@ -1,9 +1,9 @@
-package core.individus;
+package core.generation.individus;
 
 import java.io.File;
 import java.io.PrintWriter;
 
-import core.cerveau.Cerveau;
+import core.generation.individus.cerveau.Cerveau;
 import outils.aleatoire.Aleatoire;
 
 /**

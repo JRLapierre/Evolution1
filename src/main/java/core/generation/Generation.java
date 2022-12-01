@@ -6,12 +6,12 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import core.individus.CloneMute;
-import core.individus.CloneParfait;
-import core.individus.EnfantSexe;
-import core.individus.Individu;
-import core.individus.Sauvegarde;
-import core.mutations.Mutation;
+import core.generation.individus.CloneMute;
+import core.generation.individus.CloneParfait;
+import core.generation.individus.EnfantSexe;
+import core.generation.individus.Individu;
+import core.generation.individus.Sauvegarde;
+import core.generation.individus.mutations.Mutation;
 import outils.listeChaine.Carracteristique;
 import outils.listeChaine.ListeChaine;
 

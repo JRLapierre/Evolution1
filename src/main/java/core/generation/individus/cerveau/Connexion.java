@@ -1,4 +1,4 @@
-package core.cerveau;
+package core.generation.individus.cerveau;
 
 /**
  * cette classe simule une connexion entre deux neurones.

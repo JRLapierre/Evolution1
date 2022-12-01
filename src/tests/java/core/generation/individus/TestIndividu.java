@@ -1,13 +1,13 @@
-package core.individus;
+package core.generation.individus;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import core.cerveau.Cerveau;
-import core.cerveau.Connexion;
-import core.mutations.Mutation;
+import core.generation.individus.cerveau.Cerveau;
+import core.generation.individus.cerveau.Connexion;
+import core.generation.individus.mutations.Mutation;
 import outils.listeChaine.ListeChaine;
 
 class TestIndividu {

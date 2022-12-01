@@ -1,4 +1,4 @@
-package core.cerveau;
+package core.generation.individus.cerveau;
 
 import outils.listeChaine.ListeChaine;
 

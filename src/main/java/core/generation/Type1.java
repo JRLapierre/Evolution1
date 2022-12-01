@@ -1,9 +1,9 @@
 package core.generation;
 
-import core.cerveau.Cerveau;
-import core.individus.Individu;
-import core.individus.Original;
-import core.mutations.Mutation;
+import core.generation.individus.Individu;
+import core.generation.individus.Original;
+import core.generation.individus.cerveau.Cerveau;
+import core.generation.individus.mutations.Mutation;
 
 /**
  * Cette classe represente le premier type de generation.

@@ -1,11 +1,11 @@
-package core.mutation;
+package core.generation.individus.mutation;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import core.mutations.Mutation;
+import core.generation.individus.mutations.Mutation;
 
 class TestMutation {
 

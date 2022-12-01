@@ -1,4 +1,4 @@
-package core.cerveau;
+package core.generation.individus.cerveau;
 
 import static org.junit.jupiter.api.Assertions.*;
 

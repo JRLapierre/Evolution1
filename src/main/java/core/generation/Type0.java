@@ -1,7 +1,7 @@
 package core.generation;
 
-import core.individus.Individu;
-import core.mutations.Mutation;
+import core.generation.individus.Individu;
+import core.generation.individus.mutations.Mutation;
 
 /**
  * cette classe sert pour les tests.

@@ -1,6 +1,6 @@
-package core.individus;
+package core.generation.individus;
 
-import core.cerveau.Cerveau;
+import core.generation.individus.cerveau.Cerveau;
 import outils.aleatoire.Aleatoire;
 
 /**

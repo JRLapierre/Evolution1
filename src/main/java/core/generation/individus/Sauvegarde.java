@@ -1,4 +1,4 @@
-package core.individus;
+package core.generation.individus;
 
 import outils.aleatoire.Aleatoire;
 

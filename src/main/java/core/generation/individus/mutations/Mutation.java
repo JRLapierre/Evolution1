@@ -1,8 +1,8 @@
-package core.mutations;
+package core.generation.individus.mutations;
 
-import core.cerveau.Cerveau;
-import core.cerveau.Connexion;
-import core.cerveau.Neurone;
+import core.generation.individus.cerveau.Cerveau;
+import core.generation.individus.cerveau.Connexion;
+import core.generation.individus.cerveau.Neurone;
 import outils.aleatoire.Aleatoire;
 
 /**

@@ -1,13 +1,11 @@
-package core.individus;
-
-import core.mutations.Mutation;
+package core.generation.individus;
 
 /**
- * classe qui représente un clone avec quelques mutations
+ * classe représentant un individu issu du clonage parfait
  * @author jrl
  *
  */
-public class CloneMute extends Individu{
+public class CloneParfait extends Individu{
 
 	//------------------------------------------------------------------------------
 	//variables
@@ -21,30 +19,29 @@ public class CloneMute extends Individu{
 	//constructeur
 	
 	/**
-	 * constructeur pour un clone mute
+	 * constructeur pour un clone parfait,au cerveau identique à ses parents
 	 * @param parent
-	 * @param mutation
 	 */
-	public CloneMute(Individu parent, Mutation mutation) {
+	public CloneParfait(Individu parent) {
 		super();
 		this.parent = parent;
 		this.generation=parent.generation+1;
-		this.cerveau=mutation.evolution(parent.cerveau.replique());
+		this.cerveau=parent.cerveau.replique();
 	}
 	
 	//-------------------------------------------------------------------------------
 	//fonctions d'affichage
 	
 	/**
-	 * toString decrivant un clone mute
+	 * toStringJson decrivant un clone parfait
 	 */
 	@Override
 	public String toStringJson() {
 		return "{\"individu" + this.getId() + "\":{"
-		+ "\"type\":\"CloneMute\","
+		+ "\"type\":\"CloneParfait\","
 		+ "\"parent\":" + parent.getId() + ","
 		+ super.toStringJson();
 	}
 	
-	
+
 }

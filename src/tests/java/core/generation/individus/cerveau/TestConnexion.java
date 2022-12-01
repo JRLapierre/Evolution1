@@ -1,9 +1,10 @@
-package core.cerveau;
+package core.generation.individus.cerveau;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 
 class TestConnexion {
 	

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.PrintWriter;
 
 import core.generation.individus.cerveau.Cerveau;
+import core.generation.individus.mutations.Mutation;
 import outils.aleatoire.Aleatoire;
 
 /**
@@ -48,6 +49,11 @@ public abstract class Individu {
 	 * le generateur de nombres aleatoires pour la reproduction sexuee
 	 */
 	protected static Aleatoire alea;
+	
+	/**
+	 * le generateurs de mutation
+	 */
+	protected static Mutation mutation;
 	
 	/**
 	 * le score pour evaluer la
@@ -119,6 +125,14 @@ public abstract class Individu {
 	 */
 	public int getGeneration() {
 		return generation;
+	}
+	
+	/**
+	 * faux getteur qui renvoie le toStringJson de mutation
+	 * @return mutation.toStringJson()
+	 */
+	public static String getMutationToStringJson() {
+		return mutation.toStringJson();
 	}
 	
 	//----------------------------------------------------------------------

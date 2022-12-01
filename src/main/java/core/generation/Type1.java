@@ -38,8 +38,7 @@ public class Type1 extends Generation{
 	 * initialise tous les parametres cités dans la description de la classe.
 	 */
 	public Type1() {
-		super(new Original(new Cerveau(1,1,5), 46), 
-				new Mutation(46, 5, 5, 5, 2, 5), 
+		super(new Original(new Cerveau(1,1,5), 46, new Mutation(46, 5, 5, 5, 2, 5)), 
 				25, 50, 25, 10, "1");
 	}
 	

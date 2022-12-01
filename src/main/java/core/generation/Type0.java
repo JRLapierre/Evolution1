@@ -1,7 +1,6 @@
 package core.generation;
 
 import core.generation.individus.Individu;
-import core.generation.individus.mutations.Mutation;
 
 /**
  * cette classe sert pour les tests.
@@ -22,9 +21,9 @@ public class Type0 extends Generation{
 	 * @param nbTics
 	 * @param nomSimulation
 	 */
-	public Type0(Individu originel, Mutation mutation, int nbClonesParfaits, int nbClonesMutes, int nbEnfantsSexe,
+	public Type0(Individu originel, int nbClonesParfaits, int nbClonesMutes, int nbEnfantsSexe,
 			int nbTics, String nomSimulation) {
-		super(originel, mutation, nbClonesParfaits, nbClonesMutes, nbEnfantsSexe, nbTics, nomSimulation);
+		super(originel, nbClonesParfaits, nbClonesMutes, nbEnfantsSexe, nbTics, nomSimulation);
 	}
 	
 	/**

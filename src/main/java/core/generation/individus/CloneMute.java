@@ -25,7 +25,7 @@ public class CloneMute extends Individu{
 	 * @param parent
 	 * @param mutation
 	 */
-	public CloneMute(Individu parent, Mutation mutation) {
+	public CloneMute(Individu parent) {
 		super();
 		this.parent = parent;
 		this.generation=parent.generation+1;

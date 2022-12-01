@@ -36,7 +36,7 @@ public class EnfantSexe extends Individu{
 	 * @param generation
 	 * @param parent
 	 */
-	public EnfantSexe(Individu parent1, Individu parent2, Mutation mutation) {
+	public EnfantSexe(Individu parent1, Individu parent2) {
 		super();
 		this.parent1 = parent1;
 		this.parent2 = parent2;

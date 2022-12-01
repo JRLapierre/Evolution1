@@ -64,11 +64,6 @@ public abstract class Generation {
 	private String nomSimulation;
 	
 	/**
-	 * les mutations associés avec cette generation
-	 */
-	private Mutation mutation;
-	
-	/**
 	 * la liste d'individus d'une generation
 	 */
 	private Individu[] population;
@@ -85,7 +80,7 @@ public abstract class Generation {
 	 * @param nbClonesMutes
 	 * @param nbEnfantsSexe
 	 */
-	protected Generation(Individu originel, Mutation mutation,
+	protected Generation(Individu originel,
 			int nbClonesParfaits, int nbClonesMutes, int nbEnfantsSexe, 
 			int nbTics, String nomSimulation) {
 		this.nbClonesParfaits=nbClonesParfaits;
@@ -93,13 +88,12 @@ public abstract class Generation {
 		this.nbEnfantsSexe=nbEnfantsSexe;
 		this.nbIndividus=nbClonesParfaits+nbClonesMutes+nbEnfantsSexe;
 		this.id=1;
-		this.mutation=mutation;
 		this.nbTics=nbTics;
 		this.nomSimulation=nomSimulation;
 		this.population=new Individu[nbIndividus];
 		//creation d'une nouvelle generation
 		for (int i=0; i<nbIndividus; i++) {
-			population[i]=new CloneMute(originel, mutation);
+			population[i]=new CloneMute(originel);
 		}
 	}
 
@@ -114,7 +108,6 @@ public abstract class Generation {
 		this.nbEnfantsSexe=precedent.nbEnfantsSexe;
 		this.nbIndividus=precedent.nbIndividus;
 		this.id=precedent.id+1;
-		this.mutation=precedent.mutation;
 		this.nbTics=precedent.nbTics;
 		this.nomSimulation=precedent.nomSimulation;
 		this.population=new Individu[nbIndividus];
@@ -127,13 +120,13 @@ public abstract class Generation {
 		}
 		//clones mutes
 		for(int i=0; i<nbClonesMutes; i++) {
-			this.population[nbClonesParfaits+i]=new CloneMute(precedent.population[i], mutation);
+			this.population[nbClonesParfaits+i]=new CloneMute(precedent.population[i]);
 		}
 		//reproduction sexuee
 		for (int i=0; i<nbEnfantsSexe*2; i+=2) {
 			this.population[nbClonesParfaits + nbClonesMutes + i/2]=
 					new EnfantSexe(precedent.population[i % nbIndividus], 
-							precedent.population[i+1 % nbIndividus], mutation);
+							precedent.population[i+1 % nbIndividus]);
 		}
 		
 	}
@@ -167,8 +160,6 @@ public abstract class Generation {
 				sim.indexOf("\"nbEnfantsSexe\":")+16, 
 				sim.indexOf(",\"nbIndividus\"")));
 		this.nbIndividus=nbClonesParfaits+nbClonesMutes+nbEnfantsSexe;
-		//les mutations
-		this.mutation=new Mutation(sim.substring(sim.indexOf("\"mutations\":")+12));
 		this.population=new Individu[nbIndividus];
 		int graine=Integer.parseInt(sim.substring(
 				sim.indexOf("\"graine\":")+9, 
@@ -179,7 +170,8 @@ public abstract class Generation {
 		for(int i=1; i<=nbIndividus; i++) {
 			//chercher le fichier en question
 			content=Files.readString(Paths.get(path+"individu"+(premierId+i)+".json"));
-			this.population[i-1]=new Sauvegarde(content, graine);
+			this.population[i-1]=new Sauvegarde(content, graine,
+					new Mutation(sim.substring(sim.indexOf("\"mutations\":")+12)));
 		}
 		triScore(population);
 	}
@@ -258,7 +250,7 @@ public abstract class Generation {
 		+ "\"nbClonesMutes\":" + nbClonesMutes + ","
 		+ "\"nbEnfantsSexe\":" + nbEnfantsSexe + ","
 		+ "\"nbIndividus\":" + nbIndividus + ","
-		+ "\"mutations\":" + mutation.toStringJson()
+		+ "\"mutations\":" + Individu.getMutationToStringJson()
 		+"}";
 	}
 	

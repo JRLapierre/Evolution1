@@ -14,7 +14,10 @@ J'ai donc decide de creer un projet avec un tracage facile, en enregistrant tout
 changer l'evaluation et compter les pertes dans le cerveau comme du malus  
 creer un graphe qui permet de traquer visuellement les generations   
 creer une simulation pour jouer au puissance 4  
-implementer un butoir pour les x meilleurs individus pouvant se reproduire
+implementer un butoir pour les x meilleurs individus pouvant se reproduire  
+faire des expressions lambda pour l'evaluation  
+mettre la possiblite de changer les règles en pleines simulation  
+rajouter une couche simulation au dessus de la couche generation ?  
 
 #### urgent :
 
@@ -26,3 +29,4 @@ implementer un butoir pour les x meilleurs individus pouvant se reproduire
 
 continuer la classe TestAleatoire  
 faire un diagramme de classe propre plutot que le plantUML auto genere  
+tenir a jour la doc  

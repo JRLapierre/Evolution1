@@ -21,17 +21,17 @@ class TestGeneration {
 	private Generation type01() {
 		Cerveau c=new Cerveau(1, 1, 0);
 		c.addConnexion(new Connexion(2, c.getListeInput()[0], c.getListeOutput()[0]));
-		Individu i=new Original(c, 0);
 		Mutation m=new Mutation(0, 0, 0, 0, 0, 0);
-		return new Type0(i, m, 0, 0, 1, 1, "0");
+		Individu i=new Original(c, 0, m);
+		return new Type0(i, 0, 0, 1, 1, "0");
 	}
 	
 	private Generation type02() {
 		Cerveau c=new Cerveau(1, 1, 5);
 		c.addConnexion(new Connexion(2, c.getListeInput()[0], c.getListeOutput()[0]));
-		Individu i=new Original(c, 0);
 		Mutation m=new Mutation(0, 100, 0, 50, 100, 0);
-		return new Type0(i, m, 1, 1, 1, 1, "0");//devrait yavoir 3 individus
+		Individu i=new Original(c, 0, m);
+		return new Type0(i, 1, 1, 1, 1, "0");//devrait yavoir 3 individus
 	}
 	
 	//-------------------------------------------------------------------------------------------

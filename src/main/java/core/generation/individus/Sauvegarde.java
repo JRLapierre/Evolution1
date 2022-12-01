@@ -1,5 +1,6 @@
 package core.generation.individus;
 
+import core.generation.individus.mutations.Mutation;
 import outils.aleatoire.Aleatoire;
 
 /**
@@ -20,11 +21,12 @@ public class Sauvegarde extends Individu {
 	 * @param sub le string correspondant au contenu du ficher
 	 * @param seed la graine d'aleatoire
 	 */
-	public Sauvegarde(String sub, int seed) {
+	public Sauvegarde(String sub, int seed, Mutation mutation) {
 		super(sub);
 		if(!Sauvegarde.hasSeed) {
 			alea=new Aleatoire(seed+10%2147483647);
 			Sauvegarde.hasSeed=true;
+			Individu.mutation=mutation;
 		}
 	}
 	

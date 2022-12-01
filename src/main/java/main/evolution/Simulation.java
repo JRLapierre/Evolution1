@@ -31,18 +31,22 @@ public class Simulation {
 	public static void main(String[] args) {
 		
 		Generation g=new Type1();
-		for(int i=0; i<nbGenerations; i++) {
+		g.evaluation();
+		g.enregistre();
+		for(int i=1; i<nbGenerations; i++) {
+			g=new Type1(g);
 			g.evaluation();
 			g.enregistre();
-			g=new Type1(g);
 		}
 		try {
 			Generation g2=new FromSave("1", 100);
 			g2=new Type1(g2);
-			for(int i=0; i<10; i++) {
+			g2.evaluation();
+			g2.enregistre();
+			for(int i=1; i<10; i++) {
+				g2=new Type1(g2);
 				g2.evaluation();
 				g2.enregistre();
-				g2=new Type1(g2);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

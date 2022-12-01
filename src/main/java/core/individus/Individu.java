@@ -81,8 +81,8 @@ public abstract class Individu {
 				sub.indexOf("\"score\":")+8, 
 				sub.indexOf(",\"cerveau\"")));
 		this.cerveau=new Cerveau(sub);
-		if(this.id>nbIndividus) {
-			nbIndividus=id;
+		if(this.id+1>nbIndividus) {
+			nbIndividus=id+1;
 		}
 	}
 	

@@ -82,12 +82,12 @@ public class Cerveau {
 		listeNeurones=initListN(nbNeurones, "interne");		
 		//chercher les connexions et les ajouter
 		int i=0;
-		int begin=sub.indexOf("{\"connexion", i);
+		int begin=sub.indexOf("\"connexion", i);
 		int end=sub.indexOf("}}", begin)+2;
 		while(begin!=-1) {
 			addConnexion(new Connexion(sub.substring(begin, end),this));
 			i=end;
-			begin=sub.indexOf("{\"connexion", i);
+			begin=sub.indexOf("\"connexion", i);
 			end=sub.indexOf("}}", begin)+2;
 		}
 		

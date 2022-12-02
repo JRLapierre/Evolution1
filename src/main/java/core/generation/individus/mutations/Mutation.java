@@ -3,7 +3,7 @@ package core.generation.individus.mutations;
 import core.generation.individus.cerveau.Cerveau;
 import core.generation.individus.cerveau.Connexion;
 import core.generation.individus.cerveau.Neurone;
-import outils.aleatoire.Aleatoire;
+import outils.Aleatoire;
 
 /**
  * classe pour les main.mutations d'une génération à l'autre.

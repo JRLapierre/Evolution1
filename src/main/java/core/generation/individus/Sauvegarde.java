@@ -1,7 +1,7 @@
 package core.generation.individus;
 
 import core.generation.individus.mutations.Mutation;
-import outils.aleatoire.Aleatoire;
+import outils.Aleatoire;
 
 /**
  * cette classe genere des individus a partir d'un ficher.

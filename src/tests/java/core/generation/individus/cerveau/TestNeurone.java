@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
-import outils.listeChaine.ListeChaine;
+import outils.ListeChaine;
 
 class TestNeurone {
 

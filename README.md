@@ -23,6 +23,7 @@ rajouter une couche simulation au dessus de la couche generation ?
 
 
 #### TODO
+optimiser les fonctions de suppression dans listeChaine
 
 
 #### trucs a finir si j'en ai le courage

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import core.generation.individus.cerveau.Cerveau;
 import core.generation.individus.cerveau.Connexion;
 import core.generation.individus.mutations.Mutation;
-import outils.listeChaine.ListeChaine;
+import outils.ListeChaine;
 
 class TestIndividu {
 

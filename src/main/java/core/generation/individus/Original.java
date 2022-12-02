@@ -2,7 +2,7 @@ package core.generation.individus;
 
 import core.generation.individus.cerveau.Cerveau;
 import core.generation.individus.mutations.Mutation;
-import outils.aleatoire.Aleatoire;
+import outils.Aleatoire;
 
 /**
  * cette classe existe pour initialiser l'individu original.
@@ -22,7 +22,7 @@ public class Original extends Individu{
 		super();
 		this.cerveau=cerveau;
 		this.generation=0;
-		this.mutation=mutation;
+		Individu.mutation=mutation;
 		Individu.alea=new Aleatoire(graineAleatoire);
 	}
 	

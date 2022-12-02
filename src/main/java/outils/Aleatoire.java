@@ -1,4 +1,4 @@
-package outils.aleatoire;
+package outils;
 
 /**
  * j'essaie de recréer l'algorithme Mersenne Twister pour générer

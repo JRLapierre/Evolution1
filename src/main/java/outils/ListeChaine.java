@@ -1,4 +1,4 @@
-package outils.listeChaine;
+package outils;
 
 import java.util.Objects;
 

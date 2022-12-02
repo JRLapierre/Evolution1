@@ -1,4 +1,4 @@
-package outils.aleatoire;
+package outils;
 
 import static org.junit.jupiter.api.Assertions.*;
 

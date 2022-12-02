@@ -1,4 +1,4 @@
-package outils.listeChaine;
+package outils;
 
 import static org.junit.jupiter.api.Assertions.*;
 

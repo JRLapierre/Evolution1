@@ -12,8 +12,8 @@ import core.generation.individus.EnfantSexe;
 import core.generation.individus.Individu;
 import core.generation.individus.Sauvegarde;
 import core.generation.individus.mutations.Mutation;
-import outils.listeChaine.Carracteristique;
-import outils.listeChaine.ListeChaine;
+import outils.Carracteristique;
+import outils.ListeChaine;
 
 /**
  * cette classe représente une génération.
@@ -75,7 +75,6 @@ public abstract class Generation {
 	/**
 	 * genere une nouvelle generation a partir d'un individu donné
 	 * @param originel
-	 * @param mutation
 	 * @param nbClonesParfaits
 	 * @param nbClonesMutes
 	 * @param nbEnfantsSexe

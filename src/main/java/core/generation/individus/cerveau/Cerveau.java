@@ -1,6 +1,6 @@
 package core.generation.individus.cerveau;
 
-import outils.listeChaine.ListeChaine;
+import outils.ListeChaine;
 
 /**
  * cette classe va simuler un cerveau avec des entrées, 

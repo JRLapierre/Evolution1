@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 
 import core.generation.individus.cerveau.Cerveau;
 import core.generation.individus.mutations.Mutation;
-import outils.aleatoire.Aleatoire;
+import outils.Aleatoire;
 
 /**
  * cette classe représente un individu.

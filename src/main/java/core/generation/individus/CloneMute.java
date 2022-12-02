@@ -1,7 +1,5 @@
 package core.generation.individus;
 
-import core.generation.individus.mutations.Mutation;
-
 /**
  * classe qui représente un clone avec quelques mutations
  * @author jrl

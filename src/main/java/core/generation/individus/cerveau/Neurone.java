@@ -1,6 +1,6 @@
 package core.generation.individus.cerveau;
 
-import outils.listeChaine.ListeChaine;
+import outils.ListeChaine;
 
 /**
  * cette classe simule une neuronne, qui recoit des infos et qui en renvoie.

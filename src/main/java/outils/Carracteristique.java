@@ -1,4 +1,4 @@
-package outils.listeChaine;
+package outils;
 
 /**
  * Interface fonctionnelle pour isoler une carracteristique d'un element.

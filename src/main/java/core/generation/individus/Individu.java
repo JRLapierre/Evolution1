@@ -1,8 +1,5 @@
 package core.generation.individus;
 
-import java.io.File;
-import java.io.PrintWriter;
-
 import core.generation.individus.cerveau.Cerveau;
 import core.generation.individus.mutations.Mutation;
 import outils.Aleatoire;
@@ -88,7 +85,7 @@ public abstract class Individu {
 				sub.indexOf(",\"cerveau\"")));
 		this.cerveau=new Cerveau(sub);
 		if(this.id+1>nbIndividus) {
-			nbIndividus=id+1;
+			Individu.nbIndividus=id+1;
 		}
 	}
 	
@@ -164,37 +161,6 @@ public abstract class Individu {
 		//je ferme cette partie la pour l'instant
 		+ "}}";
 	}
-	
-	//------------------------------------------------------------------------------------------
-	//fonction d'enregistrement
-	
-	/**
-	 * une methode qui enregistre les resultats de chaque individu
-	 * @param numSimulation le numero de la simulation servant d'identifiant au dossier
-	 * @param sousDossier le sous dossier voulu pour mettre plus d'ordre
-	 * @param nomFic le nom du ficher à enregistrer
-	 */
-	public void creeEnregistrementJson(String nomSimulation) {
-        try {
-        	//si le dossier n'existe pas on le créé
-        	File f=new File("enregistrements\\simulation" + nomSimulation
-        			+ "\\generation" + generation + "\\");
-        	f.mkdirs();
-            PrintWriter writer = new PrintWriter(
-            		"enregistrements\\simulation" + nomSimulation
-            		+ "\\generation" + generation
-            		+ "\\individu" + id + ".json");
-            writer.write(this.toStringJson());
-            
-            writer.flush();
-            writer.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-	}
-
-	
-	
 	
 	
 }

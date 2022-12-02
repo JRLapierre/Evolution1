@@ -260,25 +260,33 @@ public abstract class Generation {
 	 * fonction pour enregistrer toute une generation dans des fichiers au format json.
 	 */
 	public void enregistre() {
-		for (int i=0; i<nbIndividus; i++) {
-			//creer un fichier generation info
-	        try {
-	        	//si le dossier n'existe pas on le créé
-	        	File f=new File("enregistrements\\simulation" + nomSimulation
-	        			+ "\\generation" + id + "\\");
-	        	f.mkdirs();
-	            PrintWriter writer = new PrintWriter(
-	            		"enregistrements\\simulation" + nomSimulation
-	            		+ "\\generation" + id
-	            		+ "\\infos_gen" + id + ".json");
-	            writer.write(this.toStringJson());
-	            
-	            writer.flush();
-	            writer.close();
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
-			population[i].creeEnregistrementJson(nomSimulation);
-		}
+		//creer un fichier generation info
+        try {
+        	//si le dossier n'existe pas on le créé
+        	File f=new File("enregistrements\\simulation" + nomSimulation
+        			+ "\\generation" + id + "\\");
+        	f.mkdirs();
+            PrintWriter writer = new PrintWriter(
+            		"enregistrements\\simulation" + nomSimulation
+            		+ "\\generation" + id
+            		+ "\\infos_gen" + id + ".json");
+            writer.write(this.toStringJson());
+            
+            writer.flush();
+            writer.close();
+
+            for (int i=0; i<nbIndividus; i++) {
+            	PrintWriter writer2 = new PrintWriter(
+                		"enregistrements\\simulation" + nomSimulation
+                		+ "\\generation" + population[i].getGeneration()
+                		+ "\\individu" + population[i].getId() + ".json");
+                writer2.write(population[i].toStringJson());
+                writer2.flush();
+                writer2.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 	}
 }

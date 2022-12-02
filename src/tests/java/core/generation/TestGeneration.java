@@ -18,12 +18,21 @@ class TestGeneration {
 	//-------------------------------------------------------------------------------------------
 	//fonctions pratiques
 	
+	private Epreuve e1() {
+		return individu -> {for(int i=0; i<10; i++) {
+			individu.getCerveau().getListeInput()[0].setPuissance(1);
+			individu.getCerveau().next();
+			float score=individu.getCerveau().getListeOutput()[0].getPuissance();
+			individu.updateScore(5+score);
+		}};
+	}
+	
 	private Generation type01() {
 		Cerveau c=new Cerveau(1, 1, 0);
 		c.addConnexion(new Connexion(2, c.getListeInput()[0], c.getListeOutput()[0]));
 		Mutation m=new Mutation(0, 0, 0, 0, 0, 0);
 		Individu i=new Original(c, 0, m);
-		return new Type0(i, 0, 0, 1, 1, "0");
+		return new Generation(i, 0, 0, 1, 1, e1(), "0");
 	}
 	
 	private Generation type02() {
@@ -31,7 +40,7 @@ class TestGeneration {
 		c.addConnexion(new Connexion(2, c.getListeInput()[0], c.getListeOutput()[0]));
 		Mutation m=new Mutation(0, 100, 0, 50, 100, 0);
 		Individu i=new Original(c, 0, m);
-		return new Type0(i, 1, 1, 1, 1, "0");//devrait yavoir 3 individus
+		return new Generation(i, 1, 1, 1, 1, e1(), "0");//devrait yavoir 3 individus
 	}
 	
 	//-------------------------------------------------------------------------------------------
@@ -43,7 +52,7 @@ class TestGeneration {
 		Generation g1=type01();
 		g1.enregistre();
 		
-		assertEquals(7, g1.getPopulation()[0].getScore());
+		assertEquals(70, g1.getPopulation()[0].getScore());
 		
 	}
 	
@@ -62,7 +71,7 @@ class TestGeneration {
 	@DisplayName("test du decodeur")
 	void testDecodeur() {
 		try {
-			Generation g=new FromSave("1", 100);
+			Generation g=new Generation("1", 100, e1());
 			g.nextGen();
 			for(int i=0; i<10; i++) {
 				g.enregistre();

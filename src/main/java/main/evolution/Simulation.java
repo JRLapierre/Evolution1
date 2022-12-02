@@ -2,9 +2,11 @@ package main.evolution;
 
 import java.io.IOException;
 
-import core.generation.FromSave;
+import core.generation.Epreuve;
 import core.generation.Generation;
-import core.generation.Type1;
+import core.generation.individus.Original;
+import core.generation.individus.cerveau.Cerveau;
+import core.generation.individus.mutations.Mutation;
 
 /**
  * cette classe est minimaliste et sert à lancer la simulation.
@@ -20,6 +22,16 @@ public class Simulation {
 	private static int nbGenerations=100;
 	
 	/**
+	 * l'expression lambda de l'evaluation
+	 */
+	private static Epreuve epreuve=individu -> {for(int i=0; i<10; i++) {
+		individu.getCerveau().getListeInput()[0].setPuissance(1);
+		individu.getCerveau().next();
+		float score=individu.getCerveau().getListeOutput()[0].getPuissance();
+		individu.updateScore(5+score);
+	}};
+	
+	/**
 	 * fonction main qui contient une boucle de nbGeneration iteration.
 	 * A chaque tour de boucle, on genere la generation suivante et on enregistre.
 	 * 
@@ -30,14 +42,14 @@ public class Simulation {
 	 */
 	public static void main(String[] args) {
 		
-		Generation g=new Type1();
+		Generation g=new Generation(new Original(new Cerveau(1,1,5), 46, new Mutation(46, 5, 5, 5, 2, 5)), 25, 50, 25, 10, epreuve, "1");
 		g.enregistre();
 		for(int i=1; i<nbGenerations; i++) {
 			g.nextGen();
 			g.enregistre();
 		}
 		try {
-			Generation g2=new FromSave("1", 100);
+			Generation g2=new Generation("1", 100, epreuve);
 			g2.nextGen();
 			g2.enregistre();
 			for(int i=1; i<10; i++) {

@@ -20,7 +20,7 @@ import outils.ListeChaine;
  * @author jrl
  *
  */
-public abstract class Generation {
+public class Generation {
 
 	//------------------------------------------------------------------------------------------
 	//variables : distribution de la population
@@ -68,6 +68,11 @@ public abstract class Generation {
 	 */
 	private Individu[] population;
 	
+	/**
+	 * expression lambda pour l'epreuve des individus.
+	 */
+	private Epreuve epreuve;
+	
 	
 	//-------------------------------------------------------------------------------------------
 	//constructeurs
@@ -79,9 +84,9 @@ public abstract class Generation {
 	 * @param nbClonesMutes
 	 * @param nbEnfantsSexe
 	 */
-	protected Generation(Individu originel,
+	public Generation(Individu originel,
 			int nbClonesParfaits, int nbClonesMutes, int nbEnfantsSexe, 
-			int nbTics, String nomSimulation) {
+			int nbTics, Epreuve epreuve, String nomSimulation) {
 		this.nbClonesParfaits=nbClonesParfaits;
 		this.nbClonesMutes=nbClonesMutes;
 		this.nbEnfantsSexe=nbEnfantsSexe;
@@ -90,6 +95,7 @@ public abstract class Generation {
 		this.nbTics=nbTics;
 		this.nomSimulation=nomSimulation;
 		this.population=new Individu[nbIndividus];
+		this.epreuve=epreuve;
 		//creation d'une nouvelle generation
 		for (int i=0; i<nbIndividus; i++) {
 			population[i]=new CloneMute(originel);
@@ -105,12 +111,12 @@ public abstract class Generation {
 	 * @param generation la generation d'ou reprendre la simulation
 	 * @throws IOException 
 	 */
-	protected Generation(String nomSimulation, int idGeneration) throws IOException {
+	public Generation(String nomSimulation, int idGeneration, Epreuve epreuve) throws IOException {
 		//recherche de la simulation et de la generation en accedant aux fichiers
 		String path="enregistrements/simulation"+nomSimulation+"/generation"+idGeneration+"/";
 		//fichiers de la generation
 		String sim = Files.readString(Paths.get(path+"infos_gen"+idGeneration+".json"));
-		
+		this.epreuve=epreuve;
 		this.nomSimulation=sim.substring(17, sim.indexOf(",\"nbTics\""));
 		this.nbTics=Integer.parseInt(sim.substring(
 				sim.indexOf("\"nbTics\":")+9, 
@@ -217,19 +223,13 @@ public abstract class Generation {
 	//-------------------------------------------------------------------------------------------
 	//fonctions d'evaluation
 	
-	/**
-	 * fonction abstraite pour l'epreuve d'un individu. 
-	 * Cette methode est redéfinie dans toutes les sous classes.
-	 * @param individu l'individu à évaluer
-	 */
-	protected abstract void epreuve(Individu individu);
 	
 	/**
 	 * fonction pour l'evaluation des individus
 	 */
 	private void evaluation() {
 		for (int i=0; i<nbIndividus; i++) {
-			epreuve(population[i]);
+			epreuve.epreuve(population[i]);
 		}
 	}
 	

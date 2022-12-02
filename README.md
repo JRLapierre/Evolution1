@@ -21,11 +21,9 @@ changer le toStringJson de Generation ?
 
 
 #### TODO
-faire des expressions lambda pour l'evaluation  
- enregistrer l'expression lambda en brut dans un fichier
+enregistrer l'expression lambda d'epreuve en brut dans un fichier
 mettre la possiblite de changer les règles en pleines simulation  
 implementer un butoir pour les x meilleurs individus pouvant se reproduire  
-faire de Generation une classe concrete  
 
 
 #### trucs a finir si j'en ai le courage

@@ -509,23 +509,26 @@ public class ListeChaine<T> {
 	//fonctions de suppression
 
 	/**
-	 * fonction de suppression d'un element selon l'index
-	 * @param index l'index de l'élément qu'on veut supprimer
+	 * fonction privee qui enleve de la liste le noeud en parametre
+	 * @param n le noeud a supprimer
 	 */
-	public void delIndex(int index) {
-		Noeud n=this.getNoeud(index);
-		//cas ou c'est le seul élément de la liste
-		if (index==0&&longueur==1) {
+	private void delNoeud(Noeud n) {
+		//n n'existe pas
+		if (n==null) {
+			return;
+		}
+		//n est le seul element de la liste
+		else if (n==premier && n==dernier) {
 			premier=null;
 			dernier=null;
 		}
 		//si l'élément c'est le premier de la liste
-		else if (index==0) {
+		else if (n==premier) {
 			premier=n.getSuivant();
 			n.getSuivant().setPrecedent(null);
 		}
 		//si l'élément est à la fin de la liste
-		else if (index==longueur-1) {
+		else if (n==dernier) {
 			dernier=n.getPrecedent();
 			n.getPrecedent().setSuivant(null);
 		}
@@ -534,7 +537,17 @@ public class ListeChaine<T> {
 			n.getPrecedent().setSuivant(n.getSuivant());
 			n.getSuivant().setPrecedent(n.getPrecedent());
 		}
-	longueur--;
+		longueur--;
+
+	}
+	
+	
+	/**
+	 * fonction de suppression d'un element selon l'index
+	 * @param index l'index de l'élément qu'on veut supprimer
+	 */
+	public void delIndex(int index) {
+		delNoeud(this.getNoeud(index));
 	}
 	
 	/**
@@ -554,13 +567,13 @@ public class ListeChaine<T> {
 	 */
 	public void delElts(T elt) {
 		Noeud n=premier;
-		for (int i=0; i<longueur; i++) {
+		while(n!=null) {
 			if(n.getElt()==elt) {
-				delIndex(i);
-				i--;
+				delNoeud(n);
 			}
-			n=n.getSuivant();
+			n=n.suivant;
 		}
+
 	}
 	
 	/**

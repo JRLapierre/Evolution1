@@ -14,6 +14,8 @@ J'ai donc decide de creer un projet avec un tracage facile, en enregistrant tout
 changer l'evaluation et compter les pertes dans le cerveau comme du malus  
 creer un graphe qui permet de traquer visuellement les generations   
 creer une simulation pour jouer au puissance 4  
+une classe evaluation et population ?  
+changer le toStringJson de Generation ?  
 
 #### urgent :
 
@@ -22,10 +24,8 @@ creer une simulation pour jouer au puissance 4
 faire des expressions lambda pour l'evaluation  
  enregistrer l'expression lambda en brut dans un fichier
 mettre la possiblite de changer les règles en pleines simulation  
-faire une classe Population  
 implementer un butoir pour les x meilleurs individus pouvant se reproduire  
-une classe evaluation ?  
-changer le toStringJson de Generation ?  
+faire de Generation une classe concrete  
 
 
 #### trucs a finir si j'en ai le courage

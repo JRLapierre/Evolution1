@@ -42,13 +42,6 @@ public class Type1 extends Generation{
 				25, 50, 25, 10, "1");
 	}
 	
-	/**
-	 * Constructeur pour generer une nouvelle generation à partir de la precedente.
-	 * @param precedent la generation precedente
-	 */
-	public Type1(Generation precedent) {
-		super(precedent);
-	}
 
 	@Override
 	protected void epreuve(Individu individu) {

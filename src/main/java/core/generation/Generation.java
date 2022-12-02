@@ -94,41 +94,10 @@ public abstract class Generation {
 		for (int i=0; i<nbIndividus; i++) {
 			population[i]=new CloneMute(originel);
 		}
+		evaluation();
 	}
 
-	/**
-	 * genere une nouvelle generation à partir d'une precedente
-	 * @param precedent la generation precedente
-	 */
-	protected Generation(Generation precedent) {
-		//initialisation des variables
-		this.nbClonesParfaits=precedent.nbClonesParfaits;
-		this.nbClonesMutes=precedent.nbClonesMutes;
-		this.nbEnfantsSexe=precedent.nbEnfantsSexe;
-		this.nbIndividus=precedent.nbIndividus;
-		this.id=precedent.id+1;
-		this.nbTics=precedent.nbTics;
-		this.nomSimulation=precedent.nomSimulation;
-		this.population=new Individu[nbIndividus];
-		//on trie la liste
-		triScore(precedent.population);
-		//on prends les meilleurs pour tous les types de reproduction
-		//clones parfaits
-		for(int i=0; i<nbClonesParfaits; i++) {
-			this.population[i]=new CloneParfait(precedent.population[i]);
-		}
-		//clones mutes
-		for(int i=0; i<nbClonesMutes; i++) {
-			this.population[nbClonesParfaits+i]=new CloneMute(precedent.population[i]);
-		}
-		//reproduction sexuee
-		for (int i=0; i<nbEnfantsSexe*2; i+=2) {
-			this.population[nbClonesParfaits + nbClonesMutes + i/2]=
-					new EnfantSexe(precedent.population[i % nbIndividus], 
-							precedent.population[i+1 % nbIndividus]);
-		}
 		
-	}
 	
 	/**
 	 * constructeur pour recreer une generation a partir de fichiers
@@ -172,7 +141,38 @@ public abstract class Generation {
 			this.population[i-1]=new Sauvegarde(content, graine,
 					new Mutation(sim.substring(sim.indexOf("\"mutations\":")+12)));
 		}
+		evaluation();
 		triScore(population);
+	}
+	
+	//----------------------------------------------------------------------------------------
+	//fonction de changement de generation
+	
+	/**
+	 * fonction qui genere la generation suivante
+	 */
+	public void nextGen() {
+		triScore(population);
+		
+		Individu[] newPopulation=new Individu[nbIndividus];
+		
+		for(int i=0; i<nbClonesParfaits; i++) {
+			newPopulation[i]=new CloneParfait(population[i]);
+		}
+		//clones mutes
+		for(int i=0; i<nbClonesMutes; i++) {
+			newPopulation[nbClonesParfaits+i]=new CloneMute(population[i]);
+		}
+		//reproduction sexuee
+		for (int i=0; i<nbEnfantsSexe*2; i+=2) {
+			newPopulation[nbClonesParfaits + nbClonesMutes + i/2]=
+					new EnfantSexe(population[i % nbIndividus], 
+							population[i+1 % nbIndividus]);
+		}
+		this.population=newPopulation;
+		this.id++;
+		//on evalue automatiquement la population a la fin
+		evaluation();
 	}
 	
 	//------------------------------------------------------------------------------------------
@@ -227,7 +227,7 @@ public abstract class Generation {
 	/**
 	 * fonction pour l'evaluation des individus
 	 */
-	public void evaluation() {
+	private void evaluation() {
 		for (int i=0; i<nbIndividus; i++) {
 			epreuve(population[i]);
 		}

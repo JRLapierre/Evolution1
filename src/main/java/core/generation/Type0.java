@@ -26,14 +26,6 @@ public class Type0 extends Generation{
 		super(originel, nbClonesParfaits, nbClonesMutes, nbEnfantsSexe, nbTics, nomSimulation);
 	}
 	
-	/**
-	 * constructeur pour la generation suivante
-	 * @param g
-	 */
-	public Type0(Generation g) {
-		super(g);
-	}
-
 	@Override
 	protected void epreuve(Individu individu) {//mmeme chose que pour Type1
 		for(int i=0; i<super.nbTics; i++) {

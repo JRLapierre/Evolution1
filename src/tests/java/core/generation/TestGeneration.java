@@ -41,7 +41,6 @@ class TestGeneration {
 	@DisplayName("test des fonctions de bases")
 	void testBases() {
 		Generation g1=type01();
-		g1.evaluation();
 		g1.enregistre();
 		
 		assertEquals(7, g1.getPopulation()[0].getScore());
@@ -52,13 +51,11 @@ class TestGeneration {
 	@DisplayName("test de plusieurs generations")
 	void testGenerations() {
 		Generation g2=type02();
-		g2.evaluation();
 		g2.enregistre();
-		Generation g3=new Type0(g2);
-		g3.evaluation();
-		g3.enregistre();
 		System.out.println( g2.toStringJson());
-		System.out.println( g3.toStringJson());
+		g2.nextGen();
+		g2.enregistre();
+		System.out.println( g2.toStringJson());
 	}
 	
 	@Test
@@ -66,11 +63,10 @@ class TestGeneration {
 	void testDecodeur() {
 		try {
 			Generation g=new FromSave("1", 100);
-			g=new Type1(g);
+			g.nextGen();
 			for(int i=0; i<10; i++) {
-				g.evaluation();
 				g.enregistre();
-				g=new Type1(g);
+				g.nextGen();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

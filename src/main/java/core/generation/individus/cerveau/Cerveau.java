@@ -47,6 +47,11 @@ public class Cerveau {
 	 * une linkedList de connexions
 	 */
 	private ListeChaine<Connexion> listeConnexions=new ListeChaine<>();
+	
+	/**
+	 * les pertes d'energie dans le cerveau
+	 */
+	private float pertes=0;
 
 	//------------------------------------------------------------------------------
 	//constructeur
@@ -242,6 +247,14 @@ public class Cerveau {
 		
 	}
 	
+	/**
+	 * getteur pour obtenir les pertes du cerveau
+	 * @return pertes
+	 */
+	public float getPertes() {
+		return pertes;
+	}
+	
 	
 	//------------------------------------------------------------------------------
 	//fonctions lies au fonctionnement dynamique du cerveau
@@ -269,7 +282,7 @@ public class Cerveau {
 		//on reparcours les connextions
 		for (int i=0; i<listeConnexions.getLongueur(); i++) {
 			//on enregistre la valeur des connextions dans les neurones
-			listeConnexions.getElement(i).transitionOut();
+			pertes += listeConnexions.getElement(i).transitionOut();
 		}
 	}
 	

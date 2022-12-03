@@ -26,7 +26,7 @@ public class SimulationEnregistree {
 	/**
 	 * le numero de la generation a laquelle on va reprendre la simulation
 	 */
-	private static int generationInitiale=500;
+	private static int generationInitiale=100;
 	
 	/**
 	 * le nombre de generations a simuler.
@@ -52,6 +52,7 @@ public class SimulationEnregistree {
 			float score=individu.getCerveau().getListeOutput()[0].getPuissance();
 			individu.updateScore(5+score);
 		}
+		individu.updateScore(-individu.getCerveau().getPertes());
 	};
 	
 	/**

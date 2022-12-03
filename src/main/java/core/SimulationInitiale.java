@@ -195,6 +195,7 @@ public class SimulationInitiale {
 			float score=individu.getCerveau().getListeOutput()[0].getPuissance();
 			individu.updateScore(5+score);
 		}
+		individu.updateScore(-individu.getCerveau().getPertes());
 	};
 	
 	/**

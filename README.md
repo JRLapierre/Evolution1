@@ -11,7 +11,6 @@ J'ai donc decide de creer un projet avec un tracage facile, en enregistrant tout
 
 #### idees : 
 
-changer l'evaluation et compter les pertes dans le cerveau comme du malus  
 creer un graphe qui permet de traquer visuellement les generations   
 creer une simulation pour jouer au puissance 4  
 
@@ -19,7 +18,7 @@ creer une simulation pour jouer au puissance 4
 
 
 #### TODO
-  
+
 
 #### trucs a finir si j'en ai le courage
 

@@ -56,12 +56,23 @@ public class Neurone {
 	 * Si la puissance excède 5, elle est ramené à 5
 	 * Si la puissance est en dessous de -5, elle est ramenée à -5
 	 * @param puissance
-	 * @return
+	 * @return les pertes
 	 */
 	private float limitePuissance(float puissance) {
-		if (puissance<-5) return -5;
-		if (puissance>5) return 5;
-		return puissance;
+		float pertes;
+		if (this.puissance+puissance<-5) {
+			pertes=-(5+this.puissance+puissance);
+			this.puissance=-5;
+		}
+		else if (this.puissance+puissance>5) {
+			pertes=(-5+this.puissance+puissance);
+			this.puissance=5;
+		}
+		else {
+			this.puissance+=puissance;
+			pertes=0;
+		}
+		return pertes;
 	}
 	
 	//-------------------------------------------------------------------------------
@@ -71,9 +82,11 @@ public class Neurone {
 	 * setter pour enregistrer la valeur (neurone d'entrée du cerveau)
 	 * cette fonction est utilisée pour les input
 	 * @param puissance
+	 * @return les pertes
 	 */
-	public void setPuissance(float puissance) {
-		this.puissance=limitePuissance(puissance);
+	public float setPuissance(float puissance) {
+		this.puissance=0;
+		return limitePuissance(puissance);
 	}
 	
 	//-------------------------------------------------------------------------------
@@ -119,9 +132,10 @@ public class Neurone {
 	 * cette fonction permet de mettre à jour la puissance pour cumuler celles 
 	 * venant des connexions
 	 * @param puissance un signal recu d'une connexion
+	 * @return les pertes
 	 */
-	public void updatePuissance(float puissance) {
-		this.puissance=limitePuissance(this.puissance + puissance);
+	public float updatePuissance(float puissance) {
+		return setPuissance(this.puissance+puissance);
 	}
 	
 	/**

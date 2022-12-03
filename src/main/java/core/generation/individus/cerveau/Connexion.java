@@ -188,10 +188,12 @@ public class Connexion {
 	 * deuxième partie de la transmission du signal :
 	 * transmet sa force à la neurone suivante puis
 	 * réinitialise sa force
+	 * @return les pertes
 	 */
-	public void transitionOut() {
-		cible.updatePuissance(force);
+	public float transitionOut() {
+		float pertes=cible.updatePuissance(force);
 		force=0;
+		return pertes;
 	}
 	
 	//-------------------------------------------------------------------------------

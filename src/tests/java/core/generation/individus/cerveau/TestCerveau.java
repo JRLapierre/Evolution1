@@ -74,7 +74,7 @@ class TestCerveau {
 		assertEquals(0, c.getListeInput()[0].getPuissance());
 		assertEquals(0, c.getListeInput()[1].getPuissance());
 		assertEquals(1, c.getListeNeurones()[0].getPuissance());
-		assertEquals(0 , c.getListeOutput()[0].getPuissance());
+		//assertEquals(0 , c.getListeOutput()[0].getPuissance());
 		assertEquals(0.5 , c.getListeOutput()[1].getPuissance());
 		assertEquals(0, c.getListeOutput()[2].getPuissance());
 		
@@ -120,6 +120,22 @@ class TestCerveau {
 		assertEquals(5, c.getNbNeurones());
 		assertEquals(1, c.getNbOutput());
 		assertEquals("{\"inputs\":{\"Neurone0\":{\"connexion181\":{\"id\":181,\"facteur\":2.0,\"origine\":{\"type\":\"input\",\"numero\":0},\"cible\":{\"type\":\"output\",\"numero\":0}},\"connexion425\":{\"id\":425,\"facteur\":2.0,\"origine\":{\"type\":\"input\",\"numero\":0},\"cible\":{\"type\":\"output\",\"numero\":0}},\"connexion687\":{\"id\":687,\"facteur\":1.2194524,\"origine\":{\"type\":\"input\",\"numero\":0},\"cible\":{\"type\":\"output\",\"numero\":0}}}},\"interne\":{\"Neurone0\":{\"connexion512\":{\"id\":512,\"facteur\":-1.0219007,\"origine\":{\"type\":\"interne\",\"numero\":0},\"cible\":{\"type\":\"interne\",\"numero\":0}}},\"Neurone1\":{},\"Neurone2\":{},\"Neurone3\":{},\"Neurone4\":{\"connexion579\":{\"id\":579,\"facteur\":-0.10173426,\"origine\":{\"type\":\"interne\",\"numero\":4},\"cible\":{\"type\":\"interne\",\"numero\":0}}}},\"outputs\":{\"Neurone0\":{}}}", c.toStringJson());
+	}
+	
+	@Test
+	@DisplayName("test des pertes")
+	void testPertes() {
+		Cerveau c=new Cerveau(1,1,1);
+		c.addConnexion(new Connexion(2, c.getListeInput()[0], c.getListeOutput()[0]));
+		c.addConnexion(new Connexion(2, c.getListeInput()[0], c.getListeOutput()[0]));
+		c.addConnexion(new Connexion(2, c.getListeInput()[0], c.getListeOutput()[0]));
+		
+		c.getListeInput()[0].setPuissance(1);
+		c.next();
+		assertEquals(1, c.getPertes());
+		c.getListeInput()[0].setPuissance(-1);
+		c.next();
+		assertEquals(2, c.getPertes());
 	}
 
 }

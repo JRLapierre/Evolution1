@@ -19,7 +19,7 @@ creer une simulation pour jouer au puissance 4
 
 
 #### TODO
-faire deux classes simulation : une pour les nouvelles simulation, une pour reprendre depuis une sauvegarde.  
+  
 
 #### trucs a finir si j'en ai le courage
 

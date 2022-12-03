@@ -84,7 +84,8 @@ public class Generation {
 	 * @param nbClonesMutes
 	 * @param nbEnfantsSexe
 	 */
-	public Generation(Individu originel,
+	public Generation(
+			Individu originel,
 			int nbClonesParfaits, 
 			int nbClonesMutes, 
 			int nbEnfantsSexe, 
@@ -222,6 +223,14 @@ public class Generation {
 	 */
 	public Individu[] getPopulation() {
 		return population;
+	}
+	
+	/**
+	 * getteur pour le numero de la genration
+	 * @return le numero de la generation
+	 */
+	public int getNumero() {
+		return id;
 	}
 	
 	

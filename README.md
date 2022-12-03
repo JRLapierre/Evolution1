@@ -14,15 +14,12 @@ J'ai donc decide de creer un projet avec un tracage facile, en enregistrant tout
 changer l'evaluation et compter les pertes dans le cerveau comme du malus  
 creer un graphe qui permet de traquer visuellement les generations   
 creer une simulation pour jouer au puissance 4  
-une classe evaluation et population ?  
-changer le toStringJson de Generation ?  
 
 #### urgent :
 
 
 #### TODO
-mettre la possiblite de changer les règles en pleine simulation  
-
+faire deux classes simulation : une pour les nouvelles simulation, une pour reprendre depuis une sauvegarde.  
 
 #### trucs a finir si j'en ai le courage
 

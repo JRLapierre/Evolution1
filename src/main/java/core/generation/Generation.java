@@ -224,6 +224,57 @@ public class Generation {
 		return population;
 	}
 	
+	
+	//----------------------------------------------------------------------------------------
+	//setteurs pour changer les parametres de la simulation en cours
+	
+	/**
+	 * @param nbClonesParfaits the nbClonesParfaits to set
+	 */
+	public void setNbClonesParfaits(int nbClonesParfaits) {
+		this.nbClonesParfaits = nbClonesParfaits;
+		this.nbIndividus=nbClonesParfaits+nbClonesMutes+nbEnfantsSexe;
+	}
+
+	/**
+	 * @param nbClonesMutes the nbClonesMutes to set
+	 */
+	public void setNbClonesMutes(int nbClonesMutes) {
+		this.nbClonesMutes = nbClonesMutes;
+		this.nbIndividus=nbClonesParfaits+nbClonesMutes+nbEnfantsSexe;
+	}
+
+	/**
+	 * @param nbEnfantsSexe the nbEnfantsSexe to set
+	 */
+	public void setNbEnfantsSexe(int nbEnfantsSexe) {
+		this.nbEnfantsSexe = nbEnfantsSexe;
+		this.nbIndividus=nbClonesParfaits+nbClonesMutes+nbEnfantsSexe;
+	}
+
+	/**
+	 * @param epreuve the epreuve to set
+	 */
+	public void setEpreuve(Epreuve epreuve) {
+		this.epreuve = epreuve;
+	}
+
+	/**
+	 * @param butoir the butoir to set
+	 */
+	public void setButoir(int butoir) {
+		this.butoir = butoir;
+	}
+	
+	/**
+	 * setteur pour changer les mutations en pleine simulation
+	 * @param mutation les mutations a changer
+	 */
+	public void setMutations(Mutation mutation) {
+		Individu.setMutation(mutation);
+	}
+	
+	
 	//-------------------------------------------------------------------------------------------
 	//fonctions d'evaluation
 	
@@ -239,7 +290,9 @@ public class Generation {
 	
 	//------------------------------------------------------------------------------------------
 	//fonction d'affichage
-	
+
+
+
 	/**
 	 * fonction toStringJson qui genere un descriptif a la syntaxe Json
 	 * @return un string compatible au json

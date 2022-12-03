@@ -143,6 +143,10 @@ public abstract class Individu {
 		this.score +=score;
 	}
 	
+	public static void setMutation(Mutation mutation) {
+		Individu.mutation=mutation;
+	}
+	
 	//-------------------------------------------------------------------------------
 	//fonction d'affichage
 	

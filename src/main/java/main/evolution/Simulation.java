@@ -42,7 +42,7 @@ public class Simulation {
 	 */
 	public static void main(String[] args) {
 		
-		Generation g=new Generation(new Original(new Cerveau(1,1,5), 46, new Mutation(46, 5, 5, 5, 2, 5)), 25, 50, 25, 10, epreuve, "1");
+		Generation g=new Generation(new Original(new Cerveau(1,1,5), 46, new Mutation(46, 5, 5, 5, 2, 5)), 25, 50, 25, 50, epreuve, "1");
 		g.enregistre();
 		for(int i=1; i<nbGenerations; i++) {
 			g.nextGen();

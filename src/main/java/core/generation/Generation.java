@@ -54,11 +54,6 @@ public class Generation {
 	private int id;
 	
 	/**
-	 * le nombre de tics d'une evaluation
-	 */
-	protected int nbTics;
-	
-	/**
 	 * le nom de la simulation
 	 */
 	private String nomSimulation;
@@ -73,6 +68,11 @@ public class Generation {
 	 */
 	private Epreuve epreuve;
 	
+	/**
+	 * le rang maximal des individus pouvant se reproduire
+	 */
+	private int butoir;
+	
 	
 	//-------------------------------------------------------------------------------------------
 	//constructeurs
@@ -85,17 +85,21 @@ public class Generation {
 	 * @param nbEnfantsSexe
 	 */
 	public Generation(Individu originel,
-			int nbClonesParfaits, int nbClonesMutes, int nbEnfantsSexe, 
-			int nbTics, Epreuve epreuve, String nomSimulation) {
+			int nbClonesParfaits, 
+			int nbClonesMutes, 
+			int nbEnfantsSexe, 
+			int butoir, 
+			Epreuve epreuve, 
+			String nomSimulation) {
 		this.nbClonesParfaits=nbClonesParfaits;
 		this.nbClonesMutes=nbClonesMutes;
 		this.nbEnfantsSexe=nbEnfantsSexe;
 		this.nbIndividus=nbClonesParfaits+nbClonesMutes+nbEnfantsSexe;
 		this.id=1;
-		this.nbTics=nbTics;
 		this.nomSimulation=nomSimulation;
 		this.population=new Individu[nbIndividus];
 		this.epreuve=epreuve;
+		this.butoir=butoir;
 		//creation d'une nouvelle generation
 		for (int i=0; i<nbIndividus; i++) {
 			population[i]=new CloneMute(originel);
@@ -117,10 +121,7 @@ public class Generation {
 		//fichiers de la generation
 		String sim = Files.readString(Paths.get(path+"infos_gen"+idGeneration+".json"));
 		this.epreuve=epreuve;
-		this.nomSimulation=sim.substring(17, sim.indexOf(",\"nbTics\""));
-		this.nbTics=Integer.parseInt(sim.substring(
-				sim.indexOf("\"nbTics\":")+9, 
-				sim.indexOf(",\"generation\"")));
+		this.nomSimulation=sim.substring(17, sim.indexOf(",\"generation\""));
 		this.id=Integer.parseInt(sim.substring(
 				sim.indexOf("\"generation\":")+13, 
 				sim.indexOf(",\"nbClonesParfaits\"")));
@@ -134,6 +135,9 @@ public class Generation {
 				sim.indexOf("\"nbEnfantsSexe\":")+16, 
 				sim.indexOf(",\"nbIndividus\"")));
 		this.nbIndividus=nbClonesParfaits+nbClonesMutes+nbEnfantsSexe;
+		this.butoir=Integer.parseInt(sim.substring(
+				sim.indexOf("\"butoir\":")+9, 
+				sim.indexOf(",\"mutations\"")));
 		this.population=new Individu[nbIndividus];
 		int graine=Integer.parseInt(sim.substring(
 				sim.indexOf("\"graine\":")+9, 
@@ -163,17 +167,17 @@ public class Generation {
 		Individu[] newPopulation=new Individu[nbIndividus];
 		
 		for(int i=0; i<nbClonesParfaits; i++) {
-			newPopulation[i]=new CloneParfait(population[i]);
+			newPopulation[i]=new CloneParfait(population[i % butoir]);
 		}
 		//clones mutes
 		for(int i=0; i<nbClonesMutes; i++) {
-			newPopulation[nbClonesParfaits+i]=new CloneMute(population[i]);
+			newPopulation[nbClonesParfaits+i]=new CloneMute(population[i % butoir]);
 		}
 		//reproduction sexuee
 		for (int i=0; i<nbEnfantsSexe*2; i+=2) {
 			newPopulation[nbClonesParfaits + nbClonesMutes + i/2]=
-					new EnfantSexe(population[i % nbIndividus], 
-							population[i+1 % nbIndividus]);
+					new EnfantSexe(population[(i % nbIndividus) % butoir], 
+							population[(i+1 % nbIndividus) % butoir]);
 		}
 		this.population=newPopulation;
 		this.id++;
@@ -243,12 +247,12 @@ public class Generation {
 	public String toStringJson() {
 		return "{"
 		+ "\"nomSimulation\":" + nomSimulation + ","
-		+ "\"nbTics\":" + nbTics + ","
 		+ "\"generation\":" + id + ","
 		+ "\"nbClonesParfaits\":" + nbClonesParfaits + ","
 		+ "\"nbClonesMutes\":" + nbClonesMutes + ","
 		+ "\"nbEnfantsSexe\":" + nbEnfantsSexe + ","
 		+ "\"nbIndividus\":" + nbIndividus + ","
+		+ "\"butoir\":" + butoir + ","
 		+ "\"mutations\":" + Individu.getMutationToStringJson()
 		+"}";
 	}

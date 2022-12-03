@@ -32,7 +32,7 @@ class TestGeneration {
 		c.addConnexion(new Connexion(2, c.getListeInput()[0], c.getListeOutput()[0]));
 		Mutation m=new Mutation(0, 0, 0, 0, 0, 0);
 		Individu i=new Original(c, 0, m);
-		return new Generation(i, 0, 0, 1, 1, e1(), "0");
+		return new Generation(i, 0, 0, 1, 100, e1(), "0");
 	}
 	
 	private Generation type02() {
@@ -40,7 +40,7 @@ class TestGeneration {
 		c.addConnexion(new Connexion(2, c.getListeInput()[0], c.getListeOutput()[0]));
 		Mutation m=new Mutation(0, 100, 0, 50, 100, 0);
 		Individu i=new Original(c, 0, m);
-		return new Generation(i, 1, 1, 1, 1, e1(), "0");//devrait yavoir 3 individus
+		return new Generation(i, 1, 1, 1, 100, e1(), "0");//devrait yavoir 3 individus
 	}
 	
 	//-------------------------------------------------------------------------------------------

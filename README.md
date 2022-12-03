@@ -21,9 +21,7 @@ changer le toStringJson de Generation ?
 
 
 #### TODO
-enregistrer l'expression lambda d'epreuve en brut dans un fichier
-mettre la possiblite de changer les règles en pleines simulation  
-implementer un butoir pour les x meilleurs individus pouvant se reproduire  
+mettre la possiblite de changer les règles en pleine simulation  
 
 
 #### trucs a finir si j'en ai le courage
@@ -31,3 +29,6 @@ implementer un butoir pour les x meilleurs individus pouvant se reproduire
 continuer la classe TestAleatoire  
 faire un diagramme de classe propre plutot que le plantUML auto genere  
 tenir a jour la doc  
+
+#### taches impossibles (ou presque)
+enregistrer l'expression lambda dans un fichier et la recreer a partir de ce fichier  

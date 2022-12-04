@@ -12,12 +12,15 @@ J'ai donc decide de creer un projet avec un tracage facile, en enregistrant tout
 #### idees : 
 
 creer un graphe qui permet de traquer visuellement les generations   
-creer une simulation pour jouer au puissance 4  
 
 #### urgent :
 
 
 #### TODO
+creer une simulation pour jouer au puissance 4 : 
+- une partie grille (focus actuel)
+- une partie jeu
+- une partie joueurs  
 
 
 #### trucs a finir si j'en ai le courage

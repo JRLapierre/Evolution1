@@ -143,6 +143,17 @@ public class Grille {
 		return false;
 	}
 	
+	//une methode de copie
+	public Grille copie() {
+		Grille g=new Grille();
+		for(int i=0; i<7; i++) {
+			for(int j=0; j<6; j++) {
+				g.grille[i].getListe()[j]=this.grille[i].getListe()[j];
+			}
+		}
+		return g;
+	}
+	
 	
 	
 	//une methode pour afficher la grille

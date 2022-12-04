@@ -11,7 +11,7 @@ class TestGrille {
 	void test() {
 		Grille g=new Grille();
 		System.out.println(g);
-		g.ajoutePion(new PionO(), 1);
+		g.ajoutePion('O', 1);
 		System.out.println(g);
 
 	}
@@ -20,64 +20,64 @@ class TestGrille {
 	@DisplayName("test de victoire horisontale")
 	void testVictoireHorisontal() {
 		Grille g=new Grille();
-		g.ajoutePion(new PionO(), 1);
-		g.ajoutePion(new PionX(), 1);
-		g.ajoutePion(new PionX(), 1);
-		g.ajoutePion(new PionX(), 1);
-		assertEquals(false, g.gagne(new PionX(), 1));
-		g.ajoutePion(new PionX(), 1);
-		assertEquals(true, g.gagne(new PionX(), 1));
+		g.ajoutePion('O', 1);
+		g.ajoutePion('X', 1);
+		g.ajoutePion('X', 1);
+		g.ajoutePion('X', 1);
+		assertEquals(false, g.gagne('X', 1));
+		g.ajoutePion('X', 1);
+		assertEquals(true, g.gagne('X', 1));
 	}
 	
 	@Test
 	@DisplayName("Test de la victoire verticale")
 	void testVictoireVerticale() {
 		Grille g=new Grille();
-		g.ajoutePion(new PionO(), 1);
-		g.ajoutePion(new PionX(), 2);
-		g.ajoutePion(new PionX(), 3);
-		g.ajoutePion(new PionX(), 4);
-		assertEquals(false, g.gagne(new PionX(), 4));
-		g.ajoutePion(new PionX(), 5);
-		assertEquals(true, g.gagne(new PionX(), 5));
+		g.ajoutePion('O', 1);
+		g.ajoutePion('X', 2);
+		g.ajoutePion('X', 3);
+		g.ajoutePion('X', 4);
+		assertEquals(false, g.gagne('X', 4));
+		g.ajoutePion('X', 5);
+		assertEquals(true, g.gagne('X', 5));
 	}
 	
 	@Test
 	@DisplayName("test de la victoire diagonale montante")
 	void testVictoireDiagonaleMontante() {
 		Grille g=new Grille();
-		g.ajoutePion(new PionO(), 2);
-		g.ajoutePion(new PionX(), 3);
-		g.ajoutePion(new PionO(), 3);
-		g.ajoutePion(new PionX(), 4);
-		g.ajoutePion(new PionX(), 4);
-		g.ajoutePion(new PionO(), 4);
-		g.ajoutePion(new PionX(), 5);
-		g.ajoutePion(new PionX(), 5);
-		g.ajoutePion(new PionX(), 5);
-		assertEquals(false, g.gagne(new PionO(), 5));
-		g.ajoutePion(new PionO(), 5);
+		g.ajoutePion('O', 2);
+		g.ajoutePion('X', 3);
+		g.ajoutePion('O', 3);
+		g.ajoutePion('X', 4);
+		g.ajoutePion('X', 4);
+		g.ajoutePion('O', 4);
+		g.ajoutePion('X', 5);
+		g.ajoutePion('X', 5);
+		g.ajoutePion('X', 5);
+		assertEquals(false, g.gagne('O', 5));
+		g.ajoutePion('O', 5);
 		System.out.println(g);
-		assertEquals(true, g.gagne(new PionO(), 5));
+		assertEquals(true, g.gagne('O', 5));
 	}
 	
 	@Test
 	@DisplayName("test de la victoire diagonale descendante")
 	void testVictoireDiagonaleDescendante() {
 		Grille g=new Grille();
-		g.ajoutePion(new PionO(), 5);
-		g.ajoutePion(new PionX(), 4);
-		g.ajoutePion(new PionO(), 4);
-		g.ajoutePion(new PionX(), 3);
-		g.ajoutePion(new PionX(), 3);
-		g.ajoutePion(new PionO(), 3);
-		g.ajoutePion(new PionX(), 2);
-		g.ajoutePion(new PionX(), 2);
-		g.ajoutePion(new PionX(), 2);
-		assertEquals(false, g.gagne(new PionO(), 2));
-		g.ajoutePion(new PionO(), 2);
+		g.ajoutePion('O', 5);
+		g.ajoutePion('X', 4);
+		g.ajoutePion('O', 4);
+		g.ajoutePion('X', 3);
+		g.ajoutePion('X', 3);
+		g.ajoutePion('O', 3);
+		g.ajoutePion('X', 2);
+		g.ajoutePion('X', 2);
+		g.ajoutePion('X', 2);
+		assertEquals(false, g.gagne('O', 2));
+		g.ajoutePion('O', 2);
 		System.out.println(g);
-		assertEquals(true, g.gagne(new PionO(), 2));
+		assertEquals(true, g.gagne('O', 2));
 	}
 
 }

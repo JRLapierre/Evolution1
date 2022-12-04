@@ -21,9 +21,9 @@ supprimer la classe colonne ?
 
 #### TODO
 creer une simulation pour jouer au puissance 4 : 
-- une partie grille (focus actuel)
+- une partie grille (fait)
 - une partie jeu
-- une partie joueurs  
+- une partie joueurs (focus actuel)  
 
 
 #### trucs a finir si j'en ai le courage

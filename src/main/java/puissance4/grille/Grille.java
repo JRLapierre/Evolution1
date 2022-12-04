@@ -28,7 +28,7 @@ public class Grille {
 	 * @param position le numero de la colonne dans laquelle on veut mettre le pion
 	 * @return true si le pion a pu etre ajoute, false sinon
 	 */
-	public boolean ajoutePion(Pion pion, int position) {
+	public boolean ajoutePion(char pion, int position) {
 		if(position>7 || position<1) return false;
 		return grille[position-1].ajoutePion(pion);
 	}
@@ -45,13 +45,13 @@ public class Grille {
 	}
 	
 	//savoir si un joueur a gagne
-	public boolean gagne(Pion pion, int position) {
+	public boolean gagne(char pion, int position) {
 		if(position>7) return false;
 		int x=position-1;
 		int y=-1;
 		//determiner la position du pion dans la colonne
 		for(int i=0; i<6; i++) {
-			if(grille[x].getListe()[i]==null) {
+			if(grille[x].getListe()[i]==' ') {
 				y=i-1;
 				break;
 			}
@@ -66,12 +66,12 @@ public class Grille {
 	//4 fonctions d'alignements :
 	
 	//vertical
-	private boolean aligneVertical(Pion pion, int x) {
+	private boolean aligneVertical(char pion, int x) {
 		int suite=0;
 		for(int i=0; i<6; i++) {
-			if(grille[x].getListe()[i]==null) {
+			if(grille[x].getListe()[i]==' ') {
 				return false;
-			} else if(grille[x].getListe()[i].equalsPion(pion)) {
+			} else if(grille[x].getListe()[i]==pion) {
 				suite++;
 				if (suite==4) {
 					return true;
@@ -85,10 +85,10 @@ public class Grille {
 	}
 	
 	//horisontal
-	private boolean aligneHorisontal(Pion pion, int y) {
+	private boolean aligneHorisontal(char pion, int y) {
 		int suite=0;
 		for(int i=0; i<7; i++) {
-			if(grille[i].getListe()[y]!=null && grille[i].getListe()[y].equalsPion(pion)) {
+			if(grille[i].getListe()[y]!=' ' && grille[i].getListe()[y]==pion) {
 				suite++;
 				if (suite==4) return true;
 			}
@@ -98,7 +98,7 @@ public class Grille {
 	}
 	
 	//diagonale montante
-	private boolean aligneDiagonaleMontante(Pion pion, int x, int y) {
+	private boolean aligneDiagonaleMontante(char pion, int x, int y) {
 		//determiner la base de la diagonale
 		if(x>y) {
 			x-=y;
@@ -113,7 +113,7 @@ public class Grille {
 		//on remonte la diagonale en verifiant qu'on ne sorte pas des limites
 		int suite=0;
 		while(x<7 && y<6) {
-			if(grille[x].getListe()[y]!=null && grille[x].getListe()[y].equalsPion(pion)) {
+			if(grille[x].getListe()[y]!=' ' && grille[x].getListe()[y]==pion) {
 				suite++;
 				if (suite==4) return true;
 			} else suite=0;
@@ -124,7 +124,7 @@ public class Grille {
 	}
 	
 	//diagonale descendante
-	private boolean aligneDiagonaleDescendante(Pion pion, int x, int y) {
+	private boolean aligneDiagonaleDescendante(char pion, int x, int y) {
 		//determiner la base de la diagonale //on commence en haut
 		while(x!=0 && y!=5) {
 			x--;
@@ -133,7 +133,7 @@ public class Grille {
 		//on descend la diagonale en verifiant qu'on ne sorte pas des limites
 		int suite=0;
 		while(x<7 && y>=0) {
-			if(grille[x].getListe()[y]!=null && grille[x].getListe()[y].equalsPion(pion)) {
+			if(grille[x].getListe()[y]!=' ' && grille[x].getListe()[y]==pion) {
 				suite++;
 				if (suite==4) return true;
 			} else suite=0;
@@ -158,11 +158,7 @@ public class Grille {
 		for(int i=0; i<6; i++) {
 			str.append("|");
 			for(int j=0; j<7; j++) {
-				if(grille[j].getListe()[5-i]==null) {
-					str.append(" ");
-				}else {
-					str.append(grille[j].getListe()[5-i].toString());
-				}
+				str.append(grille[j].getListe()[5-i]);
 				str.append("|");
 			}
 			str.append("\r\n");

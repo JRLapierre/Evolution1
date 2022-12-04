@@ -10,7 +10,7 @@ public class Colonne {
 	/**
 	 * une colonne est une liste de pion
 	 */
-	private Pion[] colonne=new Pion[6];
+	private Pion[] liste=new Pion[6];
 	
 	/**
 	 * constructeur
@@ -24,21 +24,23 @@ public class Colonne {
 	 * @return la liste de pions
 	 */
 	protected Pion[] getListe() {
-		return colonne;
+		return liste;
 	}
 	
 	/**
 	 * methode d'ajout d'un pion.
 	 * Je laisse la securite a la classe grille
 	 * @param pion le pion a rajouter
+	 * @return true si le pion a pu etre place
 	 */
-	protected void ajoutePion(Pion pion) {
+	protected boolean ajoutePion(Pion pion) {
 		for(int i=0; i<6; i++) {
-			if(colonne[i]==null) {
-				colonne[i]=pion;
-				return;
+			if(liste[i]==null) {
+				liste[i]=pion;
+				return true;
 			}
 		}
+		return false;
 	}
 	
 	
@@ -47,13 +49,13 @@ public class Colonne {
 	 * @return true si la colonne est pleine
 	 */
 	protected boolean estPleine() {
-		return colonne[5]!=null;
+		return liste[5]!=null;
 	}
 	
 	//vider une colonne
 	protected void vide() {
 		for(int i=0; i<6; i++) {
-			colonne[i]=null;
+			liste[i]=null;
 		}
 	}
 }

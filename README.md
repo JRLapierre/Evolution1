@@ -11,7 +11,10 @@ J'ai donc decide de creer un projet avec un tracage facile, en enregistrant tout
 
 #### idees : 
 
-creer un graphe qui permet de traquer visuellement les generations   
+creer un graphe qui permet de traquer visuellement les generations  
+faire une BD SQL pour traquer superficiellement les generations  
+supprimer les classes Pion ?  
+supprimer la classe colonne ?
 
 #### urgent :
 

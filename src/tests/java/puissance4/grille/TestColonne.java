@@ -14,8 +14,9 @@ class TestColonne {
 		assertEquals('O', c.getListe()[0].getCouleur());
 		assertEquals(false, c.estPleine());
 		for(int i=0; i<5; i++) {
-			c.ajoutePion(new PionX());
+			assertEquals(true, c.ajoutePion(new PionX()));
 		}
+		assertEquals(false, c.ajoutePion(new PionO()));
 		assertEquals(true, c.estPleine());
 		c.vide();
 		assertEquals(false, c.estPleine());

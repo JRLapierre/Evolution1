@@ -20,6 +20,14 @@ public class Colonne {
 	}
 	
 	/**
+	 * 
+	 * @return la liste de pions
+	 */
+	protected Pion[] getListe() {
+		return colonne;
+	}
+	
+	/**
 	 * methode d'ajout d'un pion.
 	 * Je laisse la securite a la classe grille
 	 * @param pion le pion a rajouter
@@ -38,8 +46,8 @@ public class Colonne {
 	 * si une colonne est pleine
 	 * @return true si la colonne est pleine
 	 */
-	public boolean estPleine() {
-		return colonne[5]==null;
+	protected boolean estPleine() {
+		return colonne[5]!=null;
 	}
 	
 	//vider une colonne

@@ -1,5 +1,6 @@
 package puissance4.joueurs;
 
+import outils.Aleatoire;
 import puissance4.grille.Grille;
 
 /**
@@ -14,6 +15,13 @@ public abstract class Joueur {
 	 * un attribut Pion
 	 */
 	protected char pion;
+	
+	
+	/**
+	 * un generateur de nombre aleatoires pour resoudre les indecisions
+	 */
+	protected static Aleatoire random=new Aleatoire(456);
+
 	
 	/**
 	 * constructeur

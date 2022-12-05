@@ -10,7 +10,6 @@ import puissance4.grille.Grille;
  */
 public class JoueurAI1 extends Joueur{
 	
-	private static Aleatoire random=new Aleatoire(456);
 
 	/**
 	 * aucun ajout a la superclasse

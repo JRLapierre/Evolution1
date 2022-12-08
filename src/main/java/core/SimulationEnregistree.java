@@ -89,7 +89,7 @@ public class SimulationEnregistree {
 			//on fait tourner la simulation pour nbGenerations
 			for(int i=0; i<nbGenerations; i++) {
 				System.out.println("generation " + (generationInitiale + i));
-				if(generation.getNumero()%enregistre==0) generation.enregistre();
+				if((generationInitiale + i)%enregistre==0) generation.enregistreGeneration();
 				generation.nextGen();
 			}
 		} catch (IOException e) {

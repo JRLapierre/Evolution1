@@ -242,9 +242,10 @@ public class SimulationInitiale {
 		    input.close();
     	}
 		//on fait tourner la simulation pour nbGenerations
+    	generation.enregistreInfos();
 		for(int i=0; i<nbGenerations; i++) {
 			System.out.println("generation " + i);
-			if(generation.getNumero()%enregistre==0) generation.enregistre();
+			if(i%enregistre==0) generation.enregistreGeneration();
 			generation.nextGen();
 		}
 	}

@@ -49,11 +49,6 @@ public class Generation {
 	//autres variables
 	
 	/**
-	 * le numero de la generation
-	 */
-	private int id;
-	
-	/**
 	 * le nom de la simulation
 	 */
 	private String nomSimulation;
@@ -96,7 +91,6 @@ public class Generation {
 		this.nbClonesMutes=nbClonesMutes;
 		this.nbEnfantsSexe=nbEnfantsSexe;
 		this.nbIndividus=nbClonesParfaits+nbClonesMutes+nbEnfantsSexe;
-		this.id=1;
 		this.nomSimulation=nomSimulation;
 		this.population=new Individu[nbIndividus];
 		this.epreuve=epreuve;
@@ -116,16 +110,13 @@ public class Generation {
 	 * @param generation la generation d'ou reprendre la simulation
 	 * @throws IOException 
 	 */
-	public Generation(String nomSimulation, int idGeneration, Epreuve epreuve) throws IOException {
+	public Generation(String nomSimulation, int numero, Epreuve epreuve) throws IOException {
 		//recherche de la simulation et de la generation en accedant aux fichiers
-		String path="enregistrements/simulation"+nomSimulation+"/generation"+idGeneration+"/";
+		String path="enregistrements/simulation"+nomSimulation+"/";
 		//fichiers de la generation
-		String sim = Files.readString(Paths.get(path+"infos_gen"+idGeneration+".json"));
+		String sim = Files.readString(Paths.get(path+"infos.json"));
 		this.epreuve=epreuve;
-		this.nomSimulation=sim.substring(17, sim.indexOf(",\"generation\""));
-		this.id=Integer.parseInt(sim.substring(
-				sim.indexOf("\"generation\":")+13, 
-				sim.indexOf(",\"nbClonesParfaits\"")));
+		this.nomSimulation=sim.substring(17, sim.indexOf(",\"nbClonesParfaits\""));
 		this.nbClonesParfaits=Integer.parseInt(sim.substring(
 				sim.indexOf("\"nbClonesParfaits\":")+19, 
 				sim.indexOf(",\"nbClonesMutes\"")));
@@ -144,11 +135,12 @@ public class Generation {
 				sim.indexOf("\"graine\":")+9, 
 				sim.indexOf(",\"tauxCreation\"")));
 		String content;
-		int premierId=nbIndividus*(id-1);
+		int premierId=nbIndividus*(numero-1);
 		//la population
 		for(int i=1; i<=nbIndividus; i++) {
 			//chercher le fichier en question
-			content=Files.readString(Paths.get(path+"individu"+(premierId+i)+".json"));
+			content=Files.readString(Paths.get(
+					path + "generation"+numero+"/individu"+(premierId+i)+".json"));
 			this.population[i-1]=new Sauvegarde(content, graine,
 					new Mutation(sim.substring(sim.indexOf("\"mutations\":")+12)));
 		}
@@ -181,7 +173,6 @@ public class Generation {
 							population[(i+1 % nbIndividus) % butoir]);
 		}
 		this.population=newPopulation;
-		this.id++;
 		//on evalue automatiquement la population a la fin
 		evaluation();
 	}
@@ -223,14 +214,6 @@ public class Generation {
 	 */
 	public Individu[] getPopulation() {
 		return population;
-	}
-	
-	/**
-	 * getteur pour le numero de la genration
-	 * @return le numero de la generation
-	 */
-	public int getNumero() {
-		return id;
 	}
 	
 	
@@ -309,7 +292,6 @@ public class Generation {
 	public String toStringJson() {
 		return "{"
 		+ "\"nomSimulation\":" + nomSimulation + ","
-		+ "\"generation\":" + id + ","
 		+ "\"nbClonesParfaits\":" + nbClonesParfaits + ","
 		+ "\"nbClonesMutes\":" + nbClonesMutes + ","
 		+ "\"nbEnfantsSexe\":" + nbEnfantsSexe + ","
@@ -322,24 +304,38 @@ public class Generation {
 	//-------------------------------------------------------------------------------------------
 	//fonctions d'enregistrements
 	
-	/**
-	 * fonction pour enregistrer toute une generation dans des fichiers au format json.
-	 */
-	public void enregistre() {
+	//une fonction separee pour enregistrer des infos sur la simulation
+	public void enregistreInfos() {
 		//creer un fichier generation info
         try {
         	//si le dossier n'existe pas on le créé
         	File f=new File("enregistrements\\simulation" + nomSimulation
-        			+ "\\generation" + id + "\\");
+        			+ "\\generation" + population[0].getGeneration() + "\\");
         	f.mkdirs();
             PrintWriter writer = new PrintWriter(
             		"enregistrements\\simulation" + nomSimulation
-            		+ "\\generation" + id
-            		+ "\\infos_gen" + id + ".json");
+            		+ "\\infos.json");
             writer.write(this.toStringJson());
             
             writer.flush();
             writer.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+	}
+	
+	/**
+	 * fonction pour enregistrer toute une generation dans des fichiers au format json.
+	 */
+	public void enregistreGeneration() {
+		//creer un fichier generation info
+        try {
+        	//si le dossier n'existe pas on le créé
+        	File f=new File("enregistrements\\simulation" + nomSimulation
+        			+ "\\generation" + population[0].getGeneration() + "\\");
+        	f.mkdirs();
 
             for (int i=0; i<nbIndividus; i++) {
             	PrintWriter writer2 = new PrintWriter(

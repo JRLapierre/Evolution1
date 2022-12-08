@@ -16,7 +16,6 @@ creer un graphe qui permet de traquer visuellement les generations
 faire une BD SQL pour traquer superficiellement les generations  
 simplifier le cerveau en enlevant la liste de connexion des neurones  
 pour la simulation du puissance 4 : rajouter une neurone d'entree constament active  
-deplacer les fichiers generation_info vers la racine de la simulation
 
 #### urgent :
 
@@ -26,8 +25,6 @@ creer une simulation pour jouer au puissance 4 :
 - une partie grille (fait)
 - une partie jeu (faire une classe tournoi ?)
 - une partie joueurs (fait)  
-faire des test du jeu
-
 
 #### trucs a finir si j'en ai le courage
 

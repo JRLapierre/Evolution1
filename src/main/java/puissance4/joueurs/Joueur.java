@@ -2,6 +2,7 @@ package puissance4.joueurs;
 
 import outils.Aleatoire;
 import puissance4.grille.Grille;
+import puissance4.jeu.Partie;
 
 /**
  * cette classe represente un joueur.
@@ -14,7 +15,7 @@ public abstract class Joueur {
 	/**
 	 * un attribut Pion
 	 */
-	protected char pion;
+	public char pion;
 	
 	
 	/**
@@ -27,7 +28,7 @@ public abstract class Joueur {
 	 * constructeur
 	 * @param pion le pion attribue au joueur
 	 */
-	public Joueur(char pion) {
+	protected Joueur(char pion) {
 		this.pion=pion;
 	}
 	

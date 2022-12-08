@@ -232,7 +232,7 @@ public class SimulationInitiale {
     		    System.out.println("Une simulation portant ce nom existe deja : "
     		    		+ "Si vous continuez, vous allez remplacer les fichiers de "
     		    		+ "cette simulation. ");
-    		    System.out.print("Continuer ? (oui ou non) : ");
+    		    System.out.println("Continuer ? (oui ou non) : ");
     		    reponse = input.nextLine();
     		    //on met fin a la simulation si la reponse est non
     		    if (reponse.equals("non")) {

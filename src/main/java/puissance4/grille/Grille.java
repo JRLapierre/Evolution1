@@ -44,6 +44,15 @@ public class Grille {
 		return true;
 	}
 	
+	/**
+	 * dit si une colone est pleine
+	 * @param col la colonne choisie
+	 * @return true la colonne est pleine
+	 */
+	public boolean colonnePleine(int col) {
+		return grille[col].estPleine();
+	}
+	
 	//savoir si un joueur a gagne
 	public boolean gagne(char pion, int position) {
 		if(position>7) return false;

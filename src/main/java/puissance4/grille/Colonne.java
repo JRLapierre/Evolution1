@@ -50,7 +50,7 @@ public class Colonne {
 	 * si une colonne est pleine
 	 * @return true si la colonne est pleine
 	 */
-	public boolean estPleine() {
+	protected boolean estPleine() {
 		return liste[5]!=' ';
 	}
 	

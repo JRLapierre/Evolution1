@@ -79,5 +79,31 @@ class TestGrille {
 		System.out.println(g);
 		assertEquals(true, g.gagne('O', 2));
 	}
+	
+	@Test
+	@DisplayName("test du remplissage des colonnes")
+	void testEstPleine() {
+		Grille g=new Grille();
+		g.ajoutePion('O', 5);
+		g.ajoutePion('X', 4);
+		g.ajoutePion('O', 4);
+		g.ajoutePion('X', 3);
+		g.ajoutePion('X', 3);
+		g.ajoutePion('O', 3);
+		g.ajoutePion('X', 2);
+		g.ajoutePion('X', 2);
+		g.ajoutePion('X', 2);
+		g.ajoutePion('X', 2);
+		assertEquals(false, g.colonnePleine(1));
+		System.out.println("estpleine");
+		g.ajoutePion('X', 2);
+		assertEquals(false, g.colonnePleine(1));
+		g.ajoutePion('X', 2);
+		assertEquals(true, g.colonnePleine(1));
+		System.out.println(g);
+
+
+
+	}
 
 }

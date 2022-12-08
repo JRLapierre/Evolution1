@@ -1,6 +1,5 @@
 package puissance4.joueurs;
 
-import outils.Aleatoire;
 import puissance4.grille.Grille;
 
 /**

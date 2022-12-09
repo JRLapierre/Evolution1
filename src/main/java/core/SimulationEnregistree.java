@@ -29,12 +29,12 @@ public class SimulationEnregistree {
 	/**
 	 * le numero de la generation a laquelle on va reprendre la simulation
 	 */
-	private static int generationInitiale=100;
+	private static int generationInitiale=199;
 	
 	/**
 	 * le nombre de generations a simuler.
 	 */
-	private static int nbGenerations=100;
+	private static int nbGenerations=1;
 	
 	/**
 	 * limiteur d'enregistrement.
@@ -98,8 +98,9 @@ public class SimulationEnregistree {
     	Generation generation;
 		try {
 			generation = new Generation(nomSimulation, generationInitiale, epreuve);
+			generation.enregistreInfos();
 			//on fait tourner la simulation pour nbGenerations
-			for(int i=0; i<nbGenerations; i++) {
+			for(int i=0; i<=nbGenerations; i++) {
 				System.out.println("generation " + (generationInitiale + i));
 				if((generationInitiale + i)%enregistre==0) generation.enregistreGeneration();
 				generation.nextGen();

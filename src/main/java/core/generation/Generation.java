@@ -289,7 +289,7 @@ public class Generation {
 	 */
 	public String toStringJson() {
 		return "{"
-		+ "\"nomSimulation\":" + nomSimulation + ","
+		+ "\"nomSimulation\":\"" + nomSimulation + "\","
 		+ "\"nbClonesParfaits\":" + nbClonesParfaits + ","
 		+ "\"nbClonesMutes\":" + nbClonesMutes + ","
 		+ "\"nbEnfantsSexe\":" + nbEnfantsSexe + ","

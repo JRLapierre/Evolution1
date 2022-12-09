@@ -11,20 +11,18 @@ J'ai donc decide de creer un projet avec un tracage facile, en enregistrant tout
 
 #### idees : 
 
-utiliser le multithreading pour faire tourner la simulation plus vite
+utiliser le multithreading pour faire tourner la simulation plus vite  
 creer un graphe qui permet de traquer visuellement les generations  
 faire une BD SQL pour traquer superficiellement les generations  
-simplifier le cerveau en enlevant la liste de connexion des neurones  
-pour la simulation du puissance 4 : rajouter une neurone d'entree constament active  
 
 #### urgent :
 
 
 #### TODO
-creer une simulation pour jouer au puissance 4 : 
-- une partie grille (fait)
-- une partie jeu (faire une classe tournoi ?)
-- une partie joueurs (fait)  
+
+simplifier le cerveau en enlevant la liste de connexion des neurones  
+mettre tout en place pour lancer une simulation de puissance 4  
+
 
 #### trucs a finir si j'en ai le courage
 

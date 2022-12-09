@@ -17,6 +17,10 @@ public abstract class Joueur {
 	 */
 	public char pion;
 	
+	/**
+	 * le score du joueur
+	 */
+	private int score=0;
 	
 	/**
 	 * un generateur de nombre aleatoires pour resoudre les indecisions
@@ -39,4 +43,12 @@ public abstract class Joueur {
 	 */
 	public abstract int choix(Grille grille);
 	
+	
+	public void updateScore(int points) {
+		this.score+=points;
+	}
+	
+	public int getScore() {
+		return score;
+	}
 }

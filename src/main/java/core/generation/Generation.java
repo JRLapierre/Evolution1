@@ -275,9 +275,7 @@ public class Generation {
 	 * fonction pour l'evaluation des individus
 	 */
 	private void evaluation() {
-		for (int i=0; i<nbIndividus; i++) {
-			epreuve.epreuve(population[i]);
-		}
+		epreuve.epreuve(population);
 	}
 	
 	//------------------------------------------------------------------------------------------

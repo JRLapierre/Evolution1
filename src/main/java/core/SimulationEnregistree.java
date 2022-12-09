@@ -6,6 +6,9 @@ import java.util.Scanner;
 
 import core.generation.Epreuve;
 import core.generation.Generation;
+import puissance4.jeu.Tournoi;
+import puissance4.joueurs.Joueur;
+import puissance4.joueurs.JoueurIndividu;
 
 /**
  * cette classe permet de continuer une simulation a partir d'une sauvegarde.
@@ -21,7 +24,7 @@ public class SimulationEnregistree {
 	/**
 	 * le nom de la simulation
 	 */
-	private static String nomSimulation="1";
+	private static String nomSimulation="2P4";
 	
 	/**
 	 * le numero de la generation a laquelle on va reprendre la simulation
@@ -45,14 +48,23 @@ public class SimulationEnregistree {
 	 * Malheureusement, je ne suis pas parvenu a l'enregistrer ou a la recuperer depuis un 
 	 * fichier. Il faut donc la redefinir ici.
 	 */
-	private static Epreuve epreuve=individu -> {
-		for(int i=0; i<10; i++) {
-			individu.getCerveau().getListeInput()[0].setPuissance(1);
-			individu.getCerveau().next();
-			float score=individu.getCerveau().getListeOutput()[0].getPuissance();
-			individu.updateScore(5+score);
+	private static Epreuve epreuve=population -> {
+		//creer une liste de joueurs
+		Joueur[] participants=new Joueur[population.length];
+		for(int i=0; i<population.length; i++) {
+			participants[i]=new JoueurIndividu('O', population[i].getCerveau(), 25);
 		}
-		individu.updateScore(-individu.getCerveau().getPertes());
+		//lancer le tournoi
+		Tournoi tournoi=new Tournoi(participants);
+		try {
+			tournoi.lancer();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//recuperer les scores des joueurs
+		for(int i=0; i<population.length; i++) {
+			population[i].updateScore(participants[i].getScore());
+		}
 	};
 	
 	/**

@@ -16,13 +16,11 @@ creer un graphe qui permet de traquer visuellement les generations
 faire une BD SQL pour traquer superficiellement les generations  
 
 #### urgent :
-
+corriger le nom de la simulation dans les enregistrement
 
 #### TODO
 
 simplifier le cerveau en enlevant la liste de connexion des neurones  
-mettre tout en place pour lancer une simulation de puissance 4  
-
 
 #### trucs a finir si j'en ai le courage
 

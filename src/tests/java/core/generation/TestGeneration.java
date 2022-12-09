@@ -19,12 +19,18 @@ class TestGeneration {
 	//fonctions pratiques
 	
 	private Epreuve e1() {
-		return individu -> {for(int i=0; i<10; i++) {
-			individu.getCerveau().getListeInput()[0].setPuissance(1);
-			individu.getCerveau().next();
-			float score=individu.getCerveau().getListeOutput()[0].getPuissance();
-			individu.updateScore(5+score);
-		}};
+		Epreuve epreuve=population -> {
+			for (int j=0; j<population.length; j++) {
+				for(int i=0; i<10; i++) {
+					population[j].getCerveau().getListeInput()[0].setPuissance(1);
+					population[j].getCerveau().next();
+					float score=population[j].getCerveau().getListeOutput()[0].getPuissance();
+					population[j].updateScore(5+score);
+				}
+				population[j].updateScore(-population[j].getCerveau().getPertes());
+			}
+		};
+		return epreuve;
 	}
 	
 	private Generation type01() {

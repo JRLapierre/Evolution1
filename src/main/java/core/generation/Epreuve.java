@@ -14,8 +14,8 @@ public interface Epreuve {
 	
 	/**
 	 * l'epreuve que chaque individu devra affronter.
-	 * @param individu l'individu a mettre a l'epreuve
+	 * @param population la liste d'individus
 	 */
-	void epreuve(Individu individu);
+	void epreuve(Individu[] population);
 
 }

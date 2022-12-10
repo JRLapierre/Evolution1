@@ -8,10 +8,9 @@ public class JoueurHumain extends Joueur{
 	
 	/**
 	 * rien a rajouter au constructeur
-	 * @param pion
 	 */
-	public JoueurHumain(char pion) {
-		super(pion);
+	public JoueurHumain() {
+		super();
 	}
 
 	@Override

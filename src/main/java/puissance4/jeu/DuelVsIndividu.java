@@ -24,7 +24,7 @@ public class DuelVsIndividu {
 	
 	public DuelVsIndividu(String nomSimulation, int generation, int id) throws IOException {
 		//A NE PAS LANCER DURANT UNE SIMULATION DEJA EXISTANTE
-		individu=new JoueurIndividu('O',
+		individu=new JoueurIndividu(
 		new Sauvegarde(Files.readString(Paths.get(
 				"enregistrements/simulation" + nomSimulation + 
 				"/generation"+generation + 
@@ -43,10 +43,10 @@ public class DuelVsIndividu {
 	public void duel(boolean commencer) throws Exception {
 		Joueur j;
 		if(commencer) {
-			j=Partie.jeu(individu, new JoueurHumain('X'));
+			j=Partie.jeu(individu, new JoueurHumain());
 		}
 		else {
-			j=Partie.jeu( new JoueurHumain('X'), individu);
+			j=Partie.jeu( new JoueurHumain(), individu);
 		}
 		if(j==individu) System.out.println("l'individu a gagné");
 		else System.out.println("vous avez gagné");

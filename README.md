@@ -23,7 +23,6 @@ faire une BD SQL pour traquer superficiellement les generations
 
 simplifier le cerveau en enlevant la liste de connexion des neurones  
 enlever la limite de facteur multiplicateur des connexions  
-enlever le char du constructeur de joueur  
 
 #### trucs a finir si j'en ai le courage
 

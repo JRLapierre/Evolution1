@@ -17,9 +17,9 @@ class TestJoueurs {
 	@Test
 	@DisplayName("test d'un duel entre un joueur humain et un joueur aleatoire")
 	void testJoueurHumainVsJoueurAleatoire() {
-		Joueur j1=new JoueurAI1('X');
-		Joueur j2=new JoueurAI1('O');
-		Joueur j3=new JoueurHumain('O');
+		Joueur j1=new JoueurAI1();
+		Joueur j2=new JoueurAI1();
+		Joueur j3=new JoueurHumain();
 		
 		try {
 			System.out.println(Partie.jeu(j1, j2).pion);
@@ -36,9 +36,9 @@ class TestJoueurs {
 		for(int i=0; i<43; i++) {
 			c.addConnexion(new Connexion(1, c.getListeInput()[i], c.getListeOutput()[i%7]));
 		}
-		Joueur j4=new JoueurIndividu('O', c, 2);
-		Joueur j3=new JoueurHumain('O');
-		Joueur j5=new JoueurAI1('O');
+		Joueur j4=new JoueurIndividu(c, 2);
+		Joueur j3=new JoueurHumain();
+		Joueur j5=new JoueurAI1();
 
 		
 		try {

@@ -24,12 +24,11 @@ public class JoueurIndividu extends Joueur{
 	
 	/**
 	 * constructeur d'un joueur de la classe Individu
-	 * @param pion
 	 * @param cerveau
 	 * @param nbTics le temps de choix
 	 */
-	public JoueurIndividu(char pion, Cerveau cerveau, int nbTics) {
-		super(pion);
+	public JoueurIndividu(Cerveau cerveau, int nbTics) {
+		super();
 		this.cerveau=cerveau;
 		this.nbTics=nbTics;
 	}

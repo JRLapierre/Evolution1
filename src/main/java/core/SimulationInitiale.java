@@ -195,7 +195,7 @@ public class SimulationInitiale {
 		//creer une liste de joueurs
 		Joueur[] participants=new Joueur[population.length];
 		for(int i=0; i<population.length; i++) {
-			participants[i]=new JoueurIndividu('O', population[i].getCerveau(), 25);
+			participants[i]=new JoueurIndividu(population[i].getCerveau(), 25);
 		}
 		//lancer le tournoi
 		Tournoi tournoi=new Tournoi(participants);

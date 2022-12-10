@@ -12,10 +12,9 @@ public class JoueurAI1 extends Joueur{
 
 	/**
 	 * aucun ajout a la superclasse
-	 * @param pion le pion du joueur
 	 */
-	public JoueurAI1(char pion) {
-		super(pion);
+	public JoueurAI1() {
+		super();
 	}
 
 	@Override

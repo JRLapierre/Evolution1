@@ -30,10 +30,8 @@ public abstract class Joueur {
 	
 	/**
 	 * constructeur
-	 * @param pion le pion attribue au joueur
 	 */
-	protected Joueur(char pion) {
-		this.pion=pion;
+	protected Joueur() {
 	}
 	
 	/**

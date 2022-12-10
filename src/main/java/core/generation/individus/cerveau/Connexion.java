@@ -55,7 +55,7 @@ public class Connexion {
 	 * @param cible la neurone cible de la connexion
 	 */
 	public Connexion(float facteur, Neurone origine, Neurone cible) {
-		this.facteur = corrigeFacteur(facteur);
+		this.facteur = facteur;
 		this.origine = origine;
 		this.cible = cible;
 		this.id=nbConnexions;
@@ -71,7 +71,7 @@ public class Connexion {
 	 * @param id
 	 */
 	public Connexion(float facteur, Neurone origine, Neurone cible, int id) {
-		this.facteur = corrigeFacteur(facteur);
+		this.facteur = facteur;
 		this.origine = origine;
 		this.cible = cible;
 		this.id=id;
@@ -101,17 +101,6 @@ public class Connexion {
 	
 	//---------------------------------------------------------------------
 	//fonction de controle
-	
-	/**
-	 * fonction qui limite le facteur d'une connexion en cas d'evolution
-	 * @param facteur l'ancien facteur, potentiellement incorrect.
-	 * @return le facteur corrigé
-	 */
-	private float corrigeFacteur(float facteur) {
-		if(facteur<-2) return -2;
-		if(facteur>2) return 2;
-		return facteur;
-	}
 	
 	/**
 	 * fonction privée pour determiner une neurone a partir d'un string
@@ -204,7 +193,7 @@ public class Connexion {
 	 * @param update l'amplification ou l'affaiblissement du facteur
 	 */
 	public void updateFacteur(float update) {
-		this.facteur=corrigeFacteur(facteur+update);
+		this.facteur+=update;
 	}
 	
 	/**

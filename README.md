@@ -15,13 +15,15 @@ utiliser le multithreading pour faire tourner la simulation plus vite
 creer un graphe qui permet de traquer visuellement les generations  
 faire une BD SQL pour traquer superficiellement les generations  
 
+
 #### urgent :
 
 
 #### TODO
 
 simplifier le cerveau en enlevant la liste de connexion des neurones  
-faire un decodeur pour faire un duel humain vs Individu
+enlever la limite de facteur multiplicateur des connexions  
+enlever le char du constructeur de joueur  
 
 #### trucs a finir si j'en ai le courage
 

@@ -116,7 +116,7 @@ public class Generation {
 		//fichiers de la generation
 		String sim = Files.readString(Paths.get(path+"infos.json"));
 		this.epreuve=epreuve;
-		this.nomSimulation=sim.substring(17, sim.indexOf(",\"nbClonesParfaits\""));
+		this.nomSimulation=sim.substring(18, sim.indexOf("\",\"nbClonesParfaits\""));
 		this.nbClonesParfaits=Integer.parseInt(sim.substring(
 				sim.indexOf("\"nbClonesParfaits\":")+19, 
 				sim.indexOf(",\"nbClonesMutes\"")));

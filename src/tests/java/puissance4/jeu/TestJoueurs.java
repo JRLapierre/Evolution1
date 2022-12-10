@@ -42,7 +42,7 @@ class TestJoueurs {
 
 		
 		try {
-			Partie.jeu(j4, j5);
+			Partie.jeu(j3, j5);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();

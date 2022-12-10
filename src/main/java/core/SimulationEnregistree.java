@@ -29,19 +29,19 @@ public class SimulationEnregistree {
 	/**
 	 * le numero de la generation a laquelle on va reprendre la simulation
 	 */
-	private static int generationInitiale=199;
+	private static int generationInitiale=300;
 	
 	/**
 	 * le nombre de generations a simuler.
 	 */
-	private static int nbGenerations=1;
+	private static int nbGenerations=100;
 	
 	/**
 	 * limiteur d'enregistrement.
 	 * Une generation va etre enregistree si son numero % 1 == 0.
 	 * avec une valeur de 1, toutes les generations vont etre enregistrees.
 	 */
-	private static int enregistre=1;
+	private static int enregistre=10;
 	
 	/**
 	 * fonction lambda. 
@@ -60,6 +60,7 @@ public class SimulationEnregistree {
 			tournoi.lancer();
 		} catch (Exception e) {
 			e.printStackTrace();
+			return;
 		}
 		//recuperer les scores des joueurs
 		for(int i=0; i<population.length; i++) {
@@ -98,13 +99,13 @@ public class SimulationEnregistree {
     	Generation generation;
 		try {
 			generation = new Generation(nomSimulation, generationInitiale, epreuve);
-			generation.enregistreInfos();
 			//on fait tourner la simulation pour nbGenerations
 			for(int i=0; i<=nbGenerations; i++) {
 				System.out.println("generation " + (generationInitiale + i));
 				if((generationInitiale + i)%enregistre==0) generation.enregistreGeneration();
 				generation.nextGen();
 			}
+			System.out.println("fait");
 		} catch (IOException e) {
 			System.out.println("Si vous lisez ce message, il existe des failles que je "
 					+ "n'ai pas encore detectes");

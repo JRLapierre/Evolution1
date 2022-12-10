@@ -203,6 +203,7 @@ public class SimulationInitiale {
 			tournoi.lancer();
 		} catch (Exception e) {
 			e.printStackTrace();
+			return;
 		}
 		//recuperer les scores des joueurs
 		for(int i=0; i<population.length; i++) {

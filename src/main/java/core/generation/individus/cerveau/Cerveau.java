@@ -1,5 +1,7 @@
 package core.generation.individus.cerveau;
 
+import core.generation.individus.Individu;
+import outils.Carracteristique;
 import outils.ListeChaine;
 
 /**
@@ -304,7 +306,6 @@ public class Cerveau {
 				getNeurone(c.getCible().getType(), c.getCible().getNumero()), 
 				c.getId());
 		this.listeConnexions.ajout(c2);
-		c2.getOrigine().addConnexion(c2);
 		
 	}
 	
@@ -314,7 +315,6 @@ public class Cerveau {
 	 */
 	public void delConnextion(Connexion c) {
 		listeConnexions.delElt(c);
-		c.getOrigine().delConnexion(c);
 	}
 	
 	/**
@@ -325,7 +325,6 @@ public class Cerveau {
 		this.listeConnexions = listeConnexions;
 		Connexion c=listeConnexions.getSuivant();
 		while (c!=null) {
-			c.getOrigine().addConnexion(c);
 			c=listeConnexions.getSuivant();
 		}
 	}
@@ -357,12 +356,26 @@ public class Cerveau {
 	 * d'origine.
 	 */
 	public String toStringJson() {
-		StringBuilder build=new StringBuilder(nbInput*100+nbNeurones*100+nbOutput*100);
+		//on trie la liste
+		triConnexions();
+		//on parcours sagement la liste
+		Connexion c=listeConnexions.getSuivant();
+		StringBuilder build=new StringBuilder(listeConnexions.getLongueur()*100);
 		build.append("{\"inputs\":{");
 		//les connexions venant des input
 		for (int i=0; i<nbInput; i++) {
-			build.append("\"Neurone" + i + "\":" 
-					+ listeInput[i].toStringJson());
+			build.append("\"Neurone" + i + "\":{");
+			while(c!=null && 
+					c.getOrigine().getType().equals("input") && 
+					c.getOrigine().getNumero()==i) {
+				build.append(c.toStringJson());
+				c=listeConnexions.getSuivant();
+				if(c!=null && 
+						c.getOrigine().getType().equals("input") && 
+						c.getOrigine().getNumero()==i)
+					build.append(",");
+			}
+			build.append("}");
 			if(i!=nbInput-1) {
 				build.append(",");
 			}
@@ -371,8 +384,18 @@ public class Cerveau {
 		//les connexions venant de l'interieur
 		build.append("\"interne\":{");
 		for (int i=0; i<nbNeurones; i++) {
-			build.append("\"Neurone" + i + "\":" 
-					+ listeNeurones[i].toStringJson());
+			build.append("\"Neurone" + i + "\":{");
+			while(c!=null && 
+					c.getOrigine().getType().equals("interne") && 
+					c.getOrigine().getNumero()==i) {
+				build.append(c.toStringJson());
+				c=listeConnexions.getSuivant();
+				if(c!=null && 
+						c.getOrigine().getType().equals("interne") && 
+						c.getOrigine().getNumero()==i)
+					build.append(",");
+			}
+			build.append("}");
 			if(i!=nbNeurones-1) {
 				build.append(",");
 			}
@@ -381,8 +404,18 @@ public class Cerveau {
 		//les connexions venant des outputs
 		build.append("\"outputs\":{");
 		for (int i=0; i<nbOutput; i++) {
-			build.append("\"Neurone" + i + "\":" 
-					+ listeOutput[i].toStringJson());
+			build.append("\"Neurone" + i + "\":{");
+			while(c!=null && 
+					c.getOrigine().getType().equals("output") && 
+					c.getOrigine().getNumero()==i) {
+				build.append(c.toStringJson());
+				c=listeConnexions.getSuivant();
+				if(c!=null && 
+						c.getOrigine().getType().equals("output") && 
+						c.getOrigine().getNumero()==i)
+					build.append(",");
+			}
+			build.append("}");
 			if(i!=nbOutput-1) {
 				build.append(",");
 			}
@@ -394,6 +427,24 @@ public class Cerveau {
 
 	//---------------------------------------------------------------------
 	//autres fonctions
+	
+	/**
+	 * fonction de tri de la liste de connexion
+	 */
+	public void triConnexions() {
+		Carracteristique<Connexion> car = elt -> {
+			if(elt.getOrigine().getType().equals("input")) {
+				return elt.getOrigine().getNumero();
+			}
+			else if(elt.getOrigine().getType().equals("interne")) {
+				return nbInput + elt.getOrigine().getNumero();
+			}
+			else {
+				return nbInput + nbNeurones + elt.getOrigine().getNumero();
+			}
+		};
+		listeConnexions.triRapide(car);
+	}
 	
 	@Override
 	/**

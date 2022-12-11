@@ -201,9 +201,7 @@ public class Connexion {
 	 * @param origine
 	 */
 	public void updateOrigine(Neurone origine) {
-		this.origine.delConnexion(this);
 		this.origine=origine;
-		this.origine.addConnexion(this);
 	}
 	
 	/**
@@ -211,9 +209,7 @@ public class Connexion {
 	 * @param cible
 	 */
 	public void updateCible(Neurone cible) {
-		this.cible.delConnexion(this);
 		this.cible=cible;
-		this.cible.addConnexion(this);
 	}
 		
 	//---------------------------------------------------------------------
@@ -226,8 +222,8 @@ public class Connexion {
 		return "\"connexion" + id + "\":{"
 		+ "\"id\":" + id + ","
 		+ "\"facteur\":" + facteur + ","
-		+ "\"origine\":" + origine.toStringJson2() + ","
-		+ "\"cible\":" + cible.toStringJson2()
+		+ "\"origine\":" + origine.toStringJson() + ","
+		+ "\"cible\":" + cible.toStringJson()
 		+ "}";
 	}
 	

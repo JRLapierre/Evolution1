@@ -13,13 +13,10 @@ class TestNeurone {
 	//-------------------------------------------------------------------------------
 	//mock necessiare
 	
-	@Mock
 	private Connexion c1=new Connexion(1, n1(), n2());
 	
-	@Mock
 	private Connexion c2=new Connexion(1, n1(), new Neurone("test", 3));
 	
-	@Mock
 	private Connexion c3=new Connexion(1.5f, n1(), new Neurone("test", 4));
 	
 	
@@ -68,33 +65,7 @@ class TestNeurone {
 		n.resetPuissance();
 		assertEquals(0, n.getPuissance());
 	}
-	@Test
-	@DisplayName("test de la liste de connexions")
-	void testConnexions() {//attention a l'id des neurones
-		Neurone n=n1();
-		assertEquals(new ListeChaine<Connexion>(), n.getConnexions());
 
-		n.addConnexion(c1);
-		n.addConnexion(c2);
-		n.addConnexion(c3);
-		n.delConnexion(c2);
-		
-		ListeChaine<Connexion>liste=new ListeChaine<Connexion>(c1,c3);
-		
-		assertEquals(liste, n.getConnexions());
-		
-		Neurone n5=new Neurone("test", 0);
-		n.getConnexions().vide();
-		n.addConnexion(c1);
-		n.addConnexion(c2);
-		n.addConnexion(c3);
-
-		//System.out.println(n.toStringJson());
-		
-		assertEquals(false, n.equalsRoles(n2()));
-		assertEquals(true, n.equalsRoles(n5));
-		assertEquals(n.toStringJson(), s1());
-	}
 	/*
 	@Test
 	@DisplayName("test de equalsRole")

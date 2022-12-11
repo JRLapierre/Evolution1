@@ -30,11 +30,6 @@ public class Neurone {
 	 */
 	private float puissance=0;
 	
-	/**
-	 * la liste des connexions partant de cette neurone.
-	 */
-	private ListeChaine<Connexion> connexions=new ListeChaine<>();
-	
 	//--------------------------------------------------------------------------------
 	//constructeur
 	
@@ -101,14 +96,6 @@ public class Neurone {
 	}
 	
 	/**
-	 * getteur pour obtenir la liste des connexions partant de cette neurone
-	 * @return connexions
-	 */
-	public ListeChaine<Connexion> getConnexions(){
-		return connexions;
-	}
-	
-	/**
 	 * getteur pour le type
 	 * @return
 	 */
@@ -145,55 +132,14 @@ public class Neurone {
 		this.puissance=0;
 	}
 	
-	//-------------------------------------------------------------------------------
-	//fonctions en lien avec l'evolution du main.cerveau
-	
-	/**
-	 * ajouter un element
-	 * @param c la connexion qu'on veut ajouter
-	 */
-	public void addConnexion(Connexion c) {
-		connexions.ajout(c);
-	}
-	
-	/**
-	 * supprimer une connexion partant de cette neurone
-	 * @param c la connexion à supprimer
-	 */
-	public void delConnexion(Connexion c) {
-		connexions.delElt(c);
-	}
-	
 	//--------------------------------------------------------------------
 	//fonction d'affichage
-	
-	/**
-	 * affiche une neurone et les connexions qui en partent.
-	 * Adapté au format json
-	 * @return une description de la neurone au format json
-	 */
-	public String toStringJson() {
-		StringBuilder build=new StringBuilder(connexions.getLongueur()*100);
-		build.append("");
-		build.append("{");
-		Connexion c=connexions.getSuivant();
-		while (c!=null) {
-			build.append(c.toStringJson());
-			c=connexions.getSuivant();
-			if(c!=null) {
-				build.append(",");
-			}
-			
-		}
-		build.append("}");
-		return build.toString();
-	}
 	
 	/**
 	 * fonction a appeler sans probleme dans la connexion
 	 * @return un morceau de code json contenant le type et le numero de la Neurone.
 	 */
-	public String toStringJson2() {
+	public String toStringJson() {
 		String str="{";
 		str += "\"type\":\"" + type + "\",";
 		str += "\"numero\":" + numero + "}";

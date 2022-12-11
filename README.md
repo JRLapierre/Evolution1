@@ -21,7 +21,7 @@ faire une BD SQL pour traquer superficiellement les generations
 
 #### TODO
 
-simplifier le cerveau en enlevant la liste de connexion des neurones  
+
 
 #### trucs a finir si j'en ai le courage
 

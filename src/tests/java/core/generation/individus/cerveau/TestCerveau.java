@@ -137,5 +137,20 @@ class TestCerveau {
 		c.next();
 		assertEquals(2, c.getPertes());
 	}
+	
+	@Test
+	@DisplayName("test du tri des connexions")
+	void testTri() {
+		Cerveau c=new Cerveau(2,2,2);
+		c.addConnexion(new Connexion(2, c.getListeInput()[1], c.getListeNeurones()[0]));
+		c.addConnexion(new Connexion(2, c.getListeNeurones()[1], c.getListeOutput()[0]));
+		c.addConnexion(new Connexion(2, c.getListeOutput()[0], c.getListeOutput()[0]));
+		c.addConnexion(new Connexion(2, c.getListeOutput()[1], c.getListeOutput()[0]));
+		c.addConnexion(new Connexion(2, c.getListeInput()[0], c.getListeNeurones()[1]));
+		c.addConnexion(new Connexion(2, c.getListeNeurones()[0], c.getListeNeurones()[0]));
+		
+		System.out.println(c.toStringJson());
+
+	}
 
 }

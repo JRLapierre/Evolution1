@@ -52,11 +52,11 @@ class TestConnexion {
 
 		c1.updateFacteur(1);
 		
-		assertEquals(2, c1.getFacteur());
+		assertEquals(2.5f, c1.getFacteur());
 		
 		c1.updateFacteur(-5);
 		
-		assertEquals(-2, c1.getFacteur());
+		assertEquals(-2.5f, c1.getFacteur());
 		
 		c1.updateOrigine(n3());
 		c1.updateCible(n4());

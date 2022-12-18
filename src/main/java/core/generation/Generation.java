@@ -134,14 +134,15 @@ public class Generation {
 		int graine=Integer.parseInt(sim.substring(
 				sim.indexOf("\"graine\":")+9, 
 				sim.indexOf(",\"tauxCreation\"")));
+		//generation des individus sauvegardes
 		String content;
-		int premierId=nbIndividus*(numero-1);
+		File[] fichiers=new File(path + "generation"+numero+"/").listFiles();
 		//la population
-		for(int i=1; i<=nbIndividus; i++) {
+		for(int i=0; i<fichiers.length; i++) {
 			//chercher le fichier en question
 			content=Files.readString(Paths.get(
-					path + "generation"+numero+"/individu"+(premierId+i)+".json"));
-			this.population[i-1]=new Sauvegarde(content, graine,
+					path + "generation" + numero + "/" + fichiers[i].getName()));
+			this.population[i]=new Sauvegarde(content, graine,
 					new Mutation(sim.substring(sim.indexOf("\"mutations\":")+12)));
 		}
 		evaluation();
@@ -160,17 +161,17 @@ public class Generation {
 		Individu[] newPopulation=new Individu[nbIndividus];
 		
 		for(int i=0; i<nbClonesParfaits; i++) {
-			newPopulation[i]=new CloneParfait(population[i % butoir]);
+			newPopulation[i]=new CloneParfait(population[(i % butoir) % population.length]);
 		}
 		//clones mutes
 		for(int i=0; i<nbClonesMutes; i++) {
-			newPopulation[nbClonesParfaits+i]=new CloneMute(population[i % butoir]);
+			newPopulation[nbClonesParfaits+i]=new CloneMute(population[(i % butoir) % population.length]);
 		}
 		//reproduction sexuee
 		for (int i=0; i<nbEnfantsSexe*2; i+=2) {
 			newPopulation[nbClonesParfaits + nbClonesMutes + i/2]=
-					new EnfantSexe(population[(i % nbIndividus) % butoir], 
-							population[(i+1 % nbIndividus) % butoir]);
+					new EnfantSexe(population[((i % nbIndividus) % butoir) % population.length], 
+							population[((i+1 % nbIndividus) % butoir) % population.length]);
 		}
 		this.population=newPopulation;
 		//on evalue automatiquement la population a la fin
@@ -187,7 +188,7 @@ public class Generation {
 	private void triScore(Individu[] population) {
 		//creation d'une liste chainee d'individus
 		ListeChaine<Individu> liste=new ListeChaine<>();
-		for (int i=0; i<nbIndividus; i++) {
+		for (int i=0; i<population.length; i++) {
 			liste.ajout(population[i]);
 		}
 		//tri de la population selon le score
@@ -302,7 +303,9 @@ public class Generation {
 	//-------------------------------------------------------------------------------------------
 	//fonctions d'enregistrements
 	
-	//une fonction separee pour enregistrer des infos sur la simulation
+	/**
+	 * une fonction separee pour enregistrer des infos sur la simulation
+	 */
 	public void enregistreInfos() {
 		//creer un fichier generation info
         try {
@@ -328,7 +331,6 @@ public class Generation {
 	 * fonction pour enregistrer toute une generation dans des fichiers au format json.
 	 */
 	public void enregistreGeneration() {
-		//creer un fichier generation info
         try {
         	//si le dossier n'existe pas on le créé
         	File f=new File("enregistrements\\simulation" + nomSimulation

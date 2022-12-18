@@ -19,11 +19,11 @@ public class JoueurAI1 extends Joueur{
 
 	@Override
 	public int choix(Grille grille) {
-		Grille g=grille.copie();
-		//balance un nombre aleatoire parmi les possiblites
+		//choisis un nombre aleatoire parmi les possiblites
 		int choix=random.aleatInt(1, 7);
-		while (!g.ajoutePion(this.pion, choix)) {
+		while (grille.colonnePleine(choix)) {
 			choix=(choix+1)%7;
+			if(choix==0) choix=7;
 		}
 		return choix;
 	}

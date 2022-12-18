@@ -50,7 +50,7 @@ public class Grille {
 	 * @return true la colonne est pleine
 	 */
 	public boolean colonnePleine(int col) {
-		return grille[col].estPleine();
+		return grille[col-1].estPleine();
 	}
 	
 	//savoir si un joueur a gagne

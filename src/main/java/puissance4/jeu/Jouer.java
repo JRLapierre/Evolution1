@@ -10,7 +10,7 @@ public class Jouer {
 
 	public static void main(String[] args) {
 		try {
-			DuelVsIndividu duel=new DuelVsIndividu("2P4", 400, 39905);
+			DuelVsIndividu duel=new DuelVsIndividu("2P4", 700, 69902);
 			duel.duel(true);
 		} catch (Exception e) {
 			e.printStackTrace();

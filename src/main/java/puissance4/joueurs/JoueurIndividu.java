@@ -51,7 +51,7 @@ public class JoueurIndividu extends Joueur{
 		//chercher le max des choix. En cas d'egalite, on garde les plus eleves
 		float max=maxVal(choix, nbTics*5+1);
 		ListeChaine<Integer> idMax=new ListeChaine<>();
-		while(idMax.getLongueur()==0) {//cette partie ne marche pas
+		while(idMax.getLongueur()==0) {
 			idMax=maxCustom(choix, max, grille);
 			max=maxVal(choix, max);
 		}//on fait confiance au jeu pour qu'il y ait au moins 1 possibilite
@@ -93,7 +93,7 @@ public class JoueurIndividu extends Joueur{
 		//chercher le max des choix. En cas d'egalite, on garde les plus eleves
 		ListeChaine<Integer> idMax=new ListeChaine<>();
 		for(int i=0; i<choix.length; i++) {
-			if(choix[i]==max && !grille.colonnePleine(i)) {//ca marche pas
+			if(choix[i]==max && !grille.colonnePleine(i+1)) {
 				idMax.ajout(i);
 			}
 		}

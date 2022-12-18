@@ -6,8 +6,10 @@ import java.util.Scanner;
 
 import core.generation.Epreuve;
 import core.generation.Generation;
+import puissance4.jeu.Partie;
 import puissance4.jeu.Tournoi;
 import puissance4.joueurs.Joueur;
+import puissance4.joueurs.JoueurAI1;
 import puissance4.joueurs.JoueurIndividu;
 
 /**
@@ -29,19 +31,19 @@ public class SimulationEnregistree {
 	/**
 	 * le numero de la generation a laquelle on va reprendre la simulation
 	 */
-	private static int generationInitiale=500;
+	private static int generationInitiale=1500;
 	
 	/**
 	 * le nombre de generations a simuler.
 	 */
-	private static int nbGenerations=100;
+	private static int nbGenerations=500;
 	
 	/**
 	 * limiteur d'enregistrement.
 	 * Une generation va etre enregistree si son numero % 1 == 0.
 	 * avec une valeur de 1, toutes les generations vont etre enregistrees.
 	 */
-	private static int enregistre=10;
+	private static int enregistre=50;
 	
 	/**
 	 * fonction lambda. 
@@ -54,19 +56,45 @@ public class SimulationEnregistree {
 		for(int i=0; i<population.length; i++) {
 			participants[i]=new JoueurIndividu(population[i].getCerveau(), 25);
 		}
-		//lancer le tournoi
-		Tournoi tournoi=new Tournoi(participants);
+		//les adversaires
+		Joueur AI1=new JoueurAI1();
+		//lancer les parties
 		try {
-			tournoi.lancer();
+			for(int i=0; i<participants.length; i++) {
+				Partie.jeu(participants[i], AI1);
+				Partie.jeu(AI1, participants[i]);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return;
+			System.exit(0);
 		}
 		//recuperer les scores des joueurs
 		for(int i=0; i<population.length; i++) {
 			population[i].updateScore(participants[i].getScore());
 		}
 	};
+	
+	//----------------------------------------------------------------------------------------
+	//fonction de changement
+	
+	/**
+	 * fonction permettant de changer les regles de la simulation
+	 * @param g la generation a changer
+	 */
+	private static void changeParametres(Generation g) {
+		//si vous ne voulez pas changer les parametres, mettez les en commentaires.
+		//g.setButoir(50);
+		//g.setEpreuve(epreuve);
+		//g.setMutations(null);
+		//g.setNbClonesMutes(50);
+		//g.setNbClonesParfaits(25);
+		//g.setNbEnfantsSexe(25);
+		g.enregistreInfos();
+	}
+	
+	
+	//----------------------------------------------------------------------------------------
+	//fonction main
 	
 	/**
 	 * fonction main qui permet de lancer le programme.
@@ -99,10 +127,11 @@ public class SimulationEnregistree {
     	Generation generation;
 		try {
 			generation = new Generation(nomSimulation, generationInitiale, epreuve);
+			changeParametres(generation);
 			//on fait tourner la simulation pour nbGenerations
 			for(int i=0; i<=nbGenerations; i++) {
 				System.out.println("generation " + (generationInitiale + i));
-				if((generationInitiale + i)%enregistre==0) generation.enregistreGeneration();
+				if((generationInitiale + i)%enregistre==0 && i!=0) generation.enregistreGeneration();
 				generation.nextGen();
 			}
 			System.out.println("fait");

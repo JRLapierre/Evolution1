@@ -34,7 +34,14 @@ public class Partie {
 			}
 		}
 		//on verifie quelle condition a brise la boucle
-		if(grille.gagne(joueurActuel.pion, dernierCoup)) return joueurActuel;
-		else return null;
+		if(grille.gagne(joueurActuel.pion, dernierCoup)) {
+			joueurActuel.updateScore(2);
+			return joueurActuel;
+		}
+		else {
+			joueur1.updateScore(1);
+			joueur2.updateScore(1);
+			return null;
+		}
 	}
 }

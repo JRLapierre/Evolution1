@@ -49,4 +49,12 @@ public abstract class Joueur {
 	public int getScore() {
 		return score;
 	}
+	
+	/**
+	 * setteur qui permet de renouveler la graine d'aleatoire.
+	 * @param graine la graine d'aleatoire
+	 */
+	public static void setAleatoire(int graine) {
+		random=new Aleatoire(graine);
+	}
 }

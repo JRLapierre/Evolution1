@@ -1,6 +1,5 @@
 package core.generation.individus.cerveau;
 
-import core.generation.individus.Individu;
 import outils.Carracteristique;
 import outils.ListeChaine;
 

@@ -2,14 +2,19 @@ package core;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 import core.generation.Epreuve;
 import core.generation.Generation;
+import core.generation.individus.cerveau.Cerveau;
 import puissance4.jeu.Partie;
 import puissance4.jeu.Tournoi;
 import puissance4.joueurs.Joueur;
 import puissance4.joueurs.JoueurAI1;
+import puissance4.joueurs.JoueurAI2;
+import puissance4.joueurs.JoueurAI3;
 import puissance4.joueurs.JoueurIndividu;
 
 /**
@@ -31,19 +36,19 @@ public class SimulationEnregistree {
 	/**
 	 * le numero de la generation a laquelle on va reprendre la simulation
 	 */
-	private static int generationInitiale=1500;
+	private static int generationInitiale=15000;
 	
 	/**
 	 * le nombre de generations a simuler.
 	 */
-	private static int nbGenerations=500;
+	private static int nbGenerations=5000;
 	
 	/**
 	 * limiteur d'enregistrement.
-	 * Une generation va etre enregistree si son numero % 1 == 0.
+	 * Une generation va etre enregistree si son numero % enregistre == 0.
 	 * avec une valeur de 1, toutes les generations vont etre enregistrees.
 	 */
-	private static int enregistre=50;
+	private static int enregistre=100;
 	
 	/**
 	 * fonction lambda. 
@@ -56,13 +61,11 @@ public class SimulationEnregistree {
 		for(int i=0; i<population.length; i++) {
 			participants[i]=new JoueurIndividu(population[i].getCerveau(), 25);
 		}
-		//les adversaires
-		Joueur AI1=new JoueurAI1();
-		//lancer les parties
 		try {
 			for(int i=0; i<participants.length; i++) {
-				Partie.jeu(participants[i], AI1);
-				Partie.jeu(AI1, participants[i]);
+				for(int j=0; j<participants.length; j++) {
+					if(i!=j) Partie.jeu(participants[i], participants[j]);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -72,6 +75,7 @@ public class SimulationEnregistree {
 		for(int i=0; i<population.length; i++) {
 			population[i].updateScore(participants[i].getScore());
 		}
+		
 	};
 	
 	//----------------------------------------------------------------------------------------

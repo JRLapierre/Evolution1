@@ -11,9 +11,9 @@ public class CloneMute extends Individu{
 	//variables
 	
 	/**
-	 * le père de l'individu, de la génération précédente
+	 * l'id du père de l'individu, de la génération précédente
 	 */
-	private Individu parent;
+	private int idParent;
 
 	//-------------------------------------------------------------------------------
 	//constructeur
@@ -25,7 +25,7 @@ public class CloneMute extends Individu{
 	 */
 	public CloneMute(Individu parent) {
 		super();
-		this.parent = parent;
+		this.idParent = parent.getId();
 		this.generation=parent.generation+1;
 		this.cerveau=mutation.evolution(parent.cerveau.replique());
 	}
@@ -40,7 +40,7 @@ public class CloneMute extends Individu{
 	public String toStringJson() {
 		return "{\"individu" + this.getId() + "\":{"
 		+ "\"type\":\"CloneMute\","
-		+ "\"parent\":" + parent.getId() + ","
+		+ "\"parent\":" + idParent + ","
 		+ super.toStringJson();
 	}
 	

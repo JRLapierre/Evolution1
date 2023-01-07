@@ -10,8 +10,8 @@ public class Jouer {
 
 	public static void main(String[] args) {
 		try {
-			DuelVsIndividu duel=new DuelVsIndividu("2P4", 700, 69902);
-			duel.duel(true);
+			DuelVsIndividu duel=new DuelVsIndividu("2P4", 18000, 1796153);
+			duel.duel(false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

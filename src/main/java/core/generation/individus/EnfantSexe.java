@@ -16,14 +16,14 @@ public class EnfantSexe extends Individu{
 	//variables
 	
 	/**
-	 * le père de l'individu, de la génération précédente
+	 * l'id du père de l'individu, de la génération précédente
 	 */
-	private Individu parent1;
+	private int idParent1;
 	
 	/**
 	 * l'id de la mere de l'individu, de la generation precedente
 	 */
-	private Individu parent2;
+	private int idParent2;
 
 	//-------------------------------------------------------------------------------
 	//constructeur
@@ -37,8 +37,8 @@ public class EnfantSexe extends Individu{
 	 */
 	public EnfantSexe(Individu parent1, Individu parent2) {
 		super();
-		this.parent1 = parent1;
-		this.parent2 = parent2;
+		this.idParent1 = parent1.getId();
+		this.idParent2 = parent2.getId();
 		this.generation=parent1.generation+1;
 		this.cerveau=mutation.evolution(fusion(parent1.cerveau, parent2.cerveau));
 	}
@@ -188,8 +188,8 @@ public class EnfantSexe extends Individu{
 	public String toStringJson() {
 		return "{\"individu" + this.getId() + "\":{"
 		+ "\"type\":\"EnfantSexe\"" + ","
-		+ "\"parent1\":" + parent1.getId() + ","
-		+ "\"parent2\":" + parent2.getId() + ","
+		+ "\"parent1\":" + idParent1 + ","
+		+ "\"parent2\":" + idParent2 + ","
 		+ super.toStringJson();
 	}
 	

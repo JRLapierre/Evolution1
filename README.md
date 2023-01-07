@@ -11,18 +11,15 @@ J'ai donc decide de creer un projet avec un tracage facile, en enregistrant tout
 
 #### idees : 
 
-utiliser le multithreading pour faire tourner la simulation plus vite  
 creer un graphe qui permet de traquer visuellement les generations  
 faire une BD SQL pour traquer superficiellement les generations  
 fusionner les connexions quand elles ont les memes origines et cibles  
-changer le systeme d'evaluation en faisant affronter des ai programmes par mes soins  
 
 
 #### urgent :
-corriger un bug : la simulation semble tourner en boucle infinie par moments
 
 #### TODO
-
+utiliser le multithreading pour faire tourner la simulation plus vite  
 
 
 #### trucs a finir si j'en ai le courage

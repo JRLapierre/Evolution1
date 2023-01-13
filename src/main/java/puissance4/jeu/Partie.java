@@ -8,14 +8,33 @@ import puissance4.joueurs.Joueur;
  * @author jrl
  *
  */
-public class Partie {
+public class Partie extends Thread{
+	
+	/**
+	 * le premier joueur
+	 */
+	private Joueur joueur1;
+	
+	/**
+	 * le deuxieme joueur
+	 */
+	private Joueur joueur2;
+	
+	/**
+	 * constructeur pour une nouvelle partie
+	 * @param joueur1 le joueur qui commencera
+	 * @param joueur2 le joueur qui jouera en 2e
+	 */
+	public Partie(Joueur joueur1, Joueur joueur2) {
+		this.joueur1=joueur1;
+		this.joueur2=joueur2;
+	}
 	
 	/**
 	 * simule le jeu principal
-	 * @return le joueur qui gagne, null en cas d'egalite
 	 * @throws Exception 
 	 */
-	public static Joueur jeu(Joueur joueur1, Joueur joueur2) throws Exception {
+	public void jeu() throws Exception {
 		joueur1.pion='X';
 		joueur2.pion='O';
 		Grille grille=new Grille();
@@ -36,12 +55,25 @@ public class Partie {
 		//on verifie quelle condition a brise la boucle
 		if(grille.gagne(joueurActuel.pion, dernierCoup)) {
 			joueurActuel.updateScore(2);
-			return joueurActuel;
 		}
 		else {
 			joueur1.updateScore(1);
 			joueur2.updateScore(1);
-			return null;
 		}
 	}
+
+	/**
+	 * run : lance un jeu
+	 */
+	@Override
+	public void run() {
+		try {
+			jeu();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
 }

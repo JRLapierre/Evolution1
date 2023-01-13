@@ -22,7 +22,8 @@ class TestJoueurs {
 		Joueur j3=new JoueurHumain();
 		
 		try {
-			System.out.println(Partie.jeu(j1, j2).pion);
+			Partie partie=new Partie(j1, j2);
+			partie.jeu();
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
@@ -42,7 +43,8 @@ class TestJoueurs {
 
 		
 		try {
-			Partie.jeu(j3, j5);
+			Partie partie=new Partie(j3, j5);
+			partie.jeu();
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();

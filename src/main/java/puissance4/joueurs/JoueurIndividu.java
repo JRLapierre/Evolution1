@@ -10,6 +10,11 @@ import puissance4.grille.Grille;
  *
  */
 public class JoueurIndividu extends Joueur{
+	
+	/**
+	 * un mutex pour permettre le multithreading
+	 */
+	private Object mutex=new Object();
 
 	/**
 	 * le cerveau de l'individu : il possede 42 neurones d'entree, soit autant que de 
@@ -35,28 +40,31 @@ public class JoueurIndividu extends Joueur{
 
 	@Override
 	public int choix(Grille grille) {
-		//on genere une liste a partir des output
-		float[] liste=genereListe(grille);
-		float[] choix={0,0,0,0,0,0,0};
-		for(int i=0; i<nbTics; i++) {
-			for(int j=0; j<43; j++) {
-				cerveau.getListeInput()[j].setPuissance(liste[j]);
+		//un seul choix a la fois
+		synchronized(mutex){
+			//on genere une liste a partir des output
+			float[] liste=genereListe(grille);
+			float[] choix={0,0,0,0,0,0,0};
+			for(int i=0; i<nbTics; i++) {
+				for(int j=0; j<43; j++) {
+					cerveau.getListeInput()[j].setPuissance(liste[j]);
+				}
+				cerveau.next();
+				for(int k=0; k<7; k++) {
+					choix[k]+=cerveau.getListeOutput()[k].getPuissance();
+				}
 			}
-			cerveau.next();
-			for(int k=0; k<7; k++) {
-				choix[k]+=cerveau.getListeOutput()[k].getPuissance();
-			}
+			
+			//chercher le max des choix. En cas d'egalite, on garde les plus eleves
+			float max=maxVal(choix, nbTics * 5 + 1);
+			ListeChaine<Integer> idMax=new ListeChaine<>();
+			while(idMax.getLongueur()==0) {
+				idMax=maxCustom(choix, max, grille);
+				max=maxVal(choix, max);
+			}//on fait confiance au jeu pour qu'il y ait au moins 1 possibilite
+			//en cas d'egalites entre plusieurs choix, on prends au hasard parmis ces choix
+			return idMax.getElement(random.aleatInt(idMax.getLongueur()-1))+1;
 		}
-		
-		//chercher le max des choix. En cas d'egalite, on garde les plus eleves
-		float max=maxVal(choix, nbTics*5+1);
-		ListeChaine<Integer> idMax=new ListeChaine<>();
-		while(idMax.getLongueur()==0) {
-			idMax=maxCustom(choix, max, grille);
-			max=maxVal(choix, max);
-		}//on fait confiance au jeu pour qu'il y ait au moins 1 possibilite
-		//en cas d'egalites entre plusieurs choix, on prends au hasard parmis ces choix
-		return idMax.getElement(random.aleatInt(idMax.getLongueur()-1))+1;
 	}
 	
 	
@@ -107,7 +115,7 @@ public class JoueurIndividu extends Joueur{
 	 * @return la nouvelle valeur maximale autaurisee inferieure a max
 	 */
 	private float maxVal(float[] choix, float max) {
-		float localMax=-nbTics*5-1;
+		float localMax=-nbTics * 5 - 1;
 		for(int i=0; i<choix.length; i++) {
 			if(choix[i]>localMax && choix[i]<max) {
 				localMax=choix[i];

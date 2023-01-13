@@ -22,6 +22,11 @@ public class DuelVsIndividu {
 	 */
 	Joueur individu;
 	
+	/**
+	 * nous
+	 */
+	Joueur humain=new JoueurHumain();
+	
 	public DuelVsIndividu(String nomSimulation, int generation, int id) throws IOException {
 		//A NE PAS LANCER DURANT UNE SIMULATION DEJA EXISTANTE
 		individu=new JoueurIndividu(
@@ -41,15 +46,21 @@ public class DuelVsIndividu {
 	 * @throws Exception si un des joueurs ne sais pas jouer
 	 */
 	public void duel(boolean commencer) throws Exception {
-		Joueur j;
+		Partie partie;
+		int score=humain.getScore();
 		if(commencer) {
-			j=Partie.jeu(individu, new JoueurHumain());
+			partie=new Partie(individu, humain);
+			partie.jeu();
 		}
 		else {
-			j=Partie.jeu( new JoueurHumain(), individu);
+			partie=new Partie(humain, individu);
+			partie.jeu();
 		}
-		if(j==individu) System.out.println("l'individu a gagné");
+		if(score==humain.getScore()) System.out.println("l'individu a gagné");
 		else System.out.println("vous avez gagné");
+		System.out.println("scores :"
+				+ " \r individu : " + individu.getScore()
+				+ " \r vous : " + humain.getScore());
 	}
 	
 }

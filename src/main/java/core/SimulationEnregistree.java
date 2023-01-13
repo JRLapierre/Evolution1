@@ -2,19 +2,13 @@ package core;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Scanner;
 
 import core.generation.Epreuve;
 import core.generation.Generation;
-import core.generation.individus.cerveau.Cerveau;
-import puissance4.jeu.Partie;
 import puissance4.jeu.Tournoi;
 import puissance4.joueurs.Joueur;
-import puissance4.joueurs.JoueurAI1;
-import puissance4.joueurs.JoueurAI2;
-import puissance4.joueurs.JoueurAI3;
+
 import puissance4.joueurs.JoueurIndividu;
 
 /**
@@ -36,12 +30,12 @@ public class SimulationEnregistree {
 	/**
 	 * le numero de la generation a laquelle on va reprendre la simulation
 	 */
-	private static int generationInitiale=15000;
+	private static int generationInitiale=33200;
 	
 	/**
 	 * le nombre de generations a simuler.
 	 */
-	private static int nbGenerations=5000;
+	private static int nbGenerations=6800;
 	
 	/**
 	 * limiteur d'enregistrement.
@@ -61,16 +55,9 @@ public class SimulationEnregistree {
 		for(int i=0; i<population.length; i++) {
 			participants[i]=new JoueurIndividu(population[i].getCerveau(), 25);
 		}
-		try {
-			for(int i=0; i<participants.length; i++) {
-				for(int j=0; j<participants.length; j++) {
-					if(i!=j) Partie.jeu(participants[i], participants[j]);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.exit(0);
-		}
+		//on lance le tournoi
+		Tournoi tournoi=new Tournoi(participants);
+		tournoi.lancer();
 		//recuperer les scores des joueurs
 		for(int i=0; i<population.length; i++) {
 			population[i].updateScore(participants[i].getScore());
@@ -111,8 +98,9 @@ public class SimulationEnregistree {
     		String reponse="";
 		    Scanner input = new Scanner(System.in);
     		while(!reponse.equals("oui")) {
-    		    System.out.println("Etes vous surs d'être a la derniere generation ?"
-    		    		+ " Si ce n'est pas le cas, les fichiers des generations suivantes "
+    		    System.out.println("Etes vous surs que la generation " + generationInitiale
+    		    		+ " est la derniere generation ? \r"
+    		    		+ "Si ce n'est pas le cas, les fichiers des generations suivantes "
     		    		+ "vont etre ecrases.");
     		    System.out.print("Continuer ? (oui ou non) : ");
     		    reponse = input.nextLine();

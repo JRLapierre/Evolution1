@@ -1,7 +1,5 @@
 package core.generation.individus.cerveau;
 
-import outils.ListeChaine;
-
 /**
  * cette classe simule une neuronne, qui recoit des infos et qui en renvoie.
  * Les neurones recoivent un signal soit par impulsion exterieure par les 

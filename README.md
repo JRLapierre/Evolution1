@@ -13,13 +13,12 @@ J'ai donc decide de creer un projet avec un tracage facile, en enregistrant tout
 
 creer un graphe qui permet de traquer visuellement les generations  
 faire une BD SQL pour traquer superficiellement les generations  
-fusionner les connexions quand elles ont les memes origines et cibles  
-
 
 #### urgent :
 
 #### TODO
-utiliser le multithreading pour faire tourner la simulation plus vite  
+changer le mode d'enregistrement en fichiers binaires  
+faire une interface avec toStringJson et une methode binaire  
 
 
 #### trucs a finir si j'en ai le courage

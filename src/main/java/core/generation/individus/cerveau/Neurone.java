@@ -1,5 +1,7 @@
 package core.generation.individus.cerveau;
 
+import core.Enregistrable;
+
 /**
  * cette classe simule une neuronne, qui recoit des infos et qui en renvoie.
  * Les neurones recoivent un signal soit par impulsion exterieure par les 
@@ -7,7 +9,7 @@ package core.generation.individus.cerveau;
  * @author jrl
  *
  */
-public class Neurone {
+public class Neurone implements Enregistrable {
 
 	//-------------------------------------------------------------------------------
 	//

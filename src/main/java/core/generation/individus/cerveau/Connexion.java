@@ -1,5 +1,7 @@
 package core.generation.individus.cerveau;
 
+import core.Enregistrable;
+
 /**
  * cette classe simule une connexion entre deux neurones.
  * Elle amplifie ou affaiblit le signal d'une neurone pour l'envoyer vers une autre.
@@ -7,7 +9,7 @@ package core.generation.individus.cerveau;
  * @author jrl
  *
  */
-public class Connexion {
+public class Connexion implements Enregistrable {
 	
 	//-------------------------------------------------------------------------------
 	//variables

@@ -1,5 +1,6 @@
 package core.generation.individus.cerveau;
 
+import core.Enregistrable;
 import outils.Carracteristique;
 import outils.ListeChaine;
 
@@ -9,7 +10,7 @@ import outils.ListeChaine;
  * @author jrl
  *
  */
-public class Cerveau {
+public class Cerveau implements Enregistrable {
 	
 	//-------------------------------------------------------------------------------
 	//variables

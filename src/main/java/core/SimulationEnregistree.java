@@ -30,12 +30,12 @@ public class SimulationEnregistree {
 	/**
 	 * le numero de la generation a laquelle on va reprendre la simulation
 	 */
-	private static int generationInitiale=33200;
+	private static int generationInitiale=40000;
 	
 	/**
 	 * le nombre de generations a simuler.
 	 */
-	private static int nbGenerations=6800;
+	private static int nbGenerations=10000;
 	
 	/**
 	 * limiteur d'enregistrement.

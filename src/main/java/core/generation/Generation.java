@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import core.Enregistrable;
 import core.generation.individus.CloneMute;
 import core.generation.individus.CloneParfait;
 import core.generation.individus.EnfantSexe;
@@ -20,7 +21,7 @@ import outils.ListeChaine;
  * @author jrl
  *
  */
-public class Generation {
+public class Generation implements Enregistrable {
 
 	//------------------------------------------------------------------------------------------
 	//variables : distribution de la population

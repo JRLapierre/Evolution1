@@ -13,12 +13,17 @@ J'ai donc decide de creer un projet avec un tracage facile, en enregistrant tout
 
 creer un graphe qui permet de traquer visuellement les generations  
 faire une BD SQL pour traquer superficiellement les generations  
+mettre la possibilite de mettre en pause  
+faire des fonctions pour traquer les ancetres et les liens de parentee  
+
 
 #### urgent :
 
 #### TODO
 changer le mode d'enregistrement en fichiers binaires  
 faire une interface avec toStringJson et une methode binaire  
+
+
 
 
 #### trucs a finir si j'en ai le courage

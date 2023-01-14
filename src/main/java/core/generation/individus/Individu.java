@@ -1,5 +1,6 @@
 package core.generation.individus;
 
+import core.Enregistrable;
 import core.generation.individus.cerveau.Cerveau;
 import core.generation.individus.mutations.Mutation;
 import outils.Aleatoire;
@@ -17,7 +18,7 @@ import outils.Aleatoire;
  * @author jrl
  *
  */
-public abstract class Individu {	
+public abstract class Individu implements Enregistrable {
 	
 	//-------------------------------------------------------------------------------
 	//variables

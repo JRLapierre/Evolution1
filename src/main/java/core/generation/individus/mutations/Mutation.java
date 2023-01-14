@@ -1,5 +1,6 @@
 package core.generation.individus.mutations;
 
+import core.Enregistrable;
 import core.generation.individus.cerveau.Cerveau;
 import core.generation.individus.cerveau.Connexion;
 import core.generation.individus.cerveau.Neurone;
@@ -11,7 +12,7 @@ import outils.Aleatoire;
  * @author jrl
  *
  */
-public class Mutation {
+public class Mutation implements Enregistrable{
 	
 	//-------------------------------------------------------------------------------
 	//variables

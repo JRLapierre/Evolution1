@@ -15,13 +15,18 @@ creer un graphe qui permet de traquer visuellement les generations
 mettre la possibilite de mettre en pause  
 faire des fonctions pour traquer les ancetres et les liens de parentee  
 retravailler le toStringJson de Cerveau  
+appliquer du multithreading dans la phase de recuperation des donnees
+appliquer du multithreading dans la phase de reproduction
+appliquer du multithreading dans la phase d'enregistrement
 
 #### urgent :
 
 #### TODO
-changer le mode d'enregistrement en fichiers binaires  
-programmer un decodeur binaire pour toutes les classes implementant Enregistrable  
-faire un constructeur permettant de decoder le binaire dans toutes les classe implementants enregistrable  
+changer le mode d'enregistrement en fichiers binaires :  
+programmer un decodeur binaire pour toutes les classes implementant Enregistrable et faire un constructeur permettant de decoder le binaire dans toutes les classe implementants enregistrable :  
+ - package mutation
+ - package individu
+ - package generation
 
 
 

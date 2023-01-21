@@ -63,13 +63,10 @@ public class Cerveau implements Enregistrable {
 	 * @param sub les infos venant de l'individu
 	 */
 	public Cerveau(String sub) {
-		int nbInput=decodeNbNeurones("inputs", sub);
-		int nbOutput=decodeNbNeurones("outputs", sub);
-		int nbInterne=decodeNbNeurones("interne", sub);
 		//initialisation des listes
-		listeInput=initListN(nbInput, "input");
-		listeOutput=initListN(nbOutput, "output");
-		listeInterne=initListN(nbInterne, "interne");		
+		listeInput=initListN(decodeNbNeurones("inputs", sub), "input");
+		listeOutput=initListN(decodeNbNeurones("outputs", sub), "output");
+		listeInterne=initListN(decodeNbNeurones("interne", sub), "interne");		
 		//chercher les connexions et les ajouter
 		int i=0;
 		int begin=sub.indexOf("\"connexion", i);
@@ -81,6 +78,36 @@ public class Cerveau implements Enregistrable {
 			end=sub.indexOf("}}", begin)+2;
 		}
 		
+	}
+	
+	
+	/**
+	 * constructeur pour generer un cerveau a partir de binaire
+	 * @param bb le ByteBuffer duquel on extrait les informations
+	 */
+	public Cerveau(ByteBuffer bb) {
+		this.listeInput=initListN(bb.getShort(), "input");
+		this.listeInterne=initListN(bb.getShort(), "interne");
+		this.listeOutput=initListN(bb.getShort(), "output");
+		byte type;
+		short numero;
+		short nbConnexions;
+		Neurone[] liste;
+		while (bb.hasRemaining()) {
+			type=bb.get();
+			//selon le type
+			if (type==1) liste=listeInput;
+			else if(type==2) liste=listeInterne;
+			else liste=listeOutput;
+			//on met les connexions
+			for(int i=0; i<liste.length; i++) {
+				numero=bb.getShort();
+				nbConnexions=bb.getShort();
+				for(int j=0; j<nbConnexions; j++) {
+					listeConnexions.ajout(new Connexion(bb, liste[numero], this));
+				}
+			}
+		}
 	}
 	
 	//-----------------------------------------------------------------------------
@@ -416,23 +443,37 @@ public class Cerveau implements Enregistrable {
 	 */
 	private void toBytePartiel(String type, ByteBuffer b) {
 		Connexion connexion=listeConnexions.getActuel();
-		int nb;
+		int longueur;
+		short nbConnexions;
 		if (type.equals("input")) {
 			b.put((byte) 1);
-			nb=listeInput.length;
+			longueur=listeInput.length;
 		}
 		else if (type.equals("interne")) {
 			b.put((byte) 2);
-			nb=listeInterne.length;
+			longueur=listeInterne.length;
 		}
 		else {
 			b.put((byte) 3);
-			nb=listeOutput.length;
+			longueur=listeOutput.length;
 		}
-		//pour chaque connexions
-		for(int i=0; i<nb; i++) {
+		//pour chaque neurone
+		for(int i=0; i<longueur; i++) {
 			b.putShort((short) i);
-			//si l'entree est bonne
+			//determiner le nombre de connexions partant de cette neurone
+			nbConnexions=0;
+			while( connexion!=null 
+					&& connexion.getOrigine().getType().equals(type) 
+					&& connexion.getOrigine().getNumero()==i) {
+				nbConnexions++;
+				connexion=listeConnexions.getSuivant();
+			}
+			//on se repositionne bien dans la liste
+			for(int j=0; j<nbConnexions; j++) {
+				connexion=listeConnexions.getPrecedent();
+			}
+			b.putShort(nbConnexions);
+			//si il y a des connexions partant de cette neurone
 			while( connexion!=null 
 					&& connexion.getOrigine().getType().equals(type) 
 					&& connexion.getOrigine().getNumero()==i) {
@@ -447,29 +488,34 @@ public class Cerveau implements Enregistrable {
 	 */
 	public byte[] toByte() {
 		//le ByteBuffer dans toute sa longueur
-		ByteBuffer b=ByteBuffer.allocate(toByteLongueur());
+		ByteBuffer bb=ByteBuffer.allocate(toByteLongueur());
 		//tri de la liste
 		triConnexions();
 		//preparation du parcours
 		listeConnexions.resetParcours();
 		listeConnexions.getSuivant();
 		//remplissage du ByteBuffer
+		//les nombres
+		bb.putShort((short) listeInput.length);
+		bb.putShort((short) listeInterne.length);
+		bb.putShort((short) listeOutput.length);
 		//les input
-		toBytePartiel("input", b);
+		toBytePartiel("input", bb);
 		//les interne
-		toBytePartiel("interne", b);
+		toBytePartiel("interne", bb);
 		//les output
-		toBytePartiel("output", b);
+		toBytePartiel("output", bb);
 		//return
-		return b.array();
+		return bb.array();
 	}
 	
 	/**
 	 * une fonction qui dit la longueur de toByte
-	 * @return 3 + 2*(nbInput+nbOutput+nbNeurones) + 11*listeConnexions.getLongueur()
+	 * @return 9 + 2*(nbInput+nbOutput+nbInterne) + 11*listeConnexions.getLongueur()
 	 */
 	public int toByteLongueur() {
-		return 3 + 2*(listeInput.length+listeOutput.length+listeInterne.length) + 11*listeConnexions.getLongueur();
+		return 9 + 4*(listeInput.length + listeOutput.length + listeInterne.length)
+				+ 11*listeConnexions.getLongueur();
 	}
 
 

@@ -154,13 +154,15 @@ class TestCerveau {
 		System.out.println(c.toStringJson());
 
 	}
-	/* trop difficile a tester
 	@Test
 	@DisplayName("test du toByte")
 	void testToByte() {
-		System.out.println(c2().toByte());
-		ByteBuffer b=ByteBuffer.allocate(c2().toByteLongueur());
-		b.put(null)
-	}*/
+		Cerveau c=c2();
+		ByteBuffer bb=ByteBuffer.allocate(c.toByteLongueur());
+		bb.put(c.toByte());
+		bb.flip();
+		Cerveau c2=new Cerveau(bb);
+		assertEquals(c, c2);
+	}
 
 }

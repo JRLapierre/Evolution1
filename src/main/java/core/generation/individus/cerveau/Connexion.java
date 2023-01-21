@@ -114,7 +114,10 @@ public class Connexion implements Enregistrable {
 		this.facteur=bb.getFloat();
 		this.origine=origine;
 		this.cible=trouveNeuroneBin(bb, cerveau);
-		
+		//pour remettre le compte des neurones assez haut
+		if (this.id>nbConnexions) {
+			nbConnexions=this.id;
+		}
 	}
 	
 	//---------------------------------------------------------------------

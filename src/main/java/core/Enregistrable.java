@@ -23,9 +23,13 @@ public interface Enregistrable {
 	 * parent (0, 1 ou 2 selon le type) : int
 	 * generation : int
 	 * score : float
-	 * dans le cerveau : 
+	 * dans le cerveau :
+	 * nombre d'entrees : short
+	 * nombre d'interne : short
+	 * nombre de sortie : short 
 	 * type de neurone (input 1, interne 2, output 3) : byte
 	 * 	numero de neurone x fois : short
+	 * 	nombre de connexions partant de cette neurone : short
 	 * 		connexion x fois : 
 	 * 			id : int
 	 * 			facteur : float

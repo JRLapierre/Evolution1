@@ -81,7 +81,11 @@ public class Connexion implements Enregistrable {
 		this.id=id;
 	}
 	
-	//constructeur pour creer depuis un enregistrement json
+	/**
+	 * constructeur pour creer depuis un enregistrement json
+	 * @param sub le morceau de chaine de carractere
+	 * @param cerveau le cerveau auquel la connexion apprtient
+	 */
 	public Connexion(String sub, Cerveau cerveau) {
 		//faire de la sous decoupe
 		this.id=Integer.parseInt(sub.substring(
@@ -91,16 +95,26 @@ public class Connexion implements Enregistrable {
 				sub.indexOf(",\"facteur\":")+11, 
 				sub.indexOf(",\"origine\":{")));
 		//neurones
-		this.origine=trouveNeurone(sub.substring(
+		this.origine=trouveNeuroneJson(sub.substring(
 				sub.indexOf("\"origine\":")+10, 
 				sub.indexOf(",\"cible\":")), cerveau);
-		this.cible=trouveNeurone(sub.substring(
+		this.cible=trouveNeuroneJson(sub.substring(
 				sub.indexOf("\"cible\":")+8, 
 				sub.indexOf("}}")+1), cerveau);
 		//pour remettre le compte des neurones assez haut
 		if (this.id>nbConnexions) {
 			nbConnexions=this.id;
 		}
+	}
+	
+	
+	//constructeur pour recreer une connexion depuis le binaire
+	public Connexion(ByteBuffer bb, Neurone origine, Cerveau cerveau) {//quel type ?
+		this.id=bb.getInt();
+		this.facteur=bb.getFloat();
+		this.origine=origine;
+		this.cible=trouveNeuroneBin(bb, cerveau);
+		
 	}
 	
 	//---------------------------------------------------------------------
@@ -112,7 +126,7 @@ public class Connexion implements Enregistrable {
 	 * @param cerveau le cerveau contenant la neurone
 	 * @return la neurone correspondant a cette chaine de carracteres
 	 */
-	private Neurone trouveNeurone(String sub, Cerveau cerveau) {
+	private Neurone trouveNeuroneJson(String sub, Cerveau cerveau) {
 		String type=sub.substring(9, 14);
 		if (type.equals("input")) {
 			return cerveau.getListeInput()[Integer.parseInt(sub.substring(25, 26))];
@@ -128,6 +142,30 @@ public class Connexion implements Enregistrable {
 			return null;
 		}
 		
+	}
+	
+	/**
+	 * fonction privee pour determiner une neurone a partir d'une chaine de carracteres
+	 * @param bb le ByteBuffer duquel on extrait les informations
+	 * @param cerveau le cerveau dans lequel on cherche
+	 * @return la neurone cherchee
+	 */
+	private Neurone trouveNeuroneBin(ByteBuffer bb, Cerveau cerveau) {
+		byte type=bb.get();
+		System.out.println(type);
+		if (type==(byte) 1) {
+			return cerveau.getListeInput()[bb.getShort()];
+		}
+		else if (type==(byte) 2) {
+			return cerveau.getListeInterne()[bb.getShort()];
+		}
+		else if (type==(byte) 3) {
+			return cerveau.getListeOutput()[bb.getShort()];
+		}
+		else {//flemme de faire une vraie erreur
+			System.err.println("erreur : type de neurone inconnu");
+			return null;
+		}
 	}
 	
 	//-------------------------------------------------------------------------------

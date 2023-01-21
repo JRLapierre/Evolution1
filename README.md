@@ -14,7 +14,7 @@ J'ai donc decide de creer un projet avec un tracage facile, en enregistrant tout
 creer un graphe qui permet de traquer visuellement les generations  
 mettre la possibilite de mettre en pause  
 faire des fonctions pour traquer les ancetres et les liens de parentee  
-
+retravailler le toStringJson de Cerveau  
 
 #### urgent :
 

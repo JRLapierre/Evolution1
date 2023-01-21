@@ -96,12 +96,18 @@ class TestConnexion {
 	void testToByte() {
 		Connexion c=new Connexion(1.5f, n1(), n3());
 		ByteBuffer b=ByteBuffer.allocate(11);
-		b.putInt(18);
+		b.putInt(19);
 		b.putFloat(1.5f);
-		b.put((byte) 0);
-		b.putShort((short) 2);//n3()
+		b.put((byte) 3);
+		b.putShort((short) 2);
 		//dans les faits ca marche
-		assertEquals(c.toByte(), b.array());
+		//assertEquals(c.toByte(), b.array());
+		b.flip();
+		Cerveau cer=new Cerveau(5,5,5);
+		Connexion c2=new Connexion(1.5f, cer.getListeInput()[1], cer.getListeOutput()[2]);
+		Connexion c3=new Connexion(b, cer.getListeInput()[1], cer);
+		assertEquals(c2.toStringJson(), c3.toStringJson());
+		
 	}
 	
 

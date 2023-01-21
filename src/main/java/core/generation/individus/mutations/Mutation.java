@@ -1,5 +1,7 @@
 package core.generation.individus.mutations;
 
+import java.nio.ByteBuffer;
+
 import core.Enregistrable;
 import core.generation.individus.cerveau.Cerveau;
 import core.generation.individus.cerveau.Connexion;
@@ -101,6 +103,17 @@ public class Mutation implements Enregistrable{
 		this.tauxMutationNeurone=Integer.parseInt(sub.substring(
 				sub.indexOf("\"tauxMutationNeurone\":")+22, 
 				sub.indexOf("}}")));
+	}
+	
+	
+	//constructeur a partir d'un enregistrement binaire
+	public Mutation(ByteBuffer bb) {
+		this.aleatoire=new Aleatoire(bb.getInt()+1%2147483647);
+		this.tauxCreation=bb.get();
+		this.tauxSuppression=bb.get();
+		this.tauxMutationFacteur=bb.get();
+		this.maxChangementFacteur=bb.getFloat();
+		this.tauxMutationNeurone=bb.get();
 	}
 	
 	//-------------------------------------------------------------------------------
@@ -240,5 +253,21 @@ public class Mutation implements Enregistrable{
 		+ "\"maxChangementFacteur\":" + maxChangementFacteur + ","
 		+ "\"tauxMutationNeurone\":" + tauxMutationNeurone
 		+ "}";
+	}
+	
+	
+	public byte[] toByte() {
+		ByteBuffer bb=ByteBuffer.allocate(toByteLongueur());
+		bb.putInt(aleatoire.getGraine());
+		bb.put((byte) tauxCreation);
+		bb.put((byte) tauxSuppression);
+		bb.put((byte) tauxMutationFacteur);
+		bb.putFloat(maxChangementFacteur);
+		bb.put((byte) tauxMutationNeurone);
+		return bb.array();
+	}
+	
+	public int toByteLongueur() {
+		return 12;
 	}
 }

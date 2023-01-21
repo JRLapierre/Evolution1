@@ -18,6 +18,8 @@ public interface Enregistrable {
 	/**
 	 * cree une representation de l'objet en binaire
 	 * format d'enregistrement : 
+	 * 
+	 * pour les individus : 
 	 * id : int
 	 * type d'individu : byte
 	 * parent (0, 1 ou 2 selon le type) : int
@@ -36,6 +38,15 @@ public interface Enregistrable {
 	 * 			cible : 
 	 * 				type : byte
 	 * 				numero : short 
+	 * 
+	 * Pour les mutations :
+	 * graine : int
+	 * tauxCreation : byte
+	 * tauxSuppression : byte
+	 * tauxMutationFacteur : byte
+	 * maxChangementFacteur : float
+	 * tauxMutationNeurone : byte
+	 * 
 	 * @return un tableau de byte correspondant a l'objet
 	 */
 	public byte[] toByte();

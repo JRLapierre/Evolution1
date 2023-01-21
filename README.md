@@ -24,7 +24,6 @@ appliquer du multithreading dans la phase d'enregistrement
 #### TODO
 changer le mode d'enregistrement en fichiers binaires :  
 programmer un decodeur binaire pour toutes les classes implementant Enregistrable et faire un constructeur permettant de decoder le binaire dans toutes les classe implementants enregistrable :  
- - package mutation
  - package individu
  - package generation
 

@@ -1,5 +1,7 @@
 package core.generation.individus.cerveau;
 
+import java.nio.ByteBuffer;
+
 import core.Enregistrable;
 
 /**
@@ -133,17 +135,38 @@ public class Neurone implements Enregistrable {
 	}
 	
 	//--------------------------------------------------------------------
-	//fonction d'affichage
+	//methodes d'enregistrable
 	
 	/**
 	 * fonction a appeler sans probleme dans la connexion
 	 * @return un morceau de code json contenant le type et le numero de la Neurone.
 	 */
 	public String toStringJson() {
-		String str="{";
-		str += "\"type\":\"" + type + "\",";
-		str += "\"numero\":" + numero + "}";
-		return str;
+		return "{"
+		+ "\"type\":\"" + type + "\","
+		+ "\"numero\":" + numero + "}";
+	}
+	
+	/**
+	 * fonction qui renvoie un tableau de byte correspondant au neuronne actuel
+	 * fait toujours 3 byte de long
+	 */
+	public byte[] toByte() {
+		ByteBuffer b=ByteBuffer.allocate(3);
+		if (type.equals("input")) b.put((byte) 1);
+		else if (type.equals("interne")) b.put((byte) 2);
+		else if (type.equals("output")) b.put((byte) 3);
+		else b.put((byte) 0);
+		b.putShort((short) numero);
+		return b.array();
+	}
+	
+	/**
+	 * une fonction qui dit la longueur de toByte
+	 * @return 3
+	 */
+	public int toByteLongueur() {
+		return 3;
 	}
 
 

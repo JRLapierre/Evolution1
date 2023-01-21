@@ -12,17 +12,17 @@ J'ai donc decide de creer un projet avec un tracage facile, en enregistrant tout
 #### idees : 
 
 creer un graphe qui permet de traquer visuellement les generations  
-faire une BD SQL pour traquer superficiellement les generations  
 mettre la possibilite de mettre en pause  
 faire des fonctions pour traquer les ancetres et les liens de parentee  
+changer l'attribut nbNeurones de cerveau en nbInterne  
+supprimer des attributs inutiles de cerveau (nbNeurone, etc...)  
 
 
 #### urgent :
 
 #### TODO
 changer le mode d'enregistrement en fichiers binaires  
-faire une interface avec toStringJson et une methode binaire  
-
+programmer un decodeur binaire pour toutes les classes implementant Enregistrable
 
 
 

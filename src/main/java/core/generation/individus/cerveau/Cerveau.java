@@ -1,5 +1,7 @@
 package core.generation.individus.cerveau;
 
+import java.nio.ByteBuffer;
+
 import core.Enregistrable;
 import outils.Carracteristique;
 import outils.ListeChaine;
@@ -422,6 +424,66 @@ public class Cerveau implements Enregistrable {
 		}
 		build.append("}}");
 		return build.toString();
+	}
+	
+	
+	/**
+	 * fonction pour aider au toByte
+	 * @param type
+	 * @param connexion
+	 * @param b
+	 */
+	private void toBytePartiel(String type, ByteBuffer b) {
+		Connexion connexion=listeConnexions.getActuel();
+		if (type.equals("input")) b.put((byte) 1);
+		else if (type.equals("interne")) b.put((byte) 2);
+		else b.put((byte) 3);
+		//pour chaque connexions
+		for(int i=0; i<nbInput; i++) {
+			b.putShort((short) i);
+			//si l'entree est bonne
+			while( connexion!=null 
+					&& connexion.getOrigine().getType().equals(type) 
+					&& connexion.getOrigine().getNumero()==i) {
+				b.put(connexion.toByte());
+				connexion=listeConnexions.getSuivant();
+			}
+		}
+	}
+	
+	/**
+	 * toByte();
+	 */
+	public byte[] toByte() {
+		//le ByteBuffer dans toute sa longueur
+		ByteBuffer b=ByteBuffer.allocate(3 + 2*(nbInput+nbOutput+nbNeurones) + 11*listeConnexions.getLongueur());
+		//expression lambda pour trier la liste
+		Carracteristique<Connexion> carracteristique= elt ->{
+			if(elt.getOrigine().getType().equals("input")) return elt.getOrigine().getNumero();
+			if(elt.getOrigine().getType().equals("interne")) return elt.getOrigine().getNumero() + this.nbInput;
+			else return this.nbInput + this.nbNeurones + elt.getOrigine().getNumero();
+		};
+		//tri de la liste
+		listeConnexions.triRapide(carracteristique);
+		listeConnexions.resetParcours();
+		listeConnexions.getSuivant();
+		//remplissage du ByteBuffer
+		//les input
+		toBytePartiel("input", b);
+		//les interne
+		toBytePartiel("interne", b);
+		//les output
+		toBytePartiel("output", b);
+		//return
+		return b.array();
+	}
+	
+	/**
+	 * une fonction qui dit la longueur de toByte
+	 * @return 3 + 2*(nbInput+nbOutput+nbNeurones) + 11*listeConnexions.getLongueur()
+	 */
+	public int toByteLongueur() {
+		return 3 + 2*(nbInput+nbOutput+nbNeurones) + 11*listeConnexions.getLongueur();
 	}
 
 

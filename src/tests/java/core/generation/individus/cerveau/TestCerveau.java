@@ -2,6 +2,8 @@ package core.generation.individus.cerveau;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.nio.ByteBuffer;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -152,5 +154,24 @@ class TestCerveau {
 		System.out.println(c.toStringJson());
 
 	}
+	/* trop difficile a tester
+	@Test
+	@DisplayName("test du toByte")
+	void testToByte() {
+		System.out.println(c2().toByte());
+		ByteBuffer b=ByteBuffer.allocate(c2().toByteLongueur());
+		b.put(null)
+		
+		
+				Cerveau c=c1();
+		ListeChaine<Connexion> liste=new ListeChaine<>();
+		Connexion con=new Connexion(1.2f, c.getListeInput()[1], c.getListeNeurones()[1]);
+		liste.ajout(new Connexion(1, c.getListeInput()[0], c.getListeNeurones()[0]));
+		liste.ajout(con);
+		liste.ajout(new Connexion(-1, c.getListeNeurones()[0], c.getListeOutput()[0]));
+		c.setListeConnextions(liste);
+		c.addConnexion(new Connexion(0.5f, c.getListeInput()[1], c.getListeOutput()[1]));
+		c.delConnextion(con);
+	}*/
 
 }

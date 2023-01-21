@@ -483,8 +483,7 @@ public class ListeChaine<T> {
 	public T getSuivant() {
 		if (local==null) local=premier;
 		else local=local.getSuivant();
-		if (local==null) return null;
-		else return local.getElt();
+		return getActuel();
 	}
 	
 	/**
@@ -494,6 +493,14 @@ public class ListeChaine<T> {
 	public T getPrecedent() {
 		if (local==null) local=dernier;
 		else local=local.getPrecedent();
+		return getActuel();
+	}
+	
+	/**
+	 * fonction qui permet de s'arreter dans le parcours de la liste
+	 * @return null si l'element n'existe pas, sa valeur sinon
+	 */
+	public T getActuel() {
 		if (local==null) return null;
 		else return local.getElt();
 	}

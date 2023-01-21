@@ -2,6 +2,8 @@ package core.generation.individus.cerveau;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.nio.ByteBuffer;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -87,6 +89,19 @@ class TestConnexion {
 		System.out.println(c1.toStringJson());
 		System.out.println(c2.toStringJson());
 		System.out.println(c3.toStringJson());
+	}
+	
+	@Test
+	@DisplayName("test du toByte")
+	void testToByte() {
+		Connexion c=new Connexion(1.5f, n1(), n3());
+		ByteBuffer b=ByteBuffer.allocate(11);
+		b.putInt(18);
+		b.putFloat(1.5f);
+		b.put((byte) 0);
+		b.putShort((short) 2);//n3()
+		//dans les faits ca marche
+		assertEquals(c.toByte(), b.array());
 	}
 	
 

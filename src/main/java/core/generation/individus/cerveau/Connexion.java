@@ -1,5 +1,7 @@
 package core.generation.individus.cerveau;
 
+import java.nio.ByteBuffer;
+
 import core.Enregistrable;
 
 /**
@@ -215,10 +217,10 @@ public class Connexion implements Enregistrable {
 	}
 		
 	//---------------------------------------------------------------------
-	//fonction d'affichage
+	//fonctions d'Enregistrable
 
 	/**
-	 * renvoie des infos sur la neurone pour un format json
+	 * renvoie des infos sur la connexion pour un format json
 	 */
 	public String toStringJson() {
 		return "\"connexion" + id + "\":{"
@@ -227,6 +229,26 @@ public class Connexion implements Enregistrable {
 		+ "\"origine\":" + origine.toStringJson() + ","
 		+ "\"cible\":" + cible.toStringJson()
 		+ "}";
+	}
+	
+	/**
+	 * renvoie des infos sur la connexion en binaire
+	 * fait toujours 11 byte de long
+	 */
+	public byte[] toByte() {
+		ByteBuffer b=ByteBuffer.allocate(11);
+		b.putInt(id);
+		b.putFloat(facteur);
+		b.put(cible.toByte());
+		return b.array();
+	}
+	
+	/**
+	 * une fonction qui dit la longueur de toByte
+	 * @return 11
+	 */
+	public int toByteLongueur() {
+		return 11;
 	}
 	
 	//---------------------------------------------------------------------

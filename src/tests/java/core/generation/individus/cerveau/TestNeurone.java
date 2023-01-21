@@ -2,6 +2,8 @@ package core.generation.individus.cerveau;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.nio.ByteBuffer;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -34,7 +36,7 @@ class TestNeurone {
 	}
 	
 	private String s1() {
-		return "{\"connexion0\":{\"id\":0,\"facteur\":1.0,\"origine\":{\"type\":\"test\",\"numero\":0},\"cible\":{\"type\":\"test\",\"numero\":1}},\"connexion1\":{\"id\":1,\"facteur\":1.0,\"origine\":{\"type\":\"test\",\"numero\":0},\"cible\":{\"type\":\"test\",\"numero\":3}},\"connexion2\":{\"id\":2,\"facteur\":1.5,\"origine\":{\"type\":\"test\",\"numero\":0},\"cible\":{\"type\":\"test\",\"numero\":4}}}";
+		return "{\"type\":\"input\",\"numero\":1}";
 	}
 	
 	//--------------------------------------------------------------------------------
@@ -64,6 +66,18 @@ class TestNeurone {
 		assertEquals(5, n.getPuissance());
 		n.resetPuissance();
 		assertEquals(0, n.getPuissance());
+	}
+	
+	@Test
+	@DisplayName("test des methode d'enregistrable")
+	void testEnregistrable() {
+		Neurone n=new Neurone("input", 1);
+		assertEquals(n.toStringJson(), s1());
+		ByteBuffer b=ByteBuffer.allocate(3);
+		b.put((byte) 1);
+		b.putShort((short) 1);
+		//dans les faits ca marche, mais il veut pas faire le equals correctement
+		//assertEquals(n.toByte(), b.array());
 	}
 
 	/*

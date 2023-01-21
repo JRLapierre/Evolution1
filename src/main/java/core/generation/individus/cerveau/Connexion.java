@@ -121,7 +121,7 @@ public class Connexion implements Enregistrable {
 			return cerveau.getListeOutput()[Integer.parseInt(sub.substring(26, 27))];
 		}
 		else if (type.equals("inter")) {
-			return cerveau.getListeNeurones()[Integer.parseInt(sub.substring(27, 28))];
+			return cerveau.getListeInterne()[Integer.parseInt(sub.substring(27, 28))];
 		}
 		else {//flemme de faire une vraie erreur
 			System.err.println("erreur : type de neurone inconnu");

@@ -14,15 +14,14 @@ J'ai donc decide de creer un projet avec un tracage facile, en enregistrant tout
 creer un graphe qui permet de traquer visuellement les generations  
 mettre la possibilite de mettre en pause  
 faire des fonctions pour traquer les ancetres et les liens de parentee  
-changer l'attribut nbNeurones de cerveau en nbInterne  
-supprimer des attributs inutiles de cerveau (nbNeurone, etc...)  
 
 
 #### urgent :
 
 #### TODO
 changer le mode d'enregistrement en fichiers binaires  
-programmer un decodeur binaire pour toutes les classes implementant Enregistrable
+programmer un decodeur binaire pour toutes les classes implementant Enregistrable  
+faire un constructeur permettant de decoder le binaire dans toutes les classe implementants enregistrable  
 
 
 

@@ -133,17 +133,17 @@ public class Mutation implements Enregistrable{
 	private Neurone neuroneAleat(Cerveau cerveau) {
 		int a=aleatoire.aleatInt(0,
 				cerveau.getNbInput() +
-				cerveau.getNbNeurones() +
+				cerveau.getNbInterne() +
 				cerveau.getNbOutput()-1);
 		if (a<cerveau.getNbInput()) {
 			return cerveau.getListeInput()[a];
 		}
 		a-=cerveau.getNbInput();
-		if (a<cerveau.getNbNeurones()) {
-			return cerveau.getListeNeurones()[a];
+		if (a<cerveau.getNbInterne()) {
+			return cerveau.getListeInterne()[a];
 		}
 		else {
-			a-=cerveau.getNbNeurones();
+			a-=cerveau.getNbInterne();
 			return cerveau.getListeOutput()[a];
 		}
 	}
@@ -153,7 +153,7 @@ public class Mutation implements Enregistrable{
 	 * @param cerveau
 	 */
 	private void ajoutConnexion(Cerveau cerveau) {
-		for (int i=0; i < cerveau.getNbInput() + cerveau.getNbNeurones() +
+		for (int i=0; i < cerveau.getNbInput() + cerveau.getNbInterne() +
 				cerveau.getNbOutput(); i++) {
 			if (aleatoire.aleatInt(0,100)<=tauxCreation) {
 				cerveau.addConnexion(new Connexion(

@@ -16,21 +16,6 @@ public class Cerveau implements Enregistrable {
 	
 	//-------------------------------------------------------------------------------
 	//variables
-	
-	/**
-	 * le nombre de neurones d'entrées
-	 */
-	private int nbInput;
-	
-	/**
-	 * le nombre de neurones de sortie
-	 */
-	private int nbOutput;
-	
-	/**
-	 * le nombre de neurones internes
-	 */
-	private int nbNeurones;
 
 	/**
 	 * un tableau fixe des neurones d'origines
@@ -43,9 +28,9 @@ public class Cerveau implements Enregistrable {
 	private Neurone[] listeOutput;
 
 	/**
-	 * un tableau fixe de neurones
+	 * un tableau fixe de neurones internes
 	 */
-	private Neurone[] listeNeurones;
+	private Neurone[] listeInterne;
 	
 	/**
 	 * une linkedList de connexions
@@ -67,14 +52,10 @@ public class Cerveau implements Enregistrable {
 	 * @param nbNeurones
 	 */
 	public Cerveau(int nbInput, int nbOutput, int nbNeurones) {
-		//initialisation des quantitées
-		this.nbInput=nbInput;
-		this.nbOutput=nbOutput;
-		this.nbNeurones=nbNeurones;
 		//initialisation des listes
 		listeInput=initListN(nbInput, "input");
 		listeOutput=initListN(nbOutput, "output");
-		listeNeurones=initListN(nbNeurones, "interne");		
+		listeInterne=initListN(nbNeurones, "interne");		
 	}
 	
 	/**
@@ -82,13 +63,13 @@ public class Cerveau implements Enregistrable {
 	 * @param sub les infos venant de l'individu
 	 */
 	public Cerveau(String sub) {
-		this.nbInput=decodeNbNeurones("inputs", sub);
-		this.nbOutput=decodeNbNeurones("outputs", sub);
-		this.nbNeurones=decodeNbNeurones("interne", sub);
+		int nbInput=decodeNbNeurones("inputs", sub);
+		int nbOutput=decodeNbNeurones("outputs", sub);
+		int nbInterne=decodeNbNeurones("interne", sub);
 		//initialisation des listes
 		listeInput=initListN(nbInput, "input");
 		listeOutput=initListN(nbOutput, "output");
-		listeNeurones=initListN(nbNeurones, "interne");		
+		listeInterne=initListN(nbInterne, "interne");		
 		//chercher les connexions et les ajouter
 		int i=0;
 		int begin=sub.indexOf("\"connexion", i);
@@ -172,27 +153,27 @@ public class Cerveau implements Enregistrable {
 	//getteurs
 	
 	/**
-	 * getteur pour nbInput
+	 * getteur pour le nombre de neurones d'entree
 	 * @return
 	 */
 	public int getNbInput() {
-		return nbInput;
+		return listeInput.length;
 	}
 
 	/**
-	 * getteur pour nbOutput
+	 * getteur pour le nombre de neurones de sorties
 	 * @return
 	 */
 	public int getNbOutput() {
-		return nbOutput;
+		return listeOutput.length;
 	}
 
 	/**
-	 * getteur pour nbNeurones
+	 * getteur pour le nombre de neurones internes
 	 * @return
 	 */
-	public int getNbNeurones() {
-		return nbNeurones;
+	public int getNbInterne() {
+		return listeInterne.length;
 	}
 	
 	/**
@@ -215,8 +196,8 @@ public class Cerveau implements Enregistrable {
 	 * getteur pour listeNeurones
 	 * @return
 	 */
-	public Neurone[] getListeNeurones() {
-		return listeNeurones;
+	public Neurone[] getListeInterne() {
+		return listeInterne;
 	}
 
 	/**
@@ -242,7 +223,7 @@ public class Cerveau implements Enregistrable {
 			return listeOutput[position];
 		}
 		else if (type.equals("interne")) {
-			return listeNeurones[position];
+			return listeInterne[position];
 		}
 		else {
 			System.err.println("j'ai merde : " + type + "a passe les mailles du filet");
@@ -274,13 +255,13 @@ public class Cerveau implements Enregistrable {
 			listeConnexions.getElement(i).transitionIn();
 		}
 		//on vide les neurones
-		for (int i=0; i<nbNeurones; i++) {
-			listeNeurones[i].resetPuissance();
+		for (int i=0; i<listeInterne.length; i++) {
+			listeInterne[i].resetPuissance();
 		}
-		for (int i=0; i<nbInput; i++) {
+		for (int i=0; i<listeInput.length; i++) {
 			listeInput[i].resetPuissance();
 		}		
-		for (int i=0; i<nbOutput; i++) {
+		for (int i=0; i<listeOutput.length; i++) {
 			listeOutput[i].resetPuissance();
 		}
 		//on reparcours les connextions
@@ -338,9 +319,9 @@ public class Cerveau implements Enregistrable {
 	 */
 	public Cerveau replique() {
 		Cerveau c=new Cerveau(
-				this.nbInput, 
-				this.nbOutput, 
-				this.nbNeurones);
+				this.listeInput.length, 
+				this.listeOutput.length, 
+				this.listeInterne.length);
 		Connexion i=this.listeConnexions.getSuivant();
 		while (i!=null) {
 			c.addConnexion(i);
@@ -365,7 +346,7 @@ public class Cerveau implements Enregistrable {
 		StringBuilder build=new StringBuilder(listeConnexions.getLongueur()*100);
 		build.append("{\"inputs\":{");
 		//les connexions venant des input
-		for (int i=0; i<nbInput; i++) {
+		for (int i=0; i<listeInput.length; i++) {
 			build.append("\"Neurone" + i + "\":{");
 			while(c!=null && 
 					c.getOrigine().getType().equals("input") && 
@@ -378,14 +359,14 @@ public class Cerveau implements Enregistrable {
 					build.append(",");
 			}
 			build.append("}");
-			if(i!=nbInput-1) {
+			if(i!=listeInput.length-1) {
 				build.append(",");
 			}
 		}
 		build.append("},");
 		//les connexions venant de l'interieur
 		build.append("\"interne\":{");
-		for (int i=0; i<nbNeurones; i++) {
+		for (int i=0; i<listeInterne.length; i++) {
 			build.append("\"Neurone" + i + "\":{");
 			while(c!=null && 
 					c.getOrigine().getType().equals("interne") && 
@@ -398,14 +379,14 @@ public class Cerveau implements Enregistrable {
 					build.append(",");
 			}
 			build.append("}");
-			if(i!=nbNeurones-1) {
+			if(i!=listeInterne.length-1) {
 				build.append(",");
 			}
 		}
 		build.append("},");
 		//les connexions venant des outputs
 		build.append("\"outputs\":{");
-		for (int i=0; i<nbOutput; i++) {
+		for (int i=0; i<listeOutput.length; i++) {
 			build.append("\"Neurone" + i + "\":{");
 			while(c!=null && 
 					c.getOrigine().getType().equals("output") && 
@@ -418,7 +399,7 @@ public class Cerveau implements Enregistrable {
 					build.append(",");
 			}
 			build.append("}");
-			if(i!=nbOutput-1) {
+			if(i!=listeOutput.length-1) {
 				build.append(",");
 			}
 		}
@@ -435,11 +416,21 @@ public class Cerveau implements Enregistrable {
 	 */
 	private void toBytePartiel(String type, ByteBuffer b) {
 		Connexion connexion=listeConnexions.getActuel();
-		if (type.equals("input")) b.put((byte) 1);
-		else if (type.equals("interne")) b.put((byte) 2);
-		else b.put((byte) 3);
+		int nb;
+		if (type.equals("input")) {
+			b.put((byte) 1);
+			nb=listeInput.length;
+		}
+		else if (type.equals("interne")) {
+			b.put((byte) 2);
+			nb=listeInterne.length;
+		}
+		else {
+			b.put((byte) 3);
+			nb=listeOutput.length;
+		}
 		//pour chaque connexions
-		for(int i=0; i<nbInput; i++) {
+		for(int i=0; i<nb; i++) {
 			b.putShort((short) i);
 			//si l'entree est bonne
 			while( connexion!=null 
@@ -456,15 +447,10 @@ public class Cerveau implements Enregistrable {
 	 */
 	public byte[] toByte() {
 		//le ByteBuffer dans toute sa longueur
-		ByteBuffer b=ByteBuffer.allocate(3 + 2*(nbInput+nbOutput+nbNeurones) + 11*listeConnexions.getLongueur());
-		//expression lambda pour trier la liste
-		Carracteristique<Connexion> carracteristique= elt ->{
-			if(elt.getOrigine().getType().equals("input")) return elt.getOrigine().getNumero();
-			if(elt.getOrigine().getType().equals("interne")) return elt.getOrigine().getNumero() + this.nbInput;
-			else return this.nbInput + this.nbNeurones + elt.getOrigine().getNumero();
-		};
+		ByteBuffer b=ByteBuffer.allocate(toByteLongueur());
 		//tri de la liste
-		listeConnexions.triRapide(carracteristique);
+		triConnexions();
+		//preparation du parcours
 		listeConnexions.resetParcours();
 		listeConnexions.getSuivant();
 		//remplissage du ByteBuffer
@@ -483,7 +469,7 @@ public class Cerveau implements Enregistrable {
 	 * @return 3 + 2*(nbInput+nbOutput+nbNeurones) + 11*listeConnexions.getLongueur()
 	 */
 	public int toByteLongueur() {
-		return 3 + 2*(nbInput+nbOutput+nbNeurones) + 11*listeConnexions.getLongueur();
+		return 3 + 2*(listeInput.length+listeOutput.length+listeInterne.length) + 11*listeConnexions.getLongueur();
 	}
 
 
@@ -499,10 +485,10 @@ public class Cerveau implements Enregistrable {
 				return elt.getOrigine().getNumero();
 			}
 			else if(elt.getOrigine().getType().equals("interne")) {
-				return nbInput + elt.getOrigine().getNumero();
+				return listeInput.length + elt.getOrigine().getNumero();
 			}
 			else {
-				return nbInput + nbNeurones + elt.getOrigine().getNumero();
+				return listeInput.length + listeInterne.length + elt.getOrigine().getNumero();
 			}
 		};
 		listeConnexions.triRapide(car);
@@ -520,9 +506,9 @@ public class Cerveau implements Enregistrable {
 		if (getClass() != obj.getClass())
 			return false;
 		Cerveau other = (Cerveau) obj;
-		if (nbInput!=other.nbInput 
-				|| nbOutput!=other.nbOutput 
-				|| nbNeurones!=other.nbNeurones) {
+		if (listeInput.length!=other.listeInput.length 
+				|| listeOutput.length!=other.listeOutput.length 
+				|| listeInterne.length!=other.listeInterne.length) {
 			return false;
 		}
 		return listeConnexions.equals(other.listeConnexions);

@@ -55,7 +55,7 @@ public class EnfantSexe extends Individu{
 	 * @return un cerveau issu de la fusion des deux cerveaux precents
 	 */
 	private Cerveau fusion(Cerveau c1, Cerveau c2) {
-		Cerveau c=new Cerveau(c1.getNbInput(), c1.getNbOutput(), c1.getNbNeurones());
+		Cerveau c=new Cerveau(c1.getNbInput(), c1.getNbOutput(), c1.getNbInterne());
 		//fonction locale de clonage pour dupliquer sans risque les listes
 		ListeChaine<Connexion> l1=duplique(c1.getListeConnexions());
 		ListeChaine<Connexion> l2=duplique(c2.getListeConnexions());

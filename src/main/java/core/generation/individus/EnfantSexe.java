@@ -1,5 +1,7 @@
 package core.generation.individus;
 
+import java.nio.ByteBuffer;
+
 import core.generation.individus.cerveau.Cerveau;
 import core.generation.individus.cerveau.Connexion;
 import core.generation.individus.cerveau.Neurone;
@@ -41,6 +43,17 @@ public class EnfantSexe extends Individu{
 		this.idParent2 = parent2.getId();
 		this.generation=parent1.generation+1;
 		this.cerveau=mutation.evolution(fusion(parent1.cerveau, parent2.cerveau));
+	}
+	
+	
+	//constructeur pour un enfant a partir d'un fichier binaire
+	public EnfantSexe(ByteBuffer bb) {
+		this.id=bb.getInt();
+		this.idParent1=bb.getInt();
+		this.idParent2=bb.getInt();
+		this.generation=bb.getInt();
+		this.score=bb.getFloat();
+		this.cerveau=new Cerveau(bb);
 	}
 	
 	//----------------------------------------------------------------------
@@ -191,6 +204,24 @@ public class EnfantSexe extends Individu{
 		+ "\"parent1\":" + idParent1 + ","
 		+ "\"parent2\":" + idParent2 + ","
 		+ super.toStringJson();
+	}
+
+	@Override
+	public byte[] toByte() {
+		ByteBuffer bb=ByteBuffer.allocate(toByteLongueur());
+		bb.put((byte) 3);//3 pour cloneMute
+		bb.putInt(id);
+		bb.putInt(idParent1);
+		bb.putInt(idParent2);
+		bb.putInt(generation);
+		bb.putFloat(score);
+		bb.put(cerveau.toByte());
+		return bb.array();
+	}
+
+	@Override
+	public int toByteLongueur() {
+		return 21 + cerveau.toByteLongueur();
 	}
 	
 }

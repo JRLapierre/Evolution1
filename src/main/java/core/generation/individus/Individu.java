@@ -1,5 +1,7 @@
 package core.generation.individus;
 
+import java.nio.ByteBuffer;
+
 import core.Enregistrable;
 import core.generation.individus.cerveau.Cerveau;
 import core.generation.individus.mutations.Mutation;
@@ -7,12 +9,13 @@ import outils.Aleatoire;
 
 /**
  * cette classe représente un individu.
- * l'invidu peut etre de quatre types : 
+ * l'invidu peut etre de cinq types : 
  * - original, créé depuis la racine pour servir de base à tout le reste
  * - les clones parfait, copies parfaites de leur parents
  * - les clones mutés, copies avec quelques mutations de leur parents
  * - les enfants de reproduction sexuée, qui mélange les carractéristiques
  * de leurs parents et qui ont en plus quelques mutations
+ * - les sauvegarde, qui sont des individus simplifies pour reprendre depuis une sauvegarde.
  * 
  * 
  * @author jrl
@@ -36,7 +39,7 @@ public abstract class Individu implements Enregistrable {
 	/**
 	 * l'identifiant de l'individu
 	 */
-	private int id;
+	protected int id;
 	
 	/**
 	 * le nombre d'individus
@@ -54,9 +57,9 @@ public abstract class Individu implements Enregistrable {
 	protected static Mutation mutation;
 	
 	/**
-	 * le score pour evaluer la
+	 * le score pour evaluer la performance
 	 */
-	private float score=0;
+	protected float score=0;
 	
 	//-------------------------------------------------------------------------------
 	//constructeurs
@@ -87,6 +90,29 @@ public abstract class Individu implements Enregistrable {
 		this.cerveau=new Cerveau(sub);
 		if(this.id+1>nbIndividus) {
 			Individu.nbIndividus=id+1;
+		}
+	}
+	
+	//----------------------------------------------------------------------
+	//"constructeur"
+	
+	//fonction statique qui genere un individu
+	public static Individu regenereIndividu(ByteBuffer bb) {
+		byte type=bb.get();
+		switch(type) {
+		case(0):
+			return new Original(bb);
+		case(1):
+			return new CloneParfait(bb);
+		case(2):
+			return new CloneMute(bb);
+		case(3):
+			return new EnfantSexe(bb);
+		case(4):
+			return new Sauvegarde(bb);
+		default:
+			System.err.println("type inconu");
+			return null;
 		}
 	}
 	
@@ -149,7 +175,7 @@ public abstract class Individu implements Enregistrable {
 	}
 	
 	//-------------------------------------------------------------------------------
-	//fonction d'affichage
+	//fonction de l'interface Enregistrable
 	
 	/**
 	 * fonction toStringJson incomplete qui reclamme une sous classe

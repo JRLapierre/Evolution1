@@ -20,8 +20,8 @@ public interface Enregistrable {
 	 * format d'enregistrement : 
 	 * 
 	 * pour les individus : 
+	 * type d'individu : byte (0 Original, 1 CloneParfait, 2 CloneMute, 3 EnfantSexe, 4 sauvegarde
 	 * id : int
-	 * type d'individu : byte
 	 * parent (0, 1 ou 2 selon le type) : int
 	 * generation : int
 	 * score : float
@@ -39,6 +39,11 @@ public interface Enregistrable {
 	 * 				type : byte
 	 * 				numero : short 
 	 * 
+	 * Generation : 
+	 * nbClonesParfaits : int
+	 * nbClonesMutes : int
+	 * nbEnfantsSexe : int
+	 * butoir : int
 	 * Pour les mutations :
 	 * graine : int
 	 * tauxCreation : byte

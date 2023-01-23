@@ -1,5 +1,8 @@
 package core.generation.individus;
 
+import java.nio.ByteBuffer;
+
+import core.generation.individus.cerveau.Cerveau;
 import core.generation.individus.mutations.Mutation;
 import outils.Aleatoire;
 
@@ -31,11 +34,41 @@ public class Sauvegarde extends Individu {
 	}
 	
 	
+	/**
+	 * constructeur pour creer un individu sauvegarde a partir de binaire
+	 * @param bb
+	 */
+	public Sauvegarde(ByteBuffer bb) {
+		this.id=bb.getInt();
+		this.generation=bb.getInt();
+		this.score=bb.getFloat();
+		this.cerveau=new Cerveau(bb);
+	}
+	
+	
 	@Override
 	public String toStringJson() {
 		return "{\"individu" + this.getId() + "\":{"
 		+ "\"type\":\"sauvegarde\","
 		+ super.toStringJson();
+	}
+
+
+	@Override
+	public byte[] toByte() {
+		ByteBuffer bb=ByteBuffer.allocate(toByteLongueur());
+		bb.put((byte) 4);//4 pour sauvegarde
+		bb.putInt(this.id);
+		bb.putInt(generation);
+		bb.putFloat(score);
+		bb.put(cerveau.toByte());
+		return bb.array();
+	}
+
+
+	@Override
+	public int toByteLongueur() {
+		return 13 + cerveau.toByteLongueur();
 	}
 	
 }

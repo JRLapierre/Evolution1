@@ -2,6 +2,8 @@ package core.generation.individus;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.nio.ByteBuffer;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -179,6 +181,38 @@ class TestIndividu {
 		assertEquals(2, individu.getGeneration());
 		assertEquals(50, individu.getScore());
 		System.out.println(individu.toStringJson());
+	}
+	
+	@Test
+	@DisplayName("test du toByte et de la reconstruction")
+	void testToByte() {
+		Individu individu0=new Original(c , 0 , new Mutation(0, 15, 15, 50, 0.5f, 15));
+		Individu individu1=new CloneParfait(individu0);
+		Individu individu2=new CloneMute(individu0);
+		Individu individu3=new EnfantSexe(individu1, individu2);
+		Individu individu4=new Sauvegarde("{\"individu102\":{\"type\":\"CloneParfait\",\"parent\":1,\"id\":102,\"generation\":2,\"score\":50.0,\"cerveau\":{\"inputs\":{\"Neurone0\":{}},\"interne\":{\"Neurone0\":{},\"Neurone1\":{},\"Neurone2\":{},\"Neurone3\":{\"connexion0\":{\"id\":0,\"facteur\":-1.3322587,\"origine\":{\"type\":\"interne\",\"numero\":3},\"cible\":{\"type\":\"input\",\"numero\":0}}},\"Neurone4\":{}},\"outputs\":{\"Neurone0\":{}}}}}", 0, null);
+		
+		ByteBuffer bb0=ByteBuffer.allocate(individu0.toByteLongueur());
+		bb0.put(individu0.toByte());
+		bb0.flip();
+		ByteBuffer bb1=ByteBuffer.allocate(individu1.toByteLongueur());
+		bb1.put(individu1.toByte());
+		bb1.flip();
+		ByteBuffer bb2=ByteBuffer.allocate(individu2.toByteLongueur());
+		bb2.put(individu2.toByte());
+		bb2.flip();
+		ByteBuffer bb3=ByteBuffer.allocate(individu3.toByteLongueur());
+		bb3.put(individu3.toByte());
+		bb3.flip();
+		ByteBuffer bb4=ByteBuffer.allocate(individu4.toByteLongueur());
+		bb4.put(individu4.toByte());
+		bb4.flip();
+		
+		assertEquals(Individu.regenereIndividu(bb0).toStringJson(), individu0.toStringJson());
+		assertEquals(Individu.regenereIndividu(bb1).toStringJson(), individu1.toStringJson());
+		assertEquals(Individu.regenereIndividu(bb2).toStringJson(), individu2.toStringJson());
+		assertEquals(Individu.regenereIndividu(bb3).toStringJson(), individu3.toStringJson());
+		assertEquals(Individu.regenereIndividu(bb4).toStringJson(), individu4.toStringJson());
 	}
 
 }

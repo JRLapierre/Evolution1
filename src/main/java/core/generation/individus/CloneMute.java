@@ -1,5 +1,9 @@
 package core.generation.individus;
 
+import java.nio.ByteBuffer;
+
+import core.generation.individus.cerveau.Cerveau;
+
 /**
  * classe qui représente un clone avec quelques mutations
  * @author jrl
@@ -30,6 +34,19 @@ public class CloneMute extends Individu{
 		this.cerveau=mutation.evolution(parent.cerveau.replique());
 	}
 	
+	
+	/**
+	 * constructeur pour un cloneMute a partir d'un ByteBuffer binaire
+	 * @param bb
+	 */
+	public CloneMute(ByteBuffer bb) {
+		this.id=bb.getInt();
+		this.idParent=bb.getInt();
+		this.generation=bb.getInt();
+		this.score=bb.getFloat();
+		this.cerveau=new Cerveau(bb);
+	}
+	
 	//-------------------------------------------------------------------------------
 	//fonctions d'affichage
 	
@@ -42,6 +59,23 @@ public class CloneMute extends Individu{
 		+ "\"type\":\"CloneMute\","
 		+ "\"parent\":" + idParent + ","
 		+ super.toStringJson();
+	}
+
+	@Override
+	public byte[] toByte() {
+		ByteBuffer bb=ByteBuffer.allocate(toByteLongueur());
+		bb.put((byte) 2);//2 pour cloneMute
+		bb.putInt(id);
+		bb.putInt(idParent);
+		bb.putInt(generation);
+		bb.putFloat(score);
+		bb.put(cerveau.toByte());
+		return bb.array();
+	}
+
+	@Override
+	public int toByteLongueur() {
+		return 17 + cerveau.toByteLongueur();
 	}
 	
 	

@@ -1,5 +1,7 @@
 package core.generation.individus;
 
+import java.nio.ByteBuffer;
+
 import core.generation.individus.cerveau.Cerveau;
 import core.generation.individus.mutations.Mutation;
 import outils.Aleatoire;
@@ -27,6 +29,17 @@ public class Original extends Individu{
 	}
 	
 	/**
+	 * constructeur pour un individu originan a partir de bin
+	 * @param bb le ByteBuffer duquel on extrait les infos
+	 */
+	public Original(ByteBuffer bb) {
+		this.id=bb.getInt();
+		this.generation=bb.getInt();
+		this.score=bb.getFloat();
+		this.cerveau=new Cerveau(bb);
+	}
+	
+	/**
 	 * fonction toStringJson pour les individus originaux
 	 */
 	@Override
@@ -34,6 +47,22 @@ public class Original extends Individu{
 		return "{\"individu" + this.getId() + "\":{"
 		+ "\"type\":\"original\","
 		+ super.toStringJson();
+	}
+
+	@Override
+	public byte[] toByte() {
+		ByteBuffer bb=ByteBuffer.allocate(toByteLongueur());
+		bb.put((byte) 0);//0 pour original
+		bb.putInt(this.id);
+		bb.putInt(generation);
+		bb.putFloat(score);
+		bb.put(cerveau.toByte());
+		return bb.array();
+	}
+
+	@Override
+	public int toByteLongueur() {
+		return 13 + this.cerveau.toByteLongueur();
 	}
 
 }

@@ -19,7 +19,7 @@ class TestGeneration {
 	//fonctions pratiques
 	
 	private Epreuve e1() {
-		Epreuve epreuve=population -> {
+		return population -> {
 			for (int j=0; j<population.length; j++) {
 				for(int i=0; i<10; i++) {
 					population[j].getCerveau().getListeInput()[0].setPuissance(1);
@@ -30,7 +30,6 @@ class TestGeneration {
 				population[j].updateScore(-population[j].getCerveau().getPertes());
 			}
 		};
-		return epreuve;
 	}
 	
 	private Generation type01() {
@@ -38,7 +37,7 @@ class TestGeneration {
 		c.addConnexion(new Connexion(2, c.getListeInput()[0], c.getListeOutput()[0]));
 		Mutation m=new Mutation(0, 0, 0, 0, 0, 0);
 		Individu i=new Original(c, 0, m);
-		return new Generation(i, 0, 0, 1, 100, e1(), "0");
+		return new Generation(i, 0, 0, 1, 100, e1(), "0.1");
 	}
 	
 	private Generation type02() {
@@ -46,7 +45,15 @@ class TestGeneration {
 		c.addConnexion(new Connexion(2, c.getListeInput()[0], c.getListeOutput()[0]));
 		Mutation m=new Mutation(0, 100, 0, 50, 100, 0);
 		Individu i=new Original(c, 0, m);
-		return new Generation(i, 1, 1, 1, 100, e1(), "0");//devrait yavoir 3 individus
+		return new Generation(i, 1, 1, 1, 100, e1(), "0.2");//devrait yavoir 3 individus
+	}
+	
+	private Generation type03() {
+		Cerveau c=new Cerveau(1, 1, 5);
+		c.addConnexion(new Connexion(2, c.getListeInput()[0], c.getListeOutput()[0]));
+		Mutation m=new Mutation(0, 100, 0, 50, 100, 0);
+		Individu i=new Original(c, 0, m);
+		return new Generation(i, 1, 1, 1, 100, e1(), "0.3");//devrait yavoir 3 individus
 	}
 	
 	//-------------------------------------------------------------------------------------------
@@ -56,7 +63,7 @@ class TestGeneration {
 	@DisplayName("test des fonctions de bases")
 	void testBases() {
 		Generation g1=type01();
-		g1.enregistreGeneration();
+		g1.enregistreGeneration("json");
 		
 		assertEquals(70, g1.getPopulation()[0].getScore());
 		
@@ -66,21 +73,21 @@ class TestGeneration {
 	@DisplayName("test de plusieurs generations")
 	void testGenerations() {
 		Generation g2=type02();
-		g2.enregistreGeneration();
+		g2.enregistreGeneration("json");
 		System.out.println( g2.toStringJson());
 		g2.nextGen();
-		g2.enregistreGeneration();
+		g2.enregistreGeneration("json");
 		System.out.println( g2.toStringJson());
 	}
 	
 	@Test
-	@DisplayName("test du decodeur")
-	void testDecodeur() {
+	@DisplayName("test du decodeur json")
+	void testDecodeurJson() {
 		try {
-			Generation g=new Generation("1", 100, e1());
+			Generation g=new Generation("1", 100, "json", e1());
 			g.nextGen();
 			for(int i=0; i<10; i++) {
-				g.enregistreGeneration();
+				g.enregistreGeneration("json");
 				g.nextGen();
 			}
 		} catch (IOException e) {
@@ -88,6 +95,24 @@ class TestGeneration {
 			fail();
 		}
 
+	}
+	
+	@Test
+	@DisplayName("test du decodeur binaire")
+	void testDecodeurBin() {
+		Generation g1=type03();
+		g1.enregistreGeneration("bin");
+		g1.nextGen();
+		g1.enregistreInfos("bin");
+		try {
+			Generation g2=new Generation("0.3", 1, "bin", e1());
+			g2.nextGen();
+			g2.enregistreGeneration("bin");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail();
+		}
 	}
 
 }

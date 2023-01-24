@@ -28,9 +28,22 @@ public class SimulationEnregistree {
 	private static String nomSimulation="2P4";
 	
 	/**
+	 * le format des fichiers a recuperer.
+	 * Dans la situation actuelle, on a le choix entre json et bin.
+	 */
+	private static String typeFichiers="json";
+	
+	
+	/**
+	 * le format des fichiers a enregistrer.
+	 * Dans la situation actuelle, on a le choix entre json et bin.
+	 */
+	private static String typeEnregistrements="bin";
+	
+	/**
 	 * le numero de la generation a laquelle on va reprendre la simulation
 	 */
-	private static int generationInitiale=40000;
+	private static int generationInitiale=50000;
 	
 	/**
 	 * le nombre de generations a simuler.
@@ -42,7 +55,7 @@ public class SimulationEnregistree {
 	 * Une generation va etre enregistree si son numero % enregistre == 0.
 	 * avec une valeur de 1, toutes les generations vont etre enregistrees.
 	 */
-	private static int enregistre=100;
+	private static int enregistre=1;
 	
 	/**
 	 * fonction lambda. 
@@ -80,7 +93,7 @@ public class SimulationEnregistree {
 		//g.setNbClonesMutes(50);
 		//g.setNbClonesParfaits(25);
 		//g.setNbEnfantsSexe(25);
-		g.enregistreInfos();
+		g.enregistreInfos("bin");
 	}
 	
 	
@@ -109,7 +122,7 @@ public class SimulationEnregistree {
     		    	return;
     		    }
     		}
-		    input.close();
+    		input.close();
     	}
     	else {
     		System.out.println("le dossier cherche n'existe pas. verifiez le nom de la "
@@ -118,12 +131,12 @@ public class SimulationEnregistree {
     	}
     	Generation generation;
 		try {
-			generation = new Generation(nomSimulation, generationInitiale, epreuve);
+			generation = new Generation(nomSimulation, generationInitiale, typeFichiers, epreuve);
 			changeParametres(generation);
 			//on fait tourner la simulation pour nbGenerations
 			for(int i=0; i<=nbGenerations; i++) {
 				System.out.println("generation " + (generationInitiale + i));
-				if((generationInitiale + i)%enregistre==0 && i!=0) generation.enregistreGeneration();
+				if((generationInitiale + i)%enregistre==0 && i!=0) generation.enregistreGeneration(typeEnregistrements);
 				generation.nextGen();
 			}
 			System.out.println("fait");

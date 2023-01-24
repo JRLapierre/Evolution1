@@ -1,8 +1,10 @@
 package core.generation;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -108,16 +110,44 @@ public class Generation implements Enregistrable {
 	/**
 	 * constructeur pour recreer une generation a partir de fichiers
 	 * @param nomSimulation le nom de la simulation a restaurer
-	 * @param generation la generation d'ou reprendre la simulation
+	 * @param numero la generation d'ou reprendre la simulation
+	 * @param format bin ou json
+	 * @param epreuve l'epreuve
 	 * @throws IOException 
 	 */
-	public Generation(String nomSimulation, int numero, Epreuve epreuve) throws IOException {
+	public Generation(String nomSimulation, int numero, String format, Epreuve epreuve) throws IOException {
+		this.nomSimulation=nomSimulation;
+		switch(format) {
+		case("json"):
+			decodeJson(nomSimulation, numero);
+			break;
+		case("bin"):
+			decodeBin(nomSimulation, numero);
+			break;
+		default:
+			System.err.println("le format n'existe pas");
+		}
+		this.epreuve=epreuve;
+		evaluation();
+		triScore(population);
+	}
+	
+	
+	
+	//----------------------------------------------------------------------------------------
+	//decodeurs
+	
+	/**
+	 * decodeur pour le format json
+	 * @param nomSimulation
+	 * @param numero
+	 * @throws IOException
+	 */
+	private void decodeJson(String nomSimulation, int numero) throws IOException {
 		//recherche de la simulation et de la generation en accedant aux fichiers
 		String path="enregistrements/simulation"+nomSimulation+"/";
-		//fichiers de la generation
+		//fichier de la generation
 		String sim = Files.readString(Paths.get(path+"infos.json"));
-		this.epreuve=epreuve;
-		this.nomSimulation=sim.substring(18, sim.indexOf("\",\"nbClonesParfaits\""));
 		this.nbClonesParfaits=Integer.parseInt(sim.substring(
 				sim.indexOf("\"nbClonesParfaits\":")+19, 
 				sim.indexOf(",\"nbClonesMutes\"")));
@@ -146,9 +176,43 @@ public class Generation implements Enregistrable {
 			this.population[i]=new Sauvegarde(content, graine,
 					new Mutation(sim.substring(sim.indexOf("\"mutations\":")+12)));
 		}
-		evaluation();
-		triScore(population);
 	}
+	
+	
+	//decodeur pour le format bin
+	private void decodeBin(String nomSimulation, int numero) throws IOException {
+		//recherche de la simulation et de la generation en accedant aux fichiers
+		String path="enregistrements/simulation"+nomSimulation+"/";
+		//fichier de la generation
+		byte[] sim = Files.readAllBytes(Paths.get(path+"infos.bin"));
+		ByteBuffer bb;
+		bb=ByteBuffer.allocate(sim.length);
+		bb.put(sim);
+		//recuperation des donnees de la generation
+		bb.flip();
+		this.nbClonesParfaits=bb.getInt();
+		this.nbClonesMutes=bb.getInt();
+		this.nbEnfantsSexe=bb.getInt();
+		this.nbIndividus=nbClonesParfaits + nbClonesMutes + nbEnfantsSexe;
+		this.butoir=bb.getInt();
+		this.population=new Individu[nbIndividus];
+		//regeneration des mutations
+		Individu.setMutation(new Mutation(bb));
+		//generation des individus sauvegardes
+		byte[] contenu;
+		File[] fichiers=new File(path + "generation"+numero+"/").listFiles();
+		//la population
+		for(int i=0; i<fichiers.length; i++) {
+			//chercher le fichier en question
+			contenu=Files.readAllBytes(Paths.get(
+					path + "generation" + numero + "/" + fichiers[i].getName()));
+			bb=ByteBuffer.allocate(contenu.length);
+			bb.put(contenu);
+			bb.flip();
+			this.population[i]=Individu.regenereIndividu(bb);
+		}
+	}
+	
 	
 	//----------------------------------------------------------------------------------------
 	//fonction de changement de generation
@@ -301,26 +365,52 @@ public class Generation implements Enregistrable {
 		+"}";
 	}
 	
+	
+	public byte[] toByte() {
+		ByteBuffer bb=ByteBuffer.allocate(toByteLongueur());
+		bb.putInt(nbClonesParfaits);
+		bb.putInt(nbClonesMutes);
+		bb.putInt(nbEnfantsSexe);
+		bb.putInt(butoir);
+		return bb.array();
+	}
+	
+	
+	public int toByteLongueur() {
+		return 16 + 12;//12 pour mutation
+	}
+	
 	//-------------------------------------------------------------------------------------------
 	//fonctions d'enregistrements
 	
 	/**
 	 * une fonction separee pour enregistrer des infos sur la simulation
+	 * @param format bin ou json
 	 */
-	public void enregistreInfos() {
+	public void enregistreInfos(String format) {
 		//creer un fichier generation info
         try {
         	//si le dossier n'existe pas on le créé
         	File f=new File("enregistrements\\simulation" + nomSimulation
         			+ "\\generation" + population[0].getGeneration() + "\\");
         	f.mkdirs();
-            PrintWriter writer = new PrintWriter(
-            		"enregistrements\\simulation" + nomSimulation
-            		+ "\\infos.json");
-            writer.write(this.toStringJson());
-            
-            writer.flush();
-            writer.close();
+        	String path="enregistrements\\simulation" + nomSimulation + "\\infos." + format;
+            switch(format) {
+            case("bin"):
+            	FileOutputStream fos = new FileOutputStream(path);
+            	fos.write(this.toByte());
+            	fos.flush();
+            	fos.close();
+            	break;
+            case("json"):
+                PrintWriter writer = new PrintWriter(path);
+            	writer.write(this.toStringJson());
+                writer.flush();
+                writer.close();
+                break;
+            default:
+            	System.err.println("type de document inconnu");
+            }
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -330,26 +420,43 @@ public class Generation implements Enregistrable {
 	
 	/**
 	 * fonction pour enregistrer toute une generation dans des fichiers au format json.
+	 * @param format bin ou json
 	 */
-	public void enregistreGeneration() {
+	public void enregistreGeneration(String format) {
         try {
         	//si le dossier n'existe pas on le créé
         	File f=new File("enregistrements\\simulation" + nomSimulation
         			+ "\\generation" + population[0].getGeneration() + "\\");
         	f.mkdirs();
-
-            for (int i=0; i<nbIndividus; i++) {
-            	PrintWriter writer2 = new PrintWriter(
-                		"enregistrements\\simulation" + nomSimulation
-                		+ "\\generation" + population[i].getGeneration()
-                		+ "\\individu" + population[i].getId() + ".json");
-                writer2.write(population[i].toStringJson());
-                writer2.flush();
-                writer2.close();
-            }
+        	String path="enregistrements\\simulation" + nomSimulation
+            		+ "\\generation" + population[0].getGeneration() + "\\individu";
+        	switch(format) {
+        	case("bin"):
+                for (int i=0; i<nbIndividus; i++) {
+                	FileOutputStream fos = new FileOutputStream(path + population[i].getId() + "." + format);
+                	fos.write(population[i].toByte());
+                	fos.flush();
+                	fos.close();
+                }
+        		break;
+        	case("json"):
+        		PrintWriter writer;
+                for (int i=0; i<nbIndividus; i++) {
+                	writer = new PrintWriter(path + population[i].getId() + "." + format);
+                    writer.write(population[i].toStringJson());
+                    writer.flush();
+                    writer.close();
+                }
+                break;
+            default:
+            	System.err.println("type de fichier inconnu");
+        	}
+        	
         } catch (Exception e) {
             e.printStackTrace();
         }
 
 	}
+	
+	
 }

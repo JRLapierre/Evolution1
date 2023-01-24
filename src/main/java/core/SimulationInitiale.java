@@ -32,6 +32,13 @@ public class SimulationInitiale {
 	 * le nom de la simulation
 	 */
 	private static String nomSimulation="2P4";
+	
+	
+	/**
+	 * le format d'enregistrement des fichiers. 
+	 * Dans la situation actuelle, on a le choix entre json et bin.
+	 */
+	private static String type="bin";
 		
 	//-----------------------------------------------------------------------------------------
 	//population
@@ -255,10 +262,10 @@ public class SimulationInitiale {
 		    input.close();
     	}
 		//on fait tourner la simulation pour nbGenerations
-    	generation.enregistreInfos();
+    	generation.enregistreInfos(type);
 		for(int i=0; i<nbGenerations; i++) {
 			System.out.println("generation " + i);
-			if(i%enregistre==0) generation.enregistreGeneration();
+			if(i%enregistre==0) generation.enregistreGeneration(type);
 			generation.nextGen();
 		}
 	}

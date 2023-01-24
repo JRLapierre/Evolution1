@@ -7,6 +7,7 @@ import core.generation.individus.cerveau.Cerveau;
 import core.generation.individus.cerveau.Connexion;
 import core.generation.individus.cerveau.Neurone;
 import outils.Aleatoire;
+import outils.ListeChaine;
 
 /**
  * classe pour les main.mutations d'une génération à l'autre.
@@ -235,6 +236,138 @@ public class Mutation implements Enregistrable{
 		ajoutConnexion(cerveau);
 		
 		return cerveau;
+	}
+	
+	
+	
+	/**
+	 * fonction de fusion de deux cerveaux
+	 * @param c1 le cerveau du pere
+	 * @param c2 le cerveau de la mere
+	 * @return un cerveau issu de la fusion des deux cerveaux precents
+	 */
+	public Cerveau evolution(Cerveau c1, Cerveau c2) {
+		Cerveau c=new Cerveau(c1.getNbInput(), c1.getNbOutput(), c1.getNbInterne());
+		//fonction locale de clonage pour dupliquer sans risque les listes
+		ListeChaine<Connexion> l1=duplique(c1.getListeConnexions());
+		ListeChaine<Connexion> l2=duplique(c2.getListeConnexions());
+		
+		//gestion des cas ou l'ID est le même
+		fusionMemeID(c, l1, l2);
+		
+		//gestion des connexions restantes
+		fusionListesConnexion(c, l1, l2);
+		
+		return evolution(c);
+	}
+	
+	
+	/**
+	 * fonction qui duplique de maniere securise une liste de connexion
+	 * @param liste la liste de connexions a dupliquer
+	 * @return la liste duplique
+	 */
+	private ListeChaine<Connexion> duplique(ListeChaine<Connexion> liste) {
+		ListeChaine<Connexion> duplicat=new ListeChaine<>();
+		Connexion c=liste.getSuivant();
+		while (c!=null) {
+			duplicat.ajout(c);
+			c=liste.getSuivant();
+		}
+		return duplicat;
+	}
+
+	
+	/**
+	 * fonction de fusion des connexions avec le même id.
+	 * des parents.
+	 * @param c le cerveau a affecter
+	 * @param liste1 la liste de neurones du cerveau du pere
+	 * @param liste2 la liste de neurones du cerveau de la mere
+	 */
+	private void fusionMemeID(Cerveau c, 
+			ListeChaine<Connexion> liste1, 
+			ListeChaine<Connexion> liste2) {
+		//on declare les connexions
+		Connexion c1;
+		Connexion c2;
+		//premiere boucle
+		c1=liste1.getSuivant();
+		while (c1!=null) {
+			//parcours de liste2
+			c2=liste2.getSuivant();
+			while (c2!=null) {
+				//si l'id est le même
+				if (c1.getId()==c2.getId()) {
+					//fusion et ajout
+					c.addConnexion(fusionConnexion(c1, c2));
+					//suppression des listes
+					liste1.delElt(c1);
+					liste2.delElt(c2);
+				}
+				//iteration
+				c2=liste2.getSuivant();
+			}
+			//iteration
+			c1=liste1.getSuivant();
+		}
+		
+	}
+	
+	
+	
+		
+	/**
+	 * fonction de fusion de deux connexions.
+	 * Choisis aleatoirement les neurones d'origine et de cible entre celles
+	 * des parents et choisis une puissance aleatoire entre les valeurs
+	 * Supprime au passage les elements déja traités dans les listes des parents
+	 * Est utilisé dans fusionMemeID
+	 * @param c1
+	 * @param c2
+	 * @return une connexion fusionnée
+	 */
+	private Connexion fusionConnexion(Connexion c1, Connexion c2) {
+		Neurone origine;
+		Neurone cible;
+		float facteur=(float) aleatoire.aleatDouble(c1.getFacteur(), c2.getFacteur());
+		int n=aleatoire.aleatInt(1);
+		if (n==0) {
+			origine=c1.getOrigine();
+		} else {
+			origine=c2.getOrigine();
+		}
+		n=aleatoire.aleatInt(1);
+		if (n==0) {
+			cible=c1.getCible();
+		} else {
+			cible=c2.getCible();
+		}
+		return new Connexion(facteur, origine, cible, c1.getId());
+	}
+	
+	/**
+	 * fonction d'insertion aleatoire de neurones dans le cerveau
+	 * @param c
+	 * @param liste1
+	 * @param liste2
+	 * @return
+	 */
+	private void fusionListesConnexion(Cerveau c, 
+			ListeChaine<Connexion> liste1, ListeChaine<Connexion> liste2) {
+		//on fait une liste contenant les elements des deux listes
+		ListeChaine<Connexion> liste=new ListeChaine<>();
+		liste.concatene(liste1);
+		liste.concatene(liste2);
+		int n;
+		Connexion con=liste.getSuivant();
+		while (con!=null) {
+			n=aleatoire.aleatInt(1);
+			if (n==1) {
+				c.addConnexion(con);
+			}
+			con=liste.getSuivant();
+		}
 	}
 	
 	//-------------------------------------------------------------------------------

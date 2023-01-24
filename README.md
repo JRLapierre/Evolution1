@@ -14,17 +14,15 @@ J'ai donc decide de creer un projet avec un tracage facile, en enregistrant tout
 creer un graphe qui permet de traquer visuellement les generations  
 mettre la possibilite de mettre en pause  
 faire des fonctions pour traquer les ancetres et les liens de parentee  
-retravailler le toStringJson de Cerveau  
 appliquer du multithreading dans la phase de recuperation des donnees
 appliquer du multithreading dans la phase de reproduction
 appliquer du multithreading dans la phase d'enregistrement
-passer la classe Mutation en static
 
 #### urgent :
 
 #### TODO
-
-
+retravailler le toStringJson de Cerveau  
+enlever l'attribut alea de Individu  
 
 #### trucs a finir si j'en ai le courage
 

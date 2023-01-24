@@ -21,7 +21,6 @@ appliquer du multithreading dans la phase d'enregistrement
 #### urgent :
 
 #### TODO
-retravailler le toStringJson de Cerveau  
 enlever l'attribut alea de Individu  
 
 #### trucs a finir si j'en ai le courage

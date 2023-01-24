@@ -64,8 +64,8 @@ public class Cerveau implements Enregistrable {
 	 */
 	public Cerveau(String sub) {
 		//initialisation des listes
-		listeInput=initListN(decodeNbNeurones("inputs", sub), "input");
-		listeOutput=initListN(decodeNbNeurones("outputs", sub), "output");
+		listeInput=initListN(decodeNbNeurones("input", sub), "input");
+		listeOutput=initListN(decodeNbNeurones("output", sub), "output");
 		listeInterne=initListN(decodeNbNeurones("interne", sub), "interne");		
 		//chercher les connexions et les ajouter
 		int i=0;
@@ -150,18 +150,18 @@ public class Cerveau implements Enregistrable {
 	private int decodeNbNeurones(String type, String sub) {
 		String subsub; //la sous sous chaine de carractere a etudier
 		int i=0;
-		if(type.equals("inputs")) {
+		if(type.equals("input")) {
 			subsub=sub.substring(
 					sub.indexOf(type + "\":{"), 
 					sub.indexOf(",\"interne\":{"));
 		}
-		else if(type.equals("outputs")) {
+		else if(type.equals("output")) {
 			subsub=sub.substring(sub.indexOf(type + "\":{"));
 		}
 		else if(type.equals("interne")) {
 			subsub=sub.substring(
 					sub.indexOf(",\"interne\":{"), 
-					sub.indexOf(",\"outputs\":{"));
+					sub.indexOf(",\"output\":{"));
 		}
 		else {
 			System.err.println("le type " + type + " n'est pas bon");
@@ -360,6 +360,40 @@ public class Cerveau implements Enregistrable {
 	//---------------------------------------------------------------------
 	//fonction d'affichage
 	
+	
+	private void toStringJsonPartiel(StringBuilder build, String type) {
+		Connexion c=listeConnexions.getActuel();
+		int longueur;
+		if (type.equals("input")) {
+			longueur=listeInput.length;
+		}
+		else if (type.equals("interne")) {
+			longueur=listeInterne.length;
+		}
+		else {
+			longueur=listeOutput.length;
+		}
+		build.append("\""+type+"\":{");
+		//les connexions venant des input
+		for (int i=0; i<longueur; i++) {
+			build.append("\"Neurone" + i + "\":{");
+			while(c!=null && 
+					c.getOrigine().getType().equals(type) && 
+					c.getOrigine().getNumero()==i) {
+				build.append(c.toStringJson());
+				c=listeConnexions.getSuivant();
+				if(c!=null && 
+						c.getOrigine().getType().equals(type) && 
+						c.getOrigine().getNumero()==i)
+					build.append(",");
+			}
+			build.append("}");
+			if(i!=longueur-1) {
+				build.append(",");
+			}
+		}
+	}
+	
 	/**
 	 * fonction toStringJson qui affiche un cerveau au format json
 	 * affiche successivement les connexions tries par les neurones
@@ -369,67 +403,17 @@ public class Cerveau implements Enregistrable {
 		//on trie la liste
 		triConnexions();
 		//on parcours sagement la liste
-		Connexion c=listeConnexions.getSuivant();
+		listeConnexions.getSuivant();
 		StringBuilder build=new StringBuilder(listeConnexions.getLongueur()*100);
-		build.append("{\"inputs\":{");
+		build.append("{");
 		//les connexions venant des input
-		for (int i=0; i<listeInput.length; i++) {
-			build.append("\"Neurone" + i + "\":{");
-			while(c!=null && 
-					c.getOrigine().getType().equals("input") && 
-					c.getOrigine().getNumero()==i) {
-				build.append(c.toStringJson());
-				c=listeConnexions.getSuivant();
-				if(c!=null && 
-						c.getOrigine().getType().equals("input") && 
-						c.getOrigine().getNumero()==i)
-					build.append(",");
-			}
-			build.append("}");
-			if(i!=listeInput.length-1) {
-				build.append(",");
-			}
-		}
+		toStringJsonPartiel(build, "input");
 		build.append("},");
 		//les connexions venant de l'interieur
-		build.append("\"interne\":{");
-		for (int i=0; i<listeInterne.length; i++) {
-			build.append("\"Neurone" + i + "\":{");
-			while(c!=null && 
-					c.getOrigine().getType().equals("interne") && 
-					c.getOrigine().getNumero()==i) {
-				build.append(c.toStringJson());
-				c=listeConnexions.getSuivant();
-				if(c!=null && 
-						c.getOrigine().getType().equals("interne") && 
-						c.getOrigine().getNumero()==i)
-					build.append(",");
-			}
-			build.append("}");
-			if(i!=listeInterne.length-1) {
-				build.append(",");
-			}
-		}
+		toStringJsonPartiel(build, "interne");
 		build.append("},");
 		//les connexions venant des outputs
-		build.append("\"outputs\":{");
-		for (int i=0; i<listeOutput.length; i++) {
-			build.append("\"Neurone" + i + "\":{");
-			while(c!=null && 
-					c.getOrigine().getType().equals("output") && 
-					c.getOrigine().getNumero()==i) {
-				build.append(c.toStringJson());
-				c=listeConnexions.getSuivant();
-				if(c!=null && 
-						c.getOrigine().getType().equals("output") && 
-						c.getOrigine().getNumero()==i)
-					build.append(",");
-			}
-			build.append("}");
-			if(i!=listeOutput.length-1) {
-				build.append(",");
-			}
-		}
+		toStringJsonPartiel(build, "output");
 		build.append("}}");
 		return build.toString();
 	}
@@ -439,27 +423,24 @@ public class Cerveau implements Enregistrable {
 	 * fonction pour aider au toByte
 	 * @param type
 	 * @param connexion
-	 * @param b
+	 * @param bb
 	 */
-	private void toBytePartiel(String type, ByteBuffer b) {
+	private void toBytePartiel(String type, ByteBuffer bb) {
 		Connexion connexion=listeConnexions.getActuel();
 		int longueur;
 		short nbConnexions;
 		if (type.equals("input")) {
-			b.put((byte) 1);
 			longueur=listeInput.length;
 		}
 		else if (type.equals("interne")) {
-			b.put((byte) 2);
 			longueur=listeInterne.length;
 		}
 		else {
-			b.put((byte) 3);
 			longueur=listeOutput.length;
 		}
 		//pour chaque neurone
 		for(int i=0; i<longueur; i++) {
-			b.putShort((short) i);
+			bb.putShort((short) i);
 			//determiner le nombre de connexions partant de cette neurone
 			nbConnexions=0;
 			while( connexion!=null 
@@ -472,12 +453,12 @@ public class Cerveau implements Enregistrable {
 			for(int j=0; j<nbConnexions; j++) {
 				connexion=listeConnexions.getPrecedent();
 			}
-			b.putShort(nbConnexions);
+			bb.putShort(nbConnexions);
 			//si il y a des connexions partant de cette neurone
 			while( connexion!=null 
 					&& connexion.getOrigine().getType().equals(type) 
 					&& connexion.getOrigine().getNumero()==i) {
-				b.put(connexion.toByte());
+				bb.put(connexion.toByte());
 				connexion=listeConnexions.getSuivant();
 			}
 		}
@@ -500,10 +481,13 @@ public class Cerveau implements Enregistrable {
 		bb.putShort((short) listeInterne.length);
 		bb.putShort((short) listeOutput.length);
 		//les input
+		bb.put((byte) 1);
 		toBytePartiel("input", bb);
 		//les interne
+		bb.put((byte) 2);
 		toBytePartiel("interne", bb);
 		//les output
+		bb.put((byte) 3);
 		toBytePartiel("output", bb);
 		//return
 		return bb.array();

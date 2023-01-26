@@ -220,7 +220,7 @@ public class Cerveau implements Enregistrable {
 	}
 
 	/**
-	 * getteur pour listeNeurones
+	 * getteur pour listeInterneNeurones
 	 * @return
 	 */
 	public Neurone[] getListeInterne() {
@@ -360,19 +360,27 @@ public class Cerveau implements Enregistrable {
 	//---------------------------------------------------------------------
 	//fonction d'affichage
 	
+	/**
+	 * fonction de factorisation de code.
+	 * @param type le type de neurones dont on veut connaitre le nombre
+	 * @return la longueur de la liste de neurone voulu
+	 */
+	private int longueurListe(String type) {
+		if (type.equals("input")) {
+			return listeInput.length;
+		}
+		else if (type.equals("interne")) {
+			return listeInterne.length;
+		}
+		else {
+			return listeOutput.length;
+		}
+	}
+	
 	
 	private void toStringJsonPartiel(StringBuilder build, String type) {
 		Connexion c=listeConnexions.getActuel();
-		int longueur;
-		if (type.equals("input")) {
-			longueur=listeInput.length;
-		}
-		else if (type.equals("interne")) {
-			longueur=listeInterne.length;
-		}
-		else {
-			longueur=listeOutput.length;
-		}
+		int longueur=longueurListe(type);
 		build.append("\""+type+"\":{");
 		//les connexions venant des input
 		for (int i=0; i<longueur; i++) {
@@ -427,17 +435,8 @@ public class Cerveau implements Enregistrable {
 	 */
 	private void toBytePartiel(String type, ByteBuffer bb) {
 		Connexion connexion=listeConnexions.getActuel();
-		int longueur;
+		int longueur=longueurListe(type);
 		short nbConnexions;
-		if (type.equals("input")) {
-			longueur=listeInput.length;
-		}
-		else if (type.equals("interne")) {
-			longueur=listeInterne.length;
-		}
-		else {
-			longueur=listeOutput.length;
-		}
 		//pour chaque neurone
 		for(int i=0; i<longueur; i++) {
 			bb.putShort((short) i);

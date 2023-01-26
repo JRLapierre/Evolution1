@@ -21,7 +21,6 @@ appliquer du multithreading dans la phase d'enregistrement
 #### urgent :
 
 #### TODO
-factoriser du code dans Cerveau  
 
 #### trucs a finir si j'en ai le courage
 

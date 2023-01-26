@@ -21,7 +21,7 @@ appliquer du multithreading dans la phase d'enregistrement
 #### urgent :
 
 #### TODO
-enlever l'attribut alea de Individu  
+factoriser du code dans Cerveau  
 
 #### trucs a finir si j'en ai le courage
 

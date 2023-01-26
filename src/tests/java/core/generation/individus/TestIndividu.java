@@ -40,7 +40,7 @@ class TestIndividu {
 	@Test
 	@DisplayName("test des fonctions de base")
 	void testFonctionsBase() {
-		Individu i=new Original(c1(c), 0, null);
+		Individu i=new Original(c1(c), null);
 		
 		//assertEquals(0, i.getId());
 		assertEquals(0, i.getScore());
@@ -57,7 +57,7 @@ class TestIndividu {
 	@Test   
 	@DisplayName("test d'un clone parfait")
 	void testCloneParfait() {
-		Individu i=new Original(c1(c), 0, null);
+		Individu i=new Original(c1(c), null);
 		Individu iParfait=new CloneParfait(i);
 		
 		//assertEquals(1, i.getId());
@@ -73,7 +73,7 @@ class TestIndividu {
 		//les mutations
 		Mutation m=new Mutation(0, -456, 0, 0, 0, 0);
 		
-		Individu i=new Original(c1(c), 0, m);
+		Individu i=new Original(c1(c), m);
 
 		Individu iMute=new CloneMute(i);
 		
@@ -90,7 +90,7 @@ class TestIndividu {
 		//les mutations
 		Mutation m=new Mutation(0, 50, 50, 100, 100, 100);
 		
-		Individu i=new Original(c1(c), 0, m);
+		Individu i=new Original(c1(c), m);
 
 		Individu iMute=new CloneMute(i);
 		
@@ -108,7 +108,7 @@ class TestIndividu {
 		//initialisation
 		Mutation m=new Mutation(0, 50, 50, 100, 100, 100);
 		
-		Individu i=new Original(c1(c), 0, m);
+		Individu i=new Original(c1(c), m);
 
 		Individu iMute=new CloneMute(i);
 		
@@ -129,7 +129,7 @@ class TestIndividu {
 	void testEnfantSexe2() {
 		Mutation m=new Mutation(0, 0, 0, 0, 0, 0);
 		
-		Individu i=new Original(c1(c), 0, m);
+		Individu i=new Original(c1(c), m);
 		Individu iSexe=new EnfantSexe(i, i);
 		assertEquals(0, iSexe.getScore());
 		assertEquals(i.getCerveau(), iSexe.getCerveau());
@@ -141,7 +141,7 @@ class TestIndividu {
 	void testToStringJson() {
 		Mutation m=new Mutation(0, 15, 15, 50, 0.5f, 15);
 		
-		Individu i0=new Original(c1(c), 0, m);
+		Individu i0=new Original(c1(c), m);
 		Individu i1=new CloneMute(i0);
 		Individu i2=new CloneParfait(i0);
 		Individu i3=new EnfantSexe(i1, i2);
@@ -159,7 +159,7 @@ class TestIndividu {
 	void testCreationFichiers() {
 		Mutation m=new Mutation(0, 15, 15, 50, 0.5f, 15);
 		
-		Individu i0=new Original(c1(c), 0, m);
+		Individu i0=new Original(c1(c), m);
 		Individu i1=new CloneMute(i0);
 		Individu i2=new CloneParfait(i0);
 		Individu i3=new EnfantSexe(i1, i2);
@@ -175,7 +175,7 @@ class TestIndividu {
 	@DisplayName("test de creation d'individu a partir d'un string")
 	void testCreationFromString() {
 		//{"individu102":{"type":"CloneParfait","parent":1,"id":102,"generation":2,"score":50.0,"cerveau":{"inputs":{"Neurone0":{}},"interne":{"Neurone0":{},"Neurone1":{},"Neurone2":{},"Neurone3":{"connexion0":{"id":0,"facteur":-1.3322587,"origine":{"type":"interne","numero":3},"cible":{"type":"input","numero":0}}},"Neurone4":{}},"outputs":{"Neurone0":{}}}}}
-		Individu individu=new Sauvegarde("{\"individu102\":{\"type\":\"CloneParfait\",\"parent\":1,\"id\":102,\"generation\":2,\"score\":50.0,\"cerveau\":{\"inputs\":{\"Neurone0\":{}},\"interne\":{\"Neurone0\":{},\"Neurone1\":{},\"Neurone2\":{},\"Neurone3\":{\"connexion0\":{\"id\":0,\"facteur\":-1.3322587,\"origine\":{\"type\":\"interne\",\"numero\":3},\"cible\":{\"type\":\"input\",\"numero\":0}}},\"Neurone4\":{}},\"outputs\":{\"Neurone0\":{}}}}}", 0, null);
+		Individu individu=new Sauvegarde("{\"individu102\":{\"type\":\"CloneParfait\",\"parent\":1,\"id\":102,\"generation\":2,\"score\":50.0,\"cerveau\":{\"input\":{\"Neurone0\":{}},\"interne\":{\"Neurone0\":{},\"Neurone1\":{},\"Neurone2\":{},\"Neurone3\":{\"connexion0\":{\"id\":0,\"facteur\":-1.3322587,\"origine\":{\"type\":\"interne\",\"numero\":3},\"cible\":{\"type\":\"input\",\"numero\":0}}},\"Neurone4\":{}},\"output\":{\"Neurone0\":{}}}}}", null);
 		
 		assertEquals(102, individu.getId());
 		assertEquals(2, individu.getGeneration());
@@ -186,11 +186,11 @@ class TestIndividu {
 	@Test
 	@DisplayName("test du toByte et de la reconstruction")
 	void testToByte() {
-		Individu individu0=new Original(c , 0 , new Mutation(0, 15, 15, 50, 0.5f, 15));
+		Individu individu0=new Original(c, new Mutation(0, 15, 15, 50, 0.5f, 15));
 		Individu individu1=new CloneParfait(individu0);
 		Individu individu2=new CloneMute(individu0);
 		Individu individu3=new EnfantSexe(individu1, individu2);
-		Individu individu4=new Sauvegarde("{\"individu102\":{\"type\":\"CloneParfait\",\"parent\":1,\"id\":102,\"generation\":2,\"score\":50.0,\"cerveau\":{\"inputs\":{\"Neurone0\":{}},\"interne\":{\"Neurone0\":{},\"Neurone1\":{},\"Neurone2\":{},\"Neurone3\":{\"connexion0\":{\"id\":0,\"facteur\":-1.3322587,\"origine\":{\"type\":\"interne\",\"numero\":3},\"cible\":{\"type\":\"input\",\"numero\":0}}},\"Neurone4\":{}},\"outputs\":{\"Neurone0\":{}}}}}", 0, null);
+		Individu individu4=new Sauvegarde("{\"individu102\":{\"type\":\"CloneParfait\",\"parent\":1,\"id\":102,\"generation\":2,\"score\":50.0,\"cerveau\":{\"input\":{\"Neurone0\":{}},\"interne\":{\"Neurone0\":{},\"Neurone1\":{},\"Neurone2\":{},\"Neurone3\":{\"connexion0\":{\"id\":0,\"facteur\":-1.3322587,\"origine\":{\"type\":\"interne\",\"numero\":3},\"cible\":{\"type\":\"input\",\"numero\":0}}},\"Neurone4\":{}},\"output\":{\"Neurone0\":{}}}}}", null);
 		
 		ByteBuffer bb0=ByteBuffer.allocate(individu0.toByteLongueur());
 		bb0.put(individu0.toByte());

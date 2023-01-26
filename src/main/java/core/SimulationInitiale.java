@@ -74,12 +74,6 @@ public class SimulationInitiale {
 	 * definis : leur graine d'aleatoire, leur cerveau et leurs mutations.
 	 */
 	
-	/**
-	 * la graine d'aleatoire des individus.
-	 * cette graine permet de generer une suite de nombres aleatoire qui permettent de decider
-	 * de la fusion de deux cerveaux lors de la reproduction sexuee.
-	 */
-	private static int graineAleatoire=645;
 	
 	//-----------------------------------
 	//cerveau
@@ -171,7 +165,7 @@ public class SimulationInitiale {
 	 * l'individu de base. Rien a modifier.
 	 * Cet individu va etre le pere de tous les individus de la premiere generation.
 	 */
-	private static Individu original=new Original(cerveau, graineAleatoire, mutation);
+	private static Individu original=new Original(cerveau, mutation);
 	
 	//-----------------------------------------------------------------------------------------
 	//selection

@@ -5,7 +5,6 @@ import java.nio.ByteBuffer;
 import core.Enregistrable;
 import core.generation.individus.cerveau.Cerveau;
 import core.generation.individus.mutations.Mutation;
-import outils.Aleatoire;
 
 /**
  * cette classe représente un individu.
@@ -45,11 +44,6 @@ public abstract class Individu implements Enregistrable {
 	 * le nombre d'individus
 	 */
 	private static int nbIndividus=0;
-	
-	/**
-	 * le generateur de nombres aleatoires pour la reproduction sexuee
-	 */
-	protected static Aleatoire alea;
 	
 	/**
 	 * le generateurs de mutation
@@ -192,6 +186,9 @@ public abstract class Individu implements Enregistrable {
 		//je ferme cette partie la pour l'instant
 		+ "}}";
 	}
+	
+	//les fonctions toByte() et toByteLongueur() 
+	//sont integralement definies dans les sous classes
 	
 	
 }

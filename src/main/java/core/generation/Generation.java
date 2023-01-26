@@ -162,9 +162,6 @@ public class Generation implements Enregistrable {
 				sim.indexOf("\"butoir\":")+9, 
 				sim.indexOf(",\"mutations\"")));
 		this.population=new Individu[nbIndividus];
-		int graine=Integer.parseInt(sim.substring(
-				sim.indexOf("\"graine\":")+9, 
-				sim.indexOf(",\"tauxCreation\"")));
 		//generation des individus sauvegardes
 		String content;
 		File[] fichiers=new File(path + "generation"+numero+"/").listFiles();
@@ -173,7 +170,7 @@ public class Generation implements Enregistrable {
 			//chercher le fichier en question
 			content=Files.readString(Paths.get(
 					path + "generation" + numero + "/" + fichiers[i].getName()));
-			this.population[i]=new Sauvegarde(content, graine,
+			this.population[i]=new Sauvegarde(content,
 					new Mutation(sim.substring(sim.indexOf("\"mutations\":")+12)));
 		}
 	}

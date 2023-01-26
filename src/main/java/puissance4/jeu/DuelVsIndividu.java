@@ -34,7 +34,6 @@ public class DuelVsIndividu {
 				"enregistrements/simulation" + nomSimulation + 
 				"/generation"+generation + 
 				"/individu" + id + ".json")),
-		0,
 		null
 		).getCerveau(),
 		25);

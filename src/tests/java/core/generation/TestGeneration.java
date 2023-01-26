@@ -36,7 +36,7 @@ class TestGeneration {
 		Cerveau c=new Cerveau(1, 1, 0);
 		c.addConnexion(new Connexion(2, c.getListeInput()[0], c.getListeOutput()[0]));
 		Mutation m=new Mutation(0, 0, 0, 0, 0, 0);
-		Individu i=new Original(c, 0, m);
+		Individu i=new Original(c, m);
 		return new Generation(i, 0, 0, 1, 100, e1(), "0.1");
 	}
 	
@@ -44,7 +44,7 @@ class TestGeneration {
 		Cerveau c=new Cerveau(1, 1, 5);
 		c.addConnexion(new Connexion(2, c.getListeInput()[0], c.getListeOutput()[0]));
 		Mutation m=new Mutation(0, 100, 0, 50, 100, 0);
-		Individu i=new Original(c, 0, m);
+		Individu i=new Original(c, m);
 		return new Generation(i, 1, 1, 1, 100, e1(), "0.2");//devrait yavoir 3 individus
 	}
 	
@@ -52,8 +52,16 @@ class TestGeneration {
 		Cerveau c=new Cerveau(1, 1, 5);
 		c.addConnexion(new Connexion(2, c.getListeInput()[0], c.getListeOutput()[0]));
 		Mutation m=new Mutation(0, 100, 0, 50, 100, 0);
-		Individu i=new Original(c, 0, m);
+		Individu i=new Original(c, m);
 		return new Generation(i, 1, 1, 1, 100, e1(), "0.3");//devrait yavoir 3 individus
+	}
+	
+	private Generation type04() {
+		Cerveau c=new Cerveau(1, 1, 5);
+		c.addConnexion(new Connexion(2, c.getListeInput()[0], c.getListeOutput()[0]));
+		Mutation m=new Mutation(0, 100, 0, 50, 100, 0);
+		Individu i=new Original(c, m);
+		return new Generation(i, 1, 1, 1, 100, e1(), "0.2");//devrait yavoir 3 individus
 	}
 	
 	//-------------------------------------------------------------------------------------------
@@ -72,7 +80,8 @@ class TestGeneration {
 	@Test
 	@DisplayName("test de plusieurs generations")
 	void testGenerations() {
-		Generation g2=type02();
+		Generation g2=type04();
+		g2.enregistreInfos("json");
 		g2.enregistreGeneration("json");
 		System.out.println( g2.toStringJson());
 		g2.nextGen();
@@ -84,7 +93,13 @@ class TestGeneration {
 	@DisplayName("test du decodeur json")
 	void testDecodeurJson() {
 		try {
-			Generation g=new Generation("1", 100, "json", e1());
+			Generation g2=type02();
+			g2.enregistreInfos("json");
+			g2.enregistreGeneration("json");
+			g2.nextGen();
+			g2.enregistreGeneration("json");
+			Generation g=new Generation("0.2", 2, "json", e1());
+			g.enregistreInfos("json");
 			g.nextGen();
 			for(int i=0; i<10; i++) {
 				g.enregistreGeneration("json");
@@ -109,7 +124,6 @@ class TestGeneration {
 			g2.nextGen();
 			g2.enregistreGeneration("bin");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			fail();
 		}

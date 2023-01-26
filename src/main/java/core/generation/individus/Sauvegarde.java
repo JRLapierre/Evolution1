@@ -4,7 +4,6 @@ import java.nio.ByteBuffer;
 
 import core.generation.individus.cerveau.Cerveau;
 import core.generation.individus.mutations.Mutation;
-import outils.Aleatoire;
 
 /**
  * cette classe genere des individus a partir d'un ficher.
@@ -17,18 +16,17 @@ public class Sauvegarde extends Individu {
 	 * booleen pour verifier si on a la graine.
 	 * Par defaut, la valeur est a false. elle passe a true une fois qu'on a obtenu une graine.
 	 */
-	private static boolean hasSeed=false;
+	private static boolean aMutation=false;
 	
 	/**
 	 * constructeur 
 	 * @param sub le string correspondant au contenu du ficher
-	 * @param seed la graine d'aleatoire
+	 * @param mutation les mutations
 	 */
-	public Sauvegarde(String sub, int seed, Mutation mutation) {
+	public Sauvegarde(String sub, Mutation mutation) {
 		super(sub);
-		if(!Sauvegarde.hasSeed) {
-			alea=new Aleatoire(seed+10%2147483647);
-			Sauvegarde.hasSeed=true;
+		if(!Sauvegarde.aMutation) {
+			Sauvegarde.aMutation=true;
 			Individu.mutation=mutation;
 		}
 	}

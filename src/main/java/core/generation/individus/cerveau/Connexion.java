@@ -155,7 +155,6 @@ public class Connexion implements Enregistrable {
 	 */
 	private Neurone trouveNeuroneBin(ByteBuffer bb, Cerveau cerveau) {
 		byte type=bb.get();
-		System.out.println(type);
 		if (type==(byte) 1) {
 			return cerveau.getListeInput()[bb.getShort()];
 		}

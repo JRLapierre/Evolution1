@@ -77,11 +77,15 @@ public class Generation implements Enregistrable {
 	
 	/**
 	 * genere une nouvelle generation a partir d'un individu donné
-	 * @param originel
-	 * @param nbClonesParfaits
-	 * @param nbClonesMutes
-	 * @param nbEnfantsSexe
+	 * @param originel le premier individu de la simulation
+	 * @param nbClonesParfaits le nombre de clones parfaits a chaque generation
+	 * @param nbClonesMutes le nombre de clones mutes a chaque generation
+	 * @param nbEnfantsSexe le nombre d'enfants de reproduction sexuee a chaque generation
+	 * @param butoir la limite dans le classement pour pouvoir se reproduire
+	 * @param epreuve l'epreuve pour evaluer les individus
+	 * @param nomSimulation le nom de la simulation
 	 */
+
 	public Generation(
 			Individu originel,
 			int nbClonesParfaits, 
@@ -116,6 +120,7 @@ public class Generation implements Enregistrable {
 	 * @throws IOException 
 	 */
 	public Generation(String nomSimulation, int numero, String format, Epreuve epreuve) throws IOException {
+		System.out.println("recuperation des donnees...");
 		this.nomSimulation=nomSimulation;
 		switch(format) {
 		case("json"):
@@ -128,7 +133,6 @@ public class Generation implements Enregistrable {
 			System.err.println("le format n'existe pas");
 		}
 		this.epreuve=epreuve;
-		evaluation();
 		triScore(population);
 	}
 	
@@ -140,7 +144,7 @@ public class Generation implements Enregistrable {
 	/**
 	 * decodeur pour le format json
 	 * @param nomSimulation
-	 * @param numero
+	 * @param numero le numero de la simulation
 	 * @throws IOException
 	 */
 	private void decodeJson(String nomSimulation, int numero) throws IOException {
@@ -176,7 +180,12 @@ public class Generation implements Enregistrable {
 	}
 	
 	
-	//decodeur pour le format bin
+	/**
+	 * decodeur pour le format bin
+	 * @param nomSimulation
+	 * @param numero le numero de la generation
+	 * @throws IOException
+	 */
 	private void decodeBin(String nomSimulation, int numero) throws IOException {
 		//recherche de la simulation et de la generation en accedant aux fichiers
 		String path="enregistrements/simulation"+nomSimulation+"/";
@@ -218,6 +227,7 @@ public class Generation implements Enregistrable {
 	 * fonction qui genere la generation suivante
 	 */
 	public void nextGen() {
+		System.out.println("creation de la prochaine generation...");
 		triScore(population);
 		
 		Individu[] newPopulation=new Individu[nbIndividus];
@@ -338,6 +348,7 @@ public class Generation implements Enregistrable {
 	 * fonction pour l'evaluation des individus
 	 */
 	private void evaluation() {
+		System.out.println("evaluation...");
 		epreuve.epreuve(population);
 	}
 	
@@ -363,6 +374,7 @@ public class Generation implements Enregistrable {
 	}
 	
 	
+	@Override
 	public byte[] toByte() {
 		ByteBuffer bb=ByteBuffer.allocate(toByteLongueur());
 		bb.putInt(nbClonesParfaits);
@@ -372,7 +384,7 @@ public class Generation implements Enregistrable {
 		return bb.array();
 	}
 	
-	
+	@Override
 	public int toByteLongueur() {
 		return 16 + 12;//12 pour mutation
 	}
@@ -421,6 +433,7 @@ public class Generation implements Enregistrable {
 	 */
 	public void enregistreGeneration(String format) {
         try {
+        	System.out.println("enregistrement...");
         	//si le dossier n'existe pas on le créé
         	File f=new File("enregistrements\\simulation" + nomSimulation
         			+ "\\generation" + population[0].getGeneration() + "\\");

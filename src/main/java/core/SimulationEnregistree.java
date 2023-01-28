@@ -31,7 +31,7 @@ public class SimulationEnregistree {
 	 * le format des fichiers a recuperer.
 	 * Dans la situation actuelle, on a le choix entre json et bin.
 	 */
-	private static String typeFichiers="json";
+	private static String typeFichiers="bin";
 	
 	
 	/**
@@ -43,12 +43,12 @@ public class SimulationEnregistree {
 	/**
 	 * le numero de la generation a laquelle on va reprendre la simulation
 	 */
-	private static int generationInitiale=50000;
+	private static int generationInitiale=51070;
 	
 	/**
 	 * le nombre de generations a simuler.
 	 */
-	private static int nbGenerations=10000;
+	private static int nbGenerations=10;
 	
 	/**
 	 * limiteur d'enregistrement.
@@ -98,16 +98,22 @@ public class SimulationEnregistree {
 	
 	
 	//----------------------------------------------------------------------------------------
-	//fonction main
+	//fonctions de code
+	//ne pas toucher a cette partie du code
 	
 	/**
-	 * fonction main qui permet de lancer le programme.
-	 * @param args rien a mettre
+	 * demande a l'utilisateur si il est sur de ses actions
+	 * @return true si l'utilisateur fait son choix
 	 */
-	public static void main(String[] args) {
-    	File f=new File("enregistrements\\simulation" + nomSimulation
+	private static boolean choix() {
+	   	File f=new File("enregistrements\\simulation" + nomSimulation
     			+ "\\generation" + generationInitiale + "\\");
-    	if(f.exists()) {
+	   	if(!f.exists()) {
+    		System.out.println("le dossier cherche n'existe pas. verifiez le nom de la "
+    				+ "simulation et le numero de genration.");
+    		return false;
+	   	}
+	   	else {
     		String reponse="";
 		    Scanner input = new Scanner(System.in);
     		while(!reponse.equals("oui")) {
@@ -119,25 +125,29 @@ public class SimulationEnregistree {
     		    reponse = input.nextLine();
     		    //on met fin a la simulation si la reponse est non
     		    if (reponse.equals("non")) {
-    		    	return;
+    		    	return false;
     		    }
     		}
     		input.close();
+    		return true;
     	}
-    	else {
-    		System.out.println("le dossier cherche n'existe pas. verifiez le nom de la "
-    				+ "simulation et le numero de genration.");
-    		return;
-    	}
-    	Generation generation;
+	}
+	
+	/**
+	 * fonction run qui fait tourner la simulation
+	 */
+	public static void run() {
+		Generation generation;
 		try {
 			generation = new Generation(nomSimulation, generationInitiale, typeFichiers, epreuve);
 			changeParametres(generation);
 			//on fait tourner la simulation pour nbGenerations
-			for(int i=0; i<=nbGenerations; i++) {
-				System.out.println("generation " + (generationInitiale + i));
-				if((generationInitiale + i)%enregistre==0 && i!=0) generation.enregistreGeneration(typeEnregistrements);
+			for(int i=1; i<=nbGenerations; i++) {
+				System.out.println("===generation " + (generationInitiale + i) + "===");
 				generation.nextGen();
+				if((generationInitiale + i) % enregistre==0) {
+					generation.enregistreGeneration(typeEnregistrements);
+				}
 			}
 			System.out.println("fait");
 		} catch (IOException e) {
@@ -145,7 +155,20 @@ public class SimulationEnregistree {
 					+ "n'ai pas encore detectes");
 			e.printStackTrace();
 		}
-
 	}
-
+	
+	
+	
+	
+	//----------------------------------------------------------------------------------------
+	//fonction main
+	
+	/**
+	 * fonction main qui permet de lancer le programme.
+	 * @param args rien a mettre
+	 */
+	public static void main(String[] args) {
+		if(!choix()) return; //arrete le programme si le choix n'est pas fait
+		run();
+	}
 }

@@ -230,14 +230,16 @@ public class SimulationInitiale {
 	 */
 	private static int enregistre=1;
 	
-	//-----------------------------------------------------------------------------------------
-	//programme principal
+	
+	//----------------------------------------------------------------------------------------
+	//fonctions de code
+	//ne pas toucher
 	
 	/**
-	 * fonction main qui permet de lancer le programme.
-	 * @param args rien a mettre
+	 * demande a l'utilisateur si il est sur de ses actions
+	 * @return true si l'utilisateur fait son choix
 	 */
-	public static void main(String[] args) {
+	private static boolean choix() {
     	File f=new File("enregistrements\\simulation" + nomSimulation + "\\");
     	if(f.exists()) {
     		String reponse="";
@@ -250,18 +252,40 @@ public class SimulationInitiale {
     		    reponse = input.nextLine();
     		    //on met fin a la simulation si la reponse est non
     		    if (reponse.equals("non")) {
-    		    	return;
+    		    	return false;
     		    }
     		}
 		    input.close();
     	}
+    	return true;
+	}
+	
+	/**
+	 * fonction run qui fait tourner la simulation
+	 */
+	public static void run() {
 		//on fait tourner la simulation pour nbGenerations
     	generation.enregistreInfos(type);
+    	generation.enregistreGeneration(type);
 		for(int i=0; i<nbGenerations; i++) {
-			System.out.println("generation " + i);
-			if(i%enregistre==0) generation.enregistreGeneration(type);
+			System.out.println("===generation " + i + "===");
 			generation.nextGen();
+			if(i%enregistre==0) generation.enregistreGeneration(type);
 		}
+	}
+	
+	
+	
+	//-----------------------------------------------------------------------------------------
+	//programme principal
+	
+	/**
+	 * fonction main qui permet de lancer le programme.
+	 * @param args rien a mettre
+	 */
+	public static void main(String[] args) {
+		if (!choix()) return;
+		run();
 	}
 
 }

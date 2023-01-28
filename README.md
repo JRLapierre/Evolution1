@@ -21,6 +21,7 @@ appliquer du multithreading dans la phase d'enregistrement
 #### urgent :
 
 #### TODO
+faire une interface graphique en utilsant MVC
 
 #### trucs a finir si j'en ai le courage
 

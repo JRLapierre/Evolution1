@@ -12,6 +12,25 @@ Pour la communication avec la mémoire et l'utilisateur, ne sachant pas comment f
 <br>
 Ce projet est long et demande souvent de revenir sur le code produit des mois auparavant, ce qui m'impose de produire un code clair et commenté même si je suis le seul à travailler sur le projet. J'essaie de respecter un maximum de conventions de codage.
 
+#### Structure du projet
+##### simulation
+La simulation consiste à simuler de l'évolution par sélection naturelle : à chaque génération, tous les individus sont évalués et ceux qui réussisent le mieux sont sélectionnés pour se reproduire et ainsi former la génération suivante. A chaque génération, des mutations aléatoires se produisent.
+##### génération
+Les générations sont constitués d'une population d'individus. Elle gère les interactions entre la simulation et les individus ainsi que les intéractions avec la mémoire.
+##### individus
+Les individus possèdent tous un cerveau qui définit leurs décisions.  
+Il existe plusieurs type d'individus, selon leur création :  
+Original correspond à un individu créé de toutes pièces par l'utilisateur,  
+CloneParfait correspond à des individus ayant un cerveau identitque à leur prédécesseur,  
+CloneMuté correspond à des individus ayant un cerveau muté par rapport à leur prédécesseur,  
+EnfantSexe correspond à des individus dont le cerveau est le mélange des cerveaux de leurs deux parents,  
+Sauvegarde correspond à des individus simplifiés pour les récupérer depuis une sauvegarde et recréer une nouvelle génération à partir d'une sauvegarde
+##### cerveau
+Le cerveau contient des neurones, et ces neurones sont reliés entre elles par des connexions. Le cerveau est représenté par la classe Cerveau, les neurones par la classe Neurone et les connexions par la classe Connexion.  
+##### mutations
+La classe Mutation a été créée pour gérer les différentes mutations qui arrivent au cerveau des individus lors de la phase de reproduction.  
+<br>
+
 
 ### choses a faire pour continuer le projet
 

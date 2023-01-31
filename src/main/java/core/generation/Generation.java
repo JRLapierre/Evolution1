@@ -106,7 +106,6 @@ public class Generation implements Enregistrable {
 		for (int i=0; i<nbIndividus; i++) {
 			population[i]=new CloneMute(originel);
 		}
-		evaluation();
 	}
 
 		
@@ -120,7 +119,6 @@ public class Generation implements Enregistrable {
 	 * @throws IOException 
 	 */
 	public Generation(String nomSimulation, int numero, String format, Epreuve epreuve) throws IOException {
-		System.out.println("recuperation des donnees...");
 		this.nomSimulation=nomSimulation;
 		switch(format) {
 		case("json"):
@@ -227,7 +225,6 @@ public class Generation implements Enregistrable {
 	 * fonction qui genere la generation suivante
 	 */
 	public void nextGen() {
-		System.out.println("creation de la prochaine generation...");
 		triScore(population);
 		
 		Individu[] newPopulation=new Individu[nbIndividus];
@@ -246,8 +243,6 @@ public class Generation implements Enregistrable {
 							population[((i+1 % nbIndividus) % butoir) % population.length]);
 		}
 		this.population=newPopulation;
-		//on evalue automatiquement la population a la fin
-		evaluation();
 	}
 	
 	//------------------------------------------------------------------------------------------
@@ -347,8 +342,7 @@ public class Generation implements Enregistrable {
 	/**
 	 * fonction pour l'evaluation des individus
 	 */
-	private void evaluation() {
-		System.out.println("evaluation...");
+	public void evaluation() {
 		epreuve.epreuve(population);
 	}
 	
@@ -433,7 +427,6 @@ public class Generation implements Enregistrable {
 	 */
 	public void enregistreGeneration(String format) {
         try {
-        	System.out.println("enregistrement...");
         	//si le dossier n'existe pas on le créé
         	File f=new File("enregistrements\\simulation" + nomSimulation
         			+ "\\generation" + population[0].getGeneration() + "\\");

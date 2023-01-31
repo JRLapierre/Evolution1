@@ -269,8 +269,14 @@ public class SimulationInitiale {
     	generation.enregistreGeneration(type);
 		for(int i=0; i<nbGenerations; i++) {
 			System.out.println("===generation " + i + "===");
+			System.out.println("creation de la prochaine generation...");
 			generation.nextGen();
-			if(i%enregistre==0) generation.enregistreGeneration(type);
+			System.out.println("evaluation...");
+			generation.evaluation();
+			if(i%enregistre==0) {
+	        	System.out.println("enregistrement...");
+				generation.enregistreGeneration(type);
+			}
 		}
 	}
 	

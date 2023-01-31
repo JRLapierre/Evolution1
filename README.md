@@ -38,9 +38,11 @@ La classe Mutation a été créée pour gérer les différentes mutations qui arrivent
 
 creer un graphe qui permet de traquer visuellement les generations  
 faire des fonctions pour traquer les ancetres et les liens de parentee  
-appliquer du multithreading dans la phase de recuperation des donnees
-appliquer du multithreading dans la phase de reproduction
-appliquer du multithreading dans la phase d'enregistrement
+appliquer du multithreading dans la phase de recuperation des donnees  
+appliquer du multithreading dans la phase de reproduction  
+appliquer du multithreading dans la phase d'enregistrement  
+melanger la liste d'individus avant la reproduction sexuee  
+faire des fonctions d'enregistrement dans Individu  
 
 #### urgent :
 

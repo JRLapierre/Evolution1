@@ -43,7 +43,7 @@ public class SimulationEnregistree {
 	/**
 	 * le numero de la generation a laquelle on va reprendre la simulation
 	 */
-	private static int generationInitiale=51070;
+	private static int generationInitiale=51090;
 	
 	/**
 	 * le nombre de generations a simuler.
@@ -77,6 +77,12 @@ public class SimulationEnregistree {
 		}
 		
 	};
+	
+	/**
+	 * la generation porteuse
+	 */
+	private static Generation generation;
+
 	
 	//----------------------------------------------------------------------------------------
 	//fonction de changement
@@ -137,15 +143,19 @@ public class SimulationEnregistree {
 	 * fonction run qui fait tourner la simulation
 	 */
 	public static void run() {
-		Generation generation;
 		try {
+			System.out.println("recuperation des donnees...");
 			generation = new Generation(nomSimulation, generationInitiale, typeFichiers, epreuve);
 			changeParametres(generation);
 			//on fait tourner la simulation pour nbGenerations
 			for(int i=1; i<=nbGenerations; i++) {
 				System.out.println("===generation " + (generationInitiale + i) + "===");
+				System.out.println("creation de la prochaine generation...");
 				generation.nextGen();
+				System.out.println("evaluation...");
+				generation.evaluation();
 				if((generationInitiale + i) % enregistre==0) {
+		        	System.out.println("enregistrement...");
 					generation.enregistreGeneration(typeEnregistrements);
 				}
 			}

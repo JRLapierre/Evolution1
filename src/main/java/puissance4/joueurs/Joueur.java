@@ -2,7 +2,6 @@ package puissance4.joueurs;
 
 import outils.Aleatoire;
 import puissance4.grille.Grille;
-import puissance4.jeu.Partie;
 
 /**
  * cette classe represente un joueur.

@@ -48,7 +48,6 @@ faire des fonctions d'enregistrement dans Individu
 #### TODO
 ajouter des fonctionnalites pour mettre en pause  
 melanger la liste d'individus avant la reproduction sexuee
-enlever les accesseur de Noeud  
 
 #### trucs a finir si j'en ai le courage
 

@@ -50,53 +50,6 @@ public class ListeChaine<T> {
 				this.suivant = suivant;
 			}
 
-			/**
-			 * getteur pour l'element
-			 * @return
-			 */
-			protected T getElt() {
-				return elt;
-			}
-
-			/**
-			 * setteur pour l'element
-			 * @param elt
-			 */
-			protected void setElt(T elt) {
-				this.elt = elt;
-			}
-
-			/**
-			 * getteur pour le noeud precedent
-			 * @return
-			 */
-			protected Noeud getPrecedent() {
-				return precedent;
-			}
-
-			/**
-			 * setteur pour le noeud precedent
-			 * @param precedent
-			 */
-			protected void setPrecedent(Noeud precedent) {
-				this.precedent = precedent;
-			}
-
-			/**
-			 * getteur pour le noeud suivant
-			 * @return
-			 */
-			protected Noeud getSuivant() {
-				return suivant;
-			}
-
-			/**
-			 * setteur pour le noeud suivant
-			 * @param suivant
-			 */
-			protected void setSuivant(Noeud suivant) {
-				this.suivant = suivant;
-			}
 		}
 	
 		
@@ -195,11 +148,11 @@ public class ListeChaine<T> {
 			dernier=premier;
 		} else if (longueur==1) {
 			premier=new Noeud(elt, null, dernier);
-			dernier.setPrecedent(premier);
+			dernier.precedent=premier;
 		} else {
 			Noeud n=premier;
 			premier=new Noeud(elt, null, n);
-			n.setPrecedent(premier);
+			n.precedent=premier;
 		}
 		longueur++;
 	}
@@ -214,11 +167,11 @@ public class ListeChaine<T> {
 			dernier=premier;
 		} else if (longueur==1) {
 			dernier=new Noeud(elt, premier, null);
-			premier.setSuivant(dernier);
+			premier.suivant=dernier;
 		} else {
 			Noeud n=dernier;
 			dernier=new Noeud(elt, n, null);
-			n.setSuivant(dernier);
+			n.suivant=dernier;
 		}
 		longueur++;
 	}
@@ -239,9 +192,9 @@ public class ListeChaine<T> {
 		}
 		//insertion à l'avant dernière place
 		else if (index==longueur-1) {
-			Noeud n=new Noeud(elt, dernier.getPrecedent(), dernier);
-			dernier.getPrecedent().setSuivant(n);
-			dernier.setPrecedent(n);
+			Noeud n=new Noeud(elt, dernier.precedent, dernier);
+			dernier.precedent.suivant=n;
+			dernier.precedent=n;
 			longueur++;
 		}
 	}
@@ -261,20 +214,20 @@ public class ListeChaine<T> {
 			//on commence par la fin
 			n=dernier;
 			for (int i=0; i<longueur-index-1; i++) {
-				n=n.getPrecedent();
+				n=n.precedent;
 			}
-			n2=new Noeud(elt, n.getPrecedent(),n);
-			n.getPrecedent().setSuivant(n2);
-			n.setPrecedent(n2);
+			n2=new Noeud(elt, n.precedent,n);
+			n.precedent.suivant=n2;
+			n.precedent=n2;
 		}else {
 			//on commence par le début
 			n=premier;
 			for (int i=0; i<index; i++) {
-				n=n.getSuivant();
+				n=n.suivant;
 			}
-			n2=new Noeud(elt, n.getPrecedent(),n);
-			n.getPrecedent().setSuivant(n2);
-			n.setPrecedent(n2);
+			n2=new Noeud(elt, n.precedent,n);
+			n.precedent.suivant=n2;
+			n.precedent=n2;
 		}
 		longueur++;	
 	}
@@ -321,7 +274,7 @@ public class ListeChaine<T> {
 		if (liste.longueur!=0) {
 			ListeChaine<T>.Noeud n=liste.premier;
 			while (n!=null) {
-				this.ajout(n.getElt());
+				this.ajout(n.elt);
 				n=n.suivant;
 			}
 		}
@@ -336,7 +289,7 @@ public class ListeChaine<T> {
 	 * @param elt
 	 */
 	public void replaceElt(int index, T newElt) {
-		this.getNoeud(index).setElt(newElt);
+		this.getNoeud(index).elt=newElt;
 	}
 	
 	/**
@@ -346,8 +299,8 @@ public class ListeChaine<T> {
 	 */
 	public void echange(int index1, int index2) {
 		T tmp=this.getElement(index1);
-		this.getNoeud(index1).setElt(this.getElement(index2));
-		this.getNoeud(index2).setElt(tmp);
+		this.getNoeud(index1).elt=this.getElement(index2);
+		this.getNoeud(index2).elt=tmp;
 	}
 	
 	
@@ -419,7 +372,7 @@ public class ListeChaine<T> {
 	 * @return le contenu du premier noeud
 	 */
 	public T getPremier() {
-		if (premier!=null) return premier.getElt();
+		if (premier!=null) return premier.elt;
 		return null;
 	}
 	
@@ -428,7 +381,7 @@ public class ListeChaine<T> {
 	 * @return le contenu du dernier noeud
 	 */
 	public T getDernier() {
-		if (dernier!=null) return dernier.getElt();
+		if (dernier!=null) return dernier.elt;
 		return null;
 	}
 	
@@ -442,12 +395,12 @@ public class ListeChaine<T> {
 		Noeud n=premier;
 		//parcours de la liste en incrémentant index
 		for (int i=0;i<longueur; i++) {
-			if (n.getElt()==elt) {
+			if (n.elt==elt) {
 				return index;
 			}
 			else {
 				index++;
-				n=n.getSuivant();
+				n=n.suivant;
 			}
 		}
 		//en cas d'échec
@@ -467,14 +420,14 @@ public class ListeChaine<T> {
 		if (2*index<longueur) {
 			n=premier;
 			for (int i=0; i<index; i++ ) {
-				n=n.getSuivant();
+				n=n.suivant;
 			}
 		}
 		//cas ou l'index est grand
 		else {
 			n=dernier;
 			for (int i=0; i<longueur-index-1; i++ ) {
-				n=n.getPrecedent();
+				n=n.precedent;
 			}	
 		}
 		return n;
@@ -486,7 +439,7 @@ public class ListeChaine<T> {
 	 * @return le contenu du noeud
 	 */
 	public T getElement(int index) {
-		return this.getNoeud(index).getElt();
+		return this.getNoeud(index).elt;
 	}
 	
 	/**
@@ -516,7 +469,7 @@ public class ListeChaine<T> {
 	 */
 	public T getSuivant() {
 		if (local==null) local=premier;
-		else local=local.getSuivant();
+		else local=local.suivant;
 		return getActuel();
 	}
 	
@@ -526,7 +479,7 @@ public class ListeChaine<T> {
 	 */
 	public T getPrecedent() {
 		if (local==null) local=dernier;
-		else local=local.getPrecedent();
+		else local=local.precedent;
 		return getActuel();
 	}
 	
@@ -536,7 +489,7 @@ public class ListeChaine<T> {
 	 */
 	public T getActuel() {
 		if (local==null) return null;
-		else return local.getElt();
+		else return local.elt;
 	}
 	
 	/**
@@ -565,18 +518,18 @@ public class ListeChaine<T> {
 		}
 		//si l'élément c'est le premier de la liste
 		else if (n==premier) {
-			premier=n.getSuivant();
-			n.getSuivant().setPrecedent(null);
+			premier=n.suivant;
+			n.suivant.precedent=null;
 		}
 		//si l'élément est à la fin de la liste
 		else if (n==dernier) {
-			dernier=n.getPrecedent();
-			n.getPrecedent().setSuivant(null);
+			dernier=n.precedent;
+			n.precedent.suivant=null;
 		}
 		//les autres cas
 		else {
-			n.getPrecedent().setSuivant(n.getSuivant());
-			n.getSuivant().setPrecedent(n.getPrecedent());
+			n.precedent.suivant=n.suivant;
+			n.suivant.precedent=n.precedent;
 		}
 		longueur--;
 
@@ -609,7 +562,7 @@ public class ListeChaine<T> {
 	public void delElts(T elt) {
 		Noeud n=premier;
 		while(n!=null) {
-			if(n.getElt()==elt) {
+			if(n.elt==elt) {
 				delNoeud(n);
 			}
 			n=n.suivant;
@@ -638,8 +591,8 @@ public class ListeChaine<T> {
 		Noeud n=premier;
 		System.out.println("liste");
 		for (int i=0; i<longueur; i++) {
-			System.out.println(n.getElt());
-			n=n.getSuivant();
+			System.out.println(n.elt);
+			n=n.suivant;
 		}
 	}
 	
@@ -668,7 +621,7 @@ public class ListeChaine<T> {
 		    if (n1==null || n2==null) {
 		        return false;
 		    }
-		    else if (!n1.getElt().equals(n2.getElt())) {
+		    else if (!n1.elt.equals(n2.elt)) {
 		        return false;
 		    }
 		    else {

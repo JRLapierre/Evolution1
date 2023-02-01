@@ -158,6 +158,8 @@ public class ListeChaine<T> {
 		}
 	}
 	
+
+	
 	//-----------------------------------------------------------------------------
 	//fonction d'erreur
 	
@@ -298,7 +300,6 @@ public class ListeChaine<T> {
 	 * @param index l'index auquel on commence à insérer les elements
 	 * @param elts les éléments à ajouter
 	 */
-	@SuppressWarnings("unchecked")
 	public void ajout(int index, T... elts) {
 		//risque d'erreurs conséquent
 		if (index>longueur||index<0) {
@@ -348,6 +349,9 @@ public class ListeChaine<T> {
 		this.getNoeud(index1).setElt(this.getElement(index2));
 		this.getNoeud(index2).setElt(tmp);
 	}
+	
+	
+	//TODO fonction de melange
 	
 	/**
 	 * cette fonction fait un tri rapide d'une listeChaine.
@@ -474,6 +478,27 @@ public class ListeChaine<T> {
 	 */
 	public T getElement(int index) {
 		return this.getNoeud(index).getElt();
+	}
+	
+	/**
+	 * fonction qui cree une sous chaine
+	 * @param debut l'index de l'element de debut de la sous liste
+	 * @param fin l'index de l'element de fin de la sous liste
+	 * @return une sous liste
+	 */
+	public ListeChaine<T> getSousChaine(int debut, int fin){
+		//si debut et fin sont invalides
+		this.exeptionIndex(debut);
+		this.exeptionIndex(fin-1);
+		if(debut>fin) throw new ArithmeticException("debut est plus grand que fin");
+		//creation de la sous chaine
+		ListeChaine<T> liste=new ListeChaine<T>();
+		Noeud n=this.getNoeud(debut);
+		for(int i=0; i<fin-debut; i++) {
+			liste.ajout(n.elt);
+			n=n.suivant;
+		}
+		return liste;
 	}
 	
 	/**
@@ -619,7 +644,6 @@ public class ListeChaine<T> {
 		return Objects.hash(dernier, local, longueur, premier);
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

@@ -230,6 +230,16 @@ class TestListeChaine {
 
 	}
 	
+	@Test
+	@DisplayName("dest du getSousChaine")
+	void testGetSousChaine() {
+		ListeChaine<Integer> liste=liste6();
+		//4,5,6,8,2,1,3,1,4,9
+		ListeChaine<Integer> sousListe=liste.getSousChaine(0, 5);
+		assertEquals(new ListeChaine<Integer>(4,5,6,8,2), sousListe);
+		assertEquals(new ListeChaine<Integer>(3,1,4,9), liste.getSousChaine(6, 10));
+	}
+	
 	//------------------------------------------------------------------------------
 	//tests de suppressions
 	

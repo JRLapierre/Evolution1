@@ -15,6 +15,7 @@ import core.generation.individus.EnfantSexe;
 import core.generation.individus.Individu;
 import core.generation.individus.Sauvegarde;
 import core.generation.individus.mutations.Mutation;
+import outils.Aleatoire;
 import outils.Carracteristique;
 import outils.ListeChaine;
 
@@ -235,6 +236,19 @@ public class Generation implements Enregistrable {
 		//clones mutes
 		for(int i=0; i<nbClonesMutes; i++) {
 			newPopulation[nbClonesParfaits+i]=new CloneMute(population[(i % butoir) % population.length]);
+		}
+		//melange d'une partie de la liste
+		Aleatoire alea=new Aleatoire(population[0].getId());
+		int limite=butoir%nbIndividus;//si le butoir est trop eleve
+		Individu indTemp;
+		int intTemp1;
+		int intTemp2;
+		for(int i=0; i<limite*5; i++) {
+			intTemp1=alea.aleatInt(limite-1);
+			intTemp2=alea.aleatInt(limite-1);
+			indTemp=population[intTemp1];
+			population[intTemp1]=population[intTemp2];
+			population[intTemp2]=indTemp;
 		}
 		//reproduction sexuee
 		for (int i=0; i<nbEnfantsSexe*2; i+=2) {

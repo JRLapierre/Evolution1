@@ -231,7 +231,15 @@ class TestListeChaine {
 	}
 	
 	@Test
-	@DisplayName("dest du getSousChaine")
+	@DisplayName("test du melange")
+	void testMelange() {
+		ListeChaine<Integer> liste= liste6trie();
+		liste.melange(5);
+		//liste.printElts();
+	}
+	
+	@Test
+	@DisplayName("test du getSousChaine")
 	void testGetSousChaine() {
 		ListeChaine<Integer> liste=liste6();
 		//4,5,6,8,2,1,3,1,4,9

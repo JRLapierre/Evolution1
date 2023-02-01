@@ -351,7 +351,16 @@ public class ListeChaine<T> {
 	}
 	
 	
-	//TODO fonction de melange
+	/**
+	 * fonction qui melange la liste
+	 * @param graineAleatoire la graine qui va generer une liste de nombres aleatoires
+	 */
+	public void melange(int graineAleatoire) {
+		Aleatoire alea=new Aleatoire(graineAleatoire);
+		for(int i=0; i<longueur*5; i++) {
+			echange(alea.aleatInt(longueur-1), alea.aleatInt(longueur-1));
+		}
+	}
 	
 	/**
 	 * cette fonction fait un tri rapide d'une listeChaine.
@@ -492,7 +501,7 @@ public class ListeChaine<T> {
 		this.exeptionIndex(fin-1);
 		if(debut>fin) throw new ArithmeticException("debut est plus grand que fin");
 		//creation de la sous chaine
-		ListeChaine<T> liste=new ListeChaine<T>();
+		ListeChaine<T> liste=new ListeChaine<>();
 		Noeud n=this.getNoeud(debut);
 		for(int i=0; i<fin-debut; i++) {
 			liste.ajout(n.elt);

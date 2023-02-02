@@ -41,13 +41,11 @@ faire des fonctions pour traquer les ancetres et les liens de parentee
 appliquer du multithreading dans la phase de recuperation des donnees  
 appliquer du multithreading dans la phase de reproduction  
 appliquer du multithreading dans la phase d'enregistrement  
-faire des fonctions d'enregistrement dans Individu  
 
 #### urgent :
 
 #### TODO
 ajouter des fonctionnalites pour mettre en pause  
-melanger la liste d'individus avant la reproduction sexuee
 
 #### trucs a finir si j'en ai le courage
 

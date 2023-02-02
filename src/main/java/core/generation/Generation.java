@@ -394,7 +394,7 @@ public class Generation implements Enregistrable {
 	
 	@Override
 	public int toByteLongueur() {
-		return 16 + 12;//12 pour mutation
+		return 28;//12 pour mutation, 16 pour les autres infos
 	}
 	
 	//-------------------------------------------------------------------------------------------
@@ -440,40 +440,13 @@ public class Generation implements Enregistrable {
 	 * @param format bin ou json
 	 */
 	public void enregistreGeneration(String format) {
-        try {
-        	//si le dossier n'existe pas on le créé
-        	File f=new File("enregistrements\\simulation" + nomSimulation
-        			+ "\\generation" + population[0].getGeneration() + "\\");
-        	f.mkdirs();
-        	String path="enregistrements\\simulation" + nomSimulation
-            		+ "\\generation" + population[0].getGeneration() + "\\individu";
-        	switch(format) {
-        	case("bin"):
-                for (int i=0; i<nbIndividus; i++) {
-                	FileOutputStream fos = new FileOutputStream(path + population[i].getId() + "." + format);
-                	fos.write(population[i].toByte());
-                	fos.flush();
-                	fos.close();
-                }
-        		break;
-        	case("json"):
-        		PrintWriter writer;
-                for (int i=0; i<nbIndividus; i++) {
-                	writer = new PrintWriter(path + population[i].getId() + "." + format);
-                    writer.write(population[i].toStringJson());
-                    writer.flush();
-                    writer.close();
-                }
-                break;
-            default:
-            	System.err.println("type de fichier inconnu");
-        	}
-        	
-        } catch (Exception e) {
-            e.printStackTrace();
+        String path="enregistrements/simulation" + nomSimulation
+           		+ "/generation" + population[0].getGeneration() + "/";
+        //si le dossier n'existe pas on le créé
+        File f=new File(path);
+        f.mkdirs();
+        for(Individu individu : population) {
+        	individu.enregistre(path, format);
         }
-
 	}
-	
-	
 }

@@ -2,8 +2,10 @@ package core.generation;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.File;
 import java.io.IOException;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -67,6 +69,7 @@ class TestGeneration {
 	//-------------------------------------------------------------------------------------------
 	//fonctions de test
 	
+	
 	@Test
 	@DisplayName("test des fonctions de bases")
 	void testBases() {
@@ -74,7 +77,7 @@ class TestGeneration {
 		g1.evaluation();
 		g1.enregistreGeneration("json");
 		
-		assertEquals(70, g1.getPopulation()[0].getScore());//TODO alerte
+		assertEquals(70, g1.getPopulation()[0].getScore());
 		
 	}
 	

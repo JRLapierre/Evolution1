@@ -1,5 +1,7 @@
 package core.generation.individus;
 
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.nio.ByteBuffer;
 
 import core.Enregistrable;
@@ -189,6 +191,36 @@ public abstract class Individu implements Enregistrable {
 	
 	//les fonctions toByte() et toByteLongueur() 
 	//sont integralement definies dans les sous classes
+	
+	/**
+	 * fonction qui enregistre
+	 * @param dossier le dossier dans lequel enregistrer
+	 * @param format le format d'enregistrement (bin ou json)
+	 */
+	public void enregistre(String dossier, String format) {
+		try {
+	    	switch(format) {
+	    	case("bin"):
+            	FileOutputStream fos = new FileOutputStream(
+            			dossier + "individu" + id + "." + format);
+            	fos.write(this.toByte()); 
+            	fos.flush();
+            	fos.close();
+	    		break;
+	    	case("json"):
+    		PrintWriter writer;
+            	writer = new PrintWriter(dossier + "individu" + id + "." + format);
+                writer.write(this.toStringJson());
+                writer.flush();
+                writer.close();
+            break;
+	        default:
+	        	System.err.println("type de fichier inconnu");
+	    	}
+		} catch (Exception e) {
+            e.printStackTrace();
+        }
+	}
 	
 	
 }

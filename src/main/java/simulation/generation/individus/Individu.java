@@ -92,7 +92,11 @@ public abstract class Individu implements Enregistrable {
 	//----------------------------------------------------------------------
 	//"constructeur"
 	
-	//fonction statique qui genere un individu
+	/**
+	 * fonction statique qui genere un individu
+	 * @param bb le ByteBuffer contenant les inforamtions de l'individu
+	 * @return l'individu decrit en binaire
+	 */
 	public static Individu regenereIndividu(ByteBuffer bb) {
 		byte type=bb.get();
 		switch(type) {
@@ -148,11 +152,11 @@ public abstract class Individu implements Enregistrable {
 	}
 	
 	/**
-	 * faux getteur qui renvoie le toStringJson de mutation
-	 * @return mutation.toStringJson()
+	 * renvoie la composante de mutation des individus
+	 * @return mutation
 	 */
-	public static String getMutationToStringJson() {
-		return mutation.toStringJson();
+	public static Mutation getMutation() {
+		return mutation;
 	}
 	
 	//----------------------------------------------------------------------
@@ -160,12 +164,16 @@ public abstract class Individu implements Enregistrable {
 	
 	/**
 	 * met à jour le score pour l'evaluation et la selection
-	 * @param score
+	 * @param changement le changement a apporter au score de l'individu
 	 */
-	public void updateScore(float score) {
+	public void updateScore(float changement) {
 		this.score +=score;
 	}
 	
+	/**
+	 * setteur pour les mutations
+	 * @param mutation les mutations a appliquer aux individus
+	 */
 	public static void setMutation(Mutation mutation) {
 		Individu.mutation=mutation;
 	}

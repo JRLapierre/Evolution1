@@ -117,7 +117,7 @@ public class Generation implements Enregistrable {
 	 * @param numero la generation d'ou reprendre la simulation
 	 * @param format bin ou json
 	 * @param epreuve l'epreuve
-	 * @throws IOException 
+	 * @throws IOException si le fichier n'est pas trouve
 	 */
 	public Generation(String nomSimulation, int numero, String format, Epreuve epreuve) throws IOException {
 		this.nomSimulation=nomSimulation;
@@ -144,7 +144,7 @@ public class Generation implements Enregistrable {
 	 * decodeur pour le format json
 	 * @param nomSimulation
 	 * @param numero le numero de la simulation
-	 * @throws IOException
+	 * @throws IOException si le fichier n'est pas trouve
 	 */
 	private void decodeJson(String nomSimulation, int numero) throws IOException {
 		//recherche de la simulation et de la generation en accedant aux fichiers
@@ -183,7 +183,7 @@ public class Generation implements Enregistrable {
 	 * decodeur pour le format bin
 	 * @param nomSimulation
 	 * @param numero le numero de la generation
-	 * @throws IOException
+	 * @throws IOException si le fichier n'est pas trouve
 	 */
 	private void decodeBin(String nomSimulation, int numero) throws IOException {
 		//recherche de la simulation et de la generation en accedant aux fichiers
@@ -377,7 +377,7 @@ public class Generation implements Enregistrable {
 		+ "\"nbEnfantsSexe\":" + nbEnfantsSexe + ","
 		+ "\"nbIndividus\":" + nbIndividus + ","
 		+ "\"butoir\":" + butoir + ","
-		+ "\"mutations\":" + Individu.getMutationToStringJson()
+		+ "\"mutations\":" + Individu.getMutation().toStringJson()
 		+"}";
 	}
 	
@@ -389,6 +389,7 @@ public class Generation implements Enregistrable {
 		bb.putInt(nbClonesMutes);
 		bb.putInt(nbEnfantsSexe);
 		bb.putInt(butoir);
+		bb.put(Individu.getMutation().toByte());
 		return bb.array();
 	}
 	

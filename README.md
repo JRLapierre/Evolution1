@@ -51,7 +51,6 @@ ajouter des fonctionnalites pour mettre en pause
 creer un package main et y mettre toutes les methodes main  
 renommer les package core en simulation  
 enlever le public de Colonne  
-ajouter des package-info
 
 #### trucs a finir si j'en ai le courage
 

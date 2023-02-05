@@ -5,7 +5,7 @@ package puissance4.grille;
  * @author jrl
  *
  */
-public class Colonne {
+class Colonne {
 
 	/**
 	 * une colonne est une liste de pion

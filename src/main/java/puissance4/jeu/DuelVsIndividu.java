@@ -1,10 +1,14 @@
 package puissance4.jeu;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import core.generation.individus.Individu;
 import core.generation.individus.Sauvegarde;
+import core.generation.individus.cerveau.Cerveau;
 import puissance4.joueurs.Joueur;
 import puissance4.joueurs.JoueurHumain;
 import puissance4.joueurs.JoueurIndividu;
@@ -27,16 +31,38 @@ public class DuelVsIndividu {
 	 */
 	Joueur humain=new JoueurHumain();
 	
-	public DuelVsIndividu(String nomSimulation, int generation, int id) throws IOException {
+	/**
+	 * cree une partie de puissance4 entre nous et un individu enregistre
+	 * @param nomSimulation la simulation de laquelle l'individu est sorti
+	 * @param generation la generation de l'individu
+	 * @param id l'id de l'individu
+	 * @param format bin ou json
+	 * @throws IOException
+	 */
+	public DuelVsIndividu(String nomSimulation, int generation, int id, String format) throws IOException {
 		//A NE PAS LANCER DURANT UNE SIMULATION DEJA EXISTANTE
-		individu=new JoueurIndividu(
-		new Sauvegarde(Files.readString(Paths.get(
-				"enregistrements/simulation" + nomSimulation + 
+		Cerveau c;
+		String chemin="enregistrements/simulation" + nomSimulation + 
 				"/generation"+generation + 
-				"/individu" + id + ".json")),
-		null
-		).getCerveau(),
-		25);
+				"/individu" + id + "." + format;
+		switch(format) {
+		case("json"):
+			c=new Sauvegarde(Files.readString(Paths.get(chemin)), null).getCerveau();
+			break;
+		case("bin"):
+			//recuperation du contenu du fichier
+			byte[] sim = Files.readAllBytes(Paths.get(chemin));
+			ByteBuffer bb;
+			bb=ByteBuffer.allocate(sim.length);
+			bb.put(sim);
+			bb.flip();
+			c=Individu.regenereIndividu(bb).getCerveau();
+			break;
+		default:
+			throw new FileNotFoundException("le fichier " + chemin + 
+					" n'existe pas ou n'est pas du bon format");
+		}
+		individu=new JoueurIndividu(c, 25);
 	}
 	
 	/**

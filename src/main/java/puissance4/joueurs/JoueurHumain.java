@@ -25,6 +25,7 @@ public class JoueurHumain extends Joueur{
 	    	System.out.print("votre choix : ");
 		    reponse = input.nextLine();
 	    }
+	    //input.close();
 		return Integer.parseInt(reponse);
 	}
 

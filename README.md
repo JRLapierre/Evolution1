@@ -44,7 +44,6 @@ appliquer du multithreading dans la phase d'enregistrement
 se debarasser de la classe Sauvegarde
 
 #### urgent :
-adapter la classe DuelVsIndividu pour gerer les fichiers binaires
 
 #### TODO
 ajouter des fonctionnalites pour mettre en pause  

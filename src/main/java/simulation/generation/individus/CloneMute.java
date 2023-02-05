@@ -24,8 +24,7 @@ public class CloneMute extends Individu{
 	
 	/**
 	 * constructeur pour un clone mute
-	 * @param parent
-	 * @param mutation
+	 * @param parent le parent de l'individu
 	 */
 	public CloneMute(Individu parent) {
 		super();
@@ -37,7 +36,7 @@ public class CloneMute extends Individu{
 	
 	/**
 	 * constructeur pour un cloneMute a partir d'un ByteBuffer binaire
-	 * @param bb
+	 * @param bb le ByteBuffer contenant les infos
 	 */
 	public CloneMute(ByteBuffer bb) {
 		this.id=bb.getInt();

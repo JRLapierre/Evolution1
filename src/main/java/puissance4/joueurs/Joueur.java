@@ -41,10 +41,18 @@ public abstract class Joueur {
 	public abstract int choix(Grille grille);
 	
 	
+	/**
+	 * modifie le score du joueur de x points
+	 * @param points les points a ajouter ou enlever au joueur
+	 */
 	public void updateScore(int points) {
 		this.score+=points;
 	}
 	
+	/**
+	 * getteur pour obtenir le score du joueur
+	 * @return le score du joueur
+	 */
 	public int getScore() {
 		return score;
 	}

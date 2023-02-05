@@ -59,12 +59,12 @@ public class Mutation implements Enregistrable{
 	
 	/**
 	 * initialisation des paramètres de mutation
-	 * @param graine
-	 * @param tauxCreation
-	 * @param tauxSuppressionCreation
-	 * @param tauxMutationFacteur
-	 * @param maxChangementFacteur
-	 * @param tauxMutationNeurone
+	 * @param graine 				la graine de generation de nombres aleatoires
+	 * @param tauxCreation 			le taux de creation de nouvelle connexions
+	 * @param tauxSuppression 		le taux de suppresssion de connexions
+	 * @param tauxMutationFacteur	le taux de mutation du facteur des connexions
+	 * @param maxChangementFacteur	le taux maximal de changement en cas de mutation du facteur
+	 * @param tauxMutationNeurone	le taux de changement de neurone de l'extremite d'une connexion
 	 */
 	public Mutation(
 			int graine,
@@ -107,7 +107,10 @@ public class Mutation implements Enregistrable{
 	}
 	
 	
-	//constructeur a partir d'un enregistrement binaire
+	/**
+	 * constructeur a partir d'un enregistrement binaire
+	 * @param bb le ByteBuffer contenant les infos
+	 */
 	public Mutation(ByteBuffer bb) {
 		this.aleatoire=new Aleatoire(bb.getInt()+1%2147483647);
 		this.tauxCreation=bb.get();
@@ -224,8 +227,9 @@ public class Mutation implements Enregistrable{
 	
 	
 	/**
-	 * grosse fonction de mutation du main.cerveau
+	 * grosse fonction de mutation du cerveau
 	 * @param cerveau le cerveau a changer
+	 * @return le cerveau mute
 	 */
 	public Cerveau evolution(Cerveau cerveau) {
 		//suppression de connexion

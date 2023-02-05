@@ -54,7 +54,7 @@ public class Connexion implements Enregistrable {
 	
 	/**
 	 * le constructeur pour une nouvelle Connexion unique
-	 * @param puissance le facteur multiplicateur
+	 * @param facteur le facteur multiplicateur
 	 * @param origine la neurone d'origine
 	 * @param cible la neurone cible de la connexion
 	 */
@@ -69,10 +69,10 @@ public class Connexion implements Enregistrable {
 	/**
 	 * un constructeur pour faire une copie d'une neurone.
 	 * Limiter l'usage pour le clonage
-	 * @param facteur
-	 * @param origine
-	 * @param cible
-	 * @param id
+	 * @param facteur	le facteur de multiplication de la connexion
+	 * @param origine	la neurone d'origine de la connexion
+	 * @param cible		la neurone cible de la connexion
+	 * @param id		l'identifiant de la connexion
 	 */
 	public Connexion(float facteur, Neurone origine, Neurone cible, int id) {
 		this.facteur = facteur;
@@ -108,13 +108,18 @@ public class Connexion implements Enregistrable {
 	}
 	
 	
-	//constructeur pour recreer une connexion depuis le binaire
-	public Connexion(ByteBuffer bb, Neurone origine, Cerveau cerveau) {//quel type ?
+	/**
+	 * constructeur pour recreer une connexion depuis le binaire
+	 * @param bb le ByteBuffer contentant les informations
+	 * @param origine la neurone d'origine de la connexions
+	 * @param cerveau le cerveau auquel appartient la connexion
+	 */
+	public Connexion(ByteBuffer bb, Neurone origine, Cerveau cerveau) {
 		this.id=bb.getInt();
 		this.facteur=bb.getFloat();
 		this.origine=origine;
 		this.cible=trouveNeuroneBin(bb, cerveau);
-		//pour remettre le compte des neurones assez haut
+		//pour remettre le compte des connexions assez haut
 		if (this.id>nbConnexions) {
 			nbConnexions=this.id;
 		}
@@ -175,7 +180,7 @@ public class Connexion implements Enregistrable {
 	
 	/**
 	 * getteur pour obtenir la neurone d'origine
-	 * @return
+	 * @return la neurone d'origine de la connexion
 	 */
 	public Neurone getOrigine() {
 		return this.origine;
@@ -183,7 +188,7 @@ public class Connexion implements Enregistrable {
 	
 	/**
 	 * getteur pour obtenir la neurone de cible
-	 * @return
+	 * @return la neurone de cible de la connexion
 	 */
 	public Neurone getCible() {
 		return this.cible;
@@ -191,15 +196,15 @@ public class Connexion implements Enregistrable {
 	
 	/**
 	 * getteur pour l'id
-	 * @return
+	 * @return l'id de la connexion
 	 */
 	public int getId() {
 		return this.id;
 	}
 	
 	/**
-	 * getteur pour l'id
-	 * @return
+	 * getteur pour le facteur
+	 * @return le facteur multiplicateur de la connexion
 	 */
 	public float getFacteur() {
 		return this.facteur;
@@ -242,7 +247,7 @@ public class Connexion implements Enregistrable {
 	
 	/**
 	 * cette fonction change la neurone d'origine suite à une mutation
-	 * @param origine
+	 * @param origine la neurone d'origine de la connexion
 	 */
 	public void updateOrigine(Neurone origine) {
 		this.origine=origine;
@@ -250,7 +255,7 @@ public class Connexion implements Enregistrable {
 	
 	/**
 	 * cette fonction change la neurone de cible suite à une mutations
-	 * @param cible
+	 * @param cible la neurone de cible de la connexion
 	 */
 	public void updateCible(Neurone cible) {
 		this.cible=cible;

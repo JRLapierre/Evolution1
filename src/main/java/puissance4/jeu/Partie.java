@@ -32,7 +32,7 @@ public class Partie extends Thread{
 	
 	/**
 	 * simule le jeu principal
-	 * @throws Exception 
+	 * @throws Exception si le joueur choisit une colonne deja pleine ou joue hors du plateau
 	 */
 	public void jeu() throws Exception {
 		joueur1.pion='X';

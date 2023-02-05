@@ -24,7 +24,7 @@ public class CloneParfait extends Individu{
 	
 	/**
 	 * constructeur pour un clone parfait,au cerveau identique à ses parents
-	 * @param parent
+	 * @param parent le parent de l'individu
 	 */
 	public CloneParfait(Individu parent) {
 		super();
@@ -35,7 +35,7 @@ public class CloneParfait extends Individu{
 	
 	/**
 	 * constructeur pour un clone parfait a partir de binaire
-	 * @param bb
+	 * @param bb le ByteBuffer contenant les informations
 	 */
 	public CloneParfait(ByteBuffer bb) {
 		this.id=bb.getInt();

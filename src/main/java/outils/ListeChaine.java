@@ -91,7 +91,7 @@ public class ListeChaine<T> {
 	
 	/**
 	 * constructeur qui initialise une liste avec 1 element des le départ
-	 * @param elt
+	 * @param elt l'element de depart
 	 */
 	public ListeChaine(T elt) {
 		premier=new Noeud(elt, null, null);
@@ -102,7 +102,7 @@ public class ListeChaine<T> {
 	/**
 	 * constructeur qui prend en parametres plusieurs arguments et les integres
 	 * dans la liste.
-	 * @param elts
+	 * @param elts les elements a ajouter
 	 */
 	@SafeVarargs
 	public ListeChaine(T... elts) {
@@ -159,7 +159,7 @@ public class ListeChaine<T> {
 	
 	/**
 	 * ajout d'un element en queue de liste
-	 * @param elt
+	 * @param elt l'element a ajouter
 	 */
 	public void ajout(T elt) {
 		if (longueur==0) {
@@ -234,8 +234,8 @@ public class ListeChaine<T> {
 	
 	/**
 	 * fonction d'ajout à un index donné
-	 * @param elt
-	 * @param index
+	 * @param index l'index auquel on va inserer l'element
+	 * @param elt l'element a inserer
 	 */
 	public void ajout(int index, T elt) {
 		//cas particuliers
@@ -285,8 +285,8 @@ public class ListeChaine<T> {
 	
 	/**
 	 * fonction qui remplace un element par un autre
-	 * @param index
-	 * @param elt
+	 * @param index l'index de l'element a remplacer
+	 * @param newElt l'element a mettre a la place
 	 */
 	public void replaceElt(int index, T newElt) {
 		this.getNoeud(index).elt=newElt;
@@ -387,7 +387,7 @@ public class ListeChaine<T> {
 	
 	/**
 	 * fonction qui renvoie l'index de la premiere occurence d'un element
-	 * @param elt
+	 * @param elt l'element recherche
 	 * @return -1 si l'élément n'est pas trouvé, l'index sinon
 	 */
 	public int getIndex(T elt) {
@@ -435,7 +435,7 @@ public class ListeChaine<T> {
 	
 	/**
 	 * fonction de recherche d'un element selon l'index
-	 * @param index
+	 * @param index l'index recherche
 	 * @return le contenu du noeud
 	 */
 	public T getElement(int index) {
@@ -546,7 +546,7 @@ public class ListeChaine<T> {
 	
 	/**
 	 * supprime la première occurence d'un element
-	 * @param elt
+	 * @param elt l'element recherche
 	 */
 	public void delElt(T elt) {
 		int index=getIndex(elt);

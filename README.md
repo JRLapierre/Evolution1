@@ -42,13 +42,14 @@ appliquer du multithreading dans la phase de recuperation des donnees
 appliquer du multithreading dans la phase de reproduction  
 appliquer du multithreading dans la phase d'enregistrement  
 faire un convertisseur binaire-json pour visualiser les individus enregistres en binaire  
+revoir la generation du cerveau pour les nouveaux individus  
 
 #### urgent :
+verifier le bon fonctionnement du score des individus  
 
 #### TODO
 ajouter des fonctionnalites pour mettre en pause  
 creer un package main et y mettre toutes les methodes main  
-renommer les package core en simulation  
 
 #### trucs a finir si j'en ai le courage
 

@@ -34,7 +34,7 @@ public class Sauvegarde extends Individu {
 	
 	/**
 	 * constructeur pour creer un individu sauvegarde a partir de binaire
-	 * @param bb
+	 * @param bb le bytebuffer contenant les inforamtions
 	 */
 	public Sauvegarde(ByteBuffer bb) {
 		this.id=bb.getInt();

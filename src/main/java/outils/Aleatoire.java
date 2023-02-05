@@ -169,7 +169,7 @@ public class Aleatoire {
 	
 	/**
 	 * une methode qui renvoie un nombre entre -1 et 1
-	 * @return
+	 * @return un nombre aleatoire entre -1 et 1
 	 */
 	public double aleat() {
 		return (double) aleatInt()/ (double) 2147483647;

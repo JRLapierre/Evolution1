@@ -78,7 +78,7 @@ public class Neurone implements Enregistrable {
 	/**
 	 * setter pour enregistrer la valeur (neurone d'entrée du cerveau)
 	 * cette fonction est utilisée pour les input
-	 * @param puissance
+	 * @param puissance la puissance qu'on souhaite mettre
 	 * @return les pertes
 	 */
 	public float setPuissance(float puissance) {
@@ -99,7 +99,7 @@ public class Neurone implements Enregistrable {
 	
 	/**
 	 * getteur pour le type
-	 * @return
+	 * @return le type
 	 */
 	public String getType() {
 		return type;
@@ -107,7 +107,7 @@ public class Neurone implements Enregistrable {
 
 	/**
 	 * getteur pour le numero
-	 * @return
+	 * @return le numero
 	 */
 	public int getNumero() {
 		return numero;
@@ -176,7 +176,7 @@ public class Neurone implements Enregistrable {
 	/**
 	 * fonction qui existe pour comparer des neurones de cerveau différents, 
 	 * même si la liste de Connexion associés n'est pas la même
-	 * @param obj l'objet à comparer
+	 * @param other l'objet à comparer
 	 * @return true si les deux neurones ont le même type et le même numero
 	 */
 	public boolean equalsRoles(Neurone other) {

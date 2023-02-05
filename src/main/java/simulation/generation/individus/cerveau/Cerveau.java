@@ -47,15 +47,15 @@ public class Cerveau implements Enregistrable {
 	
 	/**
 	 * génère un cerveau vierge sans connexions
-	 * @param nbInput
-	 * @param nbOutput
-	 * @param nbNeurones
+	 * @param nbInput		le nombre de neurones d'entrees du cerveau
+	 * @param nbOutput		le nombre de neurones de sortie du cerveau
+	 * @param nbInterne		le nombre de neurones internes du cerveau
 	 */
-	public Cerveau(int nbInput, int nbOutput, int nbNeurones) {
+	public Cerveau(int nbInput, int nbOutput, int nbInterne) {
 		//initialisation des listes
 		listeInput=initListN(nbInput, "input");
 		listeOutput=initListN(nbOutput, "output");
-		listeInterne=initListN(nbNeurones, "interne");		
+		listeInterne=initListN(nbInterne, "interne");		
 	}
 	
 	/**
@@ -181,7 +181,7 @@ public class Cerveau implements Enregistrable {
 	
 	/**
 	 * getteur pour le nombre de neurones d'entree
-	 * @return
+	 * @return le nombre de neurones d'entrees
 	 */
 	public int getNbInput() {
 		return listeInput.length;
@@ -189,7 +189,7 @@ public class Cerveau implements Enregistrable {
 
 	/**
 	 * getteur pour le nombre de neurones de sorties
-	 * @return
+	 * @return le nombre de neurones de sortie
 	 */
 	public int getNbOutput() {
 		return listeOutput.length;
@@ -197,7 +197,7 @@ public class Cerveau implements Enregistrable {
 
 	/**
 	 * getteur pour le nombre de neurones internes
-	 * @return
+	 * @return le nombre de neurones 
 	 */
 	public int getNbInterne() {
 		return listeInterne.length;
@@ -205,7 +205,7 @@ public class Cerveau implements Enregistrable {
 	
 	/**
 	 * getteur pour listeInput
-	 * @return
+	 * @return la liste des neurones d'entree du cerveau
 	 */
 	public Neurone[] getListeInput() {
 		return listeInput;
@@ -213,7 +213,7 @@ public class Cerveau implements Enregistrable {
 
 	/**
 	 * getteur pour listeOutPut
-	 * @return
+	 * @return la liste des neurones de sortie du cerveau
 	 */
 	public Neurone[] getListeOutput() {
 		return listeOutput;
@@ -221,7 +221,7 @@ public class Cerveau implements Enregistrable {
 
 	/**
 	 * getteur pour listeInterneNeurones
-	 * @return
+	 * @return la liste des neurones internes au cerveau
 	 */
 	public Neurone[] getListeInterne() {
 		return listeInterne;
@@ -229,7 +229,7 @@ public class Cerveau implements Enregistrable {
 
 	/**
 	 * getteur pour listeConnexions
-	 * @return
+	 * @return la liste des connexions contenues dans ce cerveau
 	 */
 	public ListeChaine<Connexion> getListeConnexions() {
 		return listeConnexions;
@@ -329,7 +329,7 @@ public class Cerveau implements Enregistrable {
 	
 	/**
 	 * setter pour inclure une liste déja faite
-	 * @param listeConnextions
+	 * @param listeConnexions la liste de connexions contenues dans ce cerveau
 	 */
 	public void setListeConnextions(ListeChaine<Connexion> listeConnexions) {
 		this.listeConnexions = listeConnexions;

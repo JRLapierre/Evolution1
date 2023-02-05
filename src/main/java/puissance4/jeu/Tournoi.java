@@ -2,6 +2,12 @@ package puissance4.jeu;
 
 import puissance4.joueurs.Joueur;
 
+/**
+ * cette classe simule un tournoi.
+ * Il s'agit d'organiser tous les duel au puissance 4 possibles.
+ * @author jrl
+ *
+ */
 public class Tournoi {
 	
 	

@@ -16,7 +16,8 @@ public class Original extends Individu{
 	/**
 	 * constructeur pour l'individu initial de la simulation, ainsi
 	 * que un peu d'initialisation
-	 * @param cerveau
+	 * @param cerveau le cerveau de l'individu
+	 * @param mutation l'objet mutation pour l'initialiser
 	 */
 	public Original(Cerveau cerveau, Mutation mutation) {
 		super();

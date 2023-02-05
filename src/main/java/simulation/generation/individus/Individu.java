@@ -121,7 +121,7 @@ public abstract class Individu implements Enregistrable {
 	
 	/**
 	 * getteur pour l'id
-	 * @return
+	 * @return l'identifiant de l'individu
 	 */
 	public int getId() {
 		return id;
@@ -129,7 +129,7 @@ public abstract class Individu implements Enregistrable {
 	
 	/**
 	 * getteur pour le score
-	 * @return
+	 * @return le score de l'individu
 	 */
 	public float getScore() {
 		return score;
@@ -137,7 +137,7 @@ public abstract class Individu implements Enregistrable {
 	
 	/**
 	 * getteur pour le cerveau
-	 * @return
+	 * @return le cerveau de l'individu
 	 */
 	public Cerveau getCerveau() {
 		return cerveau;
@@ -145,7 +145,7 @@ public abstract class Individu implements Enregistrable {
 	
 	/**
 	 * getteur pour la generation de l'individu
-	 * @return
+	 * @return le numero de generation
 	 */
 	public int getGeneration() {
 		return generation;

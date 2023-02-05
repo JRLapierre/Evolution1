@@ -37,7 +37,7 @@ public class DuelVsIndividu {
 	 * @param generation la generation de l'individu
 	 * @param id l'id de l'individu
 	 * @param format bin ou json
-	 * @throws IOException
+	 * @throws IOException si le fichier n'existe pas
 	 */
 	public DuelVsIndividu(String nomSimulation, int generation, int id, String format) throws IOException {
 		//A NE PAS LANCER DURANT UNE SIMULATION DEJA EXISTANTE

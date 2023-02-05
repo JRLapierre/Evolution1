@@ -6,7 +6,7 @@ package outils;
  * carracteristique.
  * @author jrl
  *
- * @param <T>
+ * @param <T> le type d'element qu'on veux comparer
  */
 @FunctionalInterface
 public interface Carracteristique<T> {

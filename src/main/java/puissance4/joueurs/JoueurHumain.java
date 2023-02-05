@@ -4,6 +4,12 @@ import java.util.Scanner;
 
 import puissance4.grille.Grille;
 
+/**
+ * cette classe represente un joueur hummain, c'est 
+ * a dire nous. Elle nous permet de jouer.
+ * @author jrl
+ *
+ */
 public class JoueurHumain extends Joueur{
 	
 	/**

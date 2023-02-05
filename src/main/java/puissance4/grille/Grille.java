@@ -53,7 +53,12 @@ public class Grille {
 		return grille[col-1].estPleine();
 	}
 	
-	//savoir si un joueur a gagne
+	/**
+	 * savoir si un joueur a gagne
+	 * @param pion le pion du dernier joueur
+	 * @param position la colonne dans laquelle le pion a ete joue
+	 * @return true en cas de victoire, false sinon
+	 */
 	public boolean gagne(char pion, int position) {
 		if(position>7) return false;
 		int x=position-1;
@@ -74,7 +79,13 @@ public class Grille {
 	
 	//4 fonctions d'alignements :
 	
-	//vertical
+	/**
+	 * diagonale descendante
+	 * @param pion le pion a inspecter
+	 * @param x la coordonnee x du pion
+	 * @param y la coordonnee y du pion
+	 * @return true si il y a un alignement vertical de 4 pions
+	 */
 	private boolean aligneVertical(char pion, int x) {
 		int suite=0;
 		for(int i=0; i<6; i++) {
@@ -93,7 +104,13 @@ public class Grille {
 		return false;
 	}
 	
-	//horisontal
+	/**
+	 * diagonale descendante
+	 * @param pion le pion a inspecter
+	 * @param x la coordonnee x du pion
+	 * @param y la coordonnee y du pion
+	 * @return true si il y a un alignement horisontal de 4 pions
+	 */
 	private boolean aligneHorisontal(char pion, int y) {
 		int suite=0;
 		for(int i=0; i<7; i++) {
@@ -106,7 +123,13 @@ public class Grille {
 		return false;
 	}
 	
-	//diagonale montante
+	/**
+	 * diagonale descendante
+	 * @param pion le pion a inspecter
+	 * @param x la coordonnee x du pion
+	 * @param y la coordonnee y du pion
+	 * @return true si il y a un alignement diagonal montant de 4 pions
+	 */
 	private boolean aligneDiagonaleMontante(char pion, int x, int y) {
 		//determiner la base de la diagonale
 		if(x>y) {
@@ -132,7 +155,13 @@ public class Grille {
 		return false;
 	}
 	
-	//diagonale descendante
+	/**
+	 * diagonale descendante
+	 * @param pion le pion a inspecter
+	 * @param x la coordonnee x du pion
+	 * @param y la coordonnee y du pion
+	 * @return true si il y a un alignement diagonal descendant de 4 pions
+	 */
 	private boolean aligneDiagonaleDescendante(char pion, int x, int y) {
 		//determiner la base de la diagonale //on commence en haut
 		while(x!=0 && y!=5) {
@@ -152,7 +181,10 @@ public class Grille {
 		return false;
 	}
 	
-	//une methode de copie
+	/***
+	 * une methode de copie de la grille
+	 * @return une grille identique
+	 */
 	public Grille copie() {
 		Grille g=new Grille();
 		for(int i=0; i<7; i++) {
@@ -165,7 +197,7 @@ public class Grille {
 	
 	
 	
-	//une methode pour afficher la grille
+	@Override
 	public String toString() {
 		StringBuilder str=new StringBuilder(133);
 		//ligne superieure

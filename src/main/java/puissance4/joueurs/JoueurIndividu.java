@@ -29,7 +29,7 @@ public class JoueurIndividu extends Joueur{
 	
 	/**
 	 * constructeur d'un joueur de la classe Individu
-	 * @param cerveau
+	 * @param cerveau le cerveau de l'individu
 	 * @param nbTics le temps de choix
 	 */
 	public JoueurIndividu(Cerveau cerveau, int nbTics) {

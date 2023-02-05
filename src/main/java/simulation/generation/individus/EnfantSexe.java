@@ -30,9 +30,8 @@ public class EnfantSexe extends Individu{
 	/**
 	 * constructeur pour un enfant issu de reproduciton sexuee, 
 	 * avec des mutations par rapport a ses parent
-	 * @param cerveau
-	 * @param generation
-	 * @param parent
+	 * @param parent1 un des parents de l'individu
+	 * @param parent2 l'autre parent de l'individu
 	 */
 	public EnfantSexe(Individu parent1, Individu parent2) {
 		super();
@@ -43,7 +42,10 @@ public class EnfantSexe extends Individu{
 	}
 	
 	
-	//constructeur pour un enfant a partir d'un fichier binaire
+	/**
+	 * constructeur pour un enfant a partir d'un fichier binaire
+	 * @param bb le ByteBuffer contenant les infos
+	 */
 	public EnfantSexe(ByteBuffer bb) {
 		this.id=bb.getInt();
 		this.idParent1=bb.getInt();

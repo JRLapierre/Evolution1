@@ -8,6 +8,10 @@ package puissance4.jeu;
  */
 public class Jouer {
 
+	/**
+	 * methode main qui lance un duel
+	 * @param args rien a mettre
+	 */
 	public static void main(String[] args) {
 		try {
 			DuelVsIndividu duel=new DuelVsIndividu("2P4", 51110, 1000, "bin");

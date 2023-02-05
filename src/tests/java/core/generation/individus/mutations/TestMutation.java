@@ -1,4 +1,4 @@
-package core.generation.individus.mutation;
+package core.generation.individus.mutations;
 
 import static org.junit.jupiter.api.Assertions.*;
 

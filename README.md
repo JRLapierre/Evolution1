@@ -41,17 +41,24 @@ faire des fonctions pour traquer les ancetres et les liens de parentee
 appliquer du multithreading dans la phase de recuperation des donnees  
 appliquer du multithreading dans la phase de reproduction  
 appliquer du multithreading dans la phase d'enregistrement  
+se debarasser de la classe Sauvegarde
 
 #### urgent :
+adapter la classe DuelVsIndividu pour gerer les fichiers binaires
 
 #### TODO
 ajouter des fonctionnalites pour mettre en pause  
+creer un package main et y mettre toutes les methodes main  
+renommer les package core en simulation  
+enlever le public de Colonne  
+ajouter des package-info
 
 #### trucs a finir si j'en ai le courage
 
 continuer la classe TestAleatoire  
 faire un diagramme de classe propre plutot que le plantUML auto genere  
 tenir a jour la doc  
+resoudre le mystere de la reprise des id a 100 a la generation 51014  
 
 #### taches impossibles (ou presque)
 enregistrer l'expression lambda dans un fichier et la recreer a partir de ce fichier  

@@ -6,12 +6,12 @@ import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import core.generation.individus.Individu;
-import core.generation.individus.Sauvegarde;
-import core.generation.individus.cerveau.Cerveau;
 import puissance4.joueurs.Joueur;
 import puissance4.joueurs.JoueurHumain;
 import puissance4.joueurs.JoueurIndividu;
+import simulation.generation.individus.Individu;
+import simulation.generation.individus.Sauvegarde;
+import simulation.generation.individus.cerveau.Cerveau;
 
 /**
  * cette classe contient tous les elements necessaires pour lancer un duel contre 

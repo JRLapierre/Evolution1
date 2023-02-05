@@ -5,12 +5,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import core.generation.individus.cerveau.Cerveau;
-import core.generation.individus.cerveau.Connexion;
 import puissance4.joueurs.Joueur;
 import puissance4.joueurs.JoueurAI1;
 import puissance4.joueurs.JoueurHumain;
 import puissance4.joueurs.JoueurIndividu;
+import simulation.generation.individus.cerveau.Cerveau;
+import simulation.generation.individus.cerveau.Connexion;
 
 class TestJoueurs {
 

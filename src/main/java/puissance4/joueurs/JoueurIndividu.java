@@ -1,8 +1,8 @@
 package puissance4.joueurs;
 
-import core.generation.individus.cerveau.Cerveau;
 import outils.ListeChaine;
 import puissance4.grille.Grille;
+import simulation.generation.individus.cerveau.Cerveau;
 
 /**
  * cette classe represente un joueur issu de la simulation qui joue avec son cerveau.

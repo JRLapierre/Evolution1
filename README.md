@@ -46,6 +46,8 @@ revoir la generation du cerveau pour les nouveaux individus
 
 #### urgent :
 verifier le bon fonctionnement du score des individus  
+resoudre le mystere de la reprise des id a 100 depuis la generation 51014  
+
 
 #### TODO
 ajouter des fonctionnalites pour mettre en pause  
@@ -56,7 +58,6 @@ creer un package main et y mettre toutes les methodes main
 continuer la classe TestAleatoire  
 faire un diagramme de classe propre plutot que le plantUML auto genere  
 tenir a jour la doc  
-resoudre le mystere de la reprise des id a 100 depuis la generation 51014  
 
 #### taches impossibles (ou presque)
 enregistrer l'expression lambda dans un fichier et la recreer a partir de ce fichier  

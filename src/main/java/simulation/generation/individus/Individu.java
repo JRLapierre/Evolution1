@@ -84,9 +84,7 @@ public abstract class Individu implements Enregistrable {
 				sub.indexOf("\"score\":")+8, 
 				sub.indexOf(",\"cerveau\"")));
 		this.cerveau=new Cerveau(sub);
-		if(this.id+1>nbIndividus) {
-			Individu.nbIndividus=id+1;
-		}
+		updateId();
 	}
 	
 	//----------------------------------------------------------------------
@@ -176,6 +174,15 @@ public abstract class Individu implements Enregistrable {
 	 */
 	public static void setMutation(Mutation mutation) {
 		Individu.mutation=mutation;
+	}
+	
+	/**
+	 * met a jour l'id maximal des individus
+	 */
+	protected void updateId() {
+		if(this.id+1>nbIndividus) {
+			Individu.nbIndividus=id+1;
+		}
 	}
 	
 	//-------------------------------------------------------------------------------

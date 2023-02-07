@@ -43,15 +43,16 @@ appliquer du multithreading dans la phase de reproduction
 appliquer du multithreading dans la phase d'enregistrement  
 faire un convertisseur binaire-json pour visualiser les individus enregistres en binaire  
 revoir la generation du cerveau pour les nouveaux individus  
+revoir la classe Mutation (n'agis que sur le cerveau)
+ecrire la derniere generation enregistree dans un fichier  
 
 #### urgent :
 verifier le bon fonctionnement du score des individus  
-resoudre le mystere de la reprise des id a 100 depuis la generation 51014  
-
 
 #### TODO
 ajouter des fonctionnalites pour mettre en pause  
-creer un package main et y mettre toutes les methodes main  
+mettre dans le package main toutes les methodes main  
+refaire les tests pour qu'ils soient toujours bons  
 
 #### trucs a finir si j'en ai le courage
 

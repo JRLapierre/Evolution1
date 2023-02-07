@@ -78,13 +78,13 @@ public class Generation implements Enregistrable {
 	
 	/**
 	 * genere une nouvelle generation a partir d'un individu donné
-	 * @param originel le premier individu de la simulation
-	 * @param nbClonesParfaits le nombre de clones parfaits a chaque generation
-	 * @param nbClonesMutes le nombre de clones mutes a chaque generation
-	 * @param nbEnfantsSexe le nombre d'enfants de reproduction sexuee a chaque generation
-	 * @param butoir la limite dans le classement pour pouvoir se reproduire
-	 * @param epreuve l'epreuve pour evaluer les individus
-	 * @param nomSimulation le nom de la simulation
+	 * @param originel 			le premier individu de la simulation
+	 * @param nbClonesParfaits 	le nombre de clones parfaits a chaque generation
+	 * @param nbClonesMutes 	le nombre de clones mutes a chaque generation
+	 * @param nbEnfantsSexe 	le nombre d'enfants de reproduction sexuee a chaque generation
+	 * @param butoir 			la limite dans le classement pour pouvoir se reproduire
+	 * @param epreuve 			l'epreuve pour evaluer les individus
+	 * @param nomSimulation 	le nom de la simulation
 	 */
 
 	public Generation(
@@ -103,7 +103,7 @@ public class Generation implements Enregistrable {
 		this.population=new Individu[nbIndividus];
 		this.epreuve=epreuve;
 		this.butoir=butoir;
-		//creation d'une nouvelle generation
+		//creation d'une nouvelle population
 		for (int i=0; i<nbIndividus; i++) {
 			population[i]=new CloneMute(originel);
 		}
@@ -253,7 +253,8 @@ public class Generation implements Enregistrable {
 		//reproduction sexuee
 		for (int i=0; i<nbEnfantsSexe*2; i+=2) {
 			newPopulation[nbClonesParfaits + nbClonesMutes + i/2]=
-					new EnfantSexe(population[((i % nbIndividus) % butoir) % population.length], 
+					new EnfantSexe(
+							population[((i % nbIndividus) % butoir) % population.length], 
 							population[((i+1 % nbIndividus) % butoir) % population.length]);
 		}
 		this.population=newPopulation;

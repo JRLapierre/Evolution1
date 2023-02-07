@@ -72,7 +72,9 @@ class TestGeneration {
 	@DisplayName("test des fonctions de bases")
 	void testBases() {
 		Generation g1=type01();
+		System.out.println(g1.getPopulation()[0].getScore());
 		g1.evaluation();
+		System.out.println(g1.getPopulation()[0].getScore());
 		g1.enregistreGeneration("json");
 		
 		assertEquals(70, g1.getPopulation()[0].getScore());

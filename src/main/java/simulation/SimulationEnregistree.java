@@ -43,7 +43,7 @@ public class SimulationEnregistree {
 	/**
 	 * le numero de la generation a laquelle on va reprendre la simulation
 	 */
-	private static int generationInitiale=51100;
+	private static int generationInitiale=51013;
 	
 	/**
 	 * le nombre de generations a simuler.

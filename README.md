@@ -52,8 +52,8 @@ faire un fichier java contenant tous les parametres
 #### TODO
 faire un convertisseur binaire-json pour visualiser les individus enregistres en binaire  
 mettre dans le package main toutes les methodes main  
-refaire les tests pour qu'ils soient toujours bons  
-revoir la classe Mutation (n'agis que sur le cerveau)
+revoir la classe Mutation (n'agis que sur une liste de connexions)  
+supprimer les fichiers avant les tests dans la classe TestGeneration  
 
 
 #### trucs a finir si j'en ai le courage

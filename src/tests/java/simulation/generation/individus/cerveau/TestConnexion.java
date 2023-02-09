@@ -7,6 +7,8 @@ import java.nio.ByteBuffer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import outils.Outils;
+
 
 class TestConnexion {
 	
@@ -100,10 +102,7 @@ class TestConnexion {
 		b.putFloat(1.5f);//facteur
 		b.put((byte) 3);//type de la cible
 		b.putShort((short) 2);//numero de la cible
-		byte[] b2=c.toByte();
-		for (int i=0; i<b2.length; i++) {
-			assertEquals(b2[i], b.array()[i]);
-		}
+		assertTrue(Outils.compareListeByte(c.toByte(), b.array()));
 		b.flip();
 		Cerveau cer=new Cerveau(5,5,5);
 		Connexion c2=new Connexion(b, cer.getListeInput()[0], cer);

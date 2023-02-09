@@ -7,6 +7,8 @@ import java.nio.ByteBuffer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import outils.Outils;
+
 class TestNeurone {
 	
 	
@@ -60,10 +62,7 @@ class TestNeurone {
 		ByteBuffer b=ByteBuffer.allocate(3);
 		b.put((byte) 1);
 		b.putShort((short) 1);
-		byte[] b2=n.toByte();
-		for(int i=0; i<b2.length; i++) {
-			assertEquals(b2[i], b.array()[i]);
-		}
+		assertTrue(Outils.compareListeByte(b.array(), n.toByte()));
 	}
 
 

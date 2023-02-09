@@ -86,7 +86,6 @@ public class Generation implements Enregistrable {
 	 * @param epreuve 			l'epreuve pour evaluer les individus
 	 * @param nomSimulation 	le nom de la simulation
 	 */
-
 	public Generation(
 			Individu originel,
 			int nbClonesParfaits, 

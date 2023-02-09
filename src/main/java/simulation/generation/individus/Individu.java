@@ -165,7 +165,7 @@ public abstract class Individu implements Enregistrable {
 	 * @param changement le changement a apporter au score de l'individu
 	 */
 	public void updateScore(float changement) {
-		this.score +=score;
+		this.score +=changement;
 	}
 	
 	/**

@@ -41,7 +41,6 @@ faire des fonctions pour traquer les ancetres et les liens de parentee
 appliquer du multithreading dans la phase de recuperation des donnees  
 appliquer du multithreading dans la phase de reproduction  
 appliquer du multithreading dans la phase d'enregistrement  
-faire un convertisseur binaire-json pour visualiser les individus enregistres en binaire  
 revoir la generation du cerveau pour les nouveaux individus  
 ecrire la derniere generation enregistree dans un fichier  
 ajouter des fonctionnalites pour mettre en pause  
@@ -49,9 +48,9 @@ faire un fichier java contenant tous les parametres
 
 
 #### urgent :
-verifier le bon fonctionnement du score des individus  
 
 #### TODO
+faire un convertisseur binaire-json pour visualiser les individus enregistres en binaire  
 mettre dans le package main toutes les methodes main  
 refaire les tests pour qu'ils soient toujours bons  
 revoir la classe Mutation (n'agis que sur le cerveau)

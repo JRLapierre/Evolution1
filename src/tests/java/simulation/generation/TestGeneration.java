@@ -67,6 +67,8 @@ class TestGeneration {
 	//-------------------------------------------------------------------------------------------
 	//fonctions de test
 	
+	//TODO faire des fonctions de suppresion des dossiers crees durant les tests
+	
 	
 	@Test
 	@DisplayName("test des fonctions de bases")

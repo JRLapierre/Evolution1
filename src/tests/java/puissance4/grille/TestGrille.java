@@ -94,13 +94,13 @@ class TestGrille {
 		g.ajoutePion('X', 2);
 		g.ajoutePion('X', 2);
 		g.ajoutePion('X', 2);
-		assertEquals(false, g.colonnePleine(1));
-		System.out.println("estpleine");
+		assertEquals(false, g.colonnePleine(2));
+		System.out.println("estpleine \n" + g);
 		g.ajoutePion('X', 2);
-		assertEquals(false, g.colonnePleine(1));
+		assertEquals(false, g.colonnePleine(2));
 		g.ajoutePion('X', 2);
-		assertEquals(true, g.colonnePleine(1));
-		System.out.println(g);
+		assertEquals(true, g.colonnePleine(2));
+		System.out.println("estpleine \n" + g);
 
 
 

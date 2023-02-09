@@ -60,8 +60,10 @@ class TestNeurone {
 		ByteBuffer b=ByteBuffer.allocate(3);
 		b.put((byte) 1);
 		b.putShort((short) 1);
-		//dans les faits ca marche, mais il veut pas faire le equals correctement
-		//assertEquals(n.toByte(), b.array());
+		byte[] b2=n.toByte();
+		for(int i=0; i<b2.length; i++) {
+			assertEquals(b2[i], b.array()[i]);
+		}
 	}
 
 

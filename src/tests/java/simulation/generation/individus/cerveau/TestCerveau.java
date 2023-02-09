@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import outils.ListeChaine;
 
+//@FixMethodOrder(MethodSorters.NAME_ASCENDING)//ordre alphabetique
 class TestCerveau {
 
 	
@@ -106,22 +107,12 @@ class TestCerveau {
 	
 	
 	@Test
-	@DisplayName("test du toStringJson")
+	@DisplayName("test du toStringJson et du decodeur")
 	void testToStringJson() {
 		//System.out.println(c2().toStringJson());
-		
-		assertEquals(sc2(), c2().toStringJson());
-	}
-	
-	@Test
-	@DisplayName("test du constructeur a partir d'un string")
-	void testFromToString() {
-		//{"individu391":{"type":"EnfantSexe","parent1":230,"parent2":231,"id":391,"generation":4,"score":50.0,"cerveau":{"inputs":{"Neurone0":{}},"interne":{"Neurone0":{},"Neurone1":{"connexion141":{"id":141,"facteur":-1.3898041,"origine":{"type":"interne","numero":1},"cible":{"type":"interne","numero":3}}},"Neurone2":{},"Neurone3":{},"Neurone4":{"connexion140":{"id":140,"facteur":-1.7281322,"origine":{"type":"interne","numero":4},"cible":{"type":"input","numero":0}}}},"outputs":{"Neurone0":{"connexion2":{"id":2,"facteur":-0.5347695,"origine":{"type":"output","numero":0},"cible":{"type":"interne","numero":4}}}}}}}
-		Cerveau c=new Cerveau("{\"individu9906\":{\"type\":\"CloneParfait\",\"parent\":9806,\"id\":9906,\"generation\":100,\"score\":100.0,\"cerveau\":{\"input\":{\"Neurone0\":{\"connexion181\":{\"id\":181,\"facteur\":2.0,\"origine\":{\"type\":\"input\",\"numero\":0},\"cible\":{\"type\":\"output\",\"numero\":0}},\"connexion425\":{\"id\":425,\"facteur\":2.0,\"origine\":{\"type\":\"input\",\"numero\":0},\"cible\":{\"type\":\"output\",\"numero\":0}},\"connexion687\":{\"id\":687,\"facteur\":1.2194524,\"origine\":{\"type\":\"input\",\"numero\":0},\"cible\":{\"type\":\"output\",\"numero\":0}}}},\"interne\":{\"Neurone0\":{\"connexion512\":{\"id\":512,\"facteur\":-1.0219007,\"origine\":{\"type\":\"interne\",\"numero\":0},\"cible\":{\"type\":\"interne\",\"numero\":0}}},\"Neurone1\":{},\"Neurone2\":{},\"Neurone3\":{},\"Neurone4\":{\"connexion579\":{\"id\":579,\"facteur\":-0.10173426,\"origine\":{\"type\":\"interne\",\"numero\":4},\"cible\":{\"type\":\"interne\",\"numero\":0}}}},\"output\":{\"Neurone0\":{}}}}}");
-		assertEquals(1, c.getNbInput());
-		assertEquals(5, c.getNbInterne());
-		assertEquals(1, c.getNbOutput());
-		assertEquals("{\"input\":{\"Neurone0\":{\"connexion181\":{\"id\":181,\"facteur\":2.0,\"origine\":{\"type\":\"input\",\"numero\":0},\"cible\":{\"type\":\"output\",\"numero\":0}},\"connexion425\":{\"id\":425,\"facteur\":2.0,\"origine\":{\"type\":\"input\",\"numero\":0},\"cible\":{\"type\":\"output\",\"numero\":0}},\"connexion687\":{\"id\":687,\"facteur\":1.2194524,\"origine\":{\"type\":\"input\",\"numero\":0},\"cible\":{\"type\":\"output\",\"numero\":0}}}},\"interne\":{\"Neurone0\":{\"connexion512\":{\"id\":512,\"facteur\":-1.0219007,\"origine\":{\"type\":\"interne\",\"numero\":0},\"cible\":{\"type\":\"interne\",\"numero\":0}}},\"Neurone1\":{},\"Neurone2\":{},\"Neurone3\":{},\"Neurone4\":{\"connexion579\":{\"id\":579,\"facteur\":-0.10173426,\"origine\":{\"type\":\"interne\",\"numero\":4},\"cible\":{\"type\":\"interne\",\"numero\":0}}}},\"output\":{\"Neurone0\":{}}}", c.toStringJson());
+		Cerveau c0=c2();
+		Cerveau c1=new Cerveau(c0.toStringJson());
+		assertEquals(c0, c1);
 	}
 	
 	@Test

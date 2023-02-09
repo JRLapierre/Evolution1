@@ -43,16 +43,19 @@ appliquer du multithreading dans la phase de reproduction
 appliquer du multithreading dans la phase d'enregistrement  
 faire un convertisseur binaire-json pour visualiser les individus enregistres en binaire  
 revoir la generation du cerveau pour les nouveaux individus  
-revoir la classe Mutation (n'agis que sur le cerveau)
 ecrire la derniere generation enregistree dans un fichier  
+ajouter des fonctionnalites pour mettre en pause  
+faire un fichier java contenant tous les parametres  
+
 
 #### urgent :
 verifier le bon fonctionnement du score des individus  
 
 #### TODO
-ajouter des fonctionnalites pour mettre en pause  
 mettre dans le package main toutes les methodes main  
 refaire les tests pour qu'ils soient toujours bons  
+revoir la classe Mutation (n'agis que sur le cerveau)
+
 
 #### trucs a finir si j'en ai le courage
 

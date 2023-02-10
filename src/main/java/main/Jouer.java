@@ -1,4 +1,6 @@
-package puissance4.jeu;
+package main;
+
+import puissance4.jeu.DuelVsIndividu;
 
 /**
  * cette classe permet de faire un duel contre un individu enregistre.

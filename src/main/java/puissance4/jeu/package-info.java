@@ -4,8 +4,6 @@
  * 
  * Ce package contient les classes DuelVsIndividu, 
  * qui permet d'engager un duel contre un individu, 
- * Jouer (bientot enleve) qui permet de lancer une 
- * partie, 
  * Partie, qui gere un duel entre deux joueurs,
  * Tournoi, qui organise des parties entre tous les 
  * joueurs.

@@ -16,7 +16,7 @@ public class Jouer {
 	 */
 	public static void main(String[] args) {
 		try {
-			DuelVsIndividu duel=new DuelVsIndividu("2P4", 51110, 1000, "bin");
+			DuelVsIndividu duel=new DuelVsIndividu("2P4", 51016, 100500, "bin");
 			duel.duel(false);
 		} catch (Exception e) {
 			e.printStackTrace();

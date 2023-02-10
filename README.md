@@ -52,7 +52,6 @@ faire un fichier java contenant tous les parametres
 #### TODO
 faire un convertisseur binaire-json pour visualiser les individus enregistres en binaire  
 revoir la classe Mutation (n'agis que sur une liste de connexions)  
-mettre les main de SimulationInitiale et SimulationEnregistree dans le package main
 
 #### trucs a finir si j'en ai le courage
 

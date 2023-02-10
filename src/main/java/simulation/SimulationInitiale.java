@@ -19,7 +19,7 @@ import simulation.generation.individus.mutations.Mutation;
  * @author jrl
  *
  */
-public class SimulationInitiale {
+public class SimulationInitiale  extends Simulation{
 
 	//-----------------------------------------------------------------------------------------
 	//parametres
@@ -239,7 +239,7 @@ public class SimulationInitiale {
 	 * demande a l'utilisateur si il est sur de ses actions
 	 * @return true si l'utilisateur fait son choix
 	 */
-	private static boolean choix() {
+	public boolean choix() {
     	File f=new File("enregistrements\\simulation" + nomSimulation + "\\");
     	if(f.exists()) {
     		String reponse="";
@@ -263,7 +263,7 @@ public class SimulationInitiale {
 	/**
 	 * fonction run qui fait tourner la simulation
 	 */
-	public static void run() {
+	public void run() {
 		//on fait tourner la simulation pour nbGenerations
     	generation.enregistreInfos(type);
     	generation.enregistreGeneration(type);
@@ -281,17 +281,5 @@ public class SimulationInitiale {
 	}
 	
 	
-	
-	//-----------------------------------------------------------------------------------------
-	//programme principal
-	
-	/**
-	 * fonction main qui permet de lancer le programme.
-	 * @param args rien a mettre
-	 */
-	public static void main(String[] args) {
-		if (!choix()) return;
-		run();
-	}
 
 }

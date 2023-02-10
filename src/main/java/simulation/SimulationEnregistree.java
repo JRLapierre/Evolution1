@@ -16,7 +16,7 @@ import simulation.generation.Generation;
  * @author jrl
  *
  */
-public class SimulationEnregistree {
+public class SimulationEnregistree extends Simulation{
 
 
 	//-----------------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ public class SimulationEnregistree {
 	/**
 	 * le numero de la generation a laquelle on va reprendre la simulation
 	 */
-	private static int generationInitiale=51013;
+	private static int generationInitiale=51016;
 	
 	/**
 	 * le nombre de generations a simuler.
@@ -111,7 +111,7 @@ public class SimulationEnregistree {
 	 * demande a l'utilisateur si il est sur de ses actions
 	 * @return true si l'utilisateur fait son choix
 	 */
-	private static boolean choix() {
+	public boolean choix() {
 	   	File f=new File("enregistrements\\simulation" + nomSimulation
     			+ "\\generation" + generationInitiale + "\\");
 	   	if(!f.exists()) {
@@ -142,7 +142,7 @@ public class SimulationEnregistree {
 	/**
 	 * fonction run qui fait tourner la simulation
 	 */
-	public static void run() {
+	public void run() {
 		try {
 			System.out.println("recuperation des donnees...");
 			generation = new Generation(nomSimulation, generationInitiale, typeFichiers, epreuve);
@@ -167,18 +167,5 @@ public class SimulationEnregistree {
 		}
 	}
 	
-	
-	
-	
-	//----------------------------------------------------------------------------------------
-	//fonction main
-	
-	/**
-	 * fonction main qui permet de lancer le programme.
-	 * @param args rien a mettre
-	 */
-	public static void main(String[] args) {
-		if(!choix()) return; //arrete le programme si le choix n'est pas fait
-		run();
-	}
+
 }

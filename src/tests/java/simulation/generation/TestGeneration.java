@@ -2,8 +2,10 @@ package simulation.generation;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.File;
 import java.io.IOException;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -63,11 +65,32 @@ class TestGeneration {
 		Individu i=new Original(c, m);
 		return new Generation(i, 1, 1, 1, 100, e1(), "0.2");//devrait yavoir 3 individus
 	}
+
+	static void deleteFolder(File file){
+		for (File subFile : file.listFiles()) {
+			if(subFile.isDirectory()) {
+				deleteFolder(subFile);
+			} else {
+				subFile.delete();
+			}
+		}
+		file.delete();
+	}
 	
 	//-------------------------------------------------------------------------------------------
 	//fonctions de test
 	
-	//TODO faire des fonctions de suppresion des dossiers crees durant les tests
+	
+	@BeforeAll
+	@DisplayName("suppression des dossiers si ils existent")
+	static void supprimeFichiers() {
+		File f=new File("enregistrements/simulation0.1/");
+		if(f.exists()) deleteFolder(f);
+		f=new File("enregistrements/simulation0.2/");
+		if(f.exists()) deleteFolder(f);
+		f=new File("enregistrements/simulation0.3/");
+		if(f.exists()) deleteFolder(f);
+	}
 	
 	
 	@Test

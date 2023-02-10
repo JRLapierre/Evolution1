@@ -53,8 +53,6 @@ faire un fichier java contenant tous les parametres
 faire un convertisseur binaire-json pour visualiser les individus enregistres en binaire  
 mettre dans le package main toutes les methodes main  
 revoir la classe Mutation (n'agis que sur une liste de connexions)  
-supprimer les fichiers avant les tests dans la classe TestGeneration  
-
 
 #### trucs a finir si j'en ai le courage
 

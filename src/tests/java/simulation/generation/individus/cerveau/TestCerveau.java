@@ -32,10 +32,7 @@ class TestCerveau {
 		c.delConnextion(con);
 		return c;
 	}
-	
-	private String sc2() {
-		return "{\"input\":{\"Neurone0\":{\"connexion1\":{\"id\":1,\"facteur\":1.0,\"origine\":{\"type\":\"input\",\"numero\":0},\"cible\":{\"type\":\"interne\",\"numero\":0}}},\"Neurone1\":{\"connexion3\":{\"id\":3,\"facteur\":0.5,\"origine\":{\"type\":\"input\",\"numero\":1},\"cible\":{\"type\":\"output\",\"numero\":1}}}},\"interne\":{\"Neurone0\":{\"connexion2\":{\"id\":2,\"facteur\":-1.0,\"origine\":{\"type\":\"interne\",\"numero\":0},\"cible\":{\"type\":\"output\",\"numero\":0}}},\"Neurone1\":{},\"Neurone2\":{},\"Neurone3\":{},\"Neurone4\":{},\"Neurone5\":{},\"Neurone6\":{},\"Neurone7\":{},\"Neurone8\":{},\"Neurone9\":{},\"Neurone10\":{},\"Neurone11\":{},\"Neurone12\":{},\"Neurone13\":{},\"Neurone14\":{},\"Neurone15\":{},\"Neurone16\":{},\"Neurone17\":{},\"Neurone18\":{},\"Neurone19\":{}},\"output\":{\"Neurone0\":{},\"Neurone1\":{},\"Neurone2\":{}}}";
-	}
+
 	
 	//--------------------------------------------------------------------------------
 	//tests
@@ -46,9 +43,6 @@ class TestCerveau {
 	void testFonctionsBase() {
 		Cerveau c1=c1();
 		
-		assertEquals(2, c1.getNbInput());
-		assertEquals(3, c1.getNbOutput());
-		assertEquals(20, c1.getNbInterne());
 		assertEquals(2, c1.getListeInput().length);
 		assertEquals(3, c1.getListeOutput().length);
 		assertEquals(20, c1.getListeInterne().length);

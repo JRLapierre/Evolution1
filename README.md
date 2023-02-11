@@ -51,7 +51,7 @@ faire un convertisseur binaire-json pour visualiser les individus enregistres en
 #### urgent :
 
 #### TODO
-supprimer l'ancier constructeur de Mutation  
+supprimer l'ancien constructeur de Mutation  
 revoir la methode evolution de Mutation  
 diviser la methode changeConnexion en 2  
 enlever la mutation systematique lors de la fusion de cerveaux  

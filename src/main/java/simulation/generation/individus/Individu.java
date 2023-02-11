@@ -6,7 +6,6 @@ import java.nio.ByteBuffer;
 
 import simulation.Enregistrable;
 import simulation.generation.individus.cerveau.Cerveau;
-import simulation.generation.individus.mutations.Mutation;
 
 /**
  * cette classe représente un individu.

@@ -198,18 +198,18 @@ public class Mutation implements Enregistrable{
 	 */
 	private Neurone neuroneAleat(Cerveau cerveau) {
 		int a=aleatoire.aleatInt(0,
-				cerveau.getNbInput() +
-				cerveau.getNbInterne() +
-				cerveau.getNbOutput()-1);
-		if (a<cerveau.getNbInput()) {
+				cerveau.getListeInput().length +
+				cerveau.getListeInterne().length +
+				cerveau.getListeOutput().length-1);
+		if (a<cerveau.getListeInput().length) {
 			return cerveau.getListeInput()[a];
 		}
-		a-=cerveau.getNbInput();
-		if (a<cerveau.getNbInterne()) {
+		a-=cerveau.getListeInput().length;
+		if (a<cerveau.getListeInterne().length) {
 			return cerveau.getListeInterne()[a];
 		}
 		else {
-			a-=cerveau.getNbInterne();
+			a-=cerveau.getListeInterne().length;
 			return cerveau.getListeOutput()[a];
 		}
 	}
@@ -219,8 +219,8 @@ public class Mutation implements Enregistrable{
 	 * @param cerveau
 	 */
 	private void ajoutConnexion(Cerveau cerveau) {
-		for (int i=0; i < cerveau.getNbInput() + cerveau.getNbInterne() +
-				cerveau.getNbOutput(); i++) {
+		for (int i=0; i < cerveau.getListeInput().length + cerveau.getListeInterne().length +
+				cerveau.getListeOutput().length; i++) {
 			if (aleatoire.aleatInt(0,100)<=tauxCreation) {
 				cerveau.addConnexion(new Connexion(
 						(float) aleatoire.aleatDouble(
@@ -300,7 +300,8 @@ public class Mutation implements Enregistrable{
 	 * @return un cerveau issu de la fusion des deux cerveaux precents
 	 */
 	public Cerveau evolution(Cerveau c1, Cerveau c2) {
-		Cerveau c=new Cerveau(c1.getNbInput(), c1.getNbOutput(), c1.getNbInterne());
+		Cerveau c=new Cerveau(c1.getListeInput().length, 
+				c1.getListeOutput().length, c1.getListeInterne().length);
 		//fonction locale de clonage pour dupliquer sans risque les listes
 		ListeChaine<Connexion> l1=duplique(c1.getListeConnexions());
 		ListeChaine<Connexion> l2=duplique(c2.getListeConnexions());

@@ -187,30 +187,6 @@ public class Cerveau implements Enregistrable {
 	//getteurs
 	
 	/**
-	 * getteur pour le nombre de neurones d'entree
-	 * @return le nombre de neurones d'entrees
-	 */
-	public int getNbInput() {
-		return listeInput.length;
-	}
-
-	/**
-	 * getteur pour le nombre de neurones de sorties
-	 * @return le nombre de neurones de sortie
-	 */
-	public int getNbOutput() {
-		return listeOutput.length;
-	}
-
-	/**
-	 * getteur pour le nombre de neurones internes
-	 * @return le nombre de neurones 
-	 */
-	public int getNbInterne() {
-		return listeInterne.length;
-	}
-	
-	/**
 	 * getteur pour listeInput
 	 * @return la liste des neurones d'entree du cerveau
 	 */

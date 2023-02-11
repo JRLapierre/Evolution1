@@ -45,6 +45,8 @@ revoir la generation du cerveau pour les nouveaux individus
 ecrire la derniere generation enregistree dans un fichier  
 ajouter des fonctionnalites pour mettre en pause  
 faire un fichier java contenant tous les parametres  
+changer la methode replique de cerveau en clone  
+faire un clone dans Connexion plutot qu'un constructeur douteux  
 
 
 #### urgent :
@@ -54,9 +56,11 @@ faire un convertisseur binaire-json pour visualiser les individus enregistres en
 revoir la classe Mutation (n'agis que sur une liste de connexions)  
 decouper le constructeur de la classe Mutation  
 deplacement de l'attribut mutation dans la classe Cerveau :  
- - une methode pour l'evolution  
  - une methode pour la fusion de cerveaux  
  - supprimer l'attribut mutation de Individu  
+revoir la methode setListeConnexion de Cerveau  
+revoir la methode evolution de Mutation  
+diviser la methode changeConnexion en 2  
 
 #### trucs a finir si j'en ai le courage
 

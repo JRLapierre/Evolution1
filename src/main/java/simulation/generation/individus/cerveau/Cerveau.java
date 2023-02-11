@@ -364,6 +364,13 @@ public class Cerveau implements Enregistrable {
 		return c;
 	}
 	
+	/**
+	 * fais muter le cerveau
+	 */
+	public void mute() {
+		mutations.evolution(this);
+	}
+	
 	//---------------------------------------------------------------------
 	//fonction d'affichage
 	

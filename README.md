@@ -55,12 +55,11 @@ faire un clone dans Connexion plutot qu'un constructeur douteux
 faire un convertisseur binaire-json pour visualiser les individus enregistres en binaire  
 revoir la classe Mutation (n'agis que sur une liste de connexions)  
 decouper le constructeur de la classe Mutation  
-deplacement de l'attribut mutation dans la classe Cerveau :  
- - supprimer l'attribut mutation de Individu  
 revoir la methode setListeConnexion de Cerveau  
 revoir la methode evolution de Mutation  
 diviser la methode changeConnexion en 2  
 enlever la mutation systematique lors de la fusion de cerveaux  
+supprimer les accesseurs de mutation dans Individu  
 
 #### trucs a finir si j'en ai le courage
 

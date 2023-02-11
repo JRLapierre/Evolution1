@@ -47,7 +47,7 @@ public class Cerveau implements Enregistrable {
 	 * les mutations auquelles le cerveau peut être confronté.
 	 * Si rien n'est fait, les mutations n'affecterons pas le cerveau.
 	 */
-	public static Mutation mutations=new Mutation(0,0,0,0,0,0);
+	public static Mutation mutation=new Mutation(0,0,0,0,0,0);
 
 	//------------------------------------------------------------------------------
 	//constructeur
@@ -368,7 +368,7 @@ public class Cerveau implements Enregistrable {
 	 * fais muter le cerveau
 	 */
 	public void mute() {
-		mutations.evolution(this);
+		mutation.evolution(this);
 	}
 	
 
@@ -381,7 +381,7 @@ public class Cerveau implements Enregistrable {
 	 * @return le cerveau issu de la fusion de this et de autre
 	 */
 	public Cerveau fusionne(Cerveau autre) {
-		return mutations.evolution(this, autre);
+		return mutation.evolution(this, autre);
 	}
 	
 	//---------------------------------------------------------------------

@@ -38,7 +38,8 @@ public class EnfantSexe extends Individu{
 		this.idParent1 = parent1.getId();
 		this.idParent2 = parent2.getId();
 		this.generation=parent1.generation+1;
-		this.cerveau=mutation.evolution(parent1.cerveau, parent2.cerveau);
+		this.cerveau=parent1.cerveau.fusionne(parent2.cerveau);
+		this.cerveau.mute();
 	}
 	
 	

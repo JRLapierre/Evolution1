@@ -48,11 +48,6 @@ public abstract class Individu implements Enregistrable {
 	private static int nbIndividus=0;
 	
 	/**
-	 * le generateurs de mutation
-	 */
-	protected static Mutation mutation;
-	
-	/**
 	 * le score pour evaluer la performance
 	 */
 	protected float score=0;
@@ -150,11 +145,11 @@ public abstract class Individu implements Enregistrable {
 	}
 	
 	/**
-	 * renvoie la composante de mutation des individus
-	 * @return mutation
+	 * renvoie la composante de mutation de Cerveau
+	 * @return mutation les mutations
 	 */
 	public static Mutation getMutation() {
-		return mutation;
+		return Cerveau.mutation;
 	}
 	
 	//----------------------------------------------------------------------
@@ -173,7 +168,7 @@ public abstract class Individu implements Enregistrable {
 	 * @param mutation les mutations a appliquer aux individus
 	 */
 	public static void setMutation(Mutation mutation) {
-		Individu.mutation=mutation;
+		Cerveau.mutation=mutation;
 	}
 	
 	/**

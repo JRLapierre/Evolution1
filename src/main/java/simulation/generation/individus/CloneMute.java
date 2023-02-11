@@ -30,7 +30,8 @@ public class CloneMute extends Individu{
 		super();
 		this.idParent = parent.getId();
 		this.generation=parent.generation+1;
-		this.cerveau=mutation.evolution(parent.cerveau.replique());
+		this.cerveau=parent.cerveau.replique();
+		this.cerveau.mute();
 	}
 	
 	

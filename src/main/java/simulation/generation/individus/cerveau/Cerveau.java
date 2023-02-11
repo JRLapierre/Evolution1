@@ -371,6 +371,19 @@ public class Cerveau implements Enregistrable {
 		mutations.evolution(this);
 	}
 	
+
+	/**
+	 * une fonction qui cree un cerveau issu de la fusion de deux cerveaux.
+	 * Les connexions identiques seront gardes, 
+	 * les connexions uniques a chaque cerveau auront une chance sur 2 de rester, 
+	 * les connexions differentes mais au même id seront combines aleatoirement.
+	 * @param autre l'autre cerveau avec qui la fusion sera effectue
+	 * @return le cerveau issu de la fusion de this et de autre
+	 */
+	public Cerveau fusionne(Cerveau autre) {
+		return mutations.evolution(this, autre);
+	}
+	
 	//---------------------------------------------------------------------
 	//fonction d'affichage
 	

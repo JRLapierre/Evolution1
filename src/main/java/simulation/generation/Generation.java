@@ -17,6 +17,7 @@ import simulation.generation.individus.CloneParfait;
 import simulation.generation.individus.EnfantSexe;
 import simulation.generation.individus.Individu;
 import simulation.generation.individus.Sauvegarde;
+import simulation.generation.individus.cerveau.Cerveau;
 import simulation.generation.individus.mutations.Mutation;
 
 /**
@@ -201,7 +202,7 @@ public class Generation implements Enregistrable {
 		this.butoir=bb.getInt();
 		this.population=new Individu[nbIndividus];
 		//regeneration des mutations
-		Individu.setMutation(new Mutation(bb));
+		Cerveau.mutation=new Mutation(bb);
 		//generation des individus sauvegardes
 		byte[] contenu;
 		File[] fichiers=new File(path + "generation"+numero+"/").listFiles();
@@ -345,7 +346,7 @@ public class Generation implements Enregistrable {
 	 * @param mutation les mutations a changer
 	 */
 	public void setMutations(Mutation mutation) {
-		Individu.setMutation(mutation);
+		Cerveau.mutation=mutation;
 	}
 	
 	
@@ -377,7 +378,7 @@ public class Generation implements Enregistrable {
 		+ "\"nbEnfantsSexe\":" + nbEnfantsSexe + ","
 		+ "\"nbIndividus\":" + nbIndividus + ","
 		+ "\"butoir\":" + butoir + ","
-		+ "\"mutations\":" + Individu.getMutation().toStringJson()
+		+ "\"mutations\":" + Cerveau.mutation.toStringJson()
 		+"}";
 	}
 	
@@ -389,7 +390,7 @@ public class Generation implements Enregistrable {
 		bb.putInt(nbClonesMutes);
 		bb.putInt(nbEnfantsSexe);
 		bb.putInt(butoir);
-		bb.put(Individu.getMutation().toByte());
+		bb.put(Cerveau.mutation.toByte());
 		return bb.array();
 	}
 	

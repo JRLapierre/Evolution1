@@ -143,14 +143,7 @@ public abstract class Individu implements Enregistrable {
 	public int getGeneration() {
 		return generation;
 	}
-	
-	/**
-	 * renvoie la composante de mutation de Cerveau
-	 * @return mutation les mutations
-	 */
-	public static Mutation getMutation() {
-		return Cerveau.mutation;
-	}
+
 	
 	//----------------------------------------------------------------------
 	//fonctions lies au fonctionnement actif
@@ -163,13 +156,6 @@ public abstract class Individu implements Enregistrable {
 		this.score +=changement;
 	}
 	
-	/**
-	 * setteur pour les mutations
-	 * @param mutation les mutations a appliquer aux individus
-	 */
-	public static void setMutation(Mutation mutation) {
-		Cerveau.mutation=mutation;
-	}
 	
 	/**
 	 * met a jour l'id maximal des individus

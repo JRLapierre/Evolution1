@@ -340,10 +340,6 @@ public class Cerveau implements Enregistrable {
 	 */
 	public void setListeConnextions(ListeChaine<Connexion> listeConnexions) {
 		this.listeConnexions = listeConnexions;
-		Connexion c=listeConnexions.getSuivant();
-		while (c!=null) {
-			c=listeConnexions.getSuivant();
-		}
 	}
 
 	

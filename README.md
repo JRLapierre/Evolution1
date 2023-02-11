@@ -52,7 +52,6 @@ faire un convertisseur binaire-json pour visualiser les individus enregistres en
 
 #### TODO
 decouper le constructeur de la classe Mutation  
-revoir la methode setListeConnexion de Cerveau  
 revoir la methode evolution de Mutation  
 diviser la methode changeConnexion en 2  
 enlever la mutation systematique lors de la fusion de cerveaux  

@@ -52,6 +52,11 @@ faire un fichier java contenant tous les parametres
 #### TODO
 faire un convertisseur binaire-json pour visualiser les individus enregistres en binaire  
 revoir la classe Mutation (n'agis que sur une liste de connexions)  
+decouper le constructeur de la classe Mutation  
+deplacement de l'attribut mutation dans la classe Cerveau :  
+ - une methode pour l'evolution  
+ - une methode pour la fusion de cerveaux  
+ - supprimer l'attribut mutation de Individu  
 
 #### trucs a finir si j'en ai le courage
 

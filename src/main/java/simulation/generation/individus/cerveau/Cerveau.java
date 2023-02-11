@@ -5,6 +5,7 @@ import java.nio.ByteBuffer;
 import outils.Carracteristique;
 import outils.ListeChaine;
 import simulation.Enregistrable;
+import simulation.generation.individus.mutations.Mutation;
 
 /**
  * cette classe va simuler un cerveau avec des entrées, 
@@ -41,6 +42,12 @@ public class Cerveau implements Enregistrable {
 	 * les pertes d'energie dans le cerveau
 	 */
 	private float pertes=0;
+	
+	/**
+	 * les mutations auquelles le cerveau peut être confronté.
+	 * Si rien n'est fait, les mutations n'affecterons pas le cerveau.
+	 */
+	public static Mutation mutations=new Mutation(0,0,0,0,0,0);
 
 	//------------------------------------------------------------------------------
 	//constructeur

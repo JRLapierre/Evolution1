@@ -27,30 +27,35 @@ public class Mutation implements Enregistrable{
 	
 	/**
 	 * taux de chance de creation d'une connexion allant de 0 à 100
+	 * valeur par defaut : 0
 	 */
-	private int tauxCreation;
+	private int tauxCreation=0;
 	
 	/**
 	 * taux de chance de suppression d'une connexion allant de 0 à 100
+	 * valeur par defaut : 0
 	 */
-	private int tauxSuppression;
+	private int tauxSuppression=0;
 	
 	/**
 	 * taux de chance de changement de facteur d'une connexion allant de 0 à 100
+	 * valeur par defaut : 0
 	 */
-	private int tauxMutationFacteur;
+	private int tauxMutationFacteur=0;
 	
 	/**
 	 * taux de changement du facteur d'une connexion
 	 * le taux sera aléatoire entre -maxChangementFacteur et maxChangementFacteur
+	 * valeur par defaut : 0
 	 */
-	private float maxChangementFacteur;
+	private float maxChangementFacteur=0;
 	
 	/**
 	 * taux de chance de mutation de la source ou de la fin de la connexion
 	 * allant de 0 a 100
+	 * valeur par defaut : 0
 	 */
-	private int tauxMutationNeurone;
+	private int tauxMutationNeurone=0;
 	
 	//-------------------------------------------------------------------------------
 	//constructeur
@@ -80,6 +85,16 @@ public class Mutation implements Enregistrable{
 		this.tauxMutationFacteur=corrigeTaux(tauxMutationFacteur);
 		this.maxChangementFacteur=maxChangementFacteur;
 		this.tauxMutationNeurone=corrigeTaux(tauxMutationNeurone);
+	}
+	
+	
+	/**
+	 * constructeur partiel pour faciliter l'initialisation.
+	 * les setteurs devront être utilisés pour completer les mutations.
+	 * @param graine la graine de generation de nombres aleatoires
+	 */
+	public Mutation(int graine) {
+		this.aleatoire=new Aleatoire(graine);
 	}
 	
 	/**
@@ -138,6 +153,40 @@ public class Mutation implements Enregistrable{
 		}
 		return taux;
 	}
+	
+	
+	//----------------------------------------------------------------------------------------
+	//setteurs
+	
+	/**
+	 * setteur permettant de mettre en place la creation et suppression des connexions
+	 * @param tauxCreation 		le taux de creation de nouvelle connexions
+	 * @param tauxSuppression 	le taux de suppresssion de connexions
+	 */
+	public void setTauxCreationSuppression(int tauxCreation, int tauxSuppression) {
+		this.tauxCreation=corrigeTaux(tauxCreation);
+		this.tauxSuppression=corrigeTaux(tauxSuppression);
+	}
+	
+	/**
+	 * setteur permettant de mettre en place la mutation de la puissance des connexions.
+	 * @param tauxMutationFacteur	le taux de mutation du facteur des connexions
+	 * @param maxChangementFacteur	le taux maximal de changement en cas de mutation du facteur
+	 */
+	public void setMutationFacteur(int tauxMutationFacteur, float maxChangementFacteur) {
+		this.tauxMutationFacteur=corrigeTaux(tauxMutationFacteur);
+		this.maxChangementFacteur=maxChangementFacteur;
+	}
+	
+	
+	/**
+	 * setteur permettant de mettre en place le changement d'extremites des connexions.
+	 * @param tauxMutationNeurone	le taux de changement de neurone de l'extremite d'une connexion
+	 */
+	public void setTauxMutationNeurone(int tauxMutationNeurone) {
+		this.tauxMutationNeurone=corrigeTaux(tauxMutationNeurone);
+	}
+	
 	
 	//-------------------------------------------------------------------------------
 	//fonctions de mutation

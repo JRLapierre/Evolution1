@@ -29,5 +29,16 @@ class TestMutation {
 		assertEquals(m2.toStringJson(), m3.toStringJson());
 		
 	}
+	
+	@Test
+	@DisplayName("test du constructeur classique et alternatif")
+	void testConstructeurs() {
+		Mutation m1=new Mutation(1,2,3,4,5,6);
+		Mutation m2=new Mutation(1);
+		m2.setTauxCreationSuppression(2, 3);
+		m2.setMutationFacteur(4, 5);
+		m2.setTauxMutationNeurone(6);
+		assertEquals(m1.toStringJson(), m2.toStringJson());
+	}
 
 }

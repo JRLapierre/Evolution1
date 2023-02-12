@@ -52,7 +52,6 @@ faire un convertisseur binaire-json pour visualiser les individus enregistres en
 
 #### TODO
 supprimer le parametre mutation de Original  
-revoir la methode evolution de Mutation  
 diviser la methode changeConnexion en 2  
 changer la methode replique de cerveau en clone  
 faire un clone dans Connexion plutot qu'un constructeur douteux  

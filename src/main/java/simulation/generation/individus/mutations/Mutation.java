@@ -268,17 +268,14 @@ public class Mutation implements Enregistrable{
 	/**
 	 * grosse fonction de mutation du cerveau
 	 * @param cerveau le cerveau a changer
-	 * @return le cerveau mute
 	 */
-	public Cerveau evolution(Cerveau cerveau) {
+	public void evolution(Cerveau cerveau) {
 		//suppression de connexion
 		supprConnexion(cerveau);
 		//changement des extremites d'une connexion ainsi que sa valeur
 		changeConnexion(cerveau);
 		//ajout de connexion
 		ajoutConnexion(cerveau);
-		
-		return cerveau;
 	}
 	
 	

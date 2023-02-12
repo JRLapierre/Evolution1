@@ -205,7 +205,7 @@ public class Mutation implements Enregistrable{
 	}
 	
 	/**
-	 * fonction d'ajout de conexions
+	 * fonction d'ajout de connexions
 	 * @param cerveau
 	 */
 	private void ajoutConnexion(Cerveau cerveau) {
@@ -239,28 +239,37 @@ public class Mutation implements Enregistrable{
 	
 	
 	/**
-	 * fonction de changement des attributs des connexions
-	 * @param cerveau
+	 * fonction de changement du facteur des connexions
+	 * @param listeConnexions la liste des connexions a changer
 	 */
-	private void changeConnexion(Cerveau cerveau) {
-		Connexion c=cerveau.getListeConnexions().getSuivant();
-		int i=0;
+	private void changeFacteur(ListeChaine<Connexion> listeConnexions) {
+		Connexion c=listeConnexions.getSuivant();
 		while (c!=null) {
-			if (aleatoire.aleatInt(0,100)<=tauxMutationNeurone) {
-				cerveau.getListeConnexions().getElement(i)
-				.updateOrigine(neuroneAleat(cerveau));
-			}
-			if (aleatoire.aleatInt(0,100)<=tauxMutationNeurone) {
-				cerveau.getListeConnexions().getElement(i)
-				.updateCible(neuroneAleat(cerveau));
-			}
 			if (aleatoire.aleatInt(0,100)<=tauxMutationFacteur) {
-				cerveau.getListeConnexions().getElement(i)
+				listeConnexions.getActuel()
 				.updateFacteur((float) aleatoire.aleatDouble(
 						-maxChangementFacteur, maxChangementFacteur));
 			}
+			c=listeConnexions.getSuivant();
+		}
+	}
+	
+	/**
+	 * fonction qui change aleatoirement les extrêmités de connexions
+	 * @param cerveau le cerveau a changer
+	 */
+	private void changeExtremites(Cerveau cerveau) {
+		Connexion c=cerveau.getListeConnexions().getSuivant();
+		while (c!=null) {
+			if (aleatoire.aleatInt(0,100)<=tauxMutationNeurone) {
+				cerveau.getListeConnexions().getActuel()
+				.updateOrigine(neuroneAleat(cerveau));
+			}
+			if (aleatoire.aleatInt(0,100)<=tauxMutationNeurone) {
+				cerveau.getListeConnexions().getActuel()
+				.updateCible(neuroneAleat(cerveau));
+			}
 			c=cerveau.getListeConnexions().getSuivant();
-			i++;
 		}
 	}
 	
@@ -270,10 +279,13 @@ public class Mutation implements Enregistrable{
 	 * @param cerveau le cerveau a changer
 	 */
 	public void evolution(Cerveau cerveau) {
+		cerveau.getListeConnexions().resetParcours();
 		//suppression de connexion
 		supprConnexion(cerveau);
-		//changement des extremites d'une connexion ainsi que sa valeur
-		changeConnexion(cerveau);
+		//changement des extremites d'une connexion
+		changeExtremites(cerveau);
+		//change le facteur d'une connexion
+		changeFacteur(cerveau.getListeConnexions());
 		//ajout de connexion
 		ajoutConnexion(cerveau);
 	}

@@ -303,15 +303,6 @@ public class Cerveau implements Enregistrable {
 	}
 	
 	/**
-	 * setter pour inclure une liste déja faite
-	 * @param listeConnexions la liste de connexions contenues dans ce cerveau
-	 */
-	public void setListeConnextions(ListeChaine<Connexion> listeConnexions) {
-		this.listeConnexions = listeConnexions;
-	}
-
-	
-	/**
 	 * fonction qui cree un nouveau cerveau identique au precedent
 	 * @return un nouveau cerveau
 	 */

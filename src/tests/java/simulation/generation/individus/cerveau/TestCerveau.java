@@ -7,8 +7,6 @@ import java.nio.ByteBuffer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import outils.ListeChaine;
-
 //@FixMethodOrder(MethodSorters.NAME_ASCENDING)//ordre alphabetique
 class TestCerveau {
 
@@ -22,12 +20,10 @@ class TestCerveau {
 	
 	private Cerveau c2() {
 		Cerveau c=c1();
-		ListeChaine<Connexion> liste=new ListeChaine<>();
 		Connexion con=new Connexion(1.2f, c.getListeInput()[1], c.getListeInterne()[1]);
-		liste.ajout(new Connexion(1, c.getListeInput()[0], c.getListeInterne()[0]));
-		liste.ajout(con);
-		liste.ajout(new Connexion(-1, c.getListeInterne()[0], c.getListeOutput()[0]));
-		c.setListeConnextions(liste);
+		c.getListeConnexions().ajout(new Connexion(1, c.getListeInput()[0], c.getListeInterne()[0]));
+		c.getListeConnexions().ajout(con);
+		c.getListeConnexions().ajout(new Connexion(-1, c.getListeInterne()[0], c.getListeOutput()[0]));
 		c.addConnexion(new Connexion(0.5f, c.getListeInput()[1], c.getListeOutput()[1]));
 		c.getListeConnexions().delElt(con);
 		return c;

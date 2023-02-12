@@ -7,7 +7,6 @@ import java.nio.ByteBuffer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import outils.ListeChaine;
 import simulation.generation.individus.cerveau.Cerveau;
 import simulation.generation.individus.cerveau.Connexion;
 import simulation.generation.individus.mutations.Mutation;
@@ -24,12 +23,11 @@ class TestIndividu {
 	Connexion con3=new Connexion(0.5f, c.getListeInput()[1], c.getListeOutput()[1]);
 	
 	private Cerveau c1(Cerveau c) {
-		ListeChaine<Connexion> liste=new ListeChaine<>();
-		liste.ajout(con1);
-		liste.ajout(con2);
-		c.setListeConnextions(liste);
-		c.addConnexion(con3);
-		return c;
+		Cerveau c2=c.replique();
+		c2.getListeConnexions().ajout(con1);
+		c2.getListeConnexions().ajout(con2);
+		c2.addConnexion(con3);
+		return c2;
 	}
 	
 
@@ -80,7 +78,7 @@ class TestIndividu {
 		//assertEquals(3, i.getId());
 		//assertEquals(4, iMute.getId());
 		assertEquals(0, iMute.getScore());
-		assertEquals(c1(c), iMute.getCerveau());
+		assertEquals(c1(c).toStringJson(), iMute.getCerveau().toStringJson());
 		assertEquals(1, iMute.getGeneration());
 	}
 

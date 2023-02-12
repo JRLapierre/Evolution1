@@ -71,7 +71,7 @@ class TestIndividu {
 	@DisplayName("test d'un clone mute mais des mutations quasi nulles")
 	void testCloneMute1() {
 		//les mutations
-		Mutation m=new Mutation(0, -456, 0, 0, 0, 0);
+		Mutation m=new Mutation(0).setTauxCreationSuppression(-450, 0);
 		
 		Individu i=new Original(c1(c), m);
 
@@ -88,7 +88,8 @@ class TestIndividu {
 	@DisplayName("test d'un clone mute mais les mutations sont folles")
 	void testCloneMute2() {
 		//les mutations
-		Mutation m=new Mutation(0, 50, 50, 100, 100, 100);
+		Mutation m=new Mutation(0).setTauxCreationSuppression(50, 50)
+				.setMutationFacteur(100, 100).setTauxMutationNeurone(100);
 		
 		Individu i=new Original(c1(c), m);
 
@@ -106,7 +107,8 @@ class TestIndividu {
 	@DisplayName("test d'un enfant issu de reproduction sexuelle et les mutations sont fortes")
 	void testEnfantSexe1() {
 		//initialisation
-		Mutation m=new Mutation(0, 50, 50, 100, 100, 100);
+		Mutation m=new Mutation(0).setTauxCreationSuppression(50, 50)
+				.setMutationFacteur(100, 100).setTauxMutationNeurone(100);
 		
 		Individu i=new Original(c1(c), m);
 
@@ -127,7 +129,7 @@ class TestIndividu {
 	@Test
 	@DisplayName("enfant d'une reproduction sexuelle mais les mutations sont inexistantes")
 	void testEnfantSexe2() {
-		Mutation m=new Mutation(0, 0, 0, 0, 0, 0);
+		Mutation m=new Mutation(0);
 		
 		Individu i=new Original(c1(c), m);
 		Individu iSexe=new EnfantSexe(i, i);
@@ -139,7 +141,8 @@ class TestIndividu {
 	@Test
 	@DisplayName("test des toStringJson")
 	void testToStringJson() {
-		Mutation m=new Mutation(0, 15, 15, 50, 0.5f, 15);
+		Mutation m=new Mutation(0).setTauxCreationSuppression(10, 15)
+				.setMutationFacteur(50, 0.5f).setTauxMutationNeurone(15);
 		
 		Individu i0=new Original(c1(c), m);
 		Individu i1=new CloneMute(i0);
@@ -157,7 +160,8 @@ class TestIndividu {
 	@Test
 	@DisplayName("test de creation de fichiers de trace")
 	void testCreationFichiers() {
-		Mutation m=new Mutation(0, 15, 15, 50, 0.5f, 15);
+		Mutation m=new Mutation(0).setTauxCreationSuppression(10, 15)
+				.setMutationFacteur(50, 0.5f).setTauxMutationNeurone(15);
 		
 		Individu i0=new Original(c1(c), m);
 		Individu i1=new CloneMute(i0);
@@ -186,7 +190,8 @@ class TestIndividu {
 	@Test
 	@DisplayName("test du toByte et de la reconstruction")
 	void testToByte() {
-		Individu individu0=new Original(c, new Mutation(0, 15, 15, 50, 0.5f, 15));
+		Individu individu0=new Original(c, new Mutation(0).setTauxCreationSuppression(10, 15)
+				.setMutationFacteur(50, 0.5f).setTauxMutationNeurone(15));
 		Individu individu1=new CloneParfait(individu0);
 		Individu individu2=new CloneMute(individu0);
 		Individu individu3=new EnfantSexe(individu1, individu2);

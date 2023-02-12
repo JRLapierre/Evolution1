@@ -60,33 +60,6 @@ public class Mutation implements Enregistrable{
 	//-------------------------------------------------------------------------------
 	//constructeur
 	
-	//rajouter des garde-fou pour les valeurs
-	
-	/**
-	 * initialisation des paramètres de mutation
-	 * @param graine 				la graine de generation de nombres aleatoires
-	 * @param tauxCreation 			le taux de creation de nouvelle connexions
-	 * @param tauxSuppression 		le taux de suppresssion de connexions
-	 * @param tauxMutationFacteur	le taux de mutation du facteur des connexions
-	 * @param maxChangementFacteur	le taux maximal de changement en cas de mutation du facteur
-	 * @param tauxMutationNeurone	le taux de changement de neurone de l'extremite d'une connexion
-	 */
-	public Mutation(
-			int graine,
-			int tauxCreation,
-			int tauxSuppression, 
-			int tauxMutationFacteur, 
-			float maxChangementFacteur,
-			int tauxMutationNeurone
-			) {
-		this.aleatoire=new Aleatoire(graine);
-		this.tauxCreation=corrigeTaux(tauxCreation);
-		this.tauxSuppression=corrigeTaux(tauxSuppression);
-		this.tauxMutationFacteur=corrigeTaux(tauxMutationFacteur);
-		this.maxChangementFacteur=maxChangementFacteur;
-		this.tauxMutationNeurone=corrigeTaux(tauxMutationNeurone);
-	}
-	
 	
 	/**
 	 * constructeur partiel pour faciliter l'initialisation.
@@ -162,29 +135,35 @@ public class Mutation implements Enregistrable{
 	 * setteur permettant de mettre en place la creation et suppression des connexions
 	 * @param tauxCreation 		le taux de creation de nouvelle connexions
 	 * @param tauxSuppression 	le taux de suppresssion de connexions
+	 * @return this l'objet modifié
 	 */
-	public void setTauxCreationSuppression(int tauxCreation, int tauxSuppression) {
+	public Mutation setTauxCreationSuppression(int tauxCreation, int tauxSuppression) {
 		this.tauxCreation=corrigeTaux(tauxCreation);
 		this.tauxSuppression=corrigeTaux(tauxSuppression);
+		return this;
 	}
 	
 	/**
 	 * setteur permettant de mettre en place la mutation de la puissance des connexions.
 	 * @param tauxMutationFacteur	le taux de mutation du facteur des connexions
 	 * @param maxChangementFacteur	le taux maximal de changement en cas de mutation du facteur
+	 * @return this l'objet modifié
 	 */
-	public void setMutationFacteur(int tauxMutationFacteur, float maxChangementFacteur) {
+	public Mutation setMutationFacteur(int tauxMutationFacteur, float maxChangementFacteur) {
 		this.tauxMutationFacteur=corrigeTaux(tauxMutationFacteur);
 		this.maxChangementFacteur=maxChangementFacteur;
+		return this;
 	}
 	
 	
 	/**
 	 * setteur permettant de mettre en place le changement d'extremites des connexions.
 	 * @param tauxMutationNeurone	le taux de changement de neurone de l'extremite d'une connexion
+	 * @return this l'objet simplifié
 	 */
-	public void setTauxMutationNeurone(int tauxMutationNeurone) {
+	public Mutation setTauxMutationNeurone(int tauxMutationNeurone) {
 		this.tauxMutationNeurone=corrigeTaux(tauxMutationNeurone);
+		return this;
 	}
 	
 	

@@ -153,13 +153,10 @@ public class SimulationInitiale  extends Simulation{
 	/**
 	 * les mutations. Rien a modifier.
 	 */
-	private static Mutation mutation=new Mutation(
-			graineMutation, 
-			tauxCreation, 
-			tauxSuppression, 
-			tauxMutationFacteur, 
-			maxChangementFacteur, 
-			tauxMutationNeurone);
+	private static Mutation mutation=new Mutation(graineMutation)
+			.setTauxCreationSuppression(tauxCreation, tauxSuppression)
+			.setMutationFacteur(tauxMutationFacteur, maxChangementFacteur)
+			.setTauxMutationNeurone(tauxMutationNeurone); 
 	
 	/**
 	 * l'individu de base. Rien a modifier.

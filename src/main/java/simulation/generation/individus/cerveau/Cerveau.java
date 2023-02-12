@@ -47,7 +47,7 @@ public class Cerveau implements Enregistrable {
 	 * les mutations auquelles le cerveau peut être confronté.
 	 * Si rien n'est fait, les mutations n'affecterons pas le cerveau.
 	 */
-	public static Mutation mutation=new Mutation(0,0,0,0,0,0);
+	public static Mutation mutation=new Mutation(0);
 
 	//------------------------------------------------------------------------------
 	//constructeur

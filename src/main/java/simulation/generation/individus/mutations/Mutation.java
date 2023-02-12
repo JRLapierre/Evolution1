@@ -302,7 +302,7 @@ public class Mutation implements Enregistrable{
 		//gestion des connexions restantes
 		fusionListesConnexion(c, l1, l2);
 		
-		return evolution(c);
+		return c;
 	}
 	
 	

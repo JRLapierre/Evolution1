@@ -51,7 +51,6 @@ faire un convertisseur binaire-json pour visualiser les individus enregistres en
 #### urgent :
 
 #### TODO
-mettre un setGraine dans mutation  
 supprimer le parametre mutation de Original  
 revoir la methode evolution de Mutation  
 diviser la methode changeConnexion en 2  

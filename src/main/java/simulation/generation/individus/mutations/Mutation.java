@@ -131,6 +131,17 @@ public class Mutation implements Enregistrable{
 	//----------------------------------------------------------------------------------------
 	//setteurs
 	
+	
+	/**
+	 * setteur pour changer la graine
+	 * @param graine la graine de generation de nombres aleatoires
+	 * @return this l'objet modifié
+	 */
+	public Mutation setGraine(int graine) {
+		this.aleatoire=new Aleatoire(graine);
+		return this;
+	}
+	
 	/**
 	 * setteur permettant de mettre en place la creation et suppression des connexions
 	 * @param tauxCreation 		le taux de creation de nouvelle connexions

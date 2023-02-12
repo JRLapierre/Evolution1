@@ -55,7 +55,6 @@ supprimer le parametre mutation de Original
 changer la methode replique de cerveau en clone  
 faire un clone dans Connexion plutot qu'un constructeur douteux  
 faire le tri dans les methodes d'evolution de Cerveau  
-revoir la methode supprConnexion  
 
 #### trucs a finir si j'en ai le courage
 

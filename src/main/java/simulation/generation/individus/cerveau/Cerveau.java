@@ -303,14 +303,6 @@ public class Cerveau implements Enregistrable {
 	}
 	
 	/**
-	 * fonction de suppression d'une connexion
-	 * @param c la connexion à supprimer
-	 */
-	public void delConnextion(Connexion c) {
-		listeConnexions.delElt(c);
-	}
-	
-	/**
 	 * setter pour inclure une liste déja faite
 	 * @param listeConnexions la liste de connexions contenues dans ce cerveau
 	 */

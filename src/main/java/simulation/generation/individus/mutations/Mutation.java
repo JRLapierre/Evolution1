@@ -225,15 +225,15 @@ public class Mutation implements Enregistrable{
 	/**
 	 * fonction de suppression de connexions
 	 * parcours la liste de connexion et en supprime quelques unes
-	 * @param cerveau
+	 * @param listeConnexions la liste de connexions a changer
 	 */
-	private void supprConnexion(Cerveau cerveau) {
-		Connexion c=cerveau.getListeConnexions().getSuivant();
+	private void supprConnexion(ListeChaine<Connexion> listeConnexions) {
+		Connexion c=listeConnexions.getSuivant();
 		while (c!=null) {
 			if (aleatoire.aleatInt(0,100)<=tauxSuppression) {
-				cerveau.delConnextion(c);
+				listeConnexions.delElt(c);
 			}
-			c=cerveau.getListeConnexions().getSuivant();
+			c=listeConnexions.getSuivant();
 		}
 	}
 	
@@ -279,9 +279,10 @@ public class Mutation implements Enregistrable{
 	 * @param cerveau le cerveau a changer
 	 */
 	public void evolution(Cerveau cerveau) {
+		//prudence
 		cerveau.getListeConnexions().resetParcours();
 		//suppression de connexion
-		supprConnexion(cerveau);
+		supprConnexion(cerveau.getListeConnexions());
 		//changement des extremites d'une connexion
 		changeExtremites(cerveau);
 		//change le facteur d'une connexion

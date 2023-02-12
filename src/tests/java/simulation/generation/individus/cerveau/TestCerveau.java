@@ -29,7 +29,7 @@ class TestCerveau {
 		liste.ajout(new Connexion(-1, c.getListeInterne()[0], c.getListeOutput()[0]));
 		c.setListeConnextions(liste);
 		c.addConnexion(new Connexion(0.5f, c.getListeInput()[1], c.getListeOutput()[1]));
-		c.delConnextion(con);
+		c.getListeConnexions().delElt(con);
 		return c;
 	}
 

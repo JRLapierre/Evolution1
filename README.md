@@ -52,7 +52,6 @@ faire un convertisseur binaire-json pour visualiser les individus enregistres en
 #### urgent :
 
 #### TODO
-optimiser la methode next de Cerveau  
 deplacer la classe Mutation dans le package cerveau  
 encapsuler le package cerveau de facon a n'interagir qu'avec la classe Cerveau  
 encapsuler les listes dans Cerveau  

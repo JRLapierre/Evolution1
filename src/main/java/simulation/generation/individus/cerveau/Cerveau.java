@@ -260,9 +260,9 @@ public class Cerveau implements Enregistrable {
 	 */
 	public void next() {
 		//on parcours les connextions
-		for (int i=0; i<listeConnexions.getLongueur(); i++) {
-			//on enregistre dans les conenxtions la valeur
-			listeConnexions.getElement(i).transitionIn();
+		listeConnexions.resetParcours();
+		while(listeConnexions.getSuivant()!=null) {
+			listeConnexions.getActuel().transitionIn();
 		}
 		//on vide les neurones
 		for (int i=0; i<listeInterne.length; i++) {
@@ -275,9 +275,9 @@ public class Cerveau implements Enregistrable {
 			listeOutput[i].resetPuissance();
 		}
 		//on reparcours les connextions
-		for (int i=0; i<listeConnexions.getLongueur(); i++) {
-			//on enregistre la valeur des connextions dans les neurones
-			pertes += listeConnexions.getElement(i).transitionOut();
+		listeConnexions.resetParcours();
+		while(listeConnexions.getSuivant()!=null) {
+			pertes += listeConnexions.getActuel().transitionOut();
 		}
 	}
 	

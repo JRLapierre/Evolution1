@@ -36,6 +36,7 @@ La classe Mutation a été créée pour gérer les différentes mutations qui arrivent
 
 #### idees : 
 
+developper d'autres methodes d'apprentissage  
 creer un graphe qui permet de traquer visuellement les generations  
 faire des fonctions pour traquer les ancetres et les liens de parentee  
 appliquer du multithreading dans la phase de recuperation des donnees  
@@ -51,10 +52,11 @@ faire un convertisseur binaire-json pour visualiser les individus enregistres en
 #### urgent :
 
 #### TODO
-supprimer le parametre mutation de Original  
-changer la methode replique de cerveau en clone  
-faire un clone dans Connexion plutot qu'un constructeur douteux  
-faire le tri dans les methodes d'evolution de Cerveau  
+optimiser la methode next de Cerveau  
+deplacer la classe Mutation dans le package cerveau  
+encapsuler le package cerveau de facon a n'interagir qu'avec la classe Cerveau  
+encapsuler les listes dans Cerveau  
+enlever le static de mutation dans Cerveau  
 
 #### trucs a finir si j'en ai le courage
 

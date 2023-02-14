@@ -67,21 +67,6 @@ public class Connexion implements Enregistrable {
 	}
 	
 	/**
-	 * un constructeur pour faire une copie d'une neurone.
-	 * Limiter l'usage pour le clonage
-	 * @param facteur	le facteur de multiplication de la connexion
-	 * @param origine	la neurone d'origine de la connexion
-	 * @param cible		la neurone cible de la connexion
-	 * @param id		l'identifiant de la connexion
-	 */
-	public Connexion(float facteur, Neurone origine, Neurone cible, int id) {
-		this.facteur = facteur;
-		this.origine = origine;
-		this.cible = cible;
-		this.id=id;
-	}
-	
-	/**
 	 * constructeur pour creer depuis un enregistrement json
 	 * @param sub le morceau de chaine de carractere
 	 * @param cerveau le cerveau auquel la connexion apprtient
@@ -173,6 +158,16 @@ public class Connexion implements Enregistrable {
 			System.err.println("erreur : type de neurone inconnu");
 			return null;
 		}
+	}
+	
+	//-------------------------------------------------------------------------------
+	//fonction lies à l'évolution
+	
+	public Connexion replique() {
+		Connexion nouveau=new Connexion(facteur, origine, cible);
+		nbConnexions--; //contrer l'incrementation automatique
+		nouveau.id=this.id;
+		return nouveau;
 	}
 	
 	//-------------------------------------------------------------------------------

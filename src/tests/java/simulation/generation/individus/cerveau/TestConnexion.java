@@ -70,6 +70,18 @@ class TestConnexion {
 		//assertEquals(0, c1.getId());
 	}
 	
+	
+	@Test
+	@DisplayName("test de replique")
+	void testReplique() {
+		Connexion c1=new Connexion(1.4f, n1(), n2());
+		Connexion c2=c1.replique();
+		assertEquals(c1, c2);
+		Connexion c3=new Connexion(1.3f, n3(), n4());
+		assertEquals(c1.getId()+1, c3.getId());
+	}
+	
+	
 	@Test
 	@DisplayName("test de la transition de la puissance")
 	void testTransition() {

@@ -292,14 +292,11 @@ public class Cerveau implements Enregistrable {
 	 * 
 	 * @param c la connexion à copier et integrer dans le cerveau
 	 */
-	public void addConnexion(Connexion c) {
-		Connexion c2=new Connexion(
-				c.getFacteur(), 
-				getNeurone(c.getOrigine().getType(), c.getOrigine().getNumero()), 
-				getNeurone(c.getCible().getType(), c.getCible().getNumero()), 
-				c.getId());
-		this.listeConnexions.ajout(c2);
-		
+	public void addConnexion(Connexion connexion) {
+		Connexion copie=connexion.replique();
+		copie.updateOrigine(getNeurone(connexion.getOrigine().getType(), connexion.getOrigine().getNumero()));
+		copie.updateCible(getNeurone(connexion.getCible().getType(), connexion.getCible().getNumero()));
+		listeConnexions.ajout(copie);
 	}
 	
 	/**
@@ -307,16 +304,16 @@ public class Cerveau implements Enregistrable {
 	 * @return un nouveau cerveau
 	 */
 	public Cerveau replique() {
-		Cerveau c=new Cerveau(
+		Cerveau cerveau=new Cerveau(
 				this.listeInput.length, 
 				this.listeOutput.length, 
 				this.listeInterne.length);
-		Connexion i=this.listeConnexions.getSuivant();
-		while (i!=null) {
-			c.addConnexion(i);
-			i=this.listeConnexions.getSuivant();
+		Connexion connexion=this.listeConnexions.getSuivant();
+		while (connexion!=null) {
+			cerveau.addConnexion(connexion);
+			connexion=this.listeConnexions.getSuivant();
 		}
-		return c;
+		return cerveau;
 	}
 	
 	/**

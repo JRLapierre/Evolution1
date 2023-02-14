@@ -377,27 +377,28 @@ public class Mutation implements Enregistrable{
 	 * des parents et choisis une puissance aleatoire entre les valeurs
 	 * Supprime au passage les elements déja traités dans les listes des parents
 	 * Est utilisé dans fusionMemeID
-	 * @param c1
-	 * @param c2
+	 * @param c1 la premiere connexion avec un id donne
+	 * @param c2 la deuxieme connexion avec le même id
 	 * @return une connexion fusionnée
 	 */
 	private Connexion fusionConnexion(Connexion c1, Connexion c2) {
-		Neurone origine;
-		Neurone cible;
-		float facteur=(float) aleatoire.aleatDouble(c1.getFacteur(), c2.getFacteur());
+		Connexion c3=c1.replique();
+		c3.updateFacteur(
+				(float) aleatoire.aleatDouble(c1.getFacteur(), c2.getFacteur())
+				- c3.getFacteur());
 		int n=aleatoire.aleatInt(1);
 		if (n==0) {
-			origine=c1.getOrigine();
+			c3.updateOrigine(c1.getOrigine());
 		} else {
-			origine=c2.getOrigine();
+			c3.updateOrigine(c2.getOrigine());
 		}
 		n=aleatoire.aleatInt(1);
 		if (n==0) {
-			cible=c1.getCible();
+			c3.updateCible(c1.getCible());
 		} else {
-			cible=c2.getCible();
+			c3.updateCible(c2.getCible());
 		}
-		return new Connexion(facteur, origine, cible, c1.getId());
+		return c3;
 	}
 	
 	/**

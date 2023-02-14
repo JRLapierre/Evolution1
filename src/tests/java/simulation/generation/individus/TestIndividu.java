@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import simulation.generation.individus.cerveau.Cerveau;
 import simulation.generation.individus.cerveau.Connexion;
-import simulation.generation.individus.mutations.Mutation;
+import simulation.generation.individus.cerveau.Mutation;
 
 class TestIndividu {
 

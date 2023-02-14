@@ -13,7 +13,7 @@ import simulation.generation.individus.Individu;
 import simulation.generation.individus.Original;
 import simulation.generation.individus.cerveau.Cerveau;
 import simulation.generation.individus.cerveau.Connexion;
-import simulation.generation.individus.mutations.Mutation;
+import simulation.generation.individus.cerveau.Mutation;
 
 class TestGeneration {
 	

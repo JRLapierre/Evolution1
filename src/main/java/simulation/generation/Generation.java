@@ -18,7 +18,7 @@ import simulation.generation.individus.EnfantSexe;
 import simulation.generation.individus.Individu;
 import simulation.generation.individus.Sauvegarde;
 import simulation.generation.individus.cerveau.Cerveau;
-import simulation.generation.individus.mutations.Mutation;
+import simulation.generation.individus.cerveau.Mutation;
 
 /**
  * cette classe représente une génération.

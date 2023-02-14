@@ -5,7 +5,6 @@ import java.nio.ByteBuffer;
 import outils.Carracteristique;
 import outils.ListeChaine;
 import simulation.Enregistrable;
-import simulation.generation.individus.mutations.Mutation;
 
 /**
  * cette classe va simuler un cerveau avec des entrées, 
@@ -290,7 +289,7 @@ public class Cerveau implements Enregistrable {
 	 * copie la connexion recue en parametres et lui met les neurones 
 	 * correspondantes du cerveau
 	 * 
-	 * @param c la connexion à copier et integrer dans le cerveau
+	 * @param connexion la connexion à copier et integrer dans le cerveau
 	 */
 	public void addConnexion(Connexion connexion) {
 		Connexion copie=connexion.replique();

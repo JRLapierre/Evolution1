@@ -50,9 +50,9 @@ faire un convertisseur binaire-json pour visualiser les individus enregistres en
 
 
 #### urgent :
+elucider le mystere : The import java.util.Objects cannot be resolved dans listeChaine
 
 #### TODO
-deplacer la classe Mutation dans le package cerveau  
 encapsuler le package cerveau de facon a n'interagir qu'avec la classe Cerveau  
 encapsuler les listes dans Cerveau  
 enlever le static de mutation dans Cerveau  

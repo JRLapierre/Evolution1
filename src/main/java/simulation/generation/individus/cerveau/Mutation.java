@@ -1,13 +1,10 @@
-package simulation.generation.individus.mutations;
+package simulation.generation.individus.cerveau;
 
 import java.nio.ByteBuffer;
 
 import outils.Aleatoire;
 import outils.ListeChaine;
 import simulation.Enregistrable;
-import simulation.generation.individus.cerveau.Cerveau;
-import simulation.generation.individus.cerveau.Connexion;
-import simulation.generation.individus.cerveau.Neurone;
 
 /**
  * classe pour les main.mutations d'une génération à l'autre.

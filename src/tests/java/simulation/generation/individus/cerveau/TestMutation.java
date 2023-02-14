@@ -1,4 +1,4 @@
-package simulation.generation.individus.mutations;
+package simulation.generation.individus.cerveau;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,8 +1,7 @@
 /**
  * Ce package permet de gerer les individus.
  * 
- * Ce package contient les sous-packages mutations, 
- * qui gere les mutations, et le package cerveau, 
+ * Ce package contient les le sous-package cerveau, 
  * qui gere le cerveau des individus.
  * 
  * Ce package contient la classe abstraite Individu, 

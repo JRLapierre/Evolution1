@@ -11,7 +11,7 @@ import simulation.generation.Generation;
 import simulation.generation.individus.Individu;
 import simulation.generation.individus.Original;
 import simulation.generation.individus.cerveau.Cerveau;
-import simulation.generation.individus.mutations.Mutation;
+import simulation.generation.individus.cerveau.Mutation;
 
 /**
  * cette classe permet de lancer une nouvelle simulation.

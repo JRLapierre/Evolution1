@@ -163,6 +163,10 @@ public class Connexion implements Enregistrable {
 	//-------------------------------------------------------------------------------
 	//fonction lies à l'évolution
 	
+	/**
+	 * fonction permettant d'obtenir une copie de la connexion actuelle.
+	 * @return une copie de la connexion actuelle.
+	 */
 	public Connexion replique() {
 		Connexion nouveau=new Connexion(facteur, origine, cible);
 		nbConnexions--; //contrer l'incrementation automatique

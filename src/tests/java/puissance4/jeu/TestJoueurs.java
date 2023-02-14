@@ -19,7 +19,7 @@ class TestJoueurs {
 	void testJoueurHumainVsJoueurAleatoire() {
 		Joueur j1=new JoueurAI1();
 		Joueur j2=new JoueurAI1();
-		Joueur j3=new JoueurHumain();
+		//Joueur j3=new JoueurHumain();
 		
 		try {
 			Partie partie=new Partie(j1, j2);

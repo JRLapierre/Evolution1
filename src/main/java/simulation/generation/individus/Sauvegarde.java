@@ -3,7 +3,7 @@ package simulation.generation.individus;
 import java.nio.ByteBuffer;
 
 import simulation.generation.individus.cerveau.Cerveau;
-import simulation.generation.individus.mutations.Mutation;
+import simulation.generation.individus.cerveau.Mutation;
 
 /**
  * cette classe genere des individus a partir d'un ficher.

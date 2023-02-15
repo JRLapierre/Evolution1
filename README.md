@@ -50,7 +50,6 @@ faire un convertisseur binaire-json pour visualiser les individus enregistres en
 
 
 #### urgent :
-elucider le mystere : The import java.util.Objects cannot be resolved dans listeChaine
 
 #### TODO
 encapsuler le package cerveau de facon a n'interagir qu'avec la classe Cerveau  

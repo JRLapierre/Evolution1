@@ -1,7 +1,5 @@
 package outils;
 
-import java.util.Objects;
-
 /**
  * cette classe correspond à une liste doublement chainée de taille variable.
  * Je l'ai crée parce que je le pouvais et je ne voulais pas utiliser le
@@ -600,11 +598,11 @@ public class ListeChaine<T> {
 	//-------------------------------------------------------------------------------
 	//fonctions generales
 
-	
 	@Override
 	public int hashCode() {
-		return Objects.hash(dernier, local, longueur, premier);
+		return super.hashCode();
 	}
+	
 
 	@Override
 	public boolean equals(Object obj) {
@@ -631,5 +629,7 @@ public class ListeChaine<T> {
 		}
 		return true;
 	}
+
+
 	
 }

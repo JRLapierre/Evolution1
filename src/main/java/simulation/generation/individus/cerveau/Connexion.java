@@ -71,7 +71,7 @@ public class Connexion implements Enregistrable {
 	 * @param sub le morceau de chaine de carractere
 	 * @param cerveau le cerveau auquel la connexion apprtient
 	 */
-	public Connexion(String sub, Cerveau cerveau) {
+	protected Connexion(String sub, Cerveau cerveau) {
 		//faire de la sous decoupe
 		this.id=Integer.parseInt(sub.substring(
 				sub.indexOf("\"id\":")+5, 
@@ -99,7 +99,7 @@ public class Connexion implements Enregistrable {
 	 * @param origine la neurone d'origine de la connexions
 	 * @param cerveau le cerveau auquel appartient la connexion
 	 */
-	public Connexion(ByteBuffer bb, Neurone origine, Cerveau cerveau) {
+	protected Connexion(ByteBuffer bb, Neurone origine, Cerveau cerveau) {
 		this.id=bb.getInt();
 		this.facteur=bb.getFloat();
 		this.origine=origine;
@@ -167,7 +167,7 @@ public class Connexion implements Enregistrable {
 	 * fonction permettant d'obtenir une copie de la connexion actuelle.
 	 * @return une copie de la connexion actuelle.
 	 */
-	public Connexion replique() {
+	protected Connexion replique() {
 		Connexion nouveau=new Connexion(facteur, origine, cible);
 		nbConnexions--; //contrer l'incrementation automatique
 		nouveau.id=this.id;
@@ -181,7 +181,7 @@ public class Connexion implements Enregistrable {
 	 * getteur pour obtenir la neurone d'origine
 	 * @return la neurone d'origine de la connexion
 	 */
-	public Neurone getOrigine() {
+	protected Neurone getOrigine() {
 		return this.origine;
 	}
 	
@@ -189,7 +189,7 @@ public class Connexion implements Enregistrable {
 	 * getteur pour obtenir la neurone de cible
 	 * @return la neurone de cible de la connexion
 	 */
-	public Neurone getCible() {
+	protected Neurone getCible() {
 		return this.cible;
 	}
 	
@@ -197,7 +197,7 @@ public class Connexion implements Enregistrable {
 	 * getteur pour l'id
 	 * @return l'id de la connexion
 	 */
-	public int getId() {
+	protected int getId() {
 		return this.id;
 	}
 	
@@ -205,7 +205,7 @@ public class Connexion implements Enregistrable {
 	 * getteur pour le facteur
 	 * @return le facteur multiplicateur de la connexion
 	 */
-	public float getFacteur() {
+	protected float getFacteur() {
 		return this.facteur;
 	}
 	
@@ -217,7 +217,7 @@ public class Connexion implements Enregistrable {
 	 * d'une neurone à l'autre : la valeur de la neurone se fait
 	 * transférer dans la connextion
 	 */
-	public void transitionIn() {
+	protected void transitionIn() {
 		force=origine.getPuissance()*facteur;
 	}
 	
@@ -227,7 +227,7 @@ public class Connexion implements Enregistrable {
 	 * réinitialise sa force
 	 * @return les pertes
 	 */
-	public float transitionOut() {
+	protected float transitionOut() {
 		float pertes=cible.updatePuissance(force);
 		force=0;
 		return pertes;
@@ -240,7 +240,7 @@ public class Connexion implements Enregistrable {
 	 * cette fonction met à jour la puissance suite à une mutation
 	 * @param update l'amplification ou l'affaiblissement du facteur
 	 */
-	public void updateFacteur(float update) {
+	protected void updateFacteur(float update) {
 		this.facteur+=update;
 	}
 	
@@ -248,7 +248,7 @@ public class Connexion implements Enregistrable {
 	 * cette fonction change la neurone d'origine suite à une mutation
 	 * @param origine la neurone d'origine de la connexion
 	 */
-	public void updateOrigine(Neurone origine) {
+	protected void updateOrigine(Neurone origine) {
 		this.origine=origine;
 	}
 	
@@ -256,7 +256,7 @@ public class Connexion implements Enregistrable {
 	 * cette fonction change la neurone de cible suite à une mutations
 	 * @param cible la neurone de cible de la connexion
 	 */
-	public void updateCible(Neurone cible) {
+	protected void updateCible(Neurone cible) {
 		this.cible=cible;
 	}
 		

@@ -293,8 +293,12 @@ public class Cerveau implements Enregistrable {
 	 */
 	public void addConnexion(Connexion connexion) {
 		Connexion copie=connexion.replique();
-		copie.updateOrigine(getNeurone(connexion.getOrigine().getType(), connexion.getOrigine().getNumero()));
-		copie.updateCible(getNeurone(connexion.getCible().getType(), connexion.getCible().getNumero()));
+		copie.updateOrigine(getNeurone(
+				connexion.getOrigine().getType(), 
+				connexion.getOrigine().getNumero()));
+		copie.updateCible(getNeurone(
+				connexion.getCible().getType(), 
+				connexion.getCible().getNumero()));
 		listeConnexions.ajout(copie);
 	}
 	

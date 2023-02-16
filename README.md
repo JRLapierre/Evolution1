@@ -59,7 +59,6 @@ mettre le constructeur principal de Connexion en protected (utilisé dans les tes
 faire une interface repliquable  
 faire une fonction replique dans ListeChaine  
 enlever duplique() de Mutation  
-gerer le getPuissance de Neurone depuis Cerveau  
 
 #### trucs a finir si j'en ai le courage
 

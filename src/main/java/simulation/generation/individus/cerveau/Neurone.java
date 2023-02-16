@@ -11,7 +11,7 @@ import simulation.Enregistrable;
  * @author jrl
  *
  */
-public class Neurone implements Enregistrable {
+class Neurone implements Enregistrable {
 
 	//-------------------------------------------------------------------------------
 	//
@@ -93,7 +93,7 @@ public class Neurone implements Enregistrable {
 	 * getter pour obtenir la valeur(neurone de sortie du cerveau)
 	 * @return la valeur stockée dans la neurone
 	 */
-	public float getPuissance() {
+	protected float getPuissance() {
 		return puissance;
 	}
 	

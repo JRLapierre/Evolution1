@@ -50,9 +50,7 @@ public class JoueurIndividu extends Joueur{
 					cerveau.setInputs(liste);
 				}
 				cerveau.next();
-				for(int k=0; k<7; k++) {
-					choix[k]+=cerveau.getListeOutput()[k].getPuissance();
-				}
+				choix=cerveau.getOutputs();
 			}
 			
 			//chercher le max des choix. En cas d'egalite, on garde les plus eleves

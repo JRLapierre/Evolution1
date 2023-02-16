@@ -266,6 +266,20 @@ public class Cerveau implements Enregistrable {
 	
 	
 	/**
+	 * renvoie une liste des sorties du cerveau
+	 * @return une liste de float qui contient 
+	 * la puissance des neurones en sortie du cerveau
+	 */
+	public float[] getOutputs() {
+		float[] outputs=new float[listeOutput.length];
+		for(int i=0; i<outputs.length; i++) {
+			outputs[i]=listeOutput[i].getPuissance();
+		}
+		return outputs;
+	}
+	
+	
+	/**
 	 * fonction qui met le cerveau dans l'état suivant(après 1 tic),
 	 * c'est à dire que les signeaux se transmettent d'une neurone à l'autre
 	 */

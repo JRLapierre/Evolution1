@@ -190,7 +190,7 @@ public class Cerveau implements Enregistrable {
 	 * getteur pour listeInput
 	 * @return la liste des neurones d'entree du cerveau
 	 */
-	public Neurone[] getListeInput() {
+	protected Neurone[] getListeInput() {
 		return listeInput;
 	}
 
@@ -198,7 +198,7 @@ public class Cerveau implements Enregistrable {
 	 * getteur pour listeOutPut
 	 * @return la liste des neurones de sortie du cerveau
 	 */
-	public Neurone[] getListeOutput() {
+	protected Neurone[] getListeOutput() {
 		return listeOutput;
 	}
 
@@ -206,7 +206,7 @@ public class Cerveau implements Enregistrable {
 	 * getteur pour listeInterneNeurones
 	 * @return la liste des neurones internes au cerveau
 	 */
-	public Neurone[] getListeInterne() {
+	protected Neurone[] getListeInterne() {
 		return listeInterne;
 	}
 
@@ -224,7 +224,7 @@ public class Cerveau implements Enregistrable {
 	 * @param position
 	 * @return la neurone recherchee
 	 */
-	private Neurone getNeurone(String type, int position) {
+	public Neurone getNeurone(String type, int position) {
 		exeptionType(type);
 		if (type.equals("input")) {
 			return listeInput[position];

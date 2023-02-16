@@ -18,9 +18,9 @@ class TestIndividu {
 	
 	Cerveau c=new Cerveau(2,3,20);
 	
-	Connexion con1=new Connexion(1, c.getListeInput()[0], c.getListeInterne()[0]);
-	Connexion con2=new Connexion(-1, c.getListeInterne()[0], c.getListeOutput()[0]);
-	Connexion con3=new Connexion(0.5f, c.getListeInput()[1], c.getListeOutput()[1]);
+	Connexion con1=new Connexion(1, c.getNeurone("input", 0), c.getNeurone("interne", 0));
+	Connexion con2=new Connexion(-1, c.getNeurone("interne", 0), c.getNeurone("output", 0));
+	Connexion con3=new Connexion(0.5f, c.getNeurone("input", 0), c.getNeurone("output", 1));
 	
 	private Cerveau c1(Cerveau c) {
 		Cerveau c2=c.replique();

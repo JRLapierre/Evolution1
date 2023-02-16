@@ -53,8 +53,8 @@ faire un convertisseur binaire-json pour visualiser les individus enregistres en
 
 #### TODO
 encapsuler le package cerveau de facon a n'interagir qu'avec la classe Cerveau  
-encapsuler les listes dans Cerveau  
 enlever le static de mutation dans Cerveau  
+encapsuler listeConnexion de Cerveau  
 mettre le constructeur principal de Connexion en protected (utilisé dans les tests)  
 faire une interface repliquable  
 faire une fonction replique dans ListeChaine  

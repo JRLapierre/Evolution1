@@ -37,7 +37,7 @@ class TestGeneration {
 	
 	private Generation type01() {
 		Cerveau c=new Cerveau(1, 1, 0);
-		c.addConnexion(new Connexion(2, c.getListeInput()[0], c.getListeOutput()[0]));
+		c.addConnexion(new Connexion(2, c.getNeurone("input", 0), c.getNeurone("output", 0)));
 		Mutation m=new Mutation(0);
 		Individu i=new Original(c, m);
 		return new Generation(i, 0, 0, 1, 100, e1(), "0.1");
@@ -45,7 +45,7 @@ class TestGeneration {
 	
 	private Generation type02() {
 		Cerveau c=new Cerveau(1, 1, 5);
-		c.addConnexion(new Connexion(2, c.getListeInput()[0], c.getListeOutput()[0]));
+		c.addConnexion(new Connexion(2, c.getNeurone("input", 0), c.getNeurone("output", 0)));
 		Mutation m=new Mutation(0).setTauxCreationSuppression(100, 0)
 				.setMutationFacteur(50, 100);
 		Individu i=new Original(c, m);
@@ -54,7 +54,7 @@ class TestGeneration {
 	
 	private Generation type03() {
 		Cerveau c=new Cerveau(1, 1, 5);
-		c.addConnexion(new Connexion(2, c.getListeInput()[0], c.getListeOutput()[0]));
+		c.addConnexion(new Connexion(2, c.getNeurone("input", 0), c.getNeurone("output", 0)));
 		Mutation m=new Mutation(0).setTauxCreationSuppression(100, 0)
 				.setMutationFacteur(50, 100);
 		Individu i=new Original(c, m);
@@ -63,7 +63,7 @@ class TestGeneration {
 	
 	private Generation type04() {
 		Cerveau c=new Cerveau(1, 1, 5);
-		c.addConnexion(new Connexion(2, c.getListeInput()[0], c.getListeOutput()[0]));
+		c.addConnexion(new Connexion(2, c.getNeurone("input", 0), c.getNeurone("output", 0)));
 		Mutation m=new Mutation(0).setTauxCreationSuppression(100, 0)
 				.setMutationFacteur(50, 100);
 		Individu i=new Original(c, m);

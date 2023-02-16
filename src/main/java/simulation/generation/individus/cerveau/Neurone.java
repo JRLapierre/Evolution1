@@ -40,7 +40,7 @@ public class Neurone implements Enregistrable {
 	 * @param type peut être input, output ou interne
 	 * @param numero l'emplacement dans la liste
 	 */
-	public Neurone(String type, int numero) {
+	protected Neurone(String type, int numero) {
 		this.type=type;
 		this.numero=numero;
 	}
@@ -101,7 +101,7 @@ public class Neurone implements Enregistrable {
 	 * getteur pour le type
 	 * @return le type
 	 */
-	public String getType() {
+	protected String getType() {
 		return type;
 	}
 
@@ -109,7 +109,7 @@ public class Neurone implements Enregistrable {
 	 * getteur pour le numero
 	 * @return le numero
 	 */
-	public int getNumero() {
+	protected int getNumero() {
 		return numero;
 	}
 	
@@ -123,14 +123,14 @@ public class Neurone implements Enregistrable {
 	 * @param puissance un signal recu d'une connexion
 	 * @return les pertes
 	 */
-	public float updatePuissance(float puissance) {
+	protected float updatePuissance(float puissance) {
 		return setPuissance(this.puissance+puissance);
 	}
 	
 	/**
 	 * remet à 0 la puissance (pour après le passage d'un signal)
 	 */
-	public void resetPuissance() {
+	protected void resetPuissance() {
 		this.puissance=0;
 	}
 	
@@ -179,7 +179,7 @@ public class Neurone implements Enregistrable {
 	 * @param other l'objet à comparer
 	 * @return true si les deux neurones ont le même type et le même numero
 	 */
-	public boolean equalsRoles(Neurone other) {
+	protected boolean equalsRoles(Neurone other) {
 		if (other == null)
 			return false;
 		return numero == other.numero 

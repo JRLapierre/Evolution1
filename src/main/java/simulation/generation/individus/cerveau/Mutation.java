@@ -275,7 +275,7 @@ public class Mutation implements Enregistrable{
 	 * grosse fonction de mutation du cerveau
 	 * @param cerveau le cerveau a changer
 	 */
-	public void evolution(Cerveau cerveau) {
+	protected void evolution(Cerveau cerveau) {
 		//prudence
 		cerveau.getListeConnexions().resetParcours();
 		//suppression de connexion
@@ -296,7 +296,7 @@ public class Mutation implements Enregistrable{
 	 * @param c2 le cerveau de la mere
 	 * @return un cerveau issu de la fusion des deux cerveaux precents
 	 */
-	public Cerveau evolution(Cerveau c1, Cerveau c2) {
+	protected Cerveau evolution(Cerveau c1, Cerveau c2) {
 		Cerveau c=new Cerveau(c1.getListeInput().length, 
 				c1.getListeOutput().length, c1.getListeInterne().length);
 		//fonction locale de clonage pour dupliquer sans risque les listes

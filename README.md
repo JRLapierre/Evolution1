@@ -58,7 +58,6 @@ mettre le constructeur principal de Connexion en protected (utilisé dans les tes
 faire une interface repliquable  
 faire une fonction replique dans ListeChaine  
 enlever duplique() de Mutation  
-fusionner les trois fonction de fonctionnement dynamique de Cerveau  
 
 #### trucs a finir si j'en ai le courage
 

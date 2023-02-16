@@ -45,12 +45,13 @@ public class JoueurIndividu extends Joueur{
 			//on genere une liste a partir des output
 			float[] liste=genereListe(grille);
 			float[] choix={0,0,0,0,0,0,0};
+			float[] analyse;
 			for(int i=0; i<nbTics; i++) {
-				for(int j=0; j<43; j++) {
-					cerveau.setInputs(liste);
+				analyse=cerveau.analyse(liste);
+				for(int j=0; j<analyse.length; j++) {
+					choix[i]+=analyse[i];
 				}
-				cerveau.next();
-				choix=cerveau.getOutputs();
+
 			}
 			
 			//chercher le max des choix. En cas d'egalite, on garde les plus eleves

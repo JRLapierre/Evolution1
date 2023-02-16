@@ -25,9 +25,7 @@ class TestGeneration {
 			float[] tab=new float[] {1};
 			for (int j=0; j<population.length; j++) {
 				for(int i=0; i<10; i++) {
-					population[j].getCerveau().setInputs(tab);
-					population[j].getCerveau().next();
-					float score=population[j].getCerveau().getOutputs()[0];
+					float score=population[j].getCerveau().analyse(tab)[0];
 					population[j].updateScore(5+score);
 				}
 				population[j].updateScore(-population[j].getCerveau().getPertes());

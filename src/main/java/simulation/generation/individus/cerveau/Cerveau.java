@@ -258,7 +258,7 @@ public class Cerveau implements Enregistrable {
 	 * met les valeurs souhaités dans les neurones d'entrée du cerveau.
 	 * @param inputs un tableau de float contenant les valeurs voulues
 	 */
-	public void setInputs(float[] inputs) {
+	private void setInputs(float[] inputs) {
 		for(int i=0; i<inputs.length; i++) {
 			listeInput[i].setPuissance(inputs[i]);
 		}
@@ -270,7 +270,7 @@ public class Cerveau implements Enregistrable {
 	 * @return une liste de float qui contient 
 	 * la puissance des neurones en sortie du cerveau
 	 */
-	public float[] getOutputs() {
+	private float[] getOutputs() {
 		float[] outputs=new float[listeOutput.length];
 		for(int i=0; i<outputs.length; i++) {
 			outputs[i]=listeOutput[i].getPuissance();
@@ -283,7 +283,7 @@ public class Cerveau implements Enregistrable {
 	 * fonction qui met le cerveau dans l'état suivant(après 1 tic),
 	 * c'est à dire que les signeaux se transmettent d'une neurone à l'autre
 	 */
-	public void next() {
+	private void next() {
 		//on parcours les connextions
 		listeConnexions.resetParcours();
 		while(listeConnexions.getSuivant()!=null) {
@@ -304,6 +304,18 @@ public class Cerveau implements Enregistrable {
 		while(listeConnexions.getSuivant()!=null) {
 			pertes += listeConnexions.getActuel().transitionOut();
 		}
+	}
+	
+	
+	/**
+	 * fonction qui analyse les entrees donnees et renvoie le resultat de l'analyse
+	 * @param inputs un tableau de float contenant les valeurs voulues
+	 * @return une liste qui contient la puissance des neurones de sortie
+	 */
+	public float[] analyse(float[] inputs) {
+		setInputs(inputs);
+		next();
+		return getOutputs();
 	}
 	
 	

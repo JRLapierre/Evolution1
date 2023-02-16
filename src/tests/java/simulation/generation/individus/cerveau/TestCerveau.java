@@ -62,9 +62,7 @@ class TestCerveau {
 
 		input[0]=1;
 		input[1]=1;
-		c.setInputs(input);
-		
-		c.next();
+		c.analyse(input);
 		
 		assertEquals(0, c.getListeInput()[0].getPuissance());
 		assertEquals(0, c.getListeInput()[1].getPuissance());
@@ -73,7 +71,9 @@ class TestCerveau {
 		assertEquals(0.5 , c.getListeOutput()[1].getPuissance());
 		assertEquals(0, c.getListeOutput()[2].getPuissance());
 		
-		c.next();
+		input[0]=0;
+		input[1]=0;
+		c.analyse(input);
 		
 		assertEquals(0, c.getListeInput()[0].getPuissance());
 		assertEquals(0, c.getListeInput()[1].getPuissance());
@@ -115,11 +115,11 @@ class TestCerveau {
 		c.addConnexion(new Connexion(2, c.getListeInput()[0], c.getListeOutput()[0]));
 		c.addConnexion(new Connexion(2, c.getListeInput()[0], c.getListeOutput()[0]));
 		
-		c.getListeInput()[0].setPuissance(1);
-		c.next();
+		float[] inputs=new float[] {1};
+		c.analyse(inputs);
 		assertEquals(1, c.getPertes());
-		c.getListeInput()[0].setPuissance(-1);
-		c.next();
+		inputs[0]=-1;
+		c.analyse(inputs);
 		assertEquals(2, c.getPertes());
 	}
 	

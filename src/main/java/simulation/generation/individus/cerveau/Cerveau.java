@@ -255,6 +255,17 @@ public class Cerveau implements Enregistrable {
 	//fonctions lies au fonctionnement dynamique du cerveau
 
 	/**
+	 * met les valeurs souhaités dans les neurones d'entrée du cerveau.
+	 * @param inputs un tableau de float contenant les valeurs voulues
+	 */
+	public void setInputs(float[] inputs) {
+		for(int i=0; i<inputs.length; i++) {
+			listeInput[i].setPuissance(inputs[i]);
+		}
+	}
+	
+	
+	/**
 	 * fonction qui met le cerveau dans l'état suivant(après 1 tic),
 	 * c'est à dire que les signeaux se transmettent d'une neurone à l'autre
 	 */

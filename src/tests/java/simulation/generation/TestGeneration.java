@@ -22,9 +22,10 @@ class TestGeneration {
 	
 	private Epreuve e1() {
 		return population -> {
+			float[] tab=new float[] {1};
 			for (int j=0; j<population.length; j++) {
 				for(int i=0; i<10; i++) {
-					population[j].getCerveau().getListeInput()[0].setPuissance(1);
+					population[j].getCerveau().setInputs(tab);
 					population[j].getCerveau().next();
 					float score=population[j].getCerveau().getListeOutput()[0].getPuissance();
 					population[j].updateScore(5+score);

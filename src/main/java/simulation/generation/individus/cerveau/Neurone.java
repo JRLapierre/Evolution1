@@ -81,7 +81,7 @@ public class Neurone implements Enregistrable {
 	 * @param puissance la puissance qu'on souhaite mettre
 	 * @return les pertes
 	 */
-	public float setPuissance(float puissance) {
+	protected float setPuissance(float puissance) {
 		this.puissance=0;
 		return limitePuissance(puissance);
 	}

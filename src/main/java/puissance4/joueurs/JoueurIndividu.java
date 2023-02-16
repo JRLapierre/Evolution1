@@ -47,7 +47,7 @@ public class JoueurIndividu extends Joueur{
 			float[] choix={0,0,0,0,0,0,0};
 			for(int i=0; i<nbTics; i++) {
 				for(int j=0; j<43; j++) {
-					cerveau.getListeInput()[j].setPuissance(liste[j]);
+					cerveau.setInputs(liste);
 				}
 				cerveau.next();
 				for(int k=0; k<7; k++) {

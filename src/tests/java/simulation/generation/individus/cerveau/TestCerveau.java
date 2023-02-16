@@ -58,9 +58,11 @@ class TestCerveau {
 	@DisplayName("test des fonctions du fonctionnement dynamique du cerveau")
 	void testFonctionnement() {
 		Cerveau c=c2();
-		
-		c.getListeInput()[0].setPuissance(1);
-		c.getListeInput()[1].setPuissance(1);
+		float[] input=new float[2];
+
+		input[0]=1;
+		input[1]=1;
+		c.setInputs(input);
 		
 		c.next();
 		

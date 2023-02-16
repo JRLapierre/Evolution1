@@ -55,7 +55,11 @@ faire un convertisseur binaire-json pour visualiser les individus enregistres en
 encapsuler le package cerveau de facon a n'interagir qu'avec la classe Cerveau  
 encapsuler les listes dans Cerveau  
 enlever le static de mutation dans Cerveau  
-mettre le constructeur principal de Connexion en protected  
+mettre le constructeur principal de Connexion en protected (utilisé dans les tests)  
+faire une interface repliquable  
+faire une fonction replique dans ListeChaine  
+enlever duplique() de Mutation  
+mettre la classe Neurone en protected  
 
 #### trucs a finir si j'en ai le courage
 

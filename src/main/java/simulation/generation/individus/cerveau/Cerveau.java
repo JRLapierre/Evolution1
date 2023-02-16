@@ -154,6 +154,7 @@ public class Cerveau implements Enregistrable {
 	 * @return le nombre de neurones de ce type
 	 */
 	private int decodeNbNeurones(String type, String sub) {
+		exeptionType(type);
 		String subsub; //la sous sous chaine de carractere a etudier
 		int i=0;
 		if(type.equals("input")) {

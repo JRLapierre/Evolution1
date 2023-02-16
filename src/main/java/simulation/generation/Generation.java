@@ -202,7 +202,7 @@ public class Generation implements Enregistrable {
 		this.butoir=bb.getInt();
 		this.population=new Individu[nbIndividus];
 		//regeneration des mutations
-		Cerveau.mutation=new Mutation(bb);
+		Mutation mutation=new Mutation(bb);
 		//generation des individus sauvegardes
 		byte[] contenu;
 		File[] fichiers=new File(path + "generation"+numero+"/").listFiles();
@@ -215,6 +215,7 @@ public class Generation implements Enregistrable {
 			bb.put(contenu);
 			bb.flip();
 			this.population[i]=Individu.regenereIndividu(bb);
+			this.population[i].getCerveau().mutation=mutation;
 		}
 	}
 	
@@ -346,7 +347,9 @@ public class Generation implements Enregistrable {
 	 * @param mutation les mutations a changer
 	 */
 	public void setMutations(Mutation mutation) {
-		Cerveau.mutation=mutation;
+		for (Individu individu:population) {
+			individu.getCerveau().mutation=mutation;
+		}
 	}
 	
 	
@@ -378,7 +381,7 @@ public class Generation implements Enregistrable {
 		+ "\"nbEnfantsSexe\":" + nbEnfantsSexe + ","
 		+ "\"nbIndividus\":" + nbIndividus + ","
 		+ "\"butoir\":" + butoir + ","
-		+ "\"mutations\":" + Cerveau.mutation.toStringJson()
+		+ "\"mutations\":" + population[0].getCerveau().mutation.toStringJson()
 		+"}";
 	}
 	
@@ -390,7 +393,7 @@ public class Generation implements Enregistrable {
 		bb.putInt(nbClonesMutes);
 		bb.putInt(nbEnfantsSexe);
 		bb.putInt(butoir);
-		bb.put(Cerveau.mutation.toByte());
+		bb.put(population[0].getCerveau().mutation.toByte());
 		return bb.array();
 	}
 	

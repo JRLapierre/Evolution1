@@ -46,7 +46,7 @@ public class Cerveau implements Enregistrable {
 	 * les mutations auquelles le cerveau peut être confronté.
 	 * Si rien n'est fait, les mutations n'affecterons pas le cerveau.
 	 */
-	public static Mutation mutation=new Mutation(0);
+	public Mutation mutation=new Mutation(0);
 
 	//------------------------------------------------------------------------------
 	//constructeur
@@ -333,15 +333,18 @@ public class Cerveau implements Enregistrable {
 	 * @return un nouveau cerveau
 	 */
 	public Cerveau replique() {
+		//creation de la structure principale
 		Cerveau cerveau=new Cerveau(
 				this.listeInput.length, 
 				this.listeOutput.length, 
 				this.listeInterne.length);
-		Connexion connexion=this.listeConnexions.getSuivant();
-		while (connexion!=null) {
-			cerveau.addConnexion(connexion);
-			connexion=this.listeConnexions.getSuivant();
+		//ajout des connexions
+		this.listeConnexions.resetParcours();
+		while (this.listeConnexions.getSuivant()!=null) {
+			cerveau.addConnexion(this.listeConnexions.getActuel());
 		}
+		//ajout des mutations
+		cerveau.mutation=this.mutation;
 		return cerveau;
 	}
 	

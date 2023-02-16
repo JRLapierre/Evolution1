@@ -27,7 +27,7 @@ public class Sauvegarde extends Individu {
 		super(sub);
 		if(!Sauvegarde.aMutation) {
 			Sauvegarde.aMutation=true;
-			Cerveau.mutation=mutation;
+			this.cerveau.mutation=mutation;
 		}
 	}
 	

@@ -23,7 +23,7 @@ public class Original extends Individu{
 		super();
 		this.cerveau=cerveau;
 		this.generation=0;
-		Cerveau.mutation=mutation;
+		this.cerveau.mutation=mutation;
 	}
 	
 	/**

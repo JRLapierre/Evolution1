@@ -66,6 +66,21 @@ public class Connexion implements Enregistrable {
 		nbConnexions++;
 	}
 	
+	
+	/**
+	 * constructeur pour faire une copie d'une connexion
+	 * @param facteur 	le facteur multiplicateur
+	 * @param origine 	la neurone d'origine
+	 * @param cible 	la neurone cible de la connexion
+	 * @param id		l'id de la connexion
+	 */
+	private Connexion(float facteur, Neurone origine, Neurone cible, int id) {
+		this.facteur=facteur;
+		this.origine=origine;
+		this.cible=cible;
+		this.id=id;
+	}
+	
 	/**
 	 * constructeur pour creer depuis un enregistrement json
 	 * @param sub le morceau de chaine de carractere
@@ -168,10 +183,7 @@ public class Connexion implements Enregistrable {
 	 * @return une copie de la connexion actuelle.
 	 */
 	protected Connexion replique() {
-		Connexion nouveau=new Connexion(facteur, origine, cible);
-		nbConnexions--; //contrer l'incrementation automatique
-		nouveau.id=this.id;
-		return nouveau;
+		return new Connexion(facteur, origine, cible, id);
 	}
 	
 	//-------------------------------------------------------------------------------

@@ -260,8 +260,7 @@ public class Mutation implements Enregistrable{
 	 * @param cerveau le cerveau a changer
 	 */
 	private void changeExtremites(Cerveau cerveau) {
-		Connexion c=cerveau.getListeConnexions().getSuivant();
-		while (c!=null) {
+		while (cerveau.getListeConnexions().getSuivant()!=null) {
 			if (aleatoire.aleatInt(0,100)<=tauxMutationNeurone) {
 				cerveau.getListeConnexions().getActuel()
 				.updateOrigine(neuroneAleat(cerveau));
@@ -270,7 +269,6 @@ public class Mutation implements Enregistrable{
 				cerveau.getListeConnexions().getActuel()
 				.updateCible(neuroneAleat(cerveau));
 			}
-			c=cerveau.getListeConnexions().getSuivant();
 		}
 	}
 	
@@ -283,13 +281,13 @@ public class Mutation implements Enregistrable{
 		//prudence
 		cerveau.getListeConnexions().resetParcours();
 		//suppression de connexion
-		supprConnexion(cerveau.getListeConnexions());
+		if(tauxSuppression!=0) supprConnexion(cerveau.getListeConnexions());
 		//changement des extremites d'une connexion
-		changeExtremites(cerveau);
+		if(tauxMutationNeurone!=0) changeExtremites(cerveau);
 		//change le facteur d'une connexion
-		changeFacteur(cerveau.getListeConnexions());
+		if(tauxMutationFacteur!=0) changeFacteur(cerveau.getListeConnexions());
 		//ajout de connexion
-		ajoutConnexion(cerveau);
+		if(tauxSuppression!=0) ajoutConnexion(cerveau);
 	}
 	
 	

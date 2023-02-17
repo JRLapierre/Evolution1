@@ -214,7 +214,7 @@ public class Cerveau implements Enregistrable {
 	 * getteur pour listeConnexions
 	 * @return la liste des connexions contenues dans ce cerveau
 	 */
-	public ListeChaine<Connexion> getListeConnexions() {
+	protected ListeChaine<Connexion> getListeConnexions() {
 		return listeConnexions;
 	}
 	

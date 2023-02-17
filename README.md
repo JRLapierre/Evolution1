@@ -52,7 +52,6 @@ faire un convertisseur binaire-json pour visualiser les individus enregistres en
 #### urgent :
 
 #### TODO
-encapsuler listeConnexion de Cerveau  
 faire une interface repliquable  
 faire une fonction replique dans ListeChaine  
 enlever duplique() de Mutation  

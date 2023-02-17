@@ -8,7 +8,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import simulation.generation.individus.cerveau.Cerveau;
-import simulation.generation.individus.cerveau.Connexion;
 import simulation.generation.individus.cerveau.Mutation;
 
 class TestIndividu {
@@ -18,15 +17,11 @@ class TestIndividu {
 	
 	Cerveau c=new Cerveau(2,3,20);
 	
-	Connexion con1=new Connexion(1, c.getNeurone("input", 0), c.getNeurone("interne", 0));
-	Connexion con2=new Connexion(-1, c.getNeurone("interne", 0), c.getNeurone("output", 0));
-	Connexion con3=new Connexion(0.5f, c.getNeurone("input", 0), c.getNeurone("output", 1));
-	
 	private Cerveau c1(Cerveau c) {
 		Cerveau c2=c.replique();
-		c2.getListeConnexions().ajout(con1);
-		c2.getListeConnexions().ajout(con2);
-		c2.addConnexion(con3);
+		c2.addNewConnexion(1, "input", 0, "interne", 0);
+		c2.addNewConnexion(-1, "interne", 0, "output", 0);
+		c2.addNewConnexion(0.5f, "input", 0, "output", 1);
 		return c2;
 	}
 	
@@ -38,11 +33,12 @@ class TestIndividu {
 	@Test
 	@DisplayName("test des fonctions de base")
 	void testFonctionsBase() {
-		Individu i=new Original(c1(c), null);
+		Cerveau localC=c1(c);
+		Individu i=new Original(localC, null);
 		
 		//assertEquals(0, i.getId());
 		assertEquals(0, i.getScore());
-		assertEquals(c1(c), i.getCerveau());
+		assertEquals(localC, i.getCerveau());
 		assertEquals(0, i.getGeneration());
 		
 		i.updateScore(2);
@@ -68,17 +64,18 @@ class TestIndividu {
 	@Test
 	@DisplayName("test d'un clone mute mais des mutations quasi nulles")
 	void testCloneMute1() {
+		Cerveau localC=c1(c);
 		//les mutations
 		Mutation m=new Mutation(0).setTauxCreationSuppression(-450, 0);
 		
-		Individu i=new Original(c1(c), m);
+		Individu i=new Original(localC, m);
 
 		Individu iMute=new CloneMute(i);
 		
 		//assertEquals(3, i.getId());
 		//assertEquals(4, iMute.getId());
 		assertEquals(0, iMute.getScore());
-		assertEquals(c1(c).toStringJson(), iMute.getCerveau().toStringJson());
+		assertEquals(localC.toStringJson(), iMute.getCerveau().toStringJson());
 		assertEquals(1, iMute.getGeneration());
 	}
 

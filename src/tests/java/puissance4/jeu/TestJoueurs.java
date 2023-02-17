@@ -10,7 +10,6 @@ import puissance4.joueurs.JoueurAI1;
 import puissance4.joueurs.JoueurHumain;
 import puissance4.joueurs.JoueurIndividu;
 import simulation.generation.individus.cerveau.Cerveau;
-import simulation.generation.individus.cerveau.Connexion;
 
 class TestJoueurs {
 
@@ -35,7 +34,7 @@ class TestJoueurs {
 	void testJoueurIndividu() {
 		Cerveau c=new Cerveau(43,7,0);
 		for(int i=0; i<43; i++) {
-			c.addConnexion(new Connexion(1, c.getNeurone("input", i), c.getNeurone("output", i%7)));
+			c.addNewConnexion(1,"input", i, "output", i%7);
 		}
 		Joueur j4=new JoueurIndividu(c, 2);
 		Joueur j3=new JoueurHumain();

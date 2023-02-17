@@ -224,7 +224,7 @@ public class Cerveau implements Enregistrable {
 	 * @param position
 	 * @return la neurone recherchee
 	 */
-	public Neurone getNeurone(String type, int position) {
+	private Neurone getNeurone(String type, int position) {
 		exeptionType(type);
 		if (type.equals("input")) {
 			return listeInput[position];
@@ -329,7 +329,7 @@ public class Cerveau implements Enregistrable {
 	 * 
 	 * @param connexion la connexion à copier et integrer dans le cerveau
 	 */
-	public void addConnexion(Connexion connexion) {
+	protected void addConnexion(Connexion connexion) {
 		Connexion copie=connexion.replique();
 		copie.updateOrigine(getNeurone(
 				connexion.getOrigine().getType(), 
@@ -339,6 +339,29 @@ public class Cerveau implements Enregistrable {
 				connexion.getCible().getNumero()));
 		listeConnexions.ajout(copie);
 	}
+	
+	
+	/**
+	 * fonction d'ajout d'une nouvelle connexion.
+	 * Plus rapide que addConnexion si il s'agit de creer 
+	 * une nouvelle connexion de toutes pieces.
+	 * typeOrigine et type cible peuvent être "input", "interne" ou "output"
+	 * @param facteur			le facteur de la connexion
+	 * @param typeOrigine		le type de la neurone d'origine
+	 * @param numeroOrigine		le numero de la neurone d'origine
+	 * @param typeCible			le type de la neurone cible
+	 * @param numeroCible		le numero de la neurone cible
+	 */
+	public void addNewConnexion(float facteur, 
+			String typeOrigine, int numeroOrigine, 
+			String typeCible, int numeroCible) {
+		
+		listeConnexions.ajout(new Connexion(
+				facteur, 
+				getNeurone(typeOrigine, numeroOrigine), 
+				getNeurone(typeCible, numeroCible)));
+	}
+	
 	
 	/**
 	 * fonction qui cree un nouveau cerveau identique au precedent

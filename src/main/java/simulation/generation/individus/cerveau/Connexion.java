@@ -11,7 +11,7 @@ import simulation.Enregistrable;
  * @author jrl
  *
  */
-public class Connexion implements Enregistrable {
+class Connexion implements Enregistrable {
 	
 	//-------------------------------------------------------------------------------
 	//variables
@@ -58,7 +58,7 @@ public class Connexion implements Enregistrable {
 	 * @param origine la neurone d'origine
 	 * @param cible la neurone cible de la connexion
 	 */
-	public Connexion(float facteur, Neurone origine, Neurone cible) {
+	protected Connexion(float facteur, Neurone origine, Neurone cible) {
 		this.facteur = facteur;
 		this.origine = origine;
 		this.cible = cible;

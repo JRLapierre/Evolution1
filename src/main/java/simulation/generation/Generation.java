@@ -17,7 +17,6 @@ import simulation.generation.individus.CloneParfait;
 import simulation.generation.individus.EnfantSexe;
 import simulation.generation.individus.Individu;
 import simulation.generation.individus.Sauvegarde;
-import simulation.generation.individus.cerveau.Cerveau;
 import simulation.generation.individus.cerveau.Mutation;
 
 /**

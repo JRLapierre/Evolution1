@@ -206,15 +206,19 @@ public class Mutation implements Enregistrable{
 	 * @param cerveau
 	 */
 	private void ajoutConnexion(Cerveau cerveau) {
+		Neurone origine;
+		Neurone cible;
 		for (int i=0; i < cerveau.getListeInput().length + cerveau.getListeInterne().length +
 				cerveau.getListeOutput().length; i++) {
 			if (aleatoire.aleatInt(0,100)<=tauxCreation) {
-				cerveau.addConnexion(new Connexion(
+				origine=neuroneAleat(cerveau);
+				cible=neuroneAleat(cerveau);
+				cerveau.addNewConnexion(
 						(float) aleatoire.aleatDouble(
 								-maxChangementFacteur, 
 								maxChangementFacteur), 
-						neuroneAleat(cerveau), 
-						neuroneAleat(cerveau)));
+						origine.getType(), origine.getNumero(), 
+						cible.getType(), cible.getNumero());
 			}
 		}
 	}

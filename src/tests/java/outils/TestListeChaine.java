@@ -157,6 +157,16 @@ class TestListeChaine {
 		assertEquals(liste1, liste1());
 	}
 	
+	@Test
+	@DisplayName("test de replique")
+	void testReplique() {
+		ListeChaine<Integer> original=liste6();
+		ListeChaine<Integer> copie=original.replique();
+		while(original.getSuivant()!=null) {
+			assertEquals(original.getActuel(), copie.getSuivant());
+		}
+	}
+	
 	//------------------------------------------------------------------------------
 	//tests de fonctions de changement d'éléments dans la liste
 	

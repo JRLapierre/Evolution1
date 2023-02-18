@@ -52,8 +52,6 @@ faire un convertisseur binaire-json pour visualiser les individus enregistres en
 #### urgent :
 
 #### TODO
-faire une interface repliquable  
-faire une fonction replique dans ListeChaine  
 enlever duplique() de Mutation  
 
 #### trucs a finir si j'en ai le courage

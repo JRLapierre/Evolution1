@@ -278,6 +278,19 @@ public class ListeChaine<T> {
 		}
 	}
 	
+	/**
+	 * fonction de copie de la liste (mais pas des objets contenus)
+	 * @return une liste identique a la precedente contenant les mêmes objets
+	 */
+	public ListeChaine<T> replique() {
+		ListeChaine<T> copie=new ListeChaine<>();
+		this.resetParcours();
+		while(this.getSuivant()!=null) {
+			copie.ajout(this.getActuel());
+		}
+		return copie;
+	}
+	
 	//------------------------------------------------------------------------------
 	//fonctions d'alteration d'elements
 	

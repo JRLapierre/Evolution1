@@ -52,7 +52,10 @@ faire un convertisseur binaire-json pour visualiser les individus enregistres en
 #### urgent :
 
 #### TODO
-enlever duplique() de Mutation  
+creer un package interfaces  
+renommer l'interface enregistrable  
+faire une interface pour les elements s'enregistrant  
+faire une interface repliquable  
 
 #### trucs a finir si j'en ai le courage
 

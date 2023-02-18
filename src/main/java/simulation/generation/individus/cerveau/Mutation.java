@@ -302,8 +302,8 @@ public class Mutation implements Enregistrable{
 		Cerveau c=new Cerveau(c1.getListeInput().length, 
 				c1.getListeOutput().length, c1.getListeInterne().length);
 		//fonction locale de clonage pour dupliquer sans risque les listes
-		ListeChaine<Connexion> l1=duplique(c1.getListeConnexions());
-		ListeChaine<Connexion> l2=duplique(c2.getListeConnexions());
+		ListeChaine<Connexion> l1=c1.getListeConnexions().replique();
+		ListeChaine<Connexion> l2=c2.getListeConnexions().replique();
 		
 		//gestion des cas ou l'ID est le même
 		fusionMemeID(c, l1, l2);
@@ -312,22 +312,6 @@ public class Mutation implements Enregistrable{
 		fusionListesConnexion(c, l1, l2);
 		
 		return c;
-	}
-	
-	
-	/**
-	 * fonction qui duplique de maniere securise une liste de connexion
-	 * @param liste la liste de connexions a dupliquer
-	 * @return la liste duplique
-	 */
-	private ListeChaine<Connexion> duplique(ListeChaine<Connexion> liste) {
-		ListeChaine<Connexion> duplicat=new ListeChaine<>();
-		Connexion c=liste.getSuivant();
-		while (c!=null) {
-			duplicat.ajout(c);
-			c=liste.getSuivant();
-		}
-		return duplicat;
 	}
 
 	

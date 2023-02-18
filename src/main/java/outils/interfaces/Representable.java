@@ -5,7 +5,7 @@ package outils.interfaces;
  * @author jrl
  *
  */
-public interface Enregistrable {
+public interface Representable {
 	
 	/**
 	 * produit un string correspondant au format Json des objet

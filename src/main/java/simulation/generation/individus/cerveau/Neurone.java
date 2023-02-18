@@ -2,7 +2,7 @@ package simulation.generation.individus.cerveau;
 
 import java.nio.ByteBuffer;
 
-import outils.interfaces.Enregistrable;
+import outils.interfaces.Representable;
 
 /**
  * cette classe simule une neuronne, qui recoit des infos et qui en renvoie.
@@ -11,7 +11,7 @@ import outils.interfaces.Enregistrable;
  * @author jrl
  *
  */
-class Neurone implements Enregistrable {
+class Neurone implements Representable {
 
 	//-------------------------------------------------------------------------------
 	//

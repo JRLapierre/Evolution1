@@ -2,7 +2,7 @@ package simulation.generation.individus.cerveau;
 
 import java.nio.ByteBuffer;
 
-import outils.interfaces.Enregistrable;
+import outils.interfaces.Representable;
 
 /**
  * cette classe simule une connexion entre deux neurones.
@@ -11,7 +11,7 @@ import outils.interfaces.Enregistrable;
  * @author jrl
  *
  */
-class Connexion implements Enregistrable {
+class Connexion implements Representable {
 	
 	//-------------------------------------------------------------------------------
 	//variables
@@ -273,7 +273,7 @@ class Connexion implements Enregistrable {
 	}
 		
 	//---------------------------------------------------------------------
-	//fonctions d'Enregistrable
+	//fonctions d'Representable
 
 	/**
 	 * renvoie des infos sur la connexion pour un format json

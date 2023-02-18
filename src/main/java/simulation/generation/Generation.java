@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 import outils.Aleatoire;
 import outils.Carracteristique;
 import outils.ListeChaine;
-import outils.interfaces.Enregistrable;
+import outils.interfaces.Representable;
 import simulation.generation.individus.CloneMute;
 import simulation.generation.individus.CloneParfait;
 import simulation.generation.individus.EnfantSexe;
@@ -24,7 +24,7 @@ import simulation.generation.individus.cerveau.Mutation;
  * @author jrl
  *
  */
-public class Generation implements Enregistrable {
+public class Generation implements Representable {
 
 	//------------------------------------------------------------------------------------------
 	//variables : distribution de la population

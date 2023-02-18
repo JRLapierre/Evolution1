@@ -4,7 +4,7 @@ import java.nio.ByteBuffer;
 
 import outils.Aleatoire;
 import outils.ListeChaine;
-import outils.interfaces.Enregistrable;
+import outils.interfaces.Representable;
 
 /**
  * classe pour les main.mutations d'une génération à l'autre.
@@ -12,7 +12,7 @@ import outils.interfaces.Enregistrable;
  * @author jrl
  *
  */
-public class Mutation implements Enregistrable{
+public class Mutation implements Representable{
 	
 	//-------------------------------------------------------------------------------
 	//variables

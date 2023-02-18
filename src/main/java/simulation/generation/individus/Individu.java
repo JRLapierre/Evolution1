@@ -4,7 +4,7 @@ import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.nio.ByteBuffer;
 
-import outils.interfaces.Enregistrable;
+import outils.interfaces.Representable;
 import simulation.generation.individus.cerveau.Cerveau;
 
 /**
@@ -21,7 +21,7 @@ import simulation.generation.individus.cerveau.Cerveau;
  * @author jrl
  *
  */
-public abstract class Individu implements Enregistrable {
+public abstract class Individu implements Representable {
 	
 	//-------------------------------------------------------------------------------
 	//variables
@@ -166,7 +166,7 @@ public abstract class Individu implements Enregistrable {
 	}
 	
 	//-------------------------------------------------------------------------------
-	//fonction de l'interface Enregistrable
+	//fonction de l'interface Representable
 	
 	/**
 	 * fonction toStringJson incomplete qui reclamme une sous classe

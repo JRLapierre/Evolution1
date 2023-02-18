@@ -4,7 +4,7 @@ import java.nio.ByteBuffer;
 
 import outils.Carracteristique;
 import outils.ListeChaine;
-import outils.interfaces.Enregistrable;
+import outils.interfaces.Representable;
 
 /**
  * cette classe va simuler un cerveau avec des entrées, 
@@ -12,7 +12,7 @@ import outils.interfaces.Enregistrable;
  * @author jrl
  *
  */
-public class Cerveau implements Enregistrable {
+public class Cerveau implements Representable {
 	
 	//-------------------------------------------------------------------------------
 	//variables

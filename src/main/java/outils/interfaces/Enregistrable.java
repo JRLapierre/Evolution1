@@ -1,4 +1,4 @@
-package simulation;
+package outils.interfaces;
 
 /**
  * cette interface existe pour les objets qui vont figurer dans l'enregistrement.

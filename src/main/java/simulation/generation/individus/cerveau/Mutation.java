@@ -4,7 +4,7 @@ import java.nio.ByteBuffer;
 
 import outils.Aleatoire;
 import outils.ListeChaine;
-import simulation.Enregistrable;
+import outils.interfaces.Enregistrable;
 
 /**
  * classe pour les main.mutations d'une génération à l'autre.

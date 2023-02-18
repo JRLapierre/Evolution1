@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 import outils.Aleatoire;
 import outils.Carracteristique;
 import outils.ListeChaine;
-import simulation.Enregistrable;
+import outils.interfaces.Enregistrable;
 import simulation.generation.individus.CloneMute;
 import simulation.generation.individus.CloneParfait;
 import simulation.generation.individus.EnfantSexe;

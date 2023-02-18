@@ -4,7 +4,7 @@ import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.nio.ByteBuffer;
 
-import simulation.Enregistrable;
+import outils.interfaces.Enregistrable;
 import simulation.generation.individus.cerveau.Cerveau;
 
 /**

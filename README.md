@@ -52,7 +52,6 @@ faire un convertisseur binaire-json pour visualiser les individus enregistres en
 #### urgent :
 
 #### TODO
-creer un package interfaces  
 renommer l'interface enregistrable  
 faire une interface pour les elements s'enregistrant  
 faire une interface repliquable  

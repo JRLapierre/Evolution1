@@ -1,5 +1,7 @@
 package outils;
 
+import outils.interfaces.Repliquable;
+
 /**
  * cette classe correspond à une liste doublement chainée de taille variable.
  * Je l'ai crée parce que je le pouvais et je ne voulais pas utiliser le
@@ -9,7 +11,7 @@ package outils;
  *
  * @param <T> le type en paramètre
  */
-public class ListeChaine<T> {
+public class ListeChaine<T> implements Repliquable{
 
 	//-----------------------------------------------------------------------------
 	//la classe Noeud
@@ -282,6 +284,7 @@ public class ListeChaine<T> {
 	 * fonction de copie de la liste (mais pas des objets contenus)
 	 * @return une liste identique a la precedente contenant les mêmes objets
 	 */
+	@Override
 	public ListeChaine<T> replique() {
 		ListeChaine<T> copie=new ListeChaine<>();
 		this.resetParcours();

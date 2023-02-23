@@ -4,6 +4,7 @@ import java.nio.ByteBuffer;
 
 import outils.Carracteristique;
 import outils.ListeChaine;
+import outils.interfaces.Repliquable;
 import outils.interfaces.Representable;
 
 /**
@@ -12,7 +13,7 @@ import outils.interfaces.Representable;
  * @author jrl
  *
  */
-public class Cerveau implements Representable {
+public class Cerveau implements Representable, Repliquable {
 	
 	//-------------------------------------------------------------------------------
 	//variables
@@ -367,6 +368,7 @@ public class Cerveau implements Representable {
 	 * fonction qui cree un nouveau cerveau identique au precedent
 	 * @return un nouveau cerveau
 	 */
+	@Override
 	public Cerveau replique() {
 		//creation de la structure principale
 		Cerveau cerveau=new Cerveau(

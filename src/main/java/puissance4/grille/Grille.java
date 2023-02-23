@@ -1,12 +1,14 @@
 package puissance4.grille;
 
+import outils.interfaces.Repliquable;
+
 /**
  * la grille de jeu.
  * Une grille est une liste de colonnes de pions
  * @author jrl
  *
  */
-public class Grille {
+public class Grille implements Repliquable{
 
 	/**
 	 * la grille de jeu
@@ -185,7 +187,8 @@ public class Grille {
 	 * une methode de copie de la grille
 	 * @return une grille identique
 	 */
-	public Grille copie() {
+	@Override
+	public Grille replique() {
 		Grille g=new Grille();
 		for(int i=0; i<7; i++) {
 			for(int j=0; j<6; j++) {

@@ -36,24 +36,30 @@ La classe Mutation a été créée pour gérer les différentes mutations qui arrivent
 
 #### idees : 
 
-developper d'autres methodes d'apprentissage  
-creer un graphe qui permet de traquer visuellement les generations  
-faire des fonctions pour traquer les ancetres et les liens de parentee  
+###### amelioration du code : 
+faire un fichier java contenant tous les parametres  
+revoir le package puissance4.grille  
+revoir la classe JoueurIndividu  
+
+###### optimisation du programme : 
 appliquer du multithreading dans la phase de recuperation des donnees  
 appliquer du multithreading dans la phase de reproduction  
 appliquer du multithreading dans la phase d'enregistrement  
-revoir la generation du cerveau pour les nouveaux individus  
+
+
+###### developpement de nouvelles fonctionnalites : 
+developper d'autres methodes d'apprentissage  
+creer un graphe qui permet de traquer visuellement les generations  
+faire des fonctions pour traquer les ancetres et les liens de parentee  
 ecrire la derniere generation enregistree dans un fichier  
 ajouter des fonctionnalites pour mettre en pause  
-faire un fichier java contenant tous les parametres  
 faire un convertisseur binaire-json pour visualiser les individus enregistres en binaire  
 
 
 #### urgent :
 
 #### TODO
-faire une interface pour les elements s'enregistrant  
-faire une interface repliquable  
+faire un cerveau avec des couches de neurones  
 
 #### trucs a finir si j'en ai le courage
 

@@ -2,6 +2,7 @@ package simulation.generation.individus.cerveau;
 
 import java.nio.ByteBuffer;
 
+import outils.interfaces.Repliquable;
 import outils.interfaces.Representable;
 
 /**
@@ -11,7 +12,7 @@ import outils.interfaces.Representable;
  * @author jrl
  *
  */
-class Connexion implements Representable {
+class Connexion implements Representable, Repliquable {
 	
 	//-------------------------------------------------------------------------------
 	//variables
@@ -182,7 +183,8 @@ class Connexion implements Representable {
 	 * fonction permettant d'obtenir une copie de la connexion actuelle.
 	 * @return une copie de la connexion actuelle.
 	 */
-	protected Connexion replique() {
+	@Override
+	public Connexion replique() {
 		return new Connexion(facteur, origine, cible, id);
 	}
 	

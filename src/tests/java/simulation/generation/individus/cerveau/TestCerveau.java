@@ -145,5 +145,43 @@ class TestCerveau {
 		Cerveau c2=new Cerveau(bb);
 		assertEquals(c, c2);
 	}
+	
+	//----------------------------------------------------------------------------------------
+	//tests du cerveau a couches
+	
+	@Test
+	@DisplayName("test du constructeur simplifie de CerveauACouches")
+	void testConstructeurSimplifie() {
+		CerveauACouches c=new CerveauACouches(2,3);
+		assertEquals(6, c.getListeConnexions().getLongueur());
+		assertEquals(2, c.getListeInput().length);
+		assertEquals(0, c.getListeInterne().length);
+		assertEquals(3, c.getListeOutput().length);
+	}
+	
+	@Test
+	@DisplayName("test du constructeur complet de CerveauACouches")
+	void testConstructeurComplet() {
+		CerveauACouches c=new CerveauACouches(2,3,0,0);
+		assertEquals(6, c.getListeConnexions().getLongueur());
+		assertEquals(2, c.getListeInput().length);
+		assertEquals(0, c.getListeInterne().length);
+		assertEquals(3, c.getListeOutput().length);
+		CerveauACouches c2=new CerveauACouches(1,5,2,3);
+		assertEquals(2+4+4+10, c2.getListeConnexions().getLongueur());
+		assertEquals(1, c2.getListeInput().length);
+		assertEquals(6, c2.getListeInterne().length);
+		assertEquals(5, c2.getListeOutput().length);
+	}
+	
+	@Test
+	@DisplayName("test du fonctionnement d'un cerveau a couches")
+	void testFonctionnementCerveauACouches() {
+		//sera a modifier dans le futur
+		CerveauACouches c=new CerveauACouches(1,4, 5,1);
+		float[] tab=new float[] {1};
+		assertEquals(0, c.analyse(tab)[0]);
+		assertEquals(1, c.analyse(tab)[0]);
+	}
 
 }

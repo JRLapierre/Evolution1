@@ -571,10 +571,11 @@ public class Cerveau implements Representable, Repliquable {
 		listeConnexions.triRapide(car);
 	}
 	
-	@Override
+	
 	/**
 	 * adaptation du equals pour un cerveau
 	 */
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;

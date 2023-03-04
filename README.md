@@ -59,7 +59,8 @@ faire un convertisseur binaire-json pour visualiser les individus enregistres en
 #### urgent :
 
 #### TODO
-faire un cerveau avec des couches de neurones  
+finir le cerveau a couches  
+revoir la representation du cerveau  
 
 #### trucs a finir si j'en ai le courage
 

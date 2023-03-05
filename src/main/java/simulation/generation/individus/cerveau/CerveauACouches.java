@@ -16,6 +16,17 @@ public class CerveauACouches extends Cerveau{
 	//constructeurs
 
 	/**
+	 * constructeur prive pour pouvoir utiliser la methode replique
+	 * @param nbInput	le nombre de neurones d'entree du cerveau
+	 * @param nbOutput	le nombre de neurones de sortie du cerveau
+	 * @param nbInterne	le nombre de neurones internes du cerveau
+	 */
+	private CerveauACouches(int nbInput, int nbOutput, int nbInterne) {
+		super(nbInput, nbOutput, nbInterne);
+	}
+
+	
+	/**
 	 * construit un cerveau contenant des couches de neurones internes
 	 * @param nbInput	le nombre de neurones d'entree du cerveau
 	 * @param nbOutput	le nombre de neurones de sortie du cerveau
@@ -139,7 +150,29 @@ public class CerveauACouches extends Cerveau{
 		super.resetPuissance(listeOrigine);
 	}
 	
-	//TODO reecrire replique()
+	
+	@Override
+	public CerveauACouches replique() {
+		//reprise du code de Cerveau
+		//creation de la structure principale
+		CerveauACouches cerveau=new CerveauACouches(
+				this.getListeInput().length, 
+				this.getListeOutput().length, 
+				this.getListeInterne().length);
+		//ajout des connexions
+		this.getListeConnexions().resetParcours();
+		this.triConnexions();
+		while (this.getListeConnexions().getSuivant()!=null) {
+			cerveau.addConnexion(this.getListeConnexions().getActuel());
+		}
+		//ajout des mutations
+		cerveau.mutation=this.mutation;
+		//reconstruction des couches
+		if(couchesInternes!=null) {
+			cerveau.remplisCouchesInternes(couchesInternes[0].length, couchesInternes.length);
+		}
+		return cerveau;
+	}
 	
 	//TODO reecrire toStringJson()
 	

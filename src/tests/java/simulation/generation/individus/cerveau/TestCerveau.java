@@ -183,5 +183,19 @@ class TestCerveau {
 		tab[0]=0;
 		assertEquals(0, c.analyse(tab)[0]);
 	}
+	
+	@Test
+	@DisplayName("test de replique du cerveauACouche")
+	void testRepliqueCouches() {
+		CerveauACouches c1=new CerveauACouches(1,5,2,3);
+		CerveauACouches c2=c1.replique();
+		assertEquals(c1.toStringJson(), c2.toStringJson());
+		assertEquals(2+4+4+10, c2.getListeConnexions().getLongueur());
+		assertEquals(1, c2.getListeInput().length);
+		assertEquals(6, c2.getListeInterne().length);
+		assertEquals(5, c2.getListeOutput().length);
+		float[] tab=new float[] {1};
+		assertEquals(1, c2.analyse(tab)[0]);
+	}
 
 }

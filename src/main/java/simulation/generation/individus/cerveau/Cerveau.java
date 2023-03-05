@@ -560,7 +560,7 @@ public class Cerveau implements Representable, Repliquable {
 	/**
 	 * fonction de tri de la liste de connexion
 	 */
-	private void triConnexions() {
+	protected void triConnexions() {
 		Carracteristique<Connexion> car = elt -> {
 			if(elt.getOrigine().getType().equals("input")) {
 				return elt.getOrigine().getNumero();

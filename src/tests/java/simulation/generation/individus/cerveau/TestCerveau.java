@@ -177,11 +177,11 @@ class TestCerveau {
 	@Test
 	@DisplayName("test du fonctionnement d'un cerveau a couches")
 	void testFonctionnementCerveauACouches() {
-		//sera a modifier dans le futur
-		CerveauACouches c=new CerveauACouches(1,4, 5,1);
+		CerveauACouches c=new CerveauACouches(1,6, 5,3);
 		float[] tab=new float[] {1};
-		assertEquals(0, c.analyse(tab)[0]);
 		assertEquals(1, c.analyse(tab)[0]);
+		tab[0]=0;
+		assertEquals(0, c.analyse(tab)[0]);
 	}
 
 }

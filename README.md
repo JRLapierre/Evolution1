@@ -38,7 +38,6 @@ La classe Mutation a été créée pour gérer les différentes mutations qui arrivent
 
 ###### amelioration du code : 
 faire un fichier java contenant tous les parametres  
-revoir le package puissance4.grille  
 revoir la classe JoueurIndividu  
 
 ###### optimisation du programme : 
@@ -53,7 +52,6 @@ creer un graphe qui permet de traquer visuellement les generations
 faire des fonctions pour traquer les ancetres et les liens de parentee  
 ecrire la derniere generation enregistree dans un fichier  
 ajouter des fonctionnalites pour mettre en pause  
-faire un convertisseur binaire-json pour visualiser les individus enregistres en binaire  
 
 
 #### urgent :
@@ -61,6 +59,9 @@ faire un convertisseur binaire-json pour visualiser les individus enregistres en
 #### TODO
 finir le cerveau a couches  
 revoir la representation du cerveau  
+faire un convertisseur binaire-json pour visualiser les individus enregistres en binaire  
+revoir le package puissance4.grille  
+
 
 #### trucs a finir si j'en ai le courage
 

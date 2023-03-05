@@ -284,26 +284,30 @@ public class Cerveau implements Representable, Repliquable {
 	 * fonction qui met le cerveau dans l'état suivant(après 1 tic),
 	 * c'est à dire que les signeaux se transmettent d'une neurone à l'autre
 	 */
-	private void next() {
+	protected void next() {
 		//on parcours les connextions
 		listeConnexions.resetParcours();
 		while(listeConnexions.getSuivant()!=null) {
 			listeConnexions.getActuel().transitionIn();
 		}
 		//on vide les neurones
-		for (int i=0; i<listeInterne.length; i++) {
-			listeInterne[i].resetPuissance();
-		}
-		for (int i=0; i<listeInput.length; i++) {
-			listeInput[i].resetPuissance();
-		}		
-		for (int i=0; i<listeOutput.length; i++) {
-			listeOutput[i].resetPuissance();
-		}
+		resetPuissance(listeInput);
+		resetPuissance(listeInterne);
+		resetPuissance(listeOutput);
 		//on reparcours les connextions
 		listeConnexions.resetParcours();
 		while(listeConnexions.getSuivant()!=null) {
 			pertes += listeConnexions.getActuel().transitionOut();
+		}
+	}
+	
+	/**
+	 * methode qui permet de reinitialiser la puissance dans une liste de Neurones
+	 * @param liste la liste de neurone a reinitialiser
+	 */
+	protected void resetPuissance(Neurone[] liste) {
+		for (int i=0; i<liste.length; i++) {
+			liste[i].resetPuissance();
 		}
 	}
 	
@@ -556,7 +560,7 @@ public class Cerveau implements Representable, Repliquable {
 	/**
 	 * fonction de tri de la liste de connexion
 	 */
-	public void triConnexions() {
+	private void triConnexions() {
 		Carracteristique<Connexion> car = elt -> {
 			if(elt.getOrigine().getType().equals("input")) {
 				return elt.getOrigine().getNumero();

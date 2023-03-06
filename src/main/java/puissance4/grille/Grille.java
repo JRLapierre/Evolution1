@@ -1,5 +1,7 @@
 package puissance4.grille;
 
+import java.util.Arrays;
+
 import outils.interfaces.Repliquable;
 
 /**
@@ -13,15 +15,16 @@ public class Grille implements Repliquable{
 	/**
 	 * la grille de jeu
 	 */
-	private Colonne[] grille=new Colonne[7];
+	private char[][] grille=new char[7][6];
 	
 	/**
 	 * constructeur qui initalise la grille
 	 */
 	public Grille() {
 		for(int i=0; i<7; i++) {
-			grille[i]=new Colonne();
-		}
+			for(int j=0; j<6; j++) {
+				grille[i][j]=' ';
+			}		}
 	}
 	
 	/**
@@ -32,7 +35,13 @@ public class Grille implements Repliquable{
 	 */
 	public boolean ajoutePion(char pion, int position) {
 		if(position>7 || position<1) return false;
-		return grille[position-1].ajoutePion(pion);
+		for(int i=0; i<6; i++) {
+			if(grille[position-1][i]==' ') {
+				grille[position-1][i]=pion;
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**
@@ -41,7 +50,7 @@ public class Grille implements Repliquable{
 	 */
 	public boolean estPleine() {
 		for (int i=0; i<7; i++) {
-			if(!grille[i].estPleine()) return false;
+			if(grille[i][5]==' ') return false;
 		}
 		return true;
 	}
@@ -52,7 +61,7 @@ public class Grille implements Repliquable{
 	 * @return true la colonne est pleine
 	 */
 	public boolean colonnePleine(int col) {
-		return grille[col-1].estPleine();
+		return grille[col-1][5]!=' ';
 	}
 	
 	/**
@@ -67,56 +76,50 @@ public class Grille implements Repliquable{
 		int y=-1;
 		//determiner la position du pion dans la colonne
 		for(int i=0; i<6; i++) {
-			if(grille[x].getListe()[i]==' ') {
+			if(grille[x][i]==' ') {
 				y=i-1;
 				break;
 			}
 		}
 		if(y==-1) y=5;
 		//regarder dans les 4 sens possibles
-		return (aligneVertical(pion, x) || aligneHorisontal(pion, y) ||
-				aligneDiagonaleMontante(pion, x, y) || 
-				aligneDiagonaleDescendante(pion, x, y));
+		return (aligneVertical(pion, x) 
+				|| aligneHorisontal(pion, y) 
+				|| aligneDiagonaleMontante(pion, x, y) 
+				|| aligneDiagonaleDescendante(pion, x, y));
 	}
 	
 	//4 fonctions d'alignements :
 	
 	/**
-	 * diagonale descendante
+	 * en cas d'alignement vertical
 	 * @param pion le pion a inspecter
 	 * @param x la coordonnee x du pion
-	 * @param y la coordonnee y du pion
 	 * @return true si il y a un alignement vertical de 4 pions
 	 */
 	private boolean aligneVertical(char pion, int x) {
 		int suite=0;
-		for(int i=0; i<6; i++) {
-			if(grille[x].getListe()[i]==' ') {
-				return false;
-			} else if(grille[x].getListe()[i]==pion) {
+		for(int y=0; y<6; y++) {
+			if(grille[x][y]!=' ' && grille[x][y]==pion) {
 				suite++;
-				if (suite==4) {
-					return true;
-				}
+				if (suite==4) return true;
 			}
-			else {
-				suite=0;
-			}
+			else suite=0;
+
 		}
 		return false;
 	}
 	
 	/**
-	 * diagonale descendante
+	 * en cas d'alignement horisontal
 	 * @param pion le pion a inspecter
-	 * @param x la coordonnee x du pion
 	 * @param y la coordonnee y du pion
 	 * @return true si il y a un alignement horisontal de 4 pions
 	 */
 	private boolean aligneHorisontal(char pion, int y) {
 		int suite=0;
-		for(int i=0; i<7; i++) {
-			if(grille[i].getListe()[y]!=' ' && grille[i].getListe()[y]==pion) {
+		for(int x=0; x<7; x++) {
+			if(grille[x][y]!=' ' && grille[x][y]==pion) {
 				suite++;
 				if (suite==4) return true;
 			}
@@ -126,7 +129,7 @@ public class Grille implements Repliquable{
 	}
 	
 	/**
-	 * diagonale descendante
+	 * en cas de diagonale montante
 	 * @param pion le pion a inspecter
 	 * @param x la coordonnee x du pion
 	 * @param y la coordonnee y du pion
@@ -147,7 +150,7 @@ public class Grille implements Repliquable{
 		//on remonte la diagonale en verifiant qu'on ne sorte pas des limites
 		int suite=0;
 		while(x<7 && y<6) {
-			if(grille[x].getListe()[y]!=' ' && grille[x].getListe()[y]==pion) {
+			if(grille[x][y]!=' ' && grille[x][y]==pion) {
 				suite++;
 				if (suite==4) return true;
 			} else suite=0;
@@ -173,7 +176,7 @@ public class Grille implements Repliquable{
 		//on descend la diagonale en verifiant qu'on ne sorte pas des limites
 		int suite=0;
 		while(x<7 && y>=0) {
-			if(grille[x].getListe()[y]!=' ' && grille[x].getListe()[y]==pion) {
+			if(grille[x][y]!=' ' && grille[x][y]==pion) {
 				suite++;
 				if (suite==4) return true;
 			} else suite=0;
@@ -192,7 +195,7 @@ public class Grille implements Repliquable{
 		Grille g=new Grille();
 		for(int i=0; i<7; i++) {
 			for(int j=0; j<6; j++) {
-				g.grille[i].getListe()[j]=this.grille[i].getListe()[j];
+				g.grille[i][j]=this.grille[i][j];
 			}
 		}
 		return g;
@@ -213,7 +216,7 @@ public class Grille implements Repliquable{
 		for(int i=0; i<6; i++) {
 			str.append("|");
 			for(int j=0; j<7; j++) {
-				str.append(grille[j].getListe()[5-i]);
+				str.append(grille[j][5-i]);
 				str.append("|");
 			}
 			str.append("\r\n");
@@ -221,5 +224,27 @@ public class Grille implements Repliquable{
 		
 		return str.toString();
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.deepHashCode(grille);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Grille other = (Grille) obj;
+		return Arrays.deepEquals(grille, other.grille);
+	}
+	
+	
 	
 }

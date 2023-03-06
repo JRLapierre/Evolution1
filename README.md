@@ -39,6 +39,7 @@ La classe Mutation a été créée pour gérer les différentes mutations qui arrivent
 ###### amelioration du code : 
 faire un fichier java contenant tous les parametres  
 revoir la classe JoueurIndividu  
+simplifier le toStringJson de Connexion()  
 
 ###### optimisation du programme : 
 appliquer du multithreading dans la phase de recuperation des donnees  
@@ -60,8 +61,6 @@ ajouter des fonctionnalites pour mettre en pause
 finir le cerveau a couches  
 revoir la representation du cerveau  
 faire un convertisseur binaire-json pour visualiser les individus enregistres en binaire  
-revoir le package puissance4.grille  
-
 
 #### trucs a finir si j'en ai le courage
 

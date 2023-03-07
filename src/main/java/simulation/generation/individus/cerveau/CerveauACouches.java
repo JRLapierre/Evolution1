@@ -174,7 +174,10 @@ public class CerveauACouches extends Cerveau{
 		return cerveau;
 	}
 	
-	//TODO reecrire toStringJson()
+	@Override
+	public String toStringJson() {
+		return super.baseToStringJson(1); //1 pour le type du cerveau a couches
+	}
 	
 	//TODO reecrire toByte()
 
@@ -199,10 +202,6 @@ public class CerveauACouches extends Cerveau{
 		return getListeConnexions().equals(other.getListeConnexions())
 				&& couchesInternes == other.couchesInternes;
 	}
-
-
-
-
 
 	@Override
 	public int hashCode() {

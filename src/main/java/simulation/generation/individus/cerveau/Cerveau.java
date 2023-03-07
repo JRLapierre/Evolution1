@@ -454,18 +454,16 @@ public class Cerveau implements Representable, Repliquable {
 		}
 	}
 	
-	/**
-	 * fonction toStringJson qui affiche un cerveau au format json
-	 * affiche successivement les connexions tries par les neurones
-	 * d'origine.
-	 */
-	public String toStringJson() {
+	//base pour le toStringJson d'un cerveau
+	protected String baseToStringJson(int type) {
 		//on trie la liste
 		triConnexions();
 		//on parcours sagement la liste
 		listeConnexions.getSuivant();
 		StringBuilder build=new StringBuilder(listeConnexions.getLongueur()*100);
 		build.append("{");
+		//le type
+		build.append("\"type\":"+type+",");
 		//les connexions venant des input
 		toStringJsonPartiel(build, "input");
 		build.append("},");
@@ -476,6 +474,16 @@ public class Cerveau implements Representable, Repliquable {
 		toStringJsonPartiel(build, "output");
 		build.append("}}");
 		return build.toString();
+	}
+	
+	/**
+	 * fonction toStringJson qui affiche un cerveau au format json
+	 * affiche successivement les connexions tries par les neurones
+	 * d'origine.
+	 */
+	@Override
+	public String toStringJson() {
+		return baseToStringJson(0); //0 pour le type du cerveau de base
 	}
 	
 	

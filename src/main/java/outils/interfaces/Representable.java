@@ -26,6 +26,7 @@ public interface Representable {
 	 * generation : int
 	 * score : float
 	 * dans le cerveau :
+	 * 			type de cerveau : byte (0 pour Cerveau, 1 pour CerveauACouches)
 	 * nombre d'entrees : short
 	 * nombre d'interne : short
 	 * nombre de sortie : short 

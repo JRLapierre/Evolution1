@@ -197,5 +197,12 @@ class TestCerveau {
 		float[] tab=new float[] {1};
 		assertEquals(1, c2.analyse(tab)[0]);
 	}
+	
+	@Test
+	@DisplayName("test du toStringJson du cerveau a couches")
+	void testToStringJsonCerveauACouches() {
+		CerveauACouches c = new CerveauACouches(1,5,2,3);
+		System.out.println(c.toStringJson());
+	}
 
 }

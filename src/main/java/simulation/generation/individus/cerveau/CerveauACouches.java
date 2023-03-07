@@ -199,8 +199,16 @@ public class CerveauACouches extends Cerveau{
 				|| getListeInterne().length!=other.getListeInterne().length) {
 			return false;
 		}
-		return getListeConnexions().equals(other.getListeConnexions())
-				&& couchesInternes == other.couchesInternes;
+		if((couchesInternes==null && other.couchesInternes!=null)
+				|| (couchesInternes!=null && other.couchesInternes==null)) {
+			return false;
+		}
+		if(couchesInternes!=null 
+				&& (couchesInternes[0].length!=other.couchesInternes[0].length 
+				|| couchesInternes.length!=other.couchesInternes.length)) {
+			return false;
+		}
+		return getListeConnexions().equals(other.getListeConnexions());
 	}
 
 	@Override

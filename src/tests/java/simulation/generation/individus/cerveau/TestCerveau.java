@@ -189,7 +189,7 @@ class TestCerveau {
 	void testRepliqueCouches() {
 		CerveauACouches c1=new CerveauACouches(1,5,2,3);
 		CerveauACouches c2=c1.replique();
-		assertEquals(c1.toStringJson(), c2.toStringJson());
+		assertEquals(c1, c2);
 		assertEquals(2+4+4+10, c2.getListeConnexions().getLongueur());
 		assertEquals(1, c2.getListeInput().length);
 		assertEquals(6, c2.getListeInterne().length);

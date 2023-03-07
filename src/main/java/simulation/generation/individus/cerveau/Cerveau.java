@@ -455,7 +455,7 @@ public class Cerveau implements Representable, Repliquable {
 	}
 	
 	//base pour le toStringJson d'un cerveau
-	protected String baseToStringJson(int type) {
+	protected String baseToStringJson(String type) {
 		//on trie la liste
 		triConnexions();
 		//on parcours sagement la liste
@@ -483,7 +483,7 @@ public class Cerveau implements Representable, Repliquable {
 	 */
 	@Override
 	public String toStringJson() {
-		return baseToStringJson(0); //0 pour le type du cerveau de base
+		return baseToStringJson("base"); //base pour le type du cerveau de base
 	}
 	
 	

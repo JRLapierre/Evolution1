@@ -176,7 +176,7 @@ public class CerveauACouches extends Cerveau{
 	
 	@Override
 	public String toStringJson() {
-		return super.baseToStringJson(1); //1 pour le type du cerveau a couches
+		return super.baseToStringJson("couches"); //couches pour le type du cerveau a couches
 	}
 	
 	//TODO reecrire toByte()

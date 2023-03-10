@@ -429,10 +429,15 @@ public class Cerveau implements Representable, Repliquable {
 		}
 	}
 	
-	
-	private void toStringJsonPartiel(StringBuilder build, String type) {
+	/**
+	 * cree la partie du toStringJson pour une liste de neurones
+	 * @param build le stringbuilder contenant le reste du toStringJson()
+	 * @param liste la liste a afficher
+	 * @param type	le type de la liste (input, interne, output)
+	 */
+	protected void toStringJsonPartiel(StringBuilder build,  Neurone[] liste, String type) {
 		Connexion c=listeConnexions.getActuel();
-		int longueur=longueurListe(type);
+		int longueur=liste.length;
 		build.append("\""+type+"\":{");
 		//les connexions venant des input
 		for (int i=0; i<longueur; i++) {
@@ -452,28 +457,7 @@ public class Cerveau implements Representable, Repliquable {
 				build.append(",");
 			}
 		}
-	}
-	
-	//base pour le toStringJson d'un cerveau
-	protected String baseToStringJson(String type) {
-		//on trie la liste
-		triConnexions();
-		//on parcours sagement la liste
-		listeConnexions.getSuivant();
-		StringBuilder build=new StringBuilder(listeConnexions.getLongueur()*100);
-		build.append("{");
-		//le type
-		build.append("\"type\":"+type+",");
-		//les connexions venant des input
-		toStringJsonPartiel(build, "input");
-		build.append("},");
-		//les connexions venant de l'interieur
-		toStringJsonPartiel(build, "interne");
-		build.append("},");
-		//les connexions venant des outputs
-		toStringJsonPartiel(build, "output");
-		build.append("}}");
-		return build.toString();
+		build.append("}");
 	}
 	
 	/**
@@ -483,8 +467,24 @@ public class Cerveau implements Representable, Repliquable {
 	 */
 	@Override
 	public String toStringJson() {
-		return baseToStringJson("base"); //base pour le type du cerveau de base
-	}
+		//on trie la liste
+		triConnexions();
+		//on parcours sagement la liste
+		listeConnexions.getSuivant();
+		StringBuilder build=new StringBuilder(listeConnexions.getLongueur()*100);
+		build.append("{");
+		//le type
+		build.append("\"type\":\"base\",");//base pour le cerveau de base
+		//les connexions venant des input
+		toStringJsonPartiel(build, listeInput,  "input");
+		build.append(",");
+		//les connexions venant de l'interieur
+		toStringJsonPartiel(build, listeInterne, "interne");
+		build.append(",");
+		//les connexions venant des outputs
+		toStringJsonPartiel(build, listeOutput, "output");
+		build.append("}");
+		return build.toString();	}
 	
 	
 	/**

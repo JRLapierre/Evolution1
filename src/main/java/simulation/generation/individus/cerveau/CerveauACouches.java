@@ -175,9 +175,76 @@ public class CerveauACouches extends Cerveau{
 	}
 	
 	@Override
-	public String toStringJson() {
-		return super.baseToStringJson("couches"); //couches pour le type du cerveau a couches
+	protected void toStringJsonPartiel(StringBuilder build,  Neurone[] liste, String type) {
+		Connexion c=getListeConnexions().getActuel();
+		int nbOrigines=liste.length;
+		String couche="";
+		int nbCibles=0;
+		if(type.equals("interne")) {
+			for(int i=0; i<couchesInternes.length; i++) {
+				if(liste==couchesInternes[i]) {
+					couche+=(i+1);
+					if(i==couchesInternes.length-1) {
+						nbCibles=getListeOutput().length;
+					} else {
+						nbCibles=couchesInternes[i+1].length;
+					}
+				}
+			}
+		} else {
+			if(couchesInternes==null) {
+				nbCibles=getListeOutput().length;
+			} else {
+				nbCibles=couchesInternes[0].length;
+			}
+		}
+		build.append("\""+type+couche+"\":{");
+		//les connexions venant des input
+		for (int i=0; i<nbOrigines; i++) {
+			build.append("\"Neurone" + i + "\":{");
+			for(int j=0; j<nbCibles-1; j++) {
+				build.append(c.toStringJson());
+				c=getListeConnexions().getSuivant();
+				build.append(",");
+			}
+			build.append(c.toStringJson());
+			c=getListeConnexions().getSuivant();
+			build.append("}");
+			if(i!=nbOrigines-1) {
+				build.append(",");
+			}
+		}
+		build.append("}");
 	}
+	
+	@Override
+	public String toStringJson() {
+		//on trie la liste
+		triConnexions();
+		//on parcours sagement la liste
+		getListeConnexions().resetParcours();
+		getListeConnexions().getSuivant();
+		StringBuilder build=new StringBuilder(getListeConnexions().getLongueur()*100);
+		build.append("{");
+		//le type
+		build.append("\"type\":\"couches\",");//couches pour le cerveau a couches
+		//les connexions venant des input
+		toStringJsonPartiel(build, getListeInput(), "input");
+		//les connexions venant de l'interieur
+		if(couchesInternes!=null) {
+			build.append(",");
+			for(int i=0; i<couchesInternes.length; i++) {
+				toStringJsonPartiel(build, couchesInternes[i], "interne");
+				if(i!=couchesInternes.length-1) {
+					build.append(",");
+				}
+			}
+		}
+		build.append("}");
+		return build.toString();
+	}
+	
+	//regarder github.com/kpodlaski/introductionToAspectJ
 	
 	//TODO reecrire toByte()
 

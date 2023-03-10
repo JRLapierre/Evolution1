@@ -186,16 +186,12 @@ public class Cerveau implements Representable, Repliquable {
 		else if(type.equals(OUTPUT)) {
 			subsub=sub.substring(sub.indexOf(type + "\":{"));
 		}
-		else if(type.equals(INTERNE)) {
+		else {
 			subsub=sub.substring(
 					sub.indexOf(",\""+INTERNE+"\":{"), 
 					sub.indexOf(",\""+OUTPUT+"\":{"));
 		}
-		else {
-			System.err.println("le type " + type + " n'est pas bon");
-			return 0;
-		}
-		//conmpter le nombre de neurones
+		//compter le nombre de neurones
 		while(subsub.indexOf("Neurone"+i)!=-1) {
 			i++;
 		}
@@ -253,14 +249,9 @@ public class Cerveau implements Representable, Repliquable {
 		else if (type.equals(OUTPUT)) {
 			return listeOutput[position];
 		}
-		else if (type.equals(INTERNE)) {
+		else {
 			return listeInterne[position];
 		}
-		else {
-			System.err.println("j'ai merde : " + type + "a passe les mailles du filet");
-			return null;
-		}
-		
 	}
 	
 	/**

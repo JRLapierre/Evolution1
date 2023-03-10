@@ -182,7 +182,7 @@ public class CerveauACouches extends Cerveau{
 	 * @return chaine vide si c'est input, le positionnement de la couche si c'est interne
 	 */
 	private String determineCouche(Neurone[] liste, String type){
-		if(type.equals("input")) return "";
+		if(type.equals(Cerveau.INPUT)) return "";
 		//le type restant est interne
 		for(int i=0; i<couchesInternes.length; i++) {
 			if(liste==couchesInternes[i]) {
@@ -246,12 +246,12 @@ public class CerveauACouches extends Cerveau{
 		//le type
 		build.append("\"type\":\"couches\",");//couches pour le cerveau a couches
 		//les connexions venant des input
-		toStringJsonPartiel(build, getListeInput(), "input");
+		toStringJsonPartiel(build, getListeInput(), Cerveau.INPUT);
 		//les connexions venant de l'interieur
 		if(couchesInternes!=null) {
 			build.append(",");
 			for(int i=0; i<couchesInternes.length; i++) {
-				toStringJsonPartiel(build, couchesInternes[i], "interne");
+				toStringJsonPartiel(build, couchesInternes[i], Cerveau.INTERNE);
 				if(i!=couchesInternes.length-1) {
 					build.append(",");
 				}

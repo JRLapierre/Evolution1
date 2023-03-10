@@ -16,6 +16,26 @@ import outils.interfaces.Representable;
 public class Cerveau implements Representable, Repliquable {
 	
 	//-------------------------------------------------------------------------------
+	//constantes
+	
+	/**
+	 * le nom des neurones receptrices du cerveau
+	 */
+	protected static final String INPUT="input";
+	
+	/**
+	 * le nom des neurones internes au cerveau
+	 */
+	protected static final String INTERNE="interne";
+	
+	/**
+	 * le nom des neurone emmetrices du cerveau
+	 */
+	protected static final String OUTPUT="output";
+	
+	
+	
+	//-------------------------------------------------------------------------------
 	//variables
 
 	/**
@@ -60,9 +80,9 @@ public class Cerveau implements Representable, Repliquable {
 	 */
 	public Cerveau(int nbInput, int nbOutput, int nbInterne) {
 		//initialisation des listes
-		listeInput=initListN(nbInput, "input");
-		listeOutput=initListN(nbOutput, "output");
-		listeInterne=initListN(nbInterne, "interne");		
+		listeInput=initListN(nbInput, INPUT);
+		listeOutput=initListN(nbOutput, OUTPUT);
+		listeInterne=initListN(nbInterne, INTERNE);		
 	}
 	
 	/**
@@ -71,9 +91,9 @@ public class Cerveau implements Representable, Repliquable {
 	 */
 	public Cerveau(String sub) {
 		//initialisation des listes
-		listeInput=initListN(decodeNbNeurones("input", sub), "input");
-		listeOutput=initListN(decodeNbNeurones("output", sub), "output");
-		listeInterne=initListN(decodeNbNeurones("interne", sub), "interne");		
+		listeInput=initListN(decodeNbNeurones(INPUT, sub), INPUT);
+		listeOutput=initListN(decodeNbNeurones(OUTPUT, sub), OUTPUT);
+		listeInterne=initListN(decodeNbNeurones(INTERNE, sub), INTERNE);		
 		//chercher les connexions et les ajouter
 		int i=0;
 		int begin=sub.indexOf("\"connexion", i);
@@ -93,9 +113,9 @@ public class Cerveau implements Representable, Repliquable {
 	 * @param bb le ByteBuffer duquel on extrait les informations
 	 */
 	public Cerveau(ByteBuffer bb) {
-		this.listeInput=initListN(bb.getShort(), "input");
-		this.listeInterne=initListN(bb.getShort(), "interne");
-		this.listeOutput=initListN(bb.getShort(), "output");
+		this.listeInput=initListN(bb.getShort(), INPUT);
+		this.listeInterne=initListN(bb.getShort(), INTERNE);
+		this.listeOutput=initListN(bb.getShort(), OUTPUT);
 		byte type;
 		short numero;
 		short nbConnexions;
@@ -125,7 +145,7 @@ public class Cerveau implements Representable, Repliquable {
 	 * @param type
 	 */
 	private void exeptionType(String type) {
-		if (type.equals("input") || type.equals("output") || type.equals("interne")) {
+		if (type.equals(INPUT) || type.equals(OUTPUT) || type.equals(INTERNE)) {
 			return;
 		}//je sais que l'exeption n'est pas la bonne mais flemme de creer
 		throw new ArithmeticException("le type de la neurone est inconnu");
@@ -158,18 +178,18 @@ public class Cerveau implements Representable, Repliquable {
 		exeptionType(type);
 		String subsub; //la sous sous chaine de carractere a etudier
 		int i=0;
-		if(type.equals("input")) {
+		if(type.equals(INPUT)) {
 			subsub=sub.substring(
 					sub.indexOf(type + "\":{"), 
-					sub.indexOf(",\"interne\":{"));
+					sub.indexOf(",\""+INTERNE+"\":{"));
 		}
-		else if(type.equals("output")) {
+		else if(type.equals(OUTPUT)) {
 			subsub=sub.substring(sub.indexOf(type + "\":{"));
 		}
-		else if(type.equals("interne")) {
+		else if(type.equals(INTERNE)) {
 			subsub=sub.substring(
-					sub.indexOf(",\"interne\":{"), 
-					sub.indexOf(",\"output\":{"));
+					sub.indexOf(",\""+INTERNE+"\":{"), 
+					sub.indexOf(",\""+OUTPUT+"\":{"));
 		}
 		else {
 			System.err.println("le type " + type + " n'est pas bon");
@@ -227,13 +247,13 @@ public class Cerveau implements Representable, Repliquable {
 	 */
 	private Neurone getNeurone(String type, int position) {
 		exeptionType(type);
-		if (type.equals("input")) {
+		if (type.equals(INPUT)) {
 			return listeInput[position];
 		}
-		else if (type.equals("output")) {
+		else if (type.equals(OUTPUT)) {
 			return listeOutput[position];
 		}
-		else if (type.equals("interne")) {
+		else if (type.equals(INTERNE)) {
 			return listeInterne[position];
 		}
 		else {
@@ -418,10 +438,10 @@ public class Cerveau implements Representable, Repliquable {
 	 * @return la longueur de la liste de neurone voulu
 	 */
 	private int longueurListe(String type) {
-		if (type.equals("input")) {
+		if (type.equals(INPUT)) {
 			return listeInput.length;
 		}
-		else if (type.equals("interne")) {
+		else if (type.equals(INTERNE)) {
 			return listeInterne.length;
 		}
 		else {
@@ -476,13 +496,13 @@ public class Cerveau implements Representable, Repliquable {
 		//le type
 		build.append("\"type\":\"base\",");//base pour le cerveau de base
 		//les connexions venant des input
-		toStringJsonPartiel(build, listeInput,  "input");
+		toStringJsonPartiel(build, listeInput,  INPUT);
 		build.append(",");
 		//les connexions venant de l'interieur
-		toStringJsonPartiel(build, listeInterne, "interne");
+		toStringJsonPartiel(build, listeInterne, INTERNE);
 		build.append(",");
 		//les connexions venant des outputs
-		toStringJsonPartiel(build, listeOutput, "output");
+		toStringJsonPartiel(build, listeOutput, OUTPUT);
 		build.append("}");
 		return build.toString();	}
 	
@@ -541,13 +561,13 @@ public class Cerveau implements Representable, Repliquable {
 		bb.putShort((short) listeOutput.length);
 		//les input
 		bb.put((byte) 1);
-		toBytePartiel("input", bb);
+		toBytePartiel(INPUT, bb);
 		//les interne
 		bb.put((byte) 2);
-		toBytePartiel("interne", bb);
+		toBytePartiel(INTERNE, bb);
 		//les output
 		bb.put((byte) 3);
-		toBytePartiel("output", bb);
+		toBytePartiel(OUTPUT, bb);
 		//return
 		return bb.array();
 	}
@@ -570,10 +590,10 @@ public class Cerveau implements Representable, Repliquable {
 	 */
 	protected void triConnexions() {
 		Carracteristique<Connexion> car = elt -> {
-			if(elt.getOrigine().getType().equals("input")) {
+			if(elt.getOrigine().getType().equals(INPUT)) {
 				return elt.getOrigine().getNumero();
 			}
-			else if(elt.getOrigine().getType().equals("interne")) {
+			else if(elt.getOrigine().getType().equals(INTERNE)) {
 				return listeInput.length + elt.getOrigine().getNumero();
 			}
 			else {

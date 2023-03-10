@@ -174,30 +174,47 @@ public class CerveauACouches extends Cerveau{
 		return cerveau;
 	}
 	
+	/**
+	 * assiste le toStringJsonPartiel en determinant la couche de la liste de 
+	 * neurones si c'est une liste interne. Sinon, chaine vide.
+	 * @param liste	la liste de Neurones a localiser
+	 * @param type	le type de la liste (input ou interne)
+	 * @return chaine vide si c'est input, le positionnement de la couche si c'est interne
+	 */
+	private String determineCouche(Neurone[] liste, String type){
+		if(type.equals("input")) return "";
+		//le type restant est interne
+		for(int i=0; i<couchesInternes.length; i++) {
+			if(liste==couchesInternes[i]) {
+				return ""+(i+1);
+			}
+		}
+		return null;//ne devrait jamais arriver
+	}
+	
+	/**
+	 * assiste le ToStringJsonPartiel en determinant le nombre de neurones 
+	 * de la prochaine couche du cerveau
+	 * @param couche la couche actuelle (chaine vide si c'est input, 
+	 * le numero de la couche sinon)
+	 * @return le nombre de neurones de la couches suivante
+	 */
+	private int determineNbCibles(String couche) {
+		if((couche.equals("") && couchesInternes==null) || 
+				(!couche.equals("") && Integer.parseInt(couche)==couchesInternes.length)) {
+			return getListeOutput().length;
+		}
+		else {
+			return couchesInternes[0].length;
+		}
+	}
+	
 	@Override
 	protected void toStringJsonPartiel(StringBuilder build,  Neurone[] liste, String type) {
 		Connexion c=getListeConnexions().getActuel();
 		int nbOrigines=liste.length;
-		String couche="";
-		int nbCibles=0;
-		if(type.equals("interne")) {
-			for(int i=0; i<couchesInternes.length; i++) {
-				if(liste==couchesInternes[i]) {
-					couche+=(i+1);
-					if(i==couchesInternes.length-1) {
-						nbCibles=getListeOutput().length;
-					} else {
-						nbCibles=couchesInternes[i+1].length;
-					}
-				}
-			}
-		} else {
-			if(couchesInternes==null) {
-				nbCibles=getListeOutput().length;
-			} else {
-				nbCibles=couchesInternes[0].length;
-			}
-		}
+		String couche=determineCouche(liste, type);
+		int nbCibles=determineNbCibles(couche);
 		build.append("\""+type+couche+"\":{");
 		//les connexions venant des input
 		for (int i=0; i<nbOrigines; i++) {

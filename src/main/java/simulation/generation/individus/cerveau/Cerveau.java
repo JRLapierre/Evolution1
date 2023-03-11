@@ -195,7 +195,6 @@ public class Cerveau implements Representable, Repliquable {
 		while(subsub.indexOf("Neurone"+i)!=-1) {
 			i++;
 		}
-		
 		return i;
 	}
 	

@@ -52,7 +52,31 @@ public class CerveauACouches extends Cerveau{
 		relieCouches();
 	}
 	
-	//TODO constructeur depuis un enregistrement JSON
+	/**
+	 * constructeur depuis un enregistrement JSON
+	 * @param sub la chaine de carractere contenant toutes les infos
+	 */
+	public CerveauACouches(String sub) {
+		super(decodeNbNeurones(INPUT, sub),
+				decodeNbNeurones(OUTPUT, sub),
+				decodeNbNeurones(INTERNE, sub));
+		//reconnaitre le nombre de couches internes
+		int nbCouches=nbOccurence(sub, "}},\""+INTERNE);
+
+		if(getListeInterne().length!=0 && nbCouches!=0) {
+			remplisCouchesInternes(getListeInterne().length/nbCouches, nbCouches);
+		}
+		//replacer fidelement les connexions
+		int i=0;
+		int begin=sub.indexOf("\"connexion", i);
+		int end=sub.indexOf("}}", begin)+2;
+		while(begin!=-1) {
+			addConnexion(new Connexion(sub.substring(begin, end),this));
+			i=end;
+			begin=sub.indexOf("\"connexion", i);
+			end=sub.indexOf("}}", begin)+2;
+		}
+	}
 	
 	//TODO constructeur depuis un enregistrement BIN
 	
@@ -103,6 +127,44 @@ public class CerveauACouches extends Cerveau{
 		for (int i=0; i<getListeInterne().length; i++) {
 			if(i%nbParCouche==0) couche++;
 			couchesInternes[couche][i%nbParCouche]=getListeInterne()[i];
+		}
+	}
+	
+	/**
+	 * decode le nombre de neurones de chaque type
+	 * @param type le type dont on veut savoir le nombre de couches
+	 * @param sub  la chaine de carractere representant le cerveau
+	 * @return le nombre de Neurones de type == type
+	 */
+	private static int decodeNbNeurones(String type, String sub) {
+		String subsub; //la sous sous chaine de carractere a etudier
+		if(type.equals(OUTPUT)) {
+			subsub=sub.substring(sub.lastIndexOf("Neurone"));
+			return nbOccurence(subsub, "connexion");
+		}
+		if(sub.indexOf("}},\""+INTERNE)==-1) {//si il n'y a pas de couches internes
+			if(type.equals(INPUT)) return nbOccurence(sub, "Neurone");
+			else return 0;//cas interne
+		}
+		if (type.equals(INPUT)) 
+			subsub=sub.substring(25, sub.indexOf("}},\""+INTERNE));
+		else subsub=sub.substring(sub.indexOf("}},\""+INTERNE));
+		return nbOccurence(subsub, "Neurone");
+	}
+	
+	/**
+	 * permet de connaitre le nombre d'occurence dans une chaine de carracteres
+	 * @param total la chaine de carracteres originale
+	 * @param motCle le mot cle dont on veut savoir le nombre d'occurence
+	 * @return le nombre d'apparition de motCle dans total
+	 */
+	private static int nbOccurence(String total, String motCle) {
+		int i=0;
+		int lastPos=-1;
+		while(true) {
+			lastPos = total.indexOf(motCle, lastPos + 1);
+			if (lastPos < 0) return i;
+			++i;
 		}
 	}
 	

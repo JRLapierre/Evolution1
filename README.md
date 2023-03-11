@@ -53,6 +53,8 @@ creer un graphe qui permet de traquer visuellement les generations
 faire des fonctions pour traquer les ancetres et les liens de parentee  
 ecrire la derniere generation enregistree dans un fichier  
 ajouter des fonctionnalites pour mettre en pause  
+algorithme NEAT ?
+algorithme PPO ?
 
 
 #### urgent :

@@ -199,10 +199,16 @@ class TestCerveau {
 	}
 	
 	@Test
-	@DisplayName("test du toStringJson du cerveau a couches")
+	@DisplayName("test du toStringJson du cerveau a couches et de son decodeur")
 	void testToStringJsonCerveauACouches() {
-		CerveauACouches c = new CerveauACouches(1,5,2,3);
-		System.out.println(c.toStringJson());
+		CerveauACouches c1 = new CerveauACouches(1,5,2,3);
+		System.out.println(c1.toStringJson());
+		CerveauACouches c2 = new CerveauACouches(c1.toStringJson());
+		assertEquals(c1, c2);
+		CerveauACouches c3 = new CerveauACouches(2, 3);
+		System.out.println(c3.toStringJson());
+		CerveauACouches c4 = new CerveauACouches(c3.toStringJson());
+		assertEquals(c3, c4);
 	}
 
 }

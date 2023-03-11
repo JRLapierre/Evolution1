@@ -26,7 +26,7 @@ public interface Representable {
 	 * generation : int
 	 * score : float
 	 * dans le cerveau :
-	 * 			type de cerveau : byte (0 pour Cerveau, 1 pour CerveauACouches)
+	 * type de cerveau : byte (0 pour Cerveau, 1 pour CerveauACouches)
 	 * nombre d'entrees : short
 	 * nombre d'interne : short
 	 * nombre de sortie : short 
@@ -39,6 +39,15 @@ public interface Representable {
 	 * 			cible : 
 	 * 				type : byte
 	 * 				numero : short 
+	 * 
+	 * dans le CerveauACouches : 
+	 * nombre d'entrees : short
+	 * nombre de sortie : short
+	 * nombre de neurones par couche : short
+	 * nombre de couches de neurones internes : short
+	 * les connexions x fois :
+	 * id : int
+	 * facteur : float 
 	 * 
 	 * Generation : 
 	 * nbClonesParfaits : int

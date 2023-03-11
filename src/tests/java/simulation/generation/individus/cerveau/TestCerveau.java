@@ -177,11 +177,14 @@ class TestCerveau {
 	@Test
 	@DisplayName("test du fonctionnement d'un cerveau a couches")
 	void testFonctionnementCerveauACouches() {
-		CerveauACouches c=new CerveauACouches(1,6, 5,3);
+		CerveauACouches c1=new CerveauACouches(1,6, 5,3);
+		CerveauACouches c2=new CerveauACouches(1, 5);
 		float[] tab=new float[] {1};
-		assertEquals(1, c.analyse(tab)[0]);
+		assertEquals(1, c1.analyse(tab)[0]);
+		assertEquals(1, c2.analyse(tab)[0]);
 		tab[0]=0;
-		assertEquals(0, c.analyse(tab)[0]);
+		assertEquals(0, c1.analyse(tab)[0]);
+		assertEquals(0, c2.analyse(tab)[0]);
 	}
 	
 	@Test
@@ -209,6 +212,15 @@ class TestCerveau {
 		System.out.println(c3.toStringJson());
 		CerveauACouches c4 = new CerveauACouches(c3.toStringJson());
 		assertEquals(c3, c4);
+	}
+	
+	@Test
+	@DisplayName("test du toByte du cerveau a couches")
+	void testToByteCouches() {
+		CerveauACouches c1 = new CerveauACouches(1,5,2,3);
+		CerveauACouches c2 = new CerveauACouches(2, 3);
+		c1.toByte();
+		c2.toByte();
 	}
 
 }

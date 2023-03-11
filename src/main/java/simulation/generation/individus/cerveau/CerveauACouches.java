@@ -1,5 +1,7 @@
 package simulation.generation.individus.cerveau;
 
+import java.nio.ByteBuffer;
+
 public class CerveauACouches extends Cerveau{
 	
 	
@@ -323,14 +325,31 @@ public class CerveauACouches extends Cerveau{
 		return build.toString();
 	}
 	
-	//regarder github.com/kpodlaski/introductionToAspectJ
+	@Override
+	public int toByteLongueur() {
+		return 8 + getListeConnexions().getLongueur()*8;
+	}
 	
-	//TODO reecrire toByte()
-
+	@Override
+	public byte[] toByte() {
+		ByteBuffer bb=ByteBuffer.allocate(toByteLongueur());
+		triConnexions();
+		bb.putShort((short) getListeInput().length);
+		bb.putShort((short) getListeOutput().length);
+		if(couchesInternes!=null) {
+			bb.putShort((short) couchesInternes[0].length);
+			bb.putShort((short) couchesInternes.length);
+		}
+		else bb.putInt(0); //pour mettre 0 dans les 4 octets
+		//parcours de la liste
+		getListeConnexions().resetParcours();
+		while(getListeConnexions().getSuivant()!=null) {
+			bb.putInt(getListeConnexions().getActuel().getId());
+			bb.putFloat(getListeConnexions().getActuel().getFacteur());
+		}
+		return bb.array();
+	}
 	
-	/**
-	 * adaptation du equals pour un cerveau a couches
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -361,7 +380,5 @@ public class CerveauACouches extends Cerveau{
 	public int hashCode() {
 		return super.hashCode();
 	}
-	
-	
-	
+
 }

@@ -53,8 +53,9 @@ creer un graphe qui permet de traquer visuellement les generations
 faire des fonctions pour traquer les ancetres et les liens de parentee  
 ecrire la derniere generation enregistree dans un fichier  
 ajouter des fonctionnalites pour mettre en pause  
-algorithme NEAT ?
-algorithme PPO ?
+algorithme NEAT ?  
+algorithme PPO ?  
+regarder github.com/kpodlaski/introductionToAspectJ
 
 
 #### urgent :

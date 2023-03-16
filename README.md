@@ -61,9 +61,6 @@ regarder github.com/kpodlaski/introductionToAspectJ
 #### urgent :
 
 #### TODO
-finir le cerveau a couches  
-revoir la representation du cerveau  
-faire un convertisseur binaire-json pour visualiser les individus enregistres en binaire  
 
 #### trucs a finir si j'en ai le courage
 

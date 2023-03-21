@@ -80,7 +80,27 @@ public class CerveauACouches extends Cerveau{
 		}
 	}
 	
-	//TODO constructeur depuis un enregistrement BIN
+	/**
+	 * constructeur depuis un enregistrement BIN
+	 * @param bb le ByteBuffer contenant les informations
+	 */
+	public CerveauACouches(ByteBuffer bb) {
+		super(bb.getShort(), bb.getShort(), bb.getShort()*bb.getShort());
+		if(bb.getShort(bb.position()-4)!=0 && bb.getShort(bb.position()-2)!=0) {
+			remplisCouchesInternes(bb.getShort(bb.position()-4), bb.getShort(bb.position()-2));
+		}
+		//les connexions
+		if(couchesInternes==null) {
+			relieCoucheBin(bb, getListeInput(), getListeOutput());
+		}
+		else {
+			relieCoucheBin(bb, getListeInput(), couchesInternes[0]);
+			for(int i=0; i<couchesInternes.length-1; i++) {
+				relieCoucheBin(bb, couchesInternes[i], couchesInternes[i+1]);
+			}
+			relieCoucheBin(bb, couchesInternes[couchesInternes.length-1], getListeOutput());
+		}
+	}
 	
 	//-----------------------------------------------------------------------------------------
 	//methodes d'initialisation
@@ -97,6 +117,20 @@ public class CerveauACouches extends Cerveau{
 				addNewConnexion(facteur, 
 						listeOrigine[i].getType(), listeOrigine[i].getNumero(), 
 						listeCible[j].getType(), listeCible[j].getNumero());
+			}
+		}
+	}
+	
+	/**
+	 * reliCouche mais pour decoder du code binaire
+	 * @param bb le byteBuffer contenant les informations
+	 * @param listeOrigine 	la liste d'origine des connexions
+	 * @param listeCible	la liste cible des connexions
+	 */
+	private void relieCoucheBin(ByteBuffer bb, Neurone[] listeOrigine, Neurone[] listeCible) {
+		for(int i=0; i<listeOrigine.length; i++) {
+			for(int j=0; j<listeCible.length; j++) {
+				getListeConnexions().ajout(new Connexion(bb, listeOrigine[i], listeCible[j]));
 			}
 		}
 	}
@@ -273,8 +307,7 @@ public class CerveauACouches extends Cerveau{
 		}
 	}
 	
-	@Override
-	protected void toStringJsonPartiel(StringBuilder build,  Neurone[] liste, String type) {
+	private void toStringJsonPartiel(StringBuilder build,  Neurone[] liste, String type) {
 		Connexion c=getListeConnexions().getActuel();
 		int nbOrigines=liste.length;
 		String couche=determineCouche(liste, type);
@@ -327,13 +360,14 @@ public class CerveauACouches extends Cerveau{
 	
 	@Override
 	public int toByteLongueur() {
-		return 8 + getListeConnexions().getLongueur()*8;
+		return 1 + 8 + getListeConnexions().getLongueur()*8;
 	}
 	
 	@Override
 	public byte[] toByte() {
 		ByteBuffer bb=ByteBuffer.allocate(toByteLongueur());
 		triConnexions();
+		bb.put((byte) 1);//1 pour cerveaACouches
 		bb.putShort((short) getListeInput().length);
 		bb.putShort((short) getListeOutput().length);
 		if(couchesInternes!=null) {

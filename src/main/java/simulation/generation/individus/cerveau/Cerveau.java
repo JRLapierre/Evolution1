@@ -112,7 +112,7 @@ public class Cerveau implements Representable, Repliquable {
 	 * constructeur pour generer un cerveau a partir de binaire
 	 * @param bb le ByteBuffer duquel on extrait les informations
 	 */
-	public Cerveau(ByteBuffer bb) {
+	protected Cerveau(ByteBuffer bb) {
 		this.listeInput=initListN(bb.getShort(), INPUT);
 		this.listeInterne=initListN(bb.getShort(), INTERNE);
 		this.listeOutput=initListN(bb.getShort(), OUTPUT);
@@ -135,6 +135,19 @@ public class Cerveau implements Representable, Repliquable {
 				}
 			}
 		}
+	}
+	
+	//-----------------------------------------------------------------------------
+	//"Constructeur"
+	
+	/**
+	 * permet de determiner le type du cerveau et renvoie le type adapte
+	 * @param bb le ByteBuffer qui contient les informations
+	 * @return le cerveau correspondant a l'enregistrement
+	 */
+	public static Cerveau regenereCerveau(ByteBuffer bb) {
+		if(bb.get()==0) return new Cerveau(bb);
+		return new CerveauACouches(bb);
 	}
 	
 	//-----------------------------------------------------------------------------
@@ -445,7 +458,7 @@ public class Cerveau implements Representable, Repliquable {
 	 * @param liste la liste a afficher
 	 * @param type	le type de la liste (input, interne, output)
 	 */
-	protected void toStringJsonPartiel(StringBuilder build,  Neurone[] liste, String type) {
+	private void toStringJsonPartiel(StringBuilder build,  Neurone[] liste, String type) {
 		Connexion c=listeConnexions.getActuel();
 		int longueur=liste.length;
 		build.append("\""+type+"\":{");
@@ -494,7 +507,8 @@ public class Cerveau implements Representable, Repliquable {
 		//les connexions venant des outputs
 		toStringJsonPartiel(build, listeOutput, OUTPUT);
 		build.append("}");
-		return build.toString();	}
+		return build.toString();
+		}
 	
 	
 	/**
@@ -545,6 +559,7 @@ public class Cerveau implements Representable, Repliquable {
 		listeConnexions.resetParcours();
 		listeConnexions.getSuivant();
 		//remplissage du ByteBuffer
+		bb.put((byte) 0);//type du cerveau
 		//les nombres
 		bb.putShort((short) listeInput.length);
 		bb.putShort((short) listeInterne.length);
@@ -564,10 +579,10 @@ public class Cerveau implements Representable, Repliquable {
 	
 	/**
 	 * une fonction qui dit la longueur de toByte
-	 * @return 9 + 2*(nbInput+nbOutput+nbInterne) + 11*listeConnexions.getLongueur()
+	 * @return 10 + 2*(nbInput+nbOutput+nbInterne) + 11*listeConnexions.getLongueur()
 	 */
 	public int toByteLongueur() {
-		return 9 + 4*(listeInput.length + listeOutput.length + listeInterne.length)
+		return 10 + 4*(listeInput.length + listeOutput.length + listeInterne.length)
 				+ 11*listeConnexions.getLongueur();
 	}
 

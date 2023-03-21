@@ -163,10 +163,14 @@ class TestIndividu {
 		Individu i2=new CloneParfait(i0);
 		Individu i3=new EnfantSexe(i1, i2);
 		
-		System.out.println(i0.toStringJson());
-		System.out.println(i1.toStringJson());
-		System.out.println(i2.toStringJson());
-		System.out.println(i3.toStringJson());
+		i0.enregistre("enregistrements/individus/", "json");
+		i1.enregistre("enregistrements/individus/", "json");
+		i2.enregistre("enregistrements/individus/", "json");
+		i3.enregistre("enregistrements/individus/", "json");
+		i0.enregistre("enregistrements/individus/", "bin");
+		i1.enregistre("enregistrements/individus/", "bin");
+		i2.enregistre("enregistrements/individus/", "bin");
+		i3.enregistre("enregistrements/individus/", "bin");
 	}
 	
 	

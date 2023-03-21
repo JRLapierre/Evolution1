@@ -49,7 +49,7 @@ public class JoueurIndividu extends Joueur{
 			for(int i=0; i<nbTics; i++) {
 				analyse=cerveau.analyse(liste);
 				for(int j=0; j<analyse.length; j++) {
-					choix[i]+=analyse[i];
+					choix[j]+=analyse[j];
 				}
 
 			}

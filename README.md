@@ -39,12 +39,12 @@ La classe Mutation a été créée pour gérer les différentes mutations qui arrivent
 ###### amelioration du code : 
 faire un fichier java contenant tous les parametres  
 revoir la classe JoueurIndividu  
-simplifier le toStringJson de Connexion()  
 
 ###### optimisation du programme : 
 appliquer du multithreading dans la phase de recuperation des donnees  
 appliquer du multithreading dans la phase de reproduction  
 appliquer du multithreading dans la phase d'enregistrement  
+appliquer du multithreading dans le cerveau  
 
 
 ###### developpement de nouvelles fonctionnalites : 
@@ -52,7 +52,6 @@ developper d'autres methodes d'apprentissage
 creer un graphe qui permet de traquer visuellement les generations  
 faire des fonctions pour traquer les ancetres et les liens de parentee  
 ecrire la derniere generation enregistree dans un fichier  
-ajouter des fonctionnalites pour mettre en pause  
 algorithme NEAT ?  
 algorithme PPO ?  
 regarder github.com/kpodlaski/introductionToAspectJ
@@ -61,9 +60,12 @@ regarder github.com/kpodlaski/introductionToAspectJ
 #### urgent :
 
 #### TODO
+ajouter des fonctionnalites pour mettre en pause  
+
 
 #### trucs a finir si j'en ai le courage
 
+resoudre le mystere du bug de la connexion !=null mais null quand meme  
 continuer la classe TestAleatoire  
 faire un diagramme de classe propre plutot que le plantUML auto genere  
 tenir a jour la doc  

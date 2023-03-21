@@ -431,10 +431,12 @@ public class Generation implements Representable {
                 break;
             default:
             	System.err.println("type de document inconnu");
+            	System.exit(1);
             }
             
         } catch (Exception e) {
             e.printStackTrace();
+            System.exit(1);
         }
 
 	}

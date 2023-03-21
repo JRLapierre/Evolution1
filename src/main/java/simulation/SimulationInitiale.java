@@ -31,7 +31,7 @@ public class SimulationInitiale  extends Simulation{
 	/**
 	 * le nom de la simulation
 	 */
-	private static String nomSimulation="2P4";
+	private static String nomSimulation="3P4";
 	
 	
 	/**
@@ -119,7 +119,7 @@ public class SimulationInitiale  extends Simulation{
 	 * Cette graine permet de determiner une suite de nombre pseudo-aleatoire permettant de 
 	 * faire des mutations qui semblent aleatoires.
 	 */
-	private static int graineMutation=6843;
+	private static int graineMutation=46587;
 	
 	/**
 	 * le taux de chance de creation d'une connexion entre deux neurones.

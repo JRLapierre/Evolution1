@@ -229,12 +229,11 @@ public class Mutation implements Representable{
 	 * @param listeConnexions la liste de connexions a changer
 	 */
 	private void supprConnexion(ListeChaine<Connexion> listeConnexions) {
-		Connexion c=listeConnexions.getSuivant();
-		while (c!=null) {
+		while (listeConnexions.getSuivant()!=null) {
 			if (aleatoire.aleatInt(0,100)<=tauxSuppression) {
-				listeConnexions.delElt(c);
+				listeConnexions.delElt(listeConnexions.getActuel());
 			}
-			c=listeConnexions.getSuivant();
+			listeConnexions.getSuivant();
 		}
 	}
 	

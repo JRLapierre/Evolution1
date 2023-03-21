@@ -17,23 +17,31 @@ public class Decode {
 	
 	private static final String nomSimulation="2P4";
 	
-	private static final int numeroGeneration=51012;
+	private static final int numeroGeneration=51022;
 	
-	private static final int idIndividu=100160;
+	private static final int idIndividu=101102;
 	
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		String path="enregistrements/simulation" + nomSimulation
 				+ "/generation" + numeroGeneration + 
 				"/individu" + idIndividu + ".bin";
 		//fichier de la generation
-		byte[] sim = Files.readAllBytes(Paths.get(path));
-		ByteBuffer b = ByteBuffer.allocate(sim.length);
-		b.put(sim);
-		b.flip();
-		//recreer l'individu
-		Individu i=Individu.regenereIndividu(b);
-		System.out.println(i.toStringJson());
+		byte[] sim;
+		try {
+			sim = Files.readAllBytes(Paths.get(path));
+			ByteBuffer b = ByteBuffer.allocate(sim.length);
+			b.put(sim);
+			b.flip();
+			//recreer l'individu
+			System.out.println("test");
+			Individu i=Individu.regenereIndividu(b);
+			System.out.println("test2");
+			System.out.println(i.toStringJson());
+			System.out.println("test3");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

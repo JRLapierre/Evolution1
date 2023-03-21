@@ -42,7 +42,7 @@ public class CloneParfait extends Individu{
 		this.idParent=bb.getInt();
 		this.generation=bb.getInt();
 		this.score=bb.getFloat();
-		this.cerveau=new Cerveau(bb);
+		this.cerveau=Cerveau.regenereCerveau(bb);
 		updateId();
 	}
 	

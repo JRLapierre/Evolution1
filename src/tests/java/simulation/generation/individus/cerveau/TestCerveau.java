@@ -142,6 +142,7 @@ class TestCerveau {
 		ByteBuffer bb=ByteBuffer.allocate(c.toByteLongueur());
 		bb.put(c.toByte());
 		bb.flip();
+		bb.get();
 		Cerveau c2=new Cerveau(bb);
 		assertEquals(c, c2);
 	}
@@ -219,8 +220,16 @@ class TestCerveau {
 	void testToByteCouches() {
 		CerveauACouches c1 = new CerveauACouches(1,5,2,3);
 		CerveauACouches c2 = new CerveauACouches(2, 3);
-		c1.toByte();
-		c2.toByte();
+		ByteBuffer bb=ByteBuffer.allocate(c1.toByteLongueur());
+		bb.put(c1.toByte());
+		bb.flip();
+		bb.get();
+		assertEquals(c1, new CerveauACouches(bb));
+		bb=ByteBuffer.allocate(c2.toByteLongueur());
+		bb.put(c2.toByte());
+		bb.flip();
+		bb.get();
+		assertEquals(c2, new CerveauACouches(bb));
 	}
 
 }

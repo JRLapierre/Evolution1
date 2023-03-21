@@ -71,6 +71,7 @@ public class Partie extends Thread{
 			jeu();
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.exit(1);
 		}
 	}
 	

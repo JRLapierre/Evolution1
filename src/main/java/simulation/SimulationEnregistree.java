@@ -25,7 +25,7 @@ public class SimulationEnregistree extends Simulation{
 	/**
 	 * le nom de la simulation
 	 */
-	private static String nomSimulation="2P4";
+	private static String nomSimulation="3P4";
 	
 	/**
 	 * le format des fichiers a recuperer.
@@ -43,12 +43,12 @@ public class SimulationEnregistree extends Simulation{
 	/**
 	 * le numero de la generation a laquelle on va reprendre la simulation
 	 */
-	private static int generationInitiale=51016;
+	private static int generationInitiale=110;
 	
 	/**
 	 * le nombre de generations a simuler.
 	 */
-	private static int nbGenerations=10;
+	private static int nbGenerations=90;
 	
 	/**
 	 * limiteur d'enregistrement.
@@ -99,7 +99,7 @@ public class SimulationEnregistree extends Simulation{
 		//g.setNbClonesMutes(50);
 		//g.setNbClonesParfaits(25);
 		//g.setNbEnfantsSexe(25);
-		g.enregistreInfos("bin");
+		g.enregistreInfos(typeEnregistrements);
 	}
 	
 	

@@ -24,15 +24,12 @@ class TestMutation {
 				.setTauxCreationSuppression(2, 3)
 				.setMutationFacteur(4, 5)
 				.setTauxMutationNeurone(6);
-		Mutation m2=new Mutation(2)
-				.setTauxCreationSuppression(2, 3)
-				.setMutationFacteur(4, 5)
-				.setTauxMutationNeurone(6);
 		ByteBuffer bb=ByteBuffer.allocate(m1.toByteLongueur());
 		bb.put(m1.toByte());
 		bb.flip();
 		Mutation m3=new Mutation(bb);
-		assertEquals(m2.toStringJson(), m3.toStringJson());
+		m3.setGraine(1);
+		assertEquals(m1.toStringJson(), m3.toStringJson());
 		
 	}
 

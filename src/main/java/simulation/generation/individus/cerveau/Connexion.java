@@ -126,6 +126,23 @@ class Connexion implements Representable, Repliquable {
 		}
 	}
 	
+	/**
+	 * constructeur pour recreer une connexion pour un cerveau a couches depuis le binaire
+	 * @param bb le ByteBuffer contentant les informations
+	 * @param origine la neurone d'origine de la connexions
+	 * @param cible la neurone cible de la connexions
+	 */
+	protected Connexion(ByteBuffer bb, Neurone origine, Neurone cible) {
+		this.id=bb.getInt();
+		this.facteur=bb.getFloat();
+		this.origine=origine;
+		this.cible=cible;
+		//pour remettre le compte des connexions assez haut
+		if (this.id>nbConnexions) {
+			nbConnexions=this.id;
+		}
+	}
+	
 	//---------------------------------------------------------------------
 	//fonction de controle
 	

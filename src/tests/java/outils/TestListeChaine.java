@@ -226,6 +226,17 @@ class TestListeChaine {
 		assertEquals(liste1.getPrecedent(), 4);
 		assertEquals(liste1.getPrecedent(), 7);
 		assertEquals(liste1.getPrecedent(), null);
+		
+		ListeChaine<String> liste2=new ListeChaine<>("0", null, "2", "3", null);
+		for (int i=0; i<liste2.getLongueur(); i++) {
+			if(liste2.getSuivant()!=null) {
+				assertTrue(liste2.getActuel()!=null);
+			}
+			else {
+				System.out.println("test"+i);
+				assertEquals(null, liste2.getActuel());
+			}
+		}
 	}
 	
 	@Test

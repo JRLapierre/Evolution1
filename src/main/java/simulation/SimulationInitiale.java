@@ -3,10 +3,8 @@ package simulation;
 import java.io.File;
 import java.util.Scanner;
 
-import puissance4.jeu.Tournoi;
-import puissance4.joueurs.Joueur;
-import puissance4.joueurs.JoueurIndividu;
-import simulation.generation.Epreuve;
+import javax.swing.JLabel;
+
 import simulation.generation.Generation;
 import simulation.generation.individus.Individu;
 import simulation.generation.individus.Original;
@@ -19,7 +17,7 @@ import simulation.generation.individus.cerveau.Mutation;
  * @author jrl
  *
  */
-public class SimulationInitiale  extends Simulation{
+public class SimulationInitiale extends Simulation{
 
 	//-----------------------------------------------------------------------------------------
 	//parametres
@@ -32,13 +30,6 @@ public class SimulationInitiale  extends Simulation{
 	 * le nom de la simulation
 	 */
 	private static String nomSimulation="3P4";
-	
-	
-	/**
-	 * le format d'enregistrement des fichiers. 
-	 * Dans la situation actuelle, on a le choix entre json et bin.
-	 */
-	private static String type="bin";
 		
 	//-----------------------------------------------------------------------------------------
 	//population
@@ -183,54 +174,32 @@ public class SimulationInitiale  extends Simulation{
 	private static int butoir=50;
 	
 	/**
-	 * expression lambda qui definit l'epreuve par laquelle les individus vont passer : 
-	 * on envoie des signaux dans les neurones d'entree et on observe ceux qui sont en
-	 * sortie. On leur fait accomplir une tache grace aux connexions de sortie et on 
-	 * evalue leur performance afin de former un score.
-	 * Les individus avec le plus grand score vont pouvoir se reproduire.
-	 */
-	private static Epreuve epreuve=population -> {
-		//creer une liste de joueurs
-		Joueur[] participants=new Joueur[population.length];
-		for(int i=0; i<population.length; i++) {
-			participants[i]=new JoueurIndividu(population[i].getCerveau(), 25);
-		}
-		//lancer le tournoi
-		Tournoi tournoi=new Tournoi(participants);
-		try {
-			tournoi.lancer();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return;
-		}
-		//recuperer les scores des joueurs
-		for(int i=0; i<population.length; i++) {
-			population[i].updateScore(participants[i].getScore());
-		}
-	};
-	
-	/**
-	 * la generation initiale. Rien a modifier.
-	 * Elle sera composee de clones mutes de l'individu original.
-	 */
-	private static Generation generation=new Generation(original, nbClonesParfaits, nbClonesMutes, nbEnfantsSexe, butoir, epreuve, nomSimulation);
-	
-	/**
 	 * le nombre de generations a simuler.
 	 */
 	private static int nbGenerations=100;
 	
+	
+	//----------------------------------------------------------------------------------------
+	//ne pas toucher la suite du code
+
+	//----------------------------------------------------------------------------------------
+	//constructeur
+	
 	/**
-	 * limiteur d'enregistrement.
-	 * Une generation va etre enregistree si son numero % 1 == 0.
-	 * avec une valeur de 1, toutes les generations vont etre enregistrees.
+	 * ce constructeur initialise une simulation. 
+	 * Les parametres sont les JLabel qui vont afficher
+	 * les informations relatives au fonctionnement 
+	 * de la simulation
+	 * @param generation le label qui affiche la generation
+	 * @param phase le label qui affiche la phase de la simulation
 	 */
-	private static int enregistre=1;
+	public SimulationInitiale(JLabel generation, JLabel phase) {
+		super(generation, phase);
+	}
 	
 	
 	//----------------------------------------------------------------------------------------
 	//fonctions de code
-	//ne pas toucher
 	
 	/**
 	 * demande a l'utilisateur si il est sur de ses actions
@@ -261,19 +230,12 @@ public class SimulationInitiale  extends Simulation{
 	 * fonction run qui fait tourner la simulation
 	 */
 	public void run() {
+		generation=new Generation(original, nbClonesParfaits, nbClonesMutes, nbEnfantsSexe, butoir, epreuve, nomSimulation);
 		//on fait tourner la simulation pour nbGenerations
-    	generation.enregistreInfos(type);
-    	generation.enregistreGeneration(type);
+    	generation.enregistreInfos(typeEnregistrement);
+    	generation.enregistreGeneration(typeEnregistrement);
 		for(int i=0; i<nbGenerations; i++) {
-			System.out.println("===generation " + i + "===");
-			System.out.println("creation de la prochaine generation...");
-			generation.nextGen();
-			System.out.println("evaluation...");
-			generation.evaluation();
-			if(i%enregistre==0) {
-	        	System.out.println("enregistrement...");
-				generation.enregistreGeneration(type);
-			}
+            simuleGeneration(i);
 		}
 	}
 	

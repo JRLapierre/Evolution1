@@ -4,11 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
-import puissance4.jeu.Tournoi;
-import puissance4.joueurs.Joueur;
+import javax.swing.JLabel;
 
-import puissance4.joueurs.JoueurIndividu;
-import simulation.generation.Epreuve;
 import simulation.generation.Generation;
 
 /**
@@ -33,13 +30,6 @@ public class SimulationEnregistree extends Simulation{
 	 */
 	private static String typeFichiers="bin";
 	
-	
-	/**
-	 * le format des fichiers a enregistrer.
-	 * Dans la situation actuelle, on a le choix entre json et bin.
-	 */
-	private static String typeEnregistrements="bin";
-	
 	/**
 	 * le numero de la generation a laquelle on va reprendre la simulation
 	 */
@@ -49,39 +39,6 @@ public class SimulationEnregistree extends Simulation{
 	 * le nombre de generations a simuler.
 	 */
 	private static int nbGenerations=90;
-	
-	/**
-	 * limiteur d'enregistrement.
-	 * Une generation va etre enregistree si son numero % enregistre == 0.
-	 * avec une valeur de 1, toutes les generations vont etre enregistrees.
-	 */
-	private static int enregistre=1;
-	
-	/**
-	 * fonction lambda. 
-	 * Malheureusement, je ne suis pas parvenu a l'enregistrer ou a la recuperer depuis un 
-	 * fichier. Il faut donc la redefinir ici.
-	 */
-	private static Epreuve epreuve=population -> {
-		//creer une liste de joueurs
-		Joueur[] participants=new Joueur[population.length];
-		for(int i=0; i<population.length; i++) {
-			participants[i]=new JoueurIndividu(population[i].getCerveau(), 25);
-		}
-		//on lance le tournoi
-		Tournoi tournoi=new Tournoi(participants);
-		tournoi.lancer();
-		//recuperer les scores des joueurs
-		for(int i=0; i<population.length; i++) {
-			population[i].updateScore(participants[i].getScore());
-		}
-		
-	};
-	
-	/**
-	 * la generation porteuse
-	 */
-	private static Generation generation;
 
 	
 	//----------------------------------------------------------------------------------------
@@ -90,7 +47,7 @@ public class SimulationEnregistree extends Simulation{
 	/**
 	 * fonction permettant de changer les regles de la simulation
 	 * @param g la generation a changer
-	 */
+	 *//*
 	private static void changeParametres(Generation g) {
 		//si vous ne voulez pas changer les parametres, mettez les en commentaires.
 		//g.setButoir(50);
@@ -100,12 +57,28 @@ public class SimulationEnregistree extends Simulation{
 		//g.setNbClonesParfaits(25);
 		//g.setNbEnfantsSexe(25);
 		g.enregistreInfos(typeEnregistrements);
-	}
+	}*/
 	
+	//----------------------------------------------------------------------------------------
+	//ne pas toucher a cette partie du code
+
+	//----------------------------------------------------------------------------------------
+	//constructeur
+	
+	/**
+	 * ce constructeur initialise une simulation. 
+	 * Les parametres sont les JLabel qui vont afficher
+	 * les informations relatives au fonctionnement 
+	 * de la simulation
+	 * @param generation le label qui affiche la generation
+	 * @param phase le label qui affiche la phase de la simulation
+	 */
+	public SimulationEnregistree(JLabel generation, JLabel phase) {
+		super(generation, phase);
+	}
 	
 	//----------------------------------------------------------------------------------------
 	//fonctions de code
-	//ne pas toucher a cette partie du code
 	
 	/**
 	 * demande a l'utilisateur si il est sur de ses actions
@@ -146,24 +119,17 @@ public class SimulationEnregistree extends Simulation{
 		try {
 			System.out.println("recuperation des donnees...");
 			generation = new Generation(nomSimulation, generationInitiale, typeFichiers, epreuve);
-			changeParametres(generation);
+			//changeParametres(generation);
 			//on fait tourner la simulation pour nbGenerations
 			for(int i=1; i<=nbGenerations; i++) {
-				System.out.println("===generation " + (generationInitiale + i) + "===");
-				System.out.println("creation de la prochaine generation...");
-				generation.nextGen();
-				System.out.println("evaluation...");
-				generation.evaluation();
-				if((generationInitiale + i) % enregistre==0) {
-		        	System.out.println("enregistrement...");
-					generation.enregistreGeneration(typeEnregistrements);
-				}
+	            simuleGeneration(i);
 			}
 			System.out.println("fait");
 		} catch (IOException e) {
 			System.out.println("Si vous lisez ce message, il existe des failles que je "
 					+ "n'ai pas encore detectes");
 			e.printStackTrace();
+			Thread.currentThread().interrupt();
 		}
 	}
 	

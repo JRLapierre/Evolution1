@@ -58,16 +58,16 @@ regarder github.com/kpodlaski/introductionToAspectJ
 
 
 #### urgent :
+regler le plantage des @Override
 
 #### TODO
-ajouter des fonctionnalites pour mettre en pause  
-
+verifier et ameliorer le code de la classe LanceSimulation  
+verifier et ameliorer le code du package Simulation  
 
 #### trucs a finir si j'en ai le courage
 
 resoudre le mystere du bug de la connexion !=null mais null quand meme  
 continuer la classe TestAleatoire  
-faire un diagramme de classe propre plutot que le plantUML auto genere  
 tenir a jour la doc  
 
 #### taches impossibles (ou presque)

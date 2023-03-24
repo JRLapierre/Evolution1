@@ -1,9 +1,9 @@
 package simulation;
 
 import java.io.File;
-import java.util.Scanner;
 
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 
 import simulation.generation.Generation;
 import simulation.generation.individus.Individu;
@@ -193,8 +193,8 @@ public class SimulationInitiale extends Simulation{
 	 * @param generation le label qui affiche la generation
 	 * @param phase le label qui affiche la phase de la simulation
 	 */
-	public SimulationInitiale(JLabel generation, JLabel phase) {
-		super(generation, phase);
+	public SimulationInitiale(JLabel generation, JLabel phase, JTextArea zoneTexte) {
+		super(generation, phase, zoneTexte);
 	}
 	
 	
@@ -208,20 +208,12 @@ public class SimulationInitiale extends Simulation{
 	public boolean choix() {
     	File f=new File("enregistrements\\simulation" + nomSimulation + "\\");
     	if(f.exists()) {
-    		String reponse="";
-		    Scanner input = new Scanner(System.in);
-    		while(!reponse.equals("oui")) {
-    		    System.out.println("Une simulation portant ce nom existe deja : "
-    		    		+ "Si vous continuez, vous allez remplacer les fichiers de "
-    		    		+ "cette simulation. ");
-    		    System.out.println("Continuer ? (oui ou non) : ");
-    		    reponse = input.nextLine();
-    		    //on met fin a la simulation si la reponse est non
-    		    if (reponse.equals("non")) {
-    		    	return false;
-    		    }
-    		}
-		    input.close();
+		    zoneTexte.setText("""
+				Une simulation portant ce nom existe deja : 
+				Si vous continuez, vous allez remplacer les fichiers de cette simulation. 
+				Cliquez sur play/pause pour lancer 
+				Cliquez sur arreter pour stopper
+				""");
     	}
     	return true;
 	}
@@ -229,7 +221,10 @@ public class SimulationInitiale extends Simulation{
 	/**
 	 * fonction run qui fait tourner la simulation
 	 */
+	@Override
 	public void run() {
+		pause();
+		zoneTexte.setText("");
 		generation=new Generation(original, nbClonesParfaits, nbClonesMutes, nbEnfantsSexe, butoir, epreuve, nomSimulation);
 		//on fait tourner la simulation pour nbGenerations
     	generation.enregistreInfos(typeEnregistrement);

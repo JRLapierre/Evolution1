@@ -1,6 +1,7 @@
 package simulation;
 
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 
 import puissance4.jeu.Tournoi;
 import puissance4.joueurs.Joueur;
@@ -93,13 +94,18 @@ public abstract class Simulation extends Thread {
 	 * ce label permet d'afficher la generation 
 	 * actuellement simulee.
 	 */
-	private JLabel labelGeneration;
+	protected JLabel labelGeneration;
 	
 	/**
 	 * ce label permet d'afficher la phase de 
 	 * la simulation est actuellement effectuee
 	 */
-	private JLabel labelPhase;
+	protected JLabel labelPhase;
+	
+	/**
+	 * permet d'afficher un paragraphe
+	 */
+	protected JTextArea zoneTexte;
 	
 	//-----------------------------------------------------------------------------------------
 	//constructeur
@@ -113,9 +119,10 @@ public abstract class Simulation extends Thread {
 	 * @param generation le label qui affiche la generation
 	 * @param phase le label qui affiche la phase de la simulation
 	 */
-	protected Simulation(JLabel labelGeneration, JLabel labelPhase) {
+	protected Simulation(JLabel labelGeneration, JLabel labelPhase, JTextArea zoneTexte) {
 		this.labelGeneration=labelGeneration;
 		this.labelPhase=labelPhase;
+		this.zoneTexte=zoneTexte;
 	}
 
 	//-----------------------------------------------------------------------------------------
@@ -150,22 +157,29 @@ public abstract class Simulation extends Thread {
 	public abstract boolean choix();
 	
 	/**
+	 * met en pause le programme si les conditions sont reunies
+	 */
+	protected synchronized void pause() {
+        while (pause && fonctionne) {
+        	try {
+				wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+				Thread.currentThread().interrupt();
+			}
+        }
+	}
+	
+	/**
 	 * simule une generation.
 	 * @param generationActuelle le numero de la generation
 	 */
 	public void simuleGeneration(int generationActuelle) {
 		synchronized (this) {
         	//si on a envoye l'instruction de pause
-            while (pause && fonctionne) {
-            	try {
-					wait();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-					Thread.currentThread().interrupt();
-				}
-            }
+			pause();
             //si on a envoye l'instruction d'arret
-            if (!fonctionne) Thread.currentThread().interrupt();
+            if (!fonctionne) System.exit(0);
             //simulation d'une generation
 			labelGeneration.setText("===generation " + generationActuelle + "===");
 			labelPhase.setText("creation de la prochaine generation...");
@@ -176,6 +190,7 @@ public abstract class Simulation extends Thread {
 				labelPhase.setText("enregistrement...");
 				generation.enregistreGeneration(typeEnregistrement);
 			}
+			labelPhase.setText("");
         }
 	}
 	

@@ -63,6 +63,7 @@ regler le plantage des @Override
 #### TODO
 verifier et ameliorer le code de la classe LanceSimulation  
 verifier et ameliorer le code du package Simulation  
+regler le probleme de l'arret  
 
 #### trucs a finir si j'en ai le courage
 

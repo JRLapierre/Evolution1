@@ -2,8 +2,7 @@ package simulation;
 
 import java.io.File;
 
-import javax.swing.JLabel;
-import javax.swing.JTextArea;
+import javax.swing.JPanel;
 
 import simulation.generation.Generation;
 import simulation.generation.individus.Individu;
@@ -193,8 +192,8 @@ public class SimulationInitiale extends Simulation{
 	 * @param generation le label qui affiche la generation
 	 * @param phase le label qui affiche la phase de la simulation
 	 */
-	public SimulationInitiale(JLabel generation, JLabel phase, JTextArea zoneTexte) {
-		super(generation, phase, zoneTexte);
+	public SimulationInitiale(JPanel panel) {
+		super(panel);
 	}
 	
 	

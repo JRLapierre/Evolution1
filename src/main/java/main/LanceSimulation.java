@@ -5,7 +5,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
 import simulation.Simulation;
 import simulation.SimulationInitiale;
@@ -38,21 +37,6 @@ public class LanceSimulation {
 	 */
 	private static JLabel etatSimulation;
 	
-	/**
-	 * JLabel qui affiche quelle generation est actuellement simulee
-	 */
-	private static JLabel labelGeneration;
-	
-	/**
-	 * JLabel qui affiche la phase dans la simulation
-	 */
-	private static JLabel labelPhase;
-	
-	/**
-	 * JTextArea qui affiche un paragraphe
-	 */
-	private static JTextArea zoneTexte; 
-	
 	//-------------------------------------------
 	//elements d'affichage
 	
@@ -62,9 +46,14 @@ public class LanceSimulation {
 	private static JPanel boutonsPanel;
 	
 	/**
-	 * le panel qui arrange ses elements verticalements
+	 * le panel global qui arrange ses elements verticalements
 	 */
 	private static JPanel panel;
+	
+	/**
+	 * le panel de la simulation
+	 */
+	private static JPanel panelSimulation;
 	
 	/**
 	 * le boxLayout contenant les elements
@@ -96,10 +85,7 @@ public class LanceSimulation {
     	playPause = new JButton("play/pause");
         stop = new JButton("arret");
         etatSimulation = new JLabel();
-        labelGeneration = new JLabel();
-        labelPhase = new JLabel();
-        zoneTexte = new JTextArea();
-        zoneTexte.setEditable(false);
+        panelSimulation = new JPanel();
         
         //le pannel contenant les boutons
         boutonsPanel = new JPanel();
@@ -112,9 +98,7 @@ public class LanceSimulation {
         panel.setLayout(boxLayout);
         panel.add(boutonsPanel);
         panel.add(etatSimulation);
-        panel.add(labelGeneration);
-        panel.add(labelPhase);
-        panel.add(zoneTexte);
+        panel.add(panelSimulation);
         
         //la fenetre permettant d'afficher tout
         JFrame fenetre = new JFrame();
@@ -123,7 +107,7 @@ public class LanceSimulation {
         fenetre.setVisible(true);
         
         //le programme principal
-        simulation = new SimulationInitiale(labelGeneration, labelPhase, zoneTexte);
+        simulation = new SimulationInitiale(panelSimulation);
 
         //les actions des boutons
         playPause.addActionListener(e -> {

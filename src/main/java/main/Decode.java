@@ -15,11 +15,11 @@ import simulation.generation.individus.Individu;
  */
 public class Decode {
 	
-	private static final String nomSimulation="2P4";
+	private static final String nomSimulation="3P4";
 	
-	private static final int numeroGeneration=51022;
+	private static final int numeroGeneration=39;
 	
-	private static final int idIndividu=101102;
+	private static final int idIndividu=3804;
 	
 
 	public static void main(String[] args) {

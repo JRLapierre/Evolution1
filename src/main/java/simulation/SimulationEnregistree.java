@@ -3,8 +3,7 @@ package simulation;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.JLabel;
-import javax.swing.JTextArea;
+import javax.swing.JPanel;
 
 import simulation.generation.Generation;
 
@@ -73,8 +72,8 @@ public class SimulationEnregistree extends Simulation{
 	 * @param generation le label qui affiche la generation
 	 * @param phase le label qui affiche la phase de la simulation
 	 */
-	public SimulationEnregistree(JLabel generation, JLabel phase, JTextArea zoneTexte) {
-		super(generation, phase, zoneTexte);
+	public SimulationEnregistree(JPanel panel) {
+		super(panel);
 	}
 	
 	//----------------------------------------------------------------------------------------

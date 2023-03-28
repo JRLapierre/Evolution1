@@ -1,6 +1,8 @@
 package simulation;
 
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import puissance4.jeu.Tournoi;
@@ -94,18 +96,18 @@ public abstract class Simulation extends Thread {
 	 * ce label permet d'afficher la generation 
 	 * actuellement simulee.
 	 */
-	protected JLabel labelGeneration;
+	protected JLabel labelGeneration = new JLabel();
 	
 	/**
 	 * ce label permet d'afficher la phase de 
 	 * la simulation est actuellement effectuee
 	 */
-	protected JLabel labelPhase;
+	protected JLabel labelPhase = new JLabel();
 	
 	/**
 	 * permet d'afficher un paragraphe
 	 */
-	protected JTextArea zoneTexte;
+	protected JTextArea zoneTexte = new JTextArea();
 	
 	//-----------------------------------------------------------------------------------------
 	//constructeur
@@ -119,10 +121,12 @@ public abstract class Simulation extends Thread {
 	 * @param generation le label qui affiche la generation
 	 * @param phase le label qui affiche la phase de la simulation
 	 */
-	protected Simulation(JLabel labelGeneration, JLabel labelPhase, JTextArea zoneTexte) {
-		this.labelGeneration=labelGeneration;
-		this.labelPhase=labelPhase;
-		this.zoneTexte=zoneTexte;
+	protected Simulation(JPanel panel) {
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(labelGeneration);
+        panel.add(labelPhase);
+        panel.add(zoneTexte);
+        zoneTexte.setEditable(false);
 	}
 
 	//-----------------------------------------------------------------------------------------

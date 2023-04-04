@@ -27,6 +27,8 @@ public class LanceSimulation {
 	 */
 	private static JButton stop;
 	
+	private static JButton boutonSimulation;
+	
 	//-------------------------------------------
 	//elements d'affichage
 	
@@ -68,6 +70,7 @@ public class LanceSimulation {
     	
     	//les elements a afficher
         stop = new JButton("arret");
+        boutonSimulation=new JButton("simulation");
         panelSimulation = new JPanel();
         
         //le pannel rassemblant tous les elements
@@ -75,7 +78,7 @@ public class LanceSimulation {
         boxLayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
         panel.setLayout(boxLayout);
         panel.add(stop);
-        panel.add(panelSimulation);
+        panel.add(boutonSimulation);
         
         //la fenetre permettant d'afficher tout
         JFrame fenetre = new JFrame();
@@ -91,6 +94,11 @@ public class LanceSimulation {
         	if(!simulation.estEnPause()) simulation.playPause();
         	simulation.finProgramme();
     		fenetre.dispose();
+        });
+        
+        boutonSimulation.addActionListener(e->{
+            panel.add(panelSimulation);
+            boutonSimulation.setVisible(false);
         });
    	}
 	

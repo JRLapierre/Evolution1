@@ -200,7 +200,7 @@ public abstract class Simulation extends Thread {
         	//si on a envoye l'instruction de pause
 			pause();
             //si on a envoye l'instruction d'arret
-            if (!fonctionne) System.exit(0);
+            if (!fonctionne) Thread.currentThread().interrupt();
             //simulation d'une generation
 			labelGeneration.setText("===generation " + generationActuelle + "===");
 			labelPhase.setText("creation de la prochaine generation...");

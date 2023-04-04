@@ -3,7 +3,6 @@ package main;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import simulation.Simulation;
@@ -58,7 +57,7 @@ public class LanceSimulation {
 	/**
 	 * l'objet simulation lui-même
 	 */
-	private static Simulation simulation;
+	private static Thread programme;
 	
 	//-----------------------------------------------------------------------------------------
 	//fonction d'initialisation
@@ -87,18 +86,23 @@ public class LanceSimulation {
         fenetre.setVisible(true);
         
         //le programme principal
-        simulation = new SimulationInitiale(panelSimulation);
 
         //les actions des boutons
         stop.addActionListener(e-> {
-        	if(!simulation.estEnPause()) simulation.playPause();
-        	simulation.finProgramme();
+        	if(programme instanceof Simulation simulation) {
+        		if(!simulation.estEnPause()) simulation.playPause();
+        		simulation.finProgramme();
+        	}
     		fenetre.dispose();
+    		System.exit(0);
         });
         
         boutonSimulation.addActionListener(e->{
+        	programme = new SimulationInitiale(panelSimulation);
             panel.add(panelSimulation);
             boutonSimulation.setVisible(false);
+        	if(programme instanceof Simulation simulation && !simulation.choix()) return;
+        	programme.start();
         });
    	}
 	
@@ -108,8 +112,7 @@ public class LanceSimulation {
 	 */
 	public static void main(String[] args) {
 		init();
-		if(!simulation.choix()) return; //arrete le programme si le choix n'est pas fait
-		simulation.start();
+
 	}
 
 }

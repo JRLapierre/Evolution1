@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import outils.Decode;
 import simulation.Simulation;
 import simulation.SimulationInitiale;
 
@@ -26,7 +27,15 @@ public class LanceSimulation {
 	 */
 	private static JButton stop;
 	
+	/**
+	 * le bouton qui permet de lancer une simulation
+	 */
 	private static JButton boutonSimulation;
+	
+	/**
+	 * le bouton pour lancer le decodage d'un fichier
+	 */
+	private static JButton boutonDecodage;
 	
 	//-------------------------------------------
 	//elements d'affichage
@@ -37,25 +46,25 @@ public class LanceSimulation {
 	private static JPanel panel;
 	
 	/**
-	 * le panel de la simulation
+	 * le panel qui permet d'afficher les boutons des sous applications horisontalement
 	 */
-	private static JPanel panelSimulation;
+	private static JPanel panelOptions;
 	
 	/**
-	 * le boxLayout contenant les elements
+	 * le panel du programme
 	 */
-	private static BoxLayout boxLayout;
+	private static JPanel panelProgramme;
 	
 	/**
 	 * la fenetre affichant le tout
 	 */
-	private static JFrame fenetre;
+	private static JFrame fenetre=new JFrame();
 	
 	//-------------------------------------------
-	//objets de la simulation
+	//objets du programme
 	
 	/**
-	 * l'objet simulation lui-même
+	 * l'objet programme lui-même
 	 */
 	private static Thread programme;
 	
@@ -63,31 +72,10 @@ public class LanceSimulation {
 	//fonction d'initialisation
 	
 	/**
-	 * initialise la vue
+	 * initialise les actions des bouttons
 	 */
-	private static void init() {
-    	
-    	//les elements a afficher
-        stop = new JButton("arret");
-        boutonSimulation=new JButton("simulation");
-        panelSimulation = new JPanel();
-        
-        //le pannel rassemblant tous les elements
-        panel = new JPanel();
-        boxLayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
-        panel.setLayout(boxLayout);
-        panel.add(stop);
-        panel.add(boutonSimulation);
-        
-        //la fenetre permettant d'afficher tout
-        JFrame fenetre = new JFrame();
-        fenetre.add(panel);
-        fenetre.setSize(400, 400);
-        fenetre.setVisible(true);
-        
-        //le programme principal
-
-        //les actions des boutons
+	private static void initActionsBoutons() {
+		//bouton stop
         stop.addActionListener(e-> {
         	if(programme instanceof Simulation simulation) {
         		if(!simulation.estEnPause()) simulation.playPause();
@@ -96,14 +84,53 @@ public class LanceSimulation {
     		fenetre.dispose();
     		System.exit(0);
         });
-        
+        //bouton simulation
         boutonSimulation.addActionListener(e->{
-        	programme = new SimulationInitiale(panelSimulation);
-            panel.add(panelSimulation);
-            boutonSimulation.setVisible(false);
+        	programme = new SimulationInitiale(panelProgramme);
+            panel.add(panelProgramme);
+            panelOptions.setVisible(false);
         	if(programme instanceof Simulation simulation && !simulation.choix()) return;
         	programme.start();
         });
+        //bouton decodage
+        boutonDecodage.addActionListener(e->{
+        	Decode.initialise(panelProgramme);
+            panel.add(panelProgramme);
+            panelOptions.setVisible(false);
+        });
+	}
+	
+	/**
+	 * initialise la vue
+	 */
+	private static void init() {
+
+    	//les elements a afficher
+        stop = new JButton("arret");
+        boutonSimulation=new JButton("simulation");
+        boutonDecodage=new JButton("decodage");
+        panelProgramme = new JPanel();
+        
+        //le panel des boutons des differents programmes
+        panelOptions=new JPanel();
+        panelOptions.setLayout(new BoxLayout(panelOptions, BoxLayout.X_AXIS));
+        panelOptions.add(boutonSimulation);
+        panelOptions.add(boutonDecodage);
+        
+        //le pannel rassemblant tous les elements
+        panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(stop);
+        panel.add(panelOptions);
+        
+        //les actions des boutons
+        initActionsBoutons();
+        
+        //la fenetre permettant d'afficher tout
+        fenetre.add(panel);
+        fenetre.setSize(400, 400);
+        fenetre.setVisible(true);
+
    	}
 	
 	/**

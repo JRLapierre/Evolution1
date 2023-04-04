@@ -65,7 +65,6 @@ permettre d'activer le reste du programme depuis la fenetre
 faire un fichier qui enregistre quelles simulations existent deja et la generation actuelle 
 reduire le nombre de methodes main a 1 
 faire une interface graphique pour le puissance 4
-faire une interface graphique pour le decodage
 
 #### trucs a finir si j'en ai le courage
 

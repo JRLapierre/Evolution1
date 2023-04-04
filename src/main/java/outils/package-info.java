@@ -8,6 +8,8 @@
  * pseudo-aleatoires (Random), 
  * ListeChaine, une classe modelisant une liste 
  * doublement chainee (LinkedList),
+ * Decode, une classe qui va chercher des informations 
+ * binaires dans les fichiers et renvoie un resultat JSon
  * 
  * Ce package contient aussi l'interface fonctionnelle 
  * Carracteristique, qui permet de trier les objets 

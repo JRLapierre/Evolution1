@@ -5,6 +5,7 @@ import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -53,6 +54,9 @@ public class Decode {
 	 */
 	private static JButton valider=new JButton("rechercher");
 	
+	//un panel qui aligne les elements de la recherche
+	private static JPanel panelRecherche=new JPanel();
+	
 	/**
 	 * une zone de texte pour afficher le resultat json
 	 */
@@ -65,12 +69,16 @@ public class Decode {
 	 * @param panel le panel sur lequel tout va etre affiche
 	 */
 	public static void initialise(JPanel panel) {
-		panel.add(fieldNomSimulation);
-		panel.add(fieldNumeroGeneration);
-		panel.add(fieldIdIndividu);
-		panel.add(valider);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panelRecherche.setLayout(new BoxLayout(panelRecherche, BoxLayout.X_AXIS));
+		panelRecherche.add(fieldNomSimulation);
+		panelRecherche.add(fieldNumeroGeneration);
+		panelRecherche.add(fieldIdIndividu);
+		panelRecherche.add(valider);
+		panel.add(panelRecherche);
 		panel.add(zoneTexte);
         zoneTexte.setEditable(false);
+        zoneTexte.setLineWrap(true);
         //l'action du bouton
 		valider.addActionListener(e->
 			trouveIndividu(fieldNomSimulation.getText(), 

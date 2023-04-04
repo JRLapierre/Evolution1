@@ -58,12 +58,12 @@ regarder github.com/kpodlaski/introductionToAspectJ
 
 
 #### urgent :
-regler le plantage des @Override
 
 #### TODO
-verifier et ameliorer le code de la classe LanceSimulation  
-verifier et ameliorer le code du package Simulation  
-regler le probleme de l'arret  
+permettre de rentrer les parametres d'une simulation depuis une fenetre  
+permettre d'activer le reste du programme depuis la fenetre  
+activer la simulation grace a un bouton
+faire un fichier qui enregistre quelles simulations existent deja et la generation actuelle  
 
 #### trucs a finir si j'en ai le courage
 

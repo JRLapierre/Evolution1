@@ -1,6 +1,7 @@
 package simulation;
 
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -92,6 +93,11 @@ public abstract class Simulation extends Thread {
     //-----------------------------
     //attributs pour l'affichage
     
+    /**
+     * le boutton qui permet de mettre en pause et de reprendre le programme
+     */
+	private JButton playPause = new JButton("play/pause");
+    
 	/**
 	 * ce label permet d'afficher la generation 
 	 * actuellement simulee.
@@ -123,10 +129,21 @@ public abstract class Simulation extends Thread {
 	 */
 	protected Simulation(JPanel panel) {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(playPause);
         panel.add(labelGeneration);
         panel.add(labelPhase);
         panel.add(zoneTexte);
         zoneTexte.setEditable(false);
+        //l'action du boutton play/pause
+        playPause.addActionListener(e -> {
+        	this.playPause();
+        	if(this.estEnPause()) {
+        		while(this.getState() != Thread.State.WAITING);//attendre
+        		labelPhase.setText("programme mis en pause");
+        	}else {
+        		labelPhase.setText("programme en cours ...");
+        	}
+        });
 	}
 
 	//-----------------------------------------------------------------------------------------

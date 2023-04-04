@@ -23,27 +23,12 @@ public class LanceSimulation {
 	//elements affiches
 	
 	/**
-	 * le bouton qui permet de controller la pause
-	 */
-	private static JButton playPause;
-	
-	/**
 	 * le bouton qui permet d'arreter la simulation
 	 */
 	private static JButton stop;
 	
-	/**
-	 * JLabel qui affiche si la simulation tourne ou est en pause
-	 */
-	private static JLabel etatSimulation;
-	
 	//-------------------------------------------
 	//elements d'affichage
-	
-	/**
-	 * le panel qui permet d'avoir les boutons horisontalement
-	 */
-	private static JPanel boutonsPanel;
 	
 	/**
 	 * le panel global qui arrange ses elements verticalements
@@ -82,22 +67,14 @@ public class LanceSimulation {
 	private static void init() {
     	
     	//les elements a afficher
-    	playPause = new JButton("play/pause");
         stop = new JButton("arret");
-        etatSimulation = new JLabel();
         panelSimulation = new JPanel();
-        
-        //le pannel contenant les boutons
-        boutonsPanel = new JPanel();
-        boutonsPanel.add(playPause);
-        boutonsPanel.add(stop);
         
         //le pannel rassemblant tous les elements
         panel = new JPanel();
         boxLayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
         panel.setLayout(boxLayout);
-        panel.add(boutonsPanel);
-        panel.add(etatSimulation);
+        panel.add(stop);
         panel.add(panelSimulation);
         
         //la fenetre permettant d'afficher tout
@@ -110,16 +87,6 @@ public class LanceSimulation {
         simulation = new SimulationInitiale(panelSimulation);
 
         //les actions des boutons
-        playPause.addActionListener(e -> {
-        	simulation.playPause();
-        	if(simulation.estEnPause()) {
-        		while(simulation.getState() != Thread.State.WAITING);//attendre
-        		etatSimulation.setText("programme mis en pause");
-        	}else {
-        		etatSimulation.setText("programme en cours ...");
-        	}
-        });
-        
         stop.addActionListener(e-> {
         	if(!simulation.estEnPause()) simulation.playPause();
         	simulation.finProgramme();
